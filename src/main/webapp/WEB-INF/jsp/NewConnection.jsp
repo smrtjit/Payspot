@@ -1,0 +1,542 @@
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>New Connection</title>
+<meta name="viewport" content="width=device-width, initial-scale=1 " />
+<meta charset="utf-8">
+<meta name="viewport "
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no ">
+<link href="layout/styles/layout.css" rel="stylesheet" type="text/css"
+	media="all">
+<link href="assets/css/circle.css" rel="stylesheet" />
+<link href="assets/css/bootstrap.css" rel="stylesheet" />
+
+
+<link
+	href='//cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/1.8/css/bootstrap-switch.css'
+	rel='stylesheet' type='text/css'>
+<link
+	href='http://davidstutz.github.io/bootstrap-multiselect/css/bootstrap-multiselect.css'
+	rel='stylesheet' type='text/css'>
+<script
+	src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js'
+	type='text/javascript'></script>
+<script
+	src='//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0/js/bootstrap.min.js'
+	type='text/javascript'></script>
+<script
+	src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js'
+	type='text/javascript'></script>
+<script
+	src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/1.8/js/bootstrap-switch.min.js'
+	type='text/javascript'></script>
+<script
+	src='http://davidstutz.github.io/bootstrap-multiselect/js/bootstrap-multiselect.js'
+	type='text/javascript'></script>
+<style >
+
+.indent-small {
+  margin-left: 5px;
+}
+.form-group.internal {
+  margin-bottom: 0;
+}
+.dialog-panel {
+  margin: 10px;
+}
+.datepicker-dropdown {
+  z-index: 200 !important;
+}
+.panel-body {
+  background: #e5e5e5;
+  /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover, #e5e5e5 0%, #ffffff 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #e5e5e5), color-stop(100%, #ffffff));
+  /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover, #e5e5e5 0%, #ffffff 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover, #e5e5e5 0%, #ffffff 100%);
+  /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover, #e5e5e5 0%, #ffffff 100%);
+  /* IE10+ */
+  background: radial-gradient(ellipse at center, #e5e5e5 0%, #ffffff 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e5e5e5', endColorstr='#ffffff', GradientType=1);
+  /* IE6-9 fallback on horizontal gradient */
+  font: 600 15px "Open Sans", Arial, sans-serif;
+}
+label.control-label {
+  font-weight: 600;
+  color: #777;
+}
+
+      </style>
+
+<script type="text/javascript ">
+      $(document).ready(function() {
+      $('.multiselect').multiselect();
+      $('.datepicker').datepicker();
+      });
+      </script>
+
+<script src="layout/scripts/jquery.min.js"></script>
+<script src="layout/scripts/jquery.backtotop.js"></script>
+<script src="layout/scripts/jquery.mobilemenu.js"></script>
+</head>
+<body id="top ">
+	<div class="bgded overlay"
+		style="background-image: url('images/demo/backgrounds/01.png');">
+		<!-- ################################################################################################ -->
+		<div class="wrapper row1">
+			<header id="header" class="hoc clear">
+				<!-- ################################################################################################ -->
+				<div id="logo" class="fl_left">
+					<h1>
+						<a href="index.html">PaySpot</a>
+					</h1>
+				</div>
+				<nav id="mainav" class="fl_right">
+					<ul class="clear">
+						<li class="active"><a href="LCOHome.html?user=${user }">Home</a></li>
+						<li><a class="drop" href="#">Function</a>
+							<ul>
+								<li><a href="#">Collection</a></li>
+								<li><a href="#">Connection</a></li>
+								<li><a href="#">Stock</a></li>
+								<li><a href="#">Topup</a></li>
+								<li><a href="#">Compalint</a></li>
+							</ul></li>
+						<li><a class="drop" href="#">Services</a>
+							<ul>
+								<li><a href="newConnn.html?user=${user }">New
+										Connection</a></li>
+								<li><a href="#">New LineMan</a></li>
+								<li><a href="newChannel.html?user=${user}">New Channel</a></li>
+								<li><a href="#">New Stock</a></li>
+								<li><a href="#">New Complaint</a></li>
+							</ul></li>
+						<li><a href="#">Profile</a></li>
+						<li><a href="#">Log out</a></li>
+					</ul>
+				</nav>
+			</header>
+		</div>
+
+		<div class="wrapper row3 ">
+			<main class="hoc container clear "> <!-- main body --> <!-- ################################################################################################ -->
+
+			<div class='container' style="margin-top: -128px;">
+				<div class='panel panel-primary dialog-panel'>
+					<div class='panel-heading'>
+						<h5>Create New Connection</h5>
+					</div>
+					<div class='panel-body'>
+						<form class='form-horizontal' role='form'>
+							<div class='form-group' style="margin-left: -200px;">
+								<label class='control-label col-md-2 col-md-offset-2'
+									for='id_title'>Name</label>
+								<div class='col-md-8'>
+									<div class='col-md-3'>
+										<div class='form-group internal'>
+											<input requried class='form-control' id='id_first_name'
+												placeholder='First Name' type='text'>
+										</div>
+									</div>
+									<div class='col-md-3 indent-small'>
+										<div class='form-group internal'>
+											<input class='form-control' id='id_middle_name'
+												placeholder='Middle Name' type='text'>
+										</div>
+									</div>
+									<div class='col-md-3 indent-small'>
+										<div class='form-group internal'>
+											<input requried class='form-control' id='id_last_name'
+												placeholder='Last Name' type='text'>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<div class='form-group' style="margin-left: -200px;">
+								<label class='control-label col-md-2 col-md-offset-2'
+									for='id_title'>Contact Detail</label>
+								<div class='col-md-8'>
+									<div class='col-md-3'>
+										<div class='form-group internal'>
+											<input requried="requried " class='form-control'
+												id='mobile_no' placeholder='Mobile Number' type='text'>
+										</div>
+									</div>
+									<div class='col-md-6 indent-small' style="width: 50.5%;">
+										<div class='form-group internal'>
+											<input requried="requried " class='form-control'
+												id='email_id' placeholder='Email ID' type='text'>
+										</div>
+									</div>
+
+
+								</div>
+							</div>
+
+							<div class='form-group' style="margin-left: -200px;">
+								<label class='control-label col-md-2 col-md-offset-2'
+									for='id_title'>Photo ID</label>
+								<div class='col-md-8'>
+									<div class='col-md-3'>
+										<div class='form-group internal'>
+											<select requried="requried " class="form-control "
+												id="id_title ">
+												<option>Select Type</option>
+												<option>Ms</option>
+												<option>Mrs</option>
+												<option>Miss</option>
+												<option>Dr</option>
+											</select>
+										</div>
+									</div>
+									<div class='col-md-3 indent-small'>
+										<div class='form-group internal'>
+											<input requried="requried " class='form-control' id='crf_no'
+												placeholder=' ID Number' type='text'>
+										</div>
+									</div>
+									<div class='col-md-3 indent-small'>
+										<div class='form-group internal'>
+											<input requried="requried " class='form-control' id='gst_no'
+												placeholder='GST Number' type="file ">
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+							<div class='form-group' style="margin-left: -200px;">
+								<label class='control-label col-md-2 col-md-offset-2'>Address</label>
+								<div class='col-md-6'>
+									<div class='form-group'>
+										<div class='col-md-9' style="width: 72%;">
+											<input requried="requried " class='form-control' id='address'
+												placeholder='Address' type='text'>
+										</div>
+									</div>
+									<div class='form-group internal'>
+										<div class='col-md-9' style="width: 72%;">
+											<input class='form-control' id='id_phone'
+												placeholder='Landmark' type='text'>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+							<div class='form-group' style="margin-left: -200px;">
+								<label class='control-label col-md-2 col-md-offset-2'
+									for='id_title'></label>
+								<div class='col-md-8'>
+									<div class='col-md-3'>
+										<div class='form-group internal'>
+											<select class="form-control " id="id_title ">
+												<option>Select State</option>
+												<option value=" ">Andaman and Nicobar Islands</option>
+												<option value=" ">Andhra Pradesh</option>
+												<option value=" ">Arunachal Pradesh</option>
+												<option value=" ">Assam</option>
+												<option value=" ">Bihar</option>
+												<option value=" ">Chhattisgarh</option>
+												<option value=" ">Chandigarh</option>
+												<option value=" ">Dadra and Nagar Haveli</option>
+												<option value=" ">Daman and Diu</option>
+												<option value=" ">Delhi</option>
+												<option value=" ">Goa</option>
+												<option value=" ">Gujarat</option>
+												<option value=" ">Haryana</option>
+												<option value=" ">Himachal Pradesh</option>
+												<option value=" ">Jammu & Kashmir</option>
+												<option value=" ">Jharkhand</option>
+												<option value=" ">Karnataka</option>
+												<option value=" ">Kerala</option>
+												<option value=" ">Madhya Pradesh</option>
+												<option value=" ">Maharashtra</option>
+												<option value=" ">Manipur</option>
+												<option value=" ">Meghalaya</option>
+												<option value=" ">Mizoram</option>
+												<option value=" ">Nagaland</option>
+												<option value=" ">Odisha</option>
+												<option value=" ">Punjab</option>
+												<option value=" ">Rajasthan</option>
+												<option value=" ">Sikkim</option>
+												<option value=" ">Tamil Nadu</option>
+												<option value=" ">Telangana</option>
+												<option value=" ">Tripura</option>
+												<option value=" ">Uttar Pradesh</option>
+												<option value=" ">Uttarakhand</option>
+												<option value=" ">West Bengal</option>
+												<option value=" ">Lakshadweep</option>
+												<option value=" ">Puducherry</option>
+											</select>
+										</div>
+									</div>
+									<div class='col-md-3 indent-small'>
+										<div class='form-group internal'>
+											<select requried="requried " class="form-control "
+												id="id_title ">
+												<option>Select City</option>
+												<option>Ms</option>
+												<option>Mrs</option>
+												<option>Miss</option>
+												<option>Dr</option>
+											</select>
+										</div>
+									</div>
+									<div class='col-md-3 indent-small'>
+										<div class='form-group internal'>
+											<input requried="requried " class='form-control'
+												id='id_middle_name' placeholder='Pin Code' type='text'>
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+							<div class='form-group' style="margin-left: -200px;">
+								<label class='control-label col-md-2 col-md-offset-2'
+									for='id_title'>CRF Detail</label>
+								<div class='col-md-8'>
+									<div class='col-md-3'>
+										<div class='form-group internal'>
+											<input requried="requried " class='form-control' id='gst_no'
+												placeholder='CRF Number' type='text'>
+										</div>
+									</div>
+
+									<div class='col-md-4 indent-small' style="width: 50.5%;">
+										<div class='form-group internal'>
+											<input requried="requried " class='form-control' id='gst_no'
+												placeholder='GST Number' type='File'>
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+
+
+							<div class='form-group' style="margin-left: -200px;">
+								<label class='control-label col-md-2 col-md-offset-2'
+									for='id_title'>Connection Detail</label>
+								<div class='col-md-8'>
+									<div class='col-md-4' style="width: 38%;">
+										<div class='form-group internal'>
+											<select requried="requried " class="form-control "
+												id="id_title ">
+												<option>Select STB</option>
+												<option>Ms</option>
+												<option>Mrs</option>
+												<option>Miss</option>
+												<option>Dr</option>
+											</select>
+										</div>
+									</div>
+
+									<div class='col-md-4 indent-small' style="width: 38%;">
+										<div class='form-group internal'>
+											<input requried="requried " class='form-control' id='gst_no'
+												placeholder='GST Number' type='text'>
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+							<div class='form-group' style="margin-left: -200px;">
+								<label class='control-label col-md-2 col-md-offset-2'
+									for='id_title'>Package Detail</label>
+								<div class='col-md-8'>
+									<div class='col-md-3'>
+										<div class='form-group internal'>
+											<select requried="requried " class="form-control "
+												id="id_title ">
+												<option>Select Package</option>
+												<option>Ms</option>
+												<option>Mrs</option>
+												<option>Miss</option>
+												<option>Dr</option>
+											</select>
+										</div>
+									</div>
+									<div class='col-md-3 indent-small'>
+										<div class='form-group internal'>
+											<select requried="requried " class="form-control "
+												id="id_title ">
+												<option>AddOn Package</option>
+												<option>Ms</option>
+												<option>Mrs</option>
+												<option>Miss</option>
+												<option>Dr</option>
+											</select>
+										</div>
+									</div>
+									<div class='col-md-3 indent-small'>
+										<div class='form-group internal'>
+											<select requried="requried " class="form-control "
+												id="id_title ">
+												<option>A-La-Carte Package</option>
+												<option>Ms</option>
+												<option>Mrs</option>
+												<option>Miss</option>
+												<option>Dr</option>
+											</select>
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+
+							<div class='form-group' style="margin-left: -200px;">
+								<label class='control-label col-md-2 col-md-offset-2'
+									for='id_comments'>Description</label>
+								<div class='col-md-6' style="width: 51.5%;">
+									<textarea requried="requried " class='form-control'
+										id='id_comments' placeholder='Additional comments' rows='3'></textarea>
+								</div>
+							</div>
+							<div class='form-group' style="margin-left: -200px;">
+								<div class='col-md-offset-4 col-md-3'>
+									<button class="btn-lg btn-primary " type="submit "
+										style="font-size: 13px;">Save Connection</button>
+								</div>
+								<div class='col-md-3'>
+									<button class='btn-lg btn-danger'
+										style='float: right; font-size: 13px;' type='submit'>Cancel</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-- ################################################################################################ -->
+			<!-- / main body -->
+			<div class="clear "></div>
+			</main>
+		</div>
+
+		<!-- <div class= "wrapper coloured "> -->
+		<!--   <div id= "social " class= "hoc clear ">  -->
+		<!--     ################################################################################################ -->
+		<!--     <div class= "one_half first "> -->
+		<!--       <h6 class= "title ">Social Media</h6> -->
+		<!--       <ul class= "faico clear "> -->
+		<!--         <li><a class= "faicon-facebook " href= "# "><i class= "fa fa-facebook "></i></a></li> -->
+		<!--         <li><a class= "faicon-pinterest " href= "# "><i class= "fa fa-pinterest "></i></a></li> -->
+		<!--         <li><a class= "faicon-twitter " href= "# "><i class= "fa fa-twitter "></i></a></li> -->
+		<!--         <li><a class= "faicon-dribble " href= "# "><i class= "fa fa-dribbble "></i></a></li> -->
+		<!--         <li><a class= "faicon-linkedin " href= "# "><i class= "fa fa-linkedin "></i></a></li> -->
+		<!--         <li><a class= "faicon-google-plus " href= "# "><i class= "fa fa-google-plus "></i></a></li> -->
+		<!--         <li><a class= "faicon-vk " href= "# "><i class= "fa fa-vk "></i></a></li> -->
+		<!--         <li><a class= "faicon-youtube " href= "# "><i class= "fa fa-youtube "></i></a></li> -->
+		<!--         <li><a class= "faicon-rss " href= "# "><i class= "fa fa-rss "></i></a></li> -->
+		<!--       </ul> -->
+		<!--     </div> -->
+		<!--     <div class= "one_half "> -->
+		<!--       <h6 class= "title ">Newsletter sign-up</h6> -->
+		<!--       <form class= "clear " method= "post " action= "# "> -->
+		<!--         <fieldset> -->
+		<!--           <legend>Newsletter:</legend> -->
+		<!--           <input type= "text " value= " " placeholder= "Type Email Here&hellip; "> -->
+		<!--           <button class= "fa fa-share " type= "submit " title= "Submit "><em>Submit</em></button> -->
+		<!--         </fieldset> -->
+		<!--       </form> -->
+		<!--     </div> -->
+		<!-- ################################################################################################ -->
+		<!--   </div> -->
+		<!-- </div> -->
+		<!-- ################################################################################################ -->
+		<!-- ################################################################################################ -->
+		<!-- ################################################################################################ -->
+		<div class="wrapper row4 ">
+			<footer id="footer " class="hoc clear ">
+				<!-- ################################################################################################ -->
+				<div class="one_third first ">
+					<h6 class="title ">Quam aliquam ac</h6>
+					<p>Molestie metus non pharetra felis donec volutpat molestie
+						ligula imperdiet laoreet dolor scelerisque eu nunc aliquet tortor
+						erat ut tempus justo tristique.</p>
+					<p>Condimentum vivamus tempus nisi et augue fringilla aliquet
+						mauris scelerisque sollicitudin justo non posuere nunc mollis
+						facilisis purus imperdiet aliquet nisi consectetur et phasellus.</p>
+				</div>
+				<div class="one_third ">
+					<h6 class="title ">Morbi ullamcorper</h6>
+					<ul class="nospace linklist contact ">
+						<li><i class="fa fa-map-marker "></i>
+							<address>Street Name &amp; Number, Town, Postcode/Zip</address></li>
+						<li><i class="fa fa-phone "></i> +00 (123) 456 7890</li>
+						<li><i class="fa fa-fax "></i> +00 (123) 456 7890</li>
+						<li><i class="fa fa-envelope-o "></i> info@domain.com</li>
+					</ul>
+				</div>
+				<div class="one_third ">
+					<h6 class="title ">Finibus mauris</h6>
+					<ul class="nospace linklist ">
+						<li>
+							<article>
+								<h2 class="nospace font-x1 ">
+									<a href="# ">Suscipit mauris nunc</a>
+								</h2>
+								<time class="font-xs block btmspace-10 " datetime="2045-04-06 ">
+									Friday, 6<sup>th</sup> April 2045
+								</time>
+								<p class="nospace ">Euismod leo pulvinar a aenean vehicula
+									varius eros convallis sagittis integer&hellip;</p>
+							</article>
+						</li>
+						<li>
+							<article>
+								<h2 class="nospace font-x1 ">
+									<a href="# ">Eros magna sed</a>
+								</h2>
+								<time class="font-xs block btmspace-10 " datetime="2045-04-05 ">
+									Thursday, 5<sup>th</sup> April 2045
+								</time>
+								<p class="nospace ">Posuere donec posuere elit condimentum
+									aliquet eget eu elit sed eget massa&hellip;</p>
+							</article>
+						</li>
+					</ul>
+				</div>
+				<!-- ################################################################################################ -->
+			</footer>
+		</div>
+		<!-- ################################################################################################ -->
+		<!-- ################################################################################################ -->
+		<!-- ################################################################################################ -->
+		<div class="wrapper row5 ">
+			<div id="copyright " class="hoc clear ">
+				<!-- ################################################################################################ -->
+				<p class="fl_left ">
+					Copyright &copy; 2016 - All Rights Reserved - <a href="# ">Domain
+						Name</a>
+				</p>
+				<p class="fl_right ">
+					Template by <a target="_blank "
+						href="http://www.os-templates.com/ "
+						title="Free Website Templates ">OS Templates</a>
+				</p>
+				<!-- ################################################################################################ -->
+			</div>
+		</div>
+		<!-- ################################################################################################ -->
+		<!-- ################################################################################################ -->
+		<!-- ################################################################################################ -->
+		<a id="backtotop " href="#top "><i class="fa fa-chevron-up "></i></a>
+		<!-- JAVASCRIPTS -->
+		<script src="layout/scripts/jquery.min.js "></script>
+		<script src="layout/scripts/jquery.backtotop.js "></script>
+		<script src="layout/scripts/jquery.mobilemenu.js "></script>
+</body>
+</html>

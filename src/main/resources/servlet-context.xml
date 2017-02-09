@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+    http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+    http://www.springframework.org/schema/tx    
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context-4.2.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+	<context:component-scan base-package="com.dialnet.source.dao" />
+	<bean id="basicDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://103.16.143.176:3306/tv_cable1" />
+		<property name="username" value="root" />
+		<property name="password" value="redhat@123!@#" />
+		<property name="initialSize" value="5" />
+		<property name="maxActive" value="5" />
+		<property name="maxIdle" value="2" />
+	</bean>
+
+	<bean id="dataSource1"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://103.16.143.176:3306/tv_cable1" />
+		<property name="username" value="root" />
+		<property name="password" value="redhat@123!@#" />
+	</bean>
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- maxUploadSize=10MB -->
+		<property name="maxUploadSize" value="10240000" />
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+
+		<property name="dataSource">
+			<ref bean="dataSource1" />
+		</property>
+		<property name="annotatedClasses">
+			<list>
+				<value>com.dialnet.source.model.User</value>
+				<value>com.dialnet.source.model.LMUser</value>
+				<value>com.dialnet.source.model.AllComplaints</value>
+				<value>com.dialnet.source.model.PackageInfo</value>
+				<value>com.dialnet.source.model.LCOUser</value>
+				<value>com.dialnet.source.model.AllCollections</value>
+				<value>com.dialnet.source.model.STBStock</value>
+				<value>com.dialnet.source.model.VCStock</value>
+				<value>com.dialnet.source.model.Cust_Invoice</value>
+				<value>com.dialnet.source.model.TaxInformation</value>
+				<value>com.dialnet.source.model.Customer_Invoice1</value>
+				<value>com.dialnet.source.model.LCO_Setting</value>
+				<value>com.dialnet.source.model.AgentBillDetails</value>
+
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				 <prop key="hibernate.c3p0.timeout">100</prop>
+				 <prop key="hibernate.c3p0.min_size">5</prop>
+				<prop key="hibernate.c3p0.max_size">10</prop>
+			</props>
+		</property>
+
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+
+</beans>
