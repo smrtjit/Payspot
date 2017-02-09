@@ -2447,8 +2447,8 @@ fieldset[disabled] .btn-default.active {
 .btn-primary.active,
 .open .dropdown-toggle.btn-primary {
   color: #ffffff;
-  background-color: #b83c11;
-  border-color: #a5360f;
+  background-color: #000000;
+  border-color: #000000;
 }
 
 .btn-primary:active,
@@ -4303,8 +4303,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .nav .open > a .caret,
 .nav .open > a:hover .caret,
 .nav .open > a:focus .caret {
-  border-top-color: #97310e;
-  border-bottom-color: #97310e;
+  border-top-color: #000000;
+  border-bottom-color: #000000;
 }
 
 .nav .nav-divider {
@@ -4992,7 +4992,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
   color: #ffffff;
-  background-color: #97310e;
+  background-color: #000000;
 }
 
 .navbar-default .navbar-nav > .active > a,

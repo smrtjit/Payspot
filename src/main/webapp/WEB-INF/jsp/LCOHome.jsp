@@ -42,7 +42,7 @@
               <li><a href="#">New Complaint</a></li>
             </ul>
           </li>
-          <li><a href="#">Profile</a></li>
+          <li><a href="lcoDetail.html?user=${user }">Profile</a></li>
           <li><a href="#">Log out</a></li>
         </ul>
       </nav>

@@ -4,7 +4,7 @@
 
 <html>
 <head>
-<title>New Connection</title>
+<title>LCO Profile</title>
 <meta name="viewport" content="width=device-width, initial-scale=1 " />
 <meta charset="utf-8">
 <meta name="viewport "
@@ -36,45 +36,50 @@
 <script
 	src='http://davidstutz.github.io/bootstrap-multiselect/js/bootstrap-multiselect.js'
 	type='text/javascript'></script>
-<style >
-
+<style>
 .indent-small {
-  margin-left: 5px;
-}
-.form-group.internal {
-  margin-bottom: 0;
-}
-.dialog-panel {
-  margin: 10px;
-}
-.datepicker-dropdown {
-  z-index: 200 !important;
-}
-.panel-body {
-  background: #e5e5e5;
-  /* Old browsers */
-  background: -moz-radial-gradient(center, ellipse cover, #e5e5e5 0%, #ffffff 100%);
-  /* FF3.6+ */
-  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #e5e5e5), color-stop(100%, #ffffff));
-  /* Chrome,Safari4+ */
-  background: -webkit-radial-gradient(center, ellipse cover, #e5e5e5 0%, #ffffff 100%);
-  /* Chrome10+,Safari5.1+ */
-  background: -o-radial-gradient(center, ellipse cover, #e5e5e5 0%, #ffffff 100%);
-  /* Opera 12+ */
-  background: -ms-radial-gradient(center, ellipse cover, #e5e5e5 0%, #ffffff 100%);
-  /* IE10+ */
-  background: radial-gradient(ellipse at center, #e5e5e5 0%, #ffffff 100%);
-  /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e5e5e5', endColorstr='#ffffff', GradientType=1);
-  /* IE6-9 fallback on horizontal gradient */
-  font: 600 15px "Open Sans", Arial, sans-serif;
-}
-label.control-label {
-  font-weight: 600;
-  color: #777;
+	margin-left: 5px;
 }
 
-      </style>
+.form-group.internal {
+	margin-bottom: 0;
+}
+
+.dialog-panel {
+	margin: 10px;
+}
+
+.datepicker-dropdown {
+	z-index: 200 !important;
+}
+
+.panel-body {
+	background: #e5e5e5;
+	/* Old browsers */
+	background: -moz-radial-gradient(center, ellipse cover, #e5e5e5 0%, #ffffff 100%);
+	/* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%,
+		color-stop(0%, #e5e5e5), color-stop(100%, #ffffff));
+	/* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover, #e5e5e5 0%, #ffffff 100%);
+	/* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover, #e5e5e5 0%, #ffffff 100%);
+	/* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover, #e5e5e5 0%, #ffffff 100%);
+	/* IE10+ */
+	background: radial-gradient(ellipse at center, #e5e5e5 0%, #ffffff 100%);
+	/* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e5e5e5',
+		endColorstr='#ffffff', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+	font: 600 15px "Open Sans", Arial, sans-serif;
+}
+
+label.control-label {
+	font-weight: 600;
+	color: #777;
+}
+</style>
 
 <script type="text/javascript ">
       $(document).ready(function() {
@@ -132,289 +137,177 @@ label.control-label {
 			<div class='container' style="margin-top: -128px;">
 				<div class='panel panel-primary dialog-panel'>
 					<div class='panel-heading'>
-						<h5>Create New Connection</h5>
+						<h5>LCO Profile</h5>
 					</div>
 					<div class='panel-body'>
 						<form class='form-horizontal' role='form'>
+							<div class='form-group' style="margin-left: -200px;">
+								<label class='control-label col-md-2 col-md-offset-2'
+									for='id_title'>User Information</label>
+								<div class='col-md-8'>
+									<div class='col-md-3'>
+										<div class='form-group internal'>
+										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">LCO Code</label>
+											<input requried class='form-control' id='id_first_name'
+												readonly value='1021545' type='text'>
+										</div>
+									</div>
+									<div class='col-md-3 indent-small'>
+										<div class='form-group internal'>
+										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">Username</label>
+											<input class='form-control' id='id_middle_name' readonly
+												value='1111' type='text'>
+										</div>
+									</div>
+									<div class='col-md-3 indent-small'>
+										<div class='form-group internal'>
+										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">Password</label>
+											<input requried class='form-control' id='id_last_name'
+												readonly value='1111' type="password">
+										</div>
+									</div>
+
+								</div>
+							</div>
+					<hr>
+							<div class='form-group' style="margin-left: -200px;">
+								<label class='control-label col-md-2 col-md-offset-2'
+									for='id_title'>Account Information</label>
+								<div class='col-md-8'>
+									<div class='col-md-3'>
+										<div class='form-group internal'>
+										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">JV Number</label>
+											<input requried class='form-control' id='id_first_name'
+												readonly value='3562452' type='text'>
+										</div>
+									</div>
+									<div class='col-md-3 indent-small'>
+										<div class='form-group internal'>
+										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">Direct Number</label>
+											<input class='form-control' id='id_middle_name' readonly
+												value='6524525' type='text'>
+										</div>
+									</div>
+									<div class='col-md-3 indent-small'>
+										<div class='form-group internal'>
+										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">BRM PO Id</label>
+											<input requried class='form-control' id='id_last_name'
+												readonly value='55145241' type='text'>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							
+							
+							<div class='form-group' style="margin-left: -200px;">
+								<label class='control-label col-md-2 col-md-offset-2'></label>
+								<div class='col-md-6'>
+									<div class='form-group'>
+										<div class='col-md-9' style="width: 72%;float: left; margin-right: 20px;"">
+											<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">Account No.</label>
+											 <input requried="requried "
+													class='form-control' id='address' readonly
+													value='01251154742541525' type='text'>
+										
+
+										</div>
+									</div>
+								
+								</div>
+							</div>
+							<hr>
+					
+
 							<div class='form-group' style="margin-left: -200px;">
 								<label class='control-label col-md-2 col-md-offset-2'
 									for='id_title'>Name</label>
 								<div class='col-md-8'>
 									<div class='col-md-3'>
 										<div class='form-group internal'>
-											<input requried class='form-control' id='id_first_name'
-												placeholder='First Name' type='text'>
-										</div>
-									</div>
-									<div class='col-md-3 indent-small'>
-										<div class='form-group internal'>
-											<input class='form-control' id='id_middle_name'
-												placeholder='Middle Name' type='text'>
-										</div>
-									</div>
-									<div class='col-md-3 indent-small'>
-										<div class='form-group internal'>
-											<input requried class='form-control' id='id_last_name'
-												placeholder='Last Name' type='text'>
-										</div>
-									</div>
-
-								</div>
-							</div>
-							<div class='form-group' style="margin-left: -200px;">
-								<label class='control-label col-md-2 col-md-offset-2'
-									for='id_title'>Contact Detail</label>
-								<div class='col-md-8'>
-									<div class='col-md-3'>
-										<div class='form-group internal'>
-											<input requried="requried " class='form-control'
-												id='mobile_no' placeholder='Mobile Number' type='text'>
-										</div>
-									</div>
-									<div class='col-md-6 indent-small' style="width: 50.5%;">
-										<div class='form-group internal'>
-											<input requried="requried " class='form-control'
-												id='email_id' placeholder='Email ID' type='text'>
-										</div>
-									</div>
-
-
-								</div>
-							</div>
-
-							<div class='form-group' style="margin-left: -200px;">
-								<label class='control-label col-md-2 col-md-offset-2'
-									for='id_title'>Photo ID</label>
-								<div class='col-md-8'>
-									<div class='col-md-3'>
-										<div class='form-group internal'>
-											<select requried="requried " class="form-control "
-												id="id_title ">
-												<option>Select Type</option>
-												<option>Ms</option>
-												<option>Mrs</option>
-												<option>Miss</option>
-												<option>Dr</option>
-											</select>
-										</div>
-									</div>
-									<div class='col-md-3 indent-small'>
-										<div class='form-group internal'>
+										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">First Name</label>
 											<input requried="requried " class='form-control' id='crf_no'
-												placeholder=' ID Number' type='text'>
+												readonly value='jitesh' type='text'>
 										</div>
 									</div>
 									<div class='col-md-3 indent-small'>
 										<div class='form-group internal'>
+										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">Middle Name</label>
+											<input requried="requried " class='form-control' id='crf_no'
+												readonly value='NA' type='text'>
+										</div>
+									</div>
+									<div class='col-md-3 indent-small'>
+										<div class='form-group internal'>
+										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">Last Name</label>
 											<input requried="requried " class='form-control' id='gst_no'
-												placeholder='GST Number' type="file ">
+												readonly value='Saxena' type="file ">
 										</div>
 									</div>
 
 								</div>
 							</div>
-
-							<div class='form-group' style="margin-left: -200px;">
-								<label class='control-label col-md-2 col-md-offset-2'>Address</label>
-								<div class='col-md-6'>
-									<div class='form-group'>
-										<div class='col-md-9' style="width: 72%;">
-											<input requried="requried " class='form-control' id='address'
-												placeholder='Address' type='text'>
-										</div>
-									</div>
-									<div class='form-group internal'>
-										<div class='col-md-9' style="width: 72%;">
-											<input class='form-control' id='id_phone'
-												placeholder='Landmark' type='text'>
-										</div>
-									</div>
-								</div>
-							</div>
-
-
 							<div class='form-group' style="margin-left: -200px;">
 								<label class='control-label col-md-2 col-md-offset-2'
 									for='id_title'></label>
 								<div class='col-md-8'>
 									<div class='col-md-3'>
 										<div class='form-group internal'>
-											<select class="form-control " id="id_title ">
-												<option>Select State</option>
-												<option value=" ">Andaman and Nicobar Islands</option>
-												<option value=" ">Andhra Pradesh</option>
-												<option value=" ">Arunachal Pradesh</option>
-												<option value=" ">Assam</option>
-												<option value=" ">Bihar</option>
-												<option value=" ">Chhattisgarh</option>
-												<option value=" ">Chandigarh</option>
-												<option value=" ">Dadra and Nagar Haveli</option>
-												<option value=" ">Daman and Diu</option>
-												<option value=" ">Delhi</option>
-												<option value=" ">Goa</option>
-												<option value=" ">Gujarat</option>
-												<option value=" ">Haryana</option>
-												<option value=" ">Himachal Pradesh</option>
-												<option value=" ">Jammu & Kashmir</option>
-												<option value=" ">Jharkhand</option>
-												<option value=" ">Karnataka</option>
-												<option value=" ">Kerala</option>
-												<option value=" ">Madhya Pradesh</option>
-												<option value=" ">Maharashtra</option>
-												<option value=" ">Manipur</option>
-												<option value=" ">Meghalaya</option>
-												<option value=" ">Mizoram</option>
-												<option value=" ">Nagaland</option>
-												<option value=" ">Odisha</option>
-												<option value=" ">Punjab</option>
-												<option value=" ">Rajasthan</option>
-												<option value=" ">Sikkim</option>
-												<option value=" ">Tamil Nadu</option>
-												<option value=" ">Telangana</option>
-												<option value=" ">Tripura</option>
-												<option value=" ">Uttar Pradesh</option>
-												<option value=" ">Uttarakhand</option>
-												<option value=" ">West Bengal</option>
-												<option value=" ">Lakshadweep</option>
-												<option value=" ">Puducherry</option>
-											</select>
+										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">Mobile</label>
+										<input requried="requried " class='form-control'
+												id='mobile_no' readonly value='826319024'type='text'>
 										</div>
 									</div>
-									<div class='col-md-3 indent-small'>
+									<div class='col-md-6 indent-small' style="width: 50.5%;">
 										<div class='form-group internal'>
-											<select requried="requried " class="form-control "
-												id="id_title ">
-												<option>Select City</option>
-												<option>Ms</option>
-												<option>Mrs</option>
-												<option>Miss</option>
-												<option>Dr</option>
-											</select>
+										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">Email</label>
+										<input requried="requried " class='form-control'
+												id='email_id' readonly value='smrtjit@gmail.com' type='text'>
 										</div>
 									</div>
-									<div class='col-md-3 indent-small'>
-										<div class='form-group internal'>
-											<input requried="requried " class='form-control'
-												id='id_middle_name' placeholder='Pin Code' type='text'>
-										</div>
-									</div>
+
 
 								</div>
 							</div>
-
+							<hr>
 							<div class='form-group' style="margin-left: -200px;">
-								<label class='control-label col-md-2 col-md-offset-2'
-									for='id_title'>CRF Detail</label>
-								<div class='col-md-8'>
-									<div class='col-md-3'>
-										<div class='form-group internal'>
-											<input requried="requried " class='form-control' id='gst_no'
-												placeholder='CRF Number' type='text'>
+								<label class='control-label col-md-2 col-md-offset-2'>Address</label>
+								<div class='col-md-6'>
+									<div class='form-group'>
+										<div class='col-md-9' style="width: 72%;">
+										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">Add</label>
+											<input requried class='form-control' id='address'
+												readonly value='A-206B Padav Nagar ' type='text'>
 										</div>
 									</div>
-
-									<div class='col-md-4 indent-small' style="width: 50.5%;">
-										<div class='form-group internal'>
-											<input requried="requried " class='form-control' id='gst_no'
-												placeholder='GST Number' type='File'>
-										</div>
-									</div>
-
+									
 								</div>
 							</div>
 
-
-
-							<div class='form-group' style="margin-left: -200px;">
+								<div class='form-group' style="margin-left: -200px;">
 								<label class='control-label col-md-2 col-md-offset-2'
-									for='id_title'>Connection Detail</label>
+									for='id_title'></label>
 								<div class='col-md-8'>
 									<div class='col-md-4' style="width: 38%;">
 										<div class='form-group internal'>
-											<select requried="requried " class="form-control "
-												id="id_title ">
-												<option>Select STB</option>
-												<option>Ms</option>
-												<option>Mrs</option>
-												<option>Miss</option>
-												<option>Dr</option>
-											</select>
+										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">State</label>
+											<input requried class='form-control' id='gst_no'
+												readonly value='Uttar Pradesh' type='text'>
 										</div>
 									</div>
 
 									<div class='col-md-4 indent-small' style="width: 38%;">
 										<div class='form-group internal'>
-											<input requried="requried " class='form-control' id='gst_no'
-												placeholder='GST Number' type='text'>
+										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">City</label>
+											<input requried class='form-control' id='gst_no'
+												readonly value='Shahjhanpur' type='text'>
 										</div>
 									</div>
 
 								</div>
 							</div>
+							<hr/>
 
-							<div class='form-group' style="margin-left: -200px;">
-								<label class='control-label col-md-2 col-md-offset-2'
-									for='id_title'>Package Detail</label>
-								<div class='col-md-8'>
-									<div class='col-md-3'>
-										<div class='form-group internal'>
-											<select requried="requried " class="form-control "
-												id="id_title ">
-												<option>Select Package</option>
-												<option>Ms</option>
-												<option>Mrs</option>
-												<option>Miss</option>
-												<option>Dr</option>
-											</select>
-										</div>
-									</div>
-									<div class='col-md-3 indent-small'>
-										<div class='form-group internal'>
-											<select requried="requried " class="form-control "
-												id="id_title ">
-												<option>AddOn Package</option>
-												<option>Ms</option>
-												<option>Mrs</option>
-												<option>Miss</option>
-												<option>Dr</option>
-											</select>
-										</div>
-									</div>
-									<div class='col-md-3 indent-small'>
-										<div class='form-group internal'>
-											<select requried="requried " class="form-control "
-												id="id_title ">
-												<option>A-La-Carte Package</option>
-												<option>Ms</option>
-												<option>Mrs</option>
-												<option>Miss</option>
-												<option>Dr</option>
-											</select>
-										</div>
-									</div>
-
-								</div>
-							</div>
-
-
-							<div class='form-group' style="margin-left: -200px;">
-								<label class='control-label col-md-2 col-md-offset-2'
-									for='id_comments'>Description</label>
-								<div class='col-md-6' style="width: 51.5%;">
-									<textarea requried="requried " class='form-control'
-										id='id_comments' placeholder='Additional comments' rows='3'></textarea>
-								</div>
-							</div>
-							<div class='form-group' style="margin-left: -200px;">
-								<div class='col-md-offset-4 col-md-3'>
-									<button class="btn-lg btn-primary " type="submit "
-										style="font-size: 13px;">Save Connection</button>
-								</div>
-								<div class='col-md-3'>
-									<button class='btn-lg btn-danger'
-										style='float: right; font-size: 13px;' type='submit'>Cancel</button>
-								</div>
-							</div>
 						</form>
 					</div>
 				</div>

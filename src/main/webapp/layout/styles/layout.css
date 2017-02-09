@@ -278,7 +278,7 @@ input:focus, textarea:focus, *:required:focus{border-color:#96B2B6;}
 
 
 /* Rows */
-.row1{border-color:rgba(255,255,255,.2);}
+.row1{background-color: #96B2B6;;}
 .row2, .row2 a{}
 .row3{color:#959394; background-color:#FFFFFF;}
 .row4{color:#7F7F7F; background-color:#050505;}
@@ -324,7 +324,7 @@ input:focus, textarea:focus, *:required:focus{border-color:#96B2B6;}
 
 /* Navigation */
 #mainav li a{color:inherit;}
-#mainav .active a, #mainav a:hover, #mainav li:hover > a{color:#96B2B6; background-color:inherit;}
+#mainav .active a, #mainav a:hover, #mainav li:hover > a{color:black; background-color:inherit;}
 #mainav li li a, #mainav .active li a{color:#FFFFFF; background-color:rgba(0,0,0,.6); border-color:rgba(0,0,0,.6);}
 #mainav li li:hover > a, #mainav .active .active > a{color:#FFFFFF; background-color:#96B2B6;}
 #mainav form select{color:#FFFFFF; background-color:#050505; border-color:rgba(255,255,255,.2);}

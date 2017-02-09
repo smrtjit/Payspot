@@ -110,11 +110,11 @@ public class LCOController {
 
 	@Autowired
 	CustomerInvoiceServiceImpl invoice1;
-	
+
 	@Autowired
 	AgentBillDetailsService agentbillservice;
-	
-	String imagename=null;
+
+	String imagename = null;
 
 	@RequestMapping(value = "/lcologin", method = RequestMethod.GET)
 	public String login(Model model) {
@@ -155,16 +155,23 @@ public class LCOController {
 		map.addAttribute("user", user);
 		return "LCOHome";
 	}
-	
+
 	@RequestMapping(value = "/newConnn", method = RequestMethod.GET)
 	public String newConnn(ModelMap map, @RequestParam("user") String user) {
 		map.addAttribute("user", user);
 		return "NewConnection";
 	}
+
 	@RequestMapping(value = "/newChannel", method = RequestMethod.GET)
 	public String newChannel(ModelMap map, @RequestParam("user") String user) {
 		map.addAttribute("user", user);
 		return "NewChannel";
 	}
-
+	
+	@RequestMapping(value = "/lcoDetail", method = RequestMethod.GET)
+	public String lcoProfile(ModelMap map, @RequestParam("user") String user) {
+		map.addAttribute("user", user);
+		return "LCOProfile";
 	}
+
+}
