@@ -40,6 +40,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dialnet.source.model.AgentBillDetails;
+import com.dialnet.source.model.AllChannels;
 import com.dialnet.source.model.AllCollections;
 import com.dialnet.source.model.AllComplaints;
 import com.dialnet.source.model.BulkRechargeAmount;
@@ -57,6 +58,7 @@ import com.dialnet.source.model.User;
 import com.dialnet.source.model.UserLogin;
 import com.dialnet.source.model.VCStock;
 import com.dialnet.source.service.AgentBillDetailsService;
+import com.dialnet.source.service.AllChannelService;
 import com.dialnet.source.service.AllCollectionService;
 import com.dialnet.source.service.AllComplaintService;
 import com.dialnet.source.service.CustSettingService;
@@ -113,6 +115,9 @@ public class LCOController {
 
 	@Autowired
 	AgentBillDetailsService agentbillservice;
+	
+	@Autowired
+	AllChannelService channelService;
 
 	String imagename = null;
 
@@ -163,14 +168,24 @@ public class LCOController {
 	}
 
 	@RequestMapping(value = "/newChannel", method = RequestMethod.GET)
-	public String newChannel(ModelMap map, @RequestParam("user") String user) {
+	public String newChannel(ModelMap map, @RequestParam("user") String user, Integer offset,
+			Integer maxResults) {
 		map.addAttribute("user", user);
+		List<AllChannels> l=channelService.getListByLCO(user,offset,maxResults);
+		map.addAttribute("count", channelService.count(user));
+		map.addAttribute("offset", offset);
+		for(AllChannels tmp: l){
+			System.out.println("NAME: "+tmp.getChannel_name());
+		}
+		map.addAttribute("ChannelList", l);
 		return "NewChannel";
 	}
 	
 	@RequestMapping(value = "/lcoDetail", method = RequestMethod.GET)
 	public String lcoProfile(ModelMap map, @RequestParam("user") String user) {
 		map.addAttribute("user", user);
+		LCOUser lco=lcoService.get(user);
+		map.addAttribute("LCODetail", lco);
 		return "LCOProfile";
 	}
 

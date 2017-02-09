@@ -88,44 +88,39 @@ label.control-label {
 <script src="layout/scripts/jquery.mobilemenu.js"></script>
 </head>
 <body id="top ">
-	<div class="bgded overlay"
-		style="background-image: url('images/demo/backgrounds/01.png');">
-		<!-- ################################################################################################ -->
-		<div class="wrapper row1">
-			<header id="header" class="hoc clear">
-				<!-- ################################################################################################ -->
-				<div id="logo" class="fl_left">
-					<h1>
-						<a href="index.html">PaySpot</a>
-					</h1>
-				</div>
-				<nav id="mainav" class="fl_right">
-					<ul class="clear">
-						<li class="active"><a href="LCOHome.html?user=${user }">Home</a></li>
-						<li><a class="drop" href="#">Function</a>
-							<ul>
-								<li><a href="#">Collection</a></li>
-								<li><a href="#">Connection</a></li>
-								<li><a href="#">Stock</a></li>
-								<li><a href="#">Topup</a></li>
-								<li><a href="#">Compalint</a></li>
-							</ul></li>
-						<li><a class="drop" href="#">Services</a>
-							<ul>
-								<li><a href="newConnn.html?user=${user }">New
-										Connection</a></li>
-								<li><a href="#">New LineMan</a></li>
-								<li><a href="newChannel.html?user=${user}">New Channel</a></li>
-								<li><a href="#">New Stock</a></li>
-								<li><a href="#">New Complaint</a></li>
-							</ul></li>
-						<li><a href="lcoDetail.html?user=${user }">Profile</a></li>
-						<li><a href="#">Log out</a></li>
-					</ul>
-				</nav>
-			</header>
-		</div>
-
+	<div class="wrapper row1">
+    <header id="header" class="hoc clear"> 
+      <!-- ################################################################################################ -->
+      <div id="logo" class="fl_left">
+        <h1><a href="LCOHome.html?user=${user }">PaySpot</a></h1>
+      </div>
+      <nav id="mainav" class="fl_right">
+        <ul class="clear">
+          <li class="active"><a href="LCOHome.html?user=${user }">Home</a></li>
+          <li><a class="drop" href="#">Function</a>
+            <ul>
+              <li><a href="#">Collection</a></li>
+              <li><a href="#">Connection</a></li>
+              <li><a href="#">Stock</a></li>
+              <li><a href="#">Topup</a></li>
+              <li><a href="#">Compalint</a></li>
+            </ul>
+          </li>
+          <li><a class="drop" href="#">Services</a>
+            <ul>
+              <li><a href="newConnn.html?user=${user }">New Connection</a></li>
+              <li><a href="#">New LineMan</a></li>      
+              <li><a href="newChannel.html?user=${user}">New Channel</a></li>      
+              <li><a href="#">New Stock</a></li>                  
+              <li><a href="#">New Complaint</a></li>
+            </ul>
+          </li>
+          <li><a href="lcoDetail.html?user=${user }">Profile</a></li>
+          <li><a href="logOut.html?user=${user}">Log out</a></li>
+        </ul>
+      </nav>
+    </header>
+  </div>
 		<div class="wrapper row3 ">
 			<main class="hoc container clear "> <!-- main body --> <!-- ################################################################################################ -->
 

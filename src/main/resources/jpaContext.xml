@@ -40,7 +40,7 @@
 	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://103.16.143.176:3306/tv_cable1" />
+		<property name="url" value="jdbc:mysql://103.16.143.176:3306/TV_CableMain" />
 		<property name="username" value="root" />
 		<property name="password" value="redhat@123!@#" />
 	</bean>

@@ -137,7 +137,7 @@ label.control-label {
 			<div class='container' style="margin-top: -128px;">
 				<div class='panel panel-primary dialog-panel'>
 					<div class='panel-heading'>
-						<h5>LCO Profile</h5>
+						<h5 style="font-size: 18px;font-weight: 800;">Local Cable Operator Detail</h5>
 					</div>
 					<div class='panel-body'>
 						<form class='form-horizontal' role='form'>
@@ -148,22 +148,22 @@ label.control-label {
 									<div class='col-md-3'>
 										<div class='form-group internal'>
 										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">LCO Code</label>
-											<input requried class='form-control' id='id_first_name'
-												readonly value='1021545' type='text'>
+											<input requried class='form-control' 
+												readonly value='${LCODetail.loc_code }' type='text'>
 										</div>
 									</div>
 									<div class='col-md-3 indent-small'>
 										<div class='form-group internal'>
 										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">Username</label>
-											<input class='form-control' id='id_middle_name' readonly
-												value='1111' type='text'>
+											<input class='form-control' readonly
+												value='${LCODetail.login_id }' type='text'>
 										</div>
 									</div>
 									<div class='col-md-3 indent-small'>
 										<div class='form-group internal'>
 										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">Password</label>
 											<input requried class='form-control' id='id_last_name'
-												readonly value='1111' type="password">
+												readonly value='${LCODetail.password }' type="password">
 										</div>
 									</div>
 
@@ -178,21 +178,21 @@ label.control-label {
 										<div class='form-group internal'>
 										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">JV Number</label>
 											<input requried class='form-control' id='id_first_name'
-												readonly value='3562452' type='text'>
+												readonly value='${LCODetail.jv_no }' type='text'>
 										</div>
 									</div>
 									<div class='col-md-3 indent-small'>
 										<div class='form-group internal'>
 										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">Direct Number</label>
 											<input class='form-control' id='id_middle_name' readonly
-												value='6524525' type='text'>
+												value='${LCODetail.direct_no }' type='text'>
 										</div>
 									</div>
 									<div class='col-md-3 indent-small'>
 										<div class='form-group internal'>
 										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">BRM PO Id</label>
 											<input requried class='form-control' id='id_last_name'
-												readonly value='55145241' type='text'>
+												readonly value='${LCODetail.brm_po_id }' type='text'>
 										</div>
 									</div>
 
@@ -208,7 +208,7 @@ label.control-label {
 											<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">Account No.</label>
 											 <input requried="requried "
 													class='form-control' id='address' readonly
-													value='01251154742541525' type='text'>
+													value='${LCODetail.account_no }' type='text'>
 										
 
 										</div>
@@ -227,21 +227,21 @@ label.control-label {
 										<div class='form-group internal'>
 										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">First Name</label>
 											<input requried="requried " class='form-control' id='crf_no'
-												readonly value='jitesh' type='text'>
+												readonly value='${LCODetail.f_name }' type='text'>
 										</div>
 									</div>
 									<div class='col-md-3 indent-small'>
 										<div class='form-group internal'>
 										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">Middle Name</label>
 											<input requried="requried " class='form-control' id='crf_no'
-												readonly value='NA' type='text'>
+												readonly value='${LCODetail.m_name }' type='text'>
 										</div>
 									</div>
 									<div class='col-md-3 indent-small'>
 										<div class='form-group internal'>
 										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">Last Name</label>
 											<input requried="requried " class='form-control' id='gst_no'
-												readonly value='Saxena' type="file ">
+												readonly value='${LCODetail.l_name }' type="file ">
 										</div>
 									</div>
 
@@ -255,14 +255,14 @@ label.control-label {
 										<div class='form-group internal'>
 										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">Mobile</label>
 										<input requried="requried " class='form-control'
-												id='mobile_no' readonly value='826319024'type='text'>
+												id='mobile_no' readonly value='${LCODetail.mobile }'type='text'>
 										</div>
 									</div>
 									<div class='col-md-6 indent-small' style="width: 50.5%;">
 										<div class='form-group internal'>
 										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">Email</label>
 										<input requried="requried " class='form-control'
-												id='email_id' readonly value='smrtjit@gmail.com' type='text'>
+												id='email_id' readonly value='${LCODetail.emaiil }' type='text'>
 										</div>
 									</div>
 
@@ -277,7 +277,7 @@ label.control-label {
 										<div class='col-md-9' style="width: 72%;">
 										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">Add</label>
 											<input requried class='form-control' id='address'
-												readonly value='A-206B Padav Nagar ' type='text'>
+												readonly value='${LCODetail.address }' type='text'>
 										</div>
 									</div>
 									
@@ -292,7 +292,7 @@ label.control-label {
 										<div class='form-group internal'>
 										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">State</label>
 											<input requried class='form-control' id='gst_no'
-												readonly value='Uttar Pradesh' type='text'>
+												readonly value='${LCODetail.state }' type='text'>
 										</div>
 									</div>
 
@@ -300,7 +300,7 @@ label.control-label {
 										<div class='form-group internal'>
 										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">City</label>
 											<input requried class='form-control' id='gst_no'
-												readonly value='Shahjhanpur' type='text'>
+												readonly value='${LCODetail.city }' type='text'>
 										</div>
 									</div>
 

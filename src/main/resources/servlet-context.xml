@@ -21,7 +21,7 @@
 
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://103.16.143.176:3306/tv_cable1" />
+		<property name="url" value="jdbc:mysql://103.16.143.176:3306/TV_CableMain" />
 		<property name="username" value="root" />
 		<property name="password" value="redhat@123!@#" />
 		<property name="initialSize" value="5" />
@@ -32,7 +32,7 @@
 	<bean id="dataSource1"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://103.16.143.176:3306/tv_cable1" />
+		<property name="url" value="jdbc:mysql://103.16.143.176:3306/TV_CableMain" />
 		<property name="username" value="root" />
 		<property name="password" value="redhat@123!@#" />
 	</bean>
@@ -62,6 +62,7 @@
 				<value>com.dialnet.source.model.Customer_Invoice1</value>
 				<value>com.dialnet.source.model.LCO_Setting</value>
 				<value>com.dialnet.source.model.AgentBillDetails</value>
+				<value>com.dialnet.source.model.AllChannels</value>
 
 			</list>
 		</property>

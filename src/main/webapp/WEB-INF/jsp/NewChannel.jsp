@@ -1,6 +1,12 @@
 
 <!DOCTYPE html>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+<%@ taglib prefix="tag" uri="/WEB-INF/taglibs/customTaglib.tld"%>
+<%@ taglib prefix="tag1" uri="/WEB-INF/taglibs/customTaglib2.tld"%>
 <html>
 <head>
 <title>New Channels</title>
@@ -63,7 +69,7 @@
 		<!-- / main body -->
 		<nav id="mainav">
 			<ul class="clear">
-				<li><h4>The Total Numbers of Channels are: 4</h4></li>
+				<li><h4>The Total Numbers of Channels are: ${count}</h4></li>
 				<li style="width: 27%;"></li>
 				<li><input type="file" class='form-control' /></li>
 				<li class="fl_right"><button class="btn-lg btn-primary"
@@ -74,6 +80,7 @@
 		<table>
 			<thead>
 				<tr>
+					<th style="text-align: center;">SNo.</th>
 					<th style="text-align: center;">Name</th>
 					<th style="text-align: center;">MSO Price</th>
 					<th style="text-align: center;">LCO Price</th>
@@ -82,34 +89,23 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td style="text-align: center;">Value 1</td>
-					<td style="text-align: center;">Value 2</td>
-					<td style="text-align: center;">Value 3</td>
-					<td style="text-align: center;">Value 4</td>
-					<td style="text-align: center;"><a class="btn" href="#">Update</a></td>
-				</tr>
-				<tr>
-					<td style="text-align: center;">Value 5</td>
-					<td style="text-align: center;">Value 6</td>
-					<td style="text-align: center;">Value 7</td>
-					<td style="text-align: center;">Value 4</td>
-					<td style="text-align: center;"><a class="btn" href="#">Update</a></td>
-				</tr>
-				<tr>
-					<td style="text-align: center;">Value 9</td>
-					<td style="text-align: center;">Value 4</td>
-					<td style="text-align: center;">Value 10</td>
-					<td style="text-align: center;">Value 11</td>
-					<td style="text-align: center;"><a class="btn" href="#">Update</a></td>
-				</tr>
-				<tr>
-					<td style="text-align: center;">Value 13</td>
-					<td style="text-align: center;">Value 4</td>
-					<td style="text-align: center;">Value 14</td>
-					<td style="text-align: center;">Value 15</td>
-					<td style="text-align: center;"><a class="btn" href="#">Update</a></td>
-				</tr>
+			<c:forEach items="${ChannelList}" var="bill" varStatus="itr">
+
+									<tr>
+										<td>${offset + itr.index +1 }</td>
+											<td>${bill.channel_name}</td>
+											<td>${bill.mso_price}</td>
+											<td>${bill.lco_price}</td>
+											<td>${bill.updated_on}</td>
+											<td style="text-align: center;"><a class="btn" href="#">Update</a></td>
+
+									</tr>
+
+								</c:forEach>
+							</table>
+					<tag:paginate max="15" offset="${offset}" count="${count}" uri="newChannel.html?user=${user}" next="&raquo;" previous="&laquo;" />
+						
+			
 			</tbody>
 		</table>
 		<div class="fl_right">
