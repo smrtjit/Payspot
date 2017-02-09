@@ -15,6 +15,7 @@ import com.dialnet.source.model.AllChannels;
 
 
 
+
 @Repository
 public class AllChannelsDaoImpl implements AllChannelsDao {
 	
@@ -23,19 +24,13 @@ public class AllChannelsDaoImpl implements AllChannelsDao {
 
 	@Override
 	public List<AllChannels> getListByLCO(String lco, Integer offset,Integer maxResults) {
-		System.out.println("Call For Channels with user: "+lco+","+offset+","+maxResults);
-		Session sf = session.openSession();
-		Criteria c2 = sf.createCriteria(AllChannels.class);
-		c2.add(Restrictions.eq("lco_id", lco));
-		List<AllChannels> tmp=c2.setFirstResult(offset!=null?offset:0)
-				.setMaxResults(maxResults!=null?maxResults:10)
-				.list();
-		for(AllChannels tmp1: tmp){
-			System.out.println("NAME: "+tmp1.getChannel_name());
-		}
+		Session sf=session.openSession();
+		Criteria criteria=sf.createCriteria(AllChannels.class);
+		criteria.add(Restrictions.eq("lco_id",lco));
+		List l= criteria.setFirstResult(offset != null ? offset : 0)
+				.setMaxResults(maxResults != null ? maxResults : 10).list();
 		sf.close();
-		
-		return tmp;
+		return l;
 	}
 
 	@Override
