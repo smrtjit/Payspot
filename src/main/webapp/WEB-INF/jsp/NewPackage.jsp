@@ -8,7 +8,7 @@
 <%@ taglib prefix="tag1" uri="/WEB-INF/taglibs/customTaglib2.tld"%>
 <html>
 <head>
-<title>New Channels</title>
+<title>New Package</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta charset="utf-8">
 <meta name="viewport"
@@ -59,7 +59,8 @@
           <li><a class="drop" href="#">Services</a>
             <ul>
          	  <li><a href="newConnn.html?user=${user }">Add Subscriber</a></li>
-              <li><a href="newLineman.html?user=${user}">Add LineMan</a></li>      
+              <li><a href="newLineman.html?user=${user}">Add LineMan</a></li>    
+               <li><a href="addStock.html?user=${user}">Add Stock</a></li>   
                <li><a href="topUp.html?user=${user }">Topup</a></li>           
              
             </ul>

@@ -8,7 +8,7 @@
 <%@ taglib prefix="tag1" uri="/WEB-INF/taglibs/customTaglib2.tld"%>
 <html>
 <head>
-<title>Payspot</title>
+<title>Collection</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -42,6 +42,7 @@
 								<li><a href="newConnn.html?user=${user }">Add
 										Subscriber</a></li>
 								<li><a href="newLineman.html?user=${user}">Add LineMan</a></li>
+								 <li><a href="addStock.html?user=${user}">Add Stock</a></li> 
 								<li><a href="topUp.html?user=${user }">Topup</a></li>
 
 							</ul></li>

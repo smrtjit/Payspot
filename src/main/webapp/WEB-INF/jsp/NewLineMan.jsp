@@ -4,7 +4,7 @@
 
 <html>
 <head>
-<title>New Connection</title>
+<title>New LineMan</title>
 <meta name="viewport" content="width=device-width, initial-scale=1 " />
 <meta charset="utf-8">
 <meta name="viewport "
@@ -102,7 +102,8 @@ label.control-label {
           <li><a class="drop" href="#">Services</a>
             <ul>
          	  <li><a href="newConnn.html?user=${user }">Add Subscriber</a></li>
-              <li><a href="newLineman.html?user=${user}">Add LineMan</a></li>      
+              <li><a href="newLineman.html?user=${user}">Add LineMan</a></li>     
+               <li><a href="addStock.html?user=${user}">Add Stock</a></li>  
                <li><a href="topUp.html?user=${user }">Topup</a></li>           
              
             </ul>

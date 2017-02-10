@@ -260,6 +260,14 @@ public class LCOController {
 	return new ModelAndView("TotalStock",map);
 	}
 	
+	@RequestMapping(value = "/addStock", method = RequestMethod.GET)
+	public ModelAndView addStock(ModelMap map, @RequestParam("user") String user,Integer offset,
+			Integer maxResults) {
+		
+	map.addAttribute("user", user);
+	return new ModelAndView("AddNewStock",map);
+	}
+	
 	
 	
 
