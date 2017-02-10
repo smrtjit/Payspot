@@ -102,7 +102,7 @@ public class UserController {
 			model.addObject("vc_no", found.getCustomer_vc_no());
 			model.addObject("stb_no", found.getCustomer_stb_no());
 			PackageInfo lco = packageinfoservice.getByName(found.getPackage_name());
-			model.addObject("Package_name", lco.getName());
+			model.addObject("Package_name", lco.getPckgName());
 			model.addObject("Account_balance", found.getAccount_balance());
 			model.addObject("Last_payment", found.getLast_payment());
 			// model.addObject("Account_balance", found.get);
@@ -130,7 +130,7 @@ public class UserController {
 			model.addObject("UserName", found.getCustomer_name());
 			model.addObject("vc_no", found.getCustomer_vc_no());
 			PackageInfo lco = packageinfoservice.getByID(found.getPackage_name());
-			model.addObject("Package_name", lco.getName());
+			model.addObject("Package_name", lco.getPckgName());
 			model.addObject("Package_cost", lco.getPrice());
 			model.addObject("Account_balance", found.getAccount_balance());
 			model.addObject("Last_payment", found.getLast_payment());

@@ -8,11 +8,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.dialnet.source.model.AllComplaints;
+
 import com.dialnet.source.model.PackageInfo;
 
 @Repository("pack")
@@ -25,19 +24,26 @@ public class PackageInfoDaoImpl implements PackageInfoDao {
 	public PackageInfo getByID(String code) {
 		System.out.println("PackageInfo\t"+code);
 		Session sf = session.openSession();
-//		Criteria c2 = sf.createCriteria(PackageInfo.class);
-//		c2.add(Restrictions.eq("code", code));
-//		//AllComplaints product = (AllComplaints) sf.get(AllComplaints.class, Long.parseLong(complaints_No));
-//		//System.out.println("customer_vcno: " + product);
-//		PackageInfo tmp=(PackageInfo)c2.uniqueResult();
 		PackageInfo l= (PackageInfo)sf.get(PackageInfo.class, Long.parseLong(code));
 		sf.close();
 		 return l;
 	}
 
-	public List<PackageInfo> getAll() {
+	public List<PackageInfo> getAll(String user,Integer offset,Integer maxResults) {
+		Session sf=session.openSession();
+		Criteria criteria=sf.createCriteria(PackageInfo.class);
+		criteria.add(Restrictions.eq("LcoID",user));
+		List l= criteria.setFirstResult(offset != null ? offset : 0)
+				.setMaxResults(maxResults != null ? maxResults : 10).list();
+		sf.close();
+		return l;
+	}
+	
+	public Long count(String user) {
 		Session sf = session.openSession();
-		List l= sf.createQuery("from PackageInfo").list();
+		Criteria cr=sf.createCriteria(PackageInfo.class);
+		cr.add(Restrictions.eq("LcoID",user));
+		Long l= (Long) cr.setProjection(Projections.rowCount()).uniqueResult();
 		sf.close();
 		return l;
 	}

@@ -8,7 +8,8 @@ public interface PackageInfoService {
 
 
 	public PackageInfo getByID(String code);
-	public List<PackageInfo> getAll();
+	public List<PackageInfo> getAll(String user,Integer offset,Integer maxResults);
+	public Long count(String user);
 	public List<String> getAllPckgNames();
 	public PackageInfo getByName(String name);
 }

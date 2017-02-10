@@ -16,7 +16,7 @@
 <body id="top">
 <div class="bgded overlay" style="background-image:url('images/demo/backgrounds/01.png');"> 
   <!-- ################################################################################################ -->
-  <div class="wrapper row1">
+   <div class="wrapper row1">
     <header id="header" class="hoc clear"> 
       <!-- ################################################################################################ -->
       <div id="logo" class="fl_left">
@@ -58,21 +58,7 @@
       <p class="nospace">The goal is to turn data into information, and information into insight<a href="#"></a>.</p>
     </div>
     <ul class="nospace group services">
-     <div id="counter" class="container">
-				<div class="row">
-					<div class="col-sm-3"></div>
-					<div class="col-sm-9" style="margin-top: px;margin-left: 220px;">
-						<a href="oldConnections.html?user=${user}"  class="buttongol btn-primary" >Connection<span class="badge">7</span ></a>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<a href="allLCOComplain.html?user=${user}"  class="buttongol btn-success" >Complaint<span class="badge">3</span></a>
-						
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<a href="allLCOCollection.html?user=${user}"  class="buttongol btn-danger" >Collection<span class="badge">5</span></a>
-						
-					</div>
-				</div>
-
-			</div>
+     Collection
      
     </ul>
     <!-- ################################################################################################ -->

@@ -346,7 +346,7 @@ table, th, td, #comments .avatar, #comments input, #comments textarea{border-col
 #comments input:focus, #comments textarea:focus, #comments *:required:focus{border-color:#96B2B6;}
 th{color:#FFFFFF; background-color:#373737;}
 tr, #comments li, #comments input[type="submit"], #comments input[type="reset"]{color:inherit; background-color:#FBFBFB;}
-tr:nth-child(even), #comments li:nth-child(even){color:inherit; background-color:#F7F7F7;}
+tr:nth-child(even), #comments li:nth-child(even){color:inherit; background-color:#ddf1eb;}
 table a, #comments a{background-color:inherit;}
 
 

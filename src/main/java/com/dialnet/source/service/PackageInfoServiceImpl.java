@@ -19,9 +19,7 @@ public class PackageInfoServiceImpl implements PackageInfoService {
 		return packageinfodao.getByID(code);
 	}
 
-	public List<PackageInfo> getAll() {
-		return packageinfodao.getAll();
-	}
+	
 
 	@Override
 	public List<String> getAllPckgNames() {
@@ -33,6 +31,22 @@ public class PackageInfoServiceImpl implements PackageInfoService {
 	public PackageInfo getByName(String name) {
 		// TODO Auto-generated method stub
 		return packageinfodao.getByName(name);
+	}
+
+
+
+	@Override
+	public List<PackageInfo> getAll(String user, Integer offset, Integer maxResults) {
+		// TODO Auto-generated method stub
+		return packageinfodao.getAll(user, offset, maxResults);
+	}
+
+
+
+	@Override
+	public Long count(String user) {
+		// TODO Auto-generated method stub
+		return packageinfodao.count(user);
 	}
 
 

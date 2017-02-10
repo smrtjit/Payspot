@@ -126,9 +126,9 @@ label.control-label {
 			<main class="hoc container clear "> <!-- main body --> <!-- ################################################################################################ -->
 
 			<div class='container' style="margin-top: -128px;">
-				<div class='panel panel-primary dialog-panel'>
-					<div class='panel-heading'>
-						<h5>Create New Connection</h5>
+				<div class='panel panel-primary dialog-panel' style="border-color: #333333;">
+					<div class='panel-heading' style="background-color: #072c31; border-color: #333333;">
+						<h4>Create New Line Man</h4>
 					</div>
 					<div class='panel-body'>
 						<form class='form-horizontal' role='form'>
@@ -180,7 +180,7 @@ label.control-label {
 
 							<div class='form-group' style="margin-left: -200px;">
 								<label class='control-label col-md-2 col-md-offset-2'
-									for='id_title'>Photo ID</label>
+									for='id_title'>ID Proof</label>
 								<div class='col-md-8'>
 									<div class='col-md-3'>
 										<div class='form-group internal'>
@@ -203,13 +203,45 @@ label.control-label {
 									<div class='col-md-3 indent-small'>
 										<div class='form-group internal'>
 											<input requried="requried " class='form-control' id='gst_no'
-												placeholder='GST Number' type="file ">
+												placeholder='GST Number' type='File'>
 										</div>
 									</div>
 
 								</div>
 							</div>
+							
+							<div class='form-group' style="margin-left: -200px;">
+								<label class='control-label col-md-2 col-md-offset-2'
+									for='id_title'>Addredd Proof</label>
+								<div class='col-md-8'>
+									<div class='col-md-3'>
+										<div class='form-group internal'>
+											<select requried="requried " class="form-control "
+												id="id_title ">
+												<option>Select Type</option>
+												<option>Ms</option>
+												<option>Mrs</option>
+												<option>Miss</option>
+												<option>Dr</option>
+											</select>
+										</div>
+									</div>
+									<div class='col-md-3 indent-small'>
+										<div class='form-group internal'>
+											<input requried="requried " class='form-control' id='crf_no'
+												placeholder=' ID Number' type='text'>
+										</div>
+									</div>
+									<div class='col-md-3 indent-small'>
+										<div class='form-group internal'>
+											<input requried="requried " class='form-control' id='gst_no'
+												placeholder='GST Number' type='File'>
+										</div>
+									</div>
 
+								</div>
+							</div>
+							
 							<div class='form-group' style="margin-left: -200px;">
 								<label class='control-label col-md-2 col-md-offset-2'>Address</label>
 								<div class='col-md-6'>
@@ -219,17 +251,12 @@ label.control-label {
 												placeholder='Address' type='text'>
 										</div>
 									</div>
-									<div class='form-group internal'>
-										<div class='col-md-9' style="width: 72%;">
-											<input class='form-control' id='id_phone'
-												placeholder='Landmark' type='text'>
-										</div>
-									</div>
+									
 								</div>
 							</div>
 
 
-							<div class='form-group' style="margin-left: -200px;">
+							<div class='form-group' style="margin-left: -200px;margin-top: -15px;">
 								<label class='control-label col-md-2 col-md-offset-2'
 									for='id_title'></label>
 								<div class='col-md-8'>
@@ -300,107 +327,28 @@ label.control-label {
 
 							<div class='form-group' style="margin-left: -200px;">
 								<label class='control-label col-md-2 col-md-offset-2'
-									for='id_title'>CRF Detail</label>
-								<div class='col-md-8'>
-									<div class='col-md-3'>
-										<div class='form-group internal'>
-											<input requried="requried " class='form-control' id='gst_no'
-												placeholder='CRF Number' type='text'>
-										</div>
-									</div>
-
-									<div class='col-md-4 indent-small' style="width: 50.5%;">
-										<div class='form-group internal'>
-											<input requried="requried " class='form-control' id='gst_no'
-												placeholder='GST Number' type='File'>
-										</div>
-									</div>
-
-								</div>
-							</div>
-
-
-
-							<div class='form-group' style="margin-left: -200px;">
-								<label class='control-label col-md-2 col-md-offset-2'
-									for='id_title'>Connection Detail</label>
+									for='id_title'>Role &  Responsibility</label>
 								<div class='col-md-8'>
 									<div class='col-md-4' style="width: 38%;">
 										<div class='form-group internal'>
-											<select requried="requried " class="form-control "
-												id="id_title ">
-												<option>Select STB</option>
-												<option>Ms</option>
-												<option>Mrs</option>
-												<option>Miss</option>
-												<option>Dr</option>
-											</select>
+											<input requried="requried " class='form-control' id='gst_no'
+												placeholder='Role' type='text'>
 										</div>
 									</div>
 
 									<div class='col-md-4 indent-small' style="width: 38%;">
 										<div class='form-group internal'>
 											<input requried="requried " class='form-control' id='gst_no'
-												placeholder='GST Number' type='text'>
+												placeholder='Responsibility' type='text'>
 										</div>
 									</div>
 
 								</div>
 							</div>
 
-							<div class='form-group' style="margin-left: -200px;">
-								<label class='control-label col-md-2 col-md-offset-2'
-									for='id_title'>Package Detail</label>
-								<div class='col-md-8'>
-									<div class='col-md-3'>
-										<div class='form-group internal'>
-											<select requried="requried " class="form-control "
-												id="id_title ">
-												<option>Select Package</option>
-												<option>Ms</option>
-												<option>Mrs</option>
-												<option>Miss</option>
-												<option>Dr</option>
-											</select>
-										</div>
-									</div>
-									<div class='col-md-3 indent-small'>
-										<div class='form-group internal'>
-											<select requried="requried " class="form-control "
-												id="id_title ">
-												<option>AddOn Package</option>
-												<option>Ms</option>
-												<option>Mrs</option>
-												<option>Miss</option>
-												<option>Dr</option>
-											</select>
-										</div>
-									</div>
-									<div class='col-md-3 indent-small'>
-										<div class='form-group internal'>
-											<select requried="requried " class="form-control "
-												id="id_title ">
-												<option>A-La-Carte Package</option>
-												<option>Ms</option>
-												<option>Mrs</option>
-												<option>Miss</option>
-												<option>Dr</option>
-											</select>
-										</div>
-									</div>
-
-								</div>
-							</div>
+							
 
 
-							<div class='form-group' style="margin-left: -200px;">
-								<label class='control-label col-md-2 col-md-offset-2'
-									for='id_comments'>Description</label>
-								<div class='col-md-6' style="width: 51.5%;">
-									<textarea requried="requried " class='form-control'
-										id='id_comments' placeholder='Additional comments' rows='3'></textarea>
-								</div>
-							</div>
 							<div class='form-group' style="margin-left: -200px;">
 								<div class='col-md-offset-4 col-md-3'>
 									<button class="btn-lg btn-primary " type="submit "

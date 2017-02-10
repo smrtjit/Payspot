@@ -8,86 +8,83 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "Package_Info")
+@Table(name = "PackageInfo")
 public class PackageInfo {
 
 	@Id
-	@GeneratedValue
-	@Column(name = "code")
-	private long code;
+	private String  PckgID;
 	
-
-	@Size(min = 1, max = 25)
-	private String name;
 	
-	private String price;
-	
-	private String duration;
-	
-	private String type;
-	
-	private String trndate;
+	private String  PckgName;
+	private String  PckgType;
+	private String  Price;
+	private String  NoOfChannels;
+	private String  NoOfUser;
+	private String  LcoID;
+	private String  trnadte;
+	public PackageInfo(String pckgID, String pckgName, String pckgType, String price, String noOfChannels,
+			String noOfUser, String lcoID, String trnadte) {
+		super();
+		PckgID = pckgID;
+		PckgName = pckgName;
+		PckgType = pckgType;
+		Price = price;
+		NoOfChannels = noOfChannels;
+		NoOfUser = noOfUser;
+		LcoID = lcoID;
+		this.trnadte = trnadte;
+	}
 	public PackageInfo() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-
-	public PackageInfo(long code, String name, String price, String duration, String type, String trndate) {
-		super();
-		this.code = code;
-		this.name = name;
-		this.price = price;
-		this.duration = duration;
-		this.type = type;
-		this.trndate = trndate;
+	public String getPckgID() {
+		return PckgID;
 	}
-
-	public long getCode() {
-		return code;
+	public void setPckgID(String pckgID) {
+		PckgID = pckgID;
 	}
-
-	public void setCode(long code) {
-		this.code = code;
+	public String getPckgName() {
+		return PckgName;
 	}
-
-	public String getName() {
-		return name;
+	public void setPckgName(String pckgName) {
+		PckgName = pckgName;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	public String getPckgType() {
+		return PckgType;
 	}
-
+	public void setPckgType(String pckgType) {
+		PckgType = pckgType;
+	}
 	public String getPrice() {
-		return price;
+		return Price;
 	}
-
 	public void setPrice(String price) {
-		this.price = price;
+		Price = price;
 	}
-
-	public String getDuration() {
-		return duration;
+	public String getNoOfChannels() {
+		return NoOfChannels;
 	}
-
-	public void setDuration(String duration) {
-		this.duration = duration;
+	public void setNoOfChannels(String noOfChannels) {
+		NoOfChannels = noOfChannels;
 	}
-
-	public String getType() {
-		return type;
+	public String getNoOfUser() {
+		return NoOfUser;
 	}
-
-	public void setType(String type) {
-		this.type = type;
+	public void setNoOfUser(String noOfUser) {
+		NoOfUser = noOfUser;
 	}
-
-	public String getTrndate() {
-		return trndate;
+	public String getLcoID() {
+		return LcoID;
 	}
-
-	public void setTrndate(String trndate) {
-		this.trndate = trndate;
+	public void setLcoID(String lcoID) {
+		LcoID = lcoID;
 	}
-
+	public String getTrnadte() {
+		return trnadte;
+	}
+	public void setTrnadte(String trnadte) {
+		this.trnadte = trnadte;
+	}
 	
 }

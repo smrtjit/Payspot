@@ -166,7 +166,14 @@ public class LCOController {
 		map.addAttribute("user", user);
 		return "NewConnection";
 	}
+	
+	@RequestMapping(value = "/newLineman", method = RequestMethod.GET)
+	public String newLineman(ModelMap map, @RequestParam("user") String user) {
+		map.addAttribute("user", user);
+		return "NewLineMan";
+	}
 
+	
 	@RequestMapping(value = "/newChannel", method = RequestMethod.GET)
 	public String newChannel(ModelMap map, @RequestParam("user") String user, Integer offset,
 			Integer maxResults) {
@@ -182,11 +189,78 @@ public class LCOController {
 	}
 	
 	@RequestMapping(value = "/lcoDetail", method = RequestMethod.GET)
-	public String lcoProfile(ModelMap map, @RequestParam("user") String user) {
+	public String lcoProfile(ModelMap map, @RequestParam("user") String user, Integer offset,
+			Integer maxResults) {
+		
 		map.addAttribute("user", user);
 		LCOUser lco=lcoService.get(user);
 		map.addAttribute("LCODetail", lco);
 		return "LCOProfile";
 	}
+	
+	@RequestMapping(value = "/newPackage", method = RequestMethod.GET)
+	public ModelAndView newPackage(ModelMap map, @RequestParam("user") String user,Integer offset,
+			Integer maxResults) {
+		List<PackageInfo> l=pckgservice.getAll(user, offset, maxResults);
+		for(PackageInfo tmp: l){
+			System.out.println("NAME of Packages: "+tmp.getPckgName());
+		}
+		map.addAttribute("PckgList", l);
+		map.addAttribute("count", pckgservice.count(user));
+		map.addAttribute("offset", offset);
+	map.addAttribute("user", user);
+	return new ModelAndView("NewPackage",map);
+	}
+	
+	@RequestMapping(value = "/allSubscriber", method = RequestMethod.GET)
+	public ModelAndView allSubscriber(ModelMap map, @RequestParam("user") String user,Integer offset,
+			Integer maxResults) {
+		
+	map.addAttribute("user", user);
+	return new ModelAndView("AllUsers",map);
+	}
+	
+	@RequestMapping(value = "/allCollection", method = RequestMethod.GET)
+	public ModelAndView allCollection(ModelMap map, @RequestParam("user") String user,Integer offset,
+			Integer maxResults) {
+		
+	map.addAttribute("user", user);
+	return new ModelAndView("AllCollection",map);
+	}
+	
+	@RequestMapping(value = "/allComplaint", method = RequestMethod.GET)
+	public ModelAndView allComplaint(ModelMap map, @RequestParam("user") String user,Integer offset,
+			Integer maxResults) {
+		
+	map.addAttribute("user", user);
+	return new ModelAndView("AllComp",map);
+	}
+	
+	@RequestMapping(value = "/topUp", method = RequestMethod.GET)
+	public ModelAndView topUp(ModelMap map, @RequestParam("user") String user,Integer offset,
+			Integer maxResults) {
+		
+	map.addAttribute("user", user);
+	return new ModelAndView("Topup",map);
+	}
+	
+	@RequestMapping(value = "/allLM", method = RequestMethod.GET)
+	public ModelAndView allLM(ModelMap map, @RequestParam("user") String user,Integer offset,
+			Integer maxResults) {
+		
+	map.addAttribute("user", user);
+	return new ModelAndView("AllLineMan",map);
+	}
+	
+	@RequestMapping(value = "/stock", method = RequestMethod.GET)
+	public ModelAndView stock(ModelMap map, @RequestParam("user") String user,Integer offset,
+			Integer maxResults) {
+		
+	map.addAttribute("user", user);
+	return new ModelAndView("TotalStock",map);
+	}
+	
+	
+	
 
 }
