@@ -21,6 +21,7 @@ import javax.validation.Valid;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -52,8 +53,9 @@ import com.dialnet.source.model.LCO_Setting;
 import com.dialnet.source.model.LMUser;
 import com.dialnet.source.model.PackageInfo;
 import com.dialnet.source.model.STBStock;
+import com.dialnet.source.model.Subscriber;
 import com.dialnet.source.model.TaxInformation;
-import com.dialnet.source.model.User;
+
 //import com.dialnet.source.model.LCOUserRegistration;
 import com.dialnet.source.model.UserLogin;
 import com.dialnet.source.model.VCStock;
@@ -84,7 +86,7 @@ public class LCOController {
 	public SubscriberService userService;
 
 	@Autowired
-	public AllComplaintService LCOComplaintRepository;
+	public AllComplaintService comservice;
 
 	@Autowired
 	public AllCollectionService LCOCollectionRepository;
@@ -175,17 +177,53 @@ public class LCOController {
 
 	
 	@RequestMapping(value = "/newChannel", method = RequestMethod.GET)
-	public String newChannel(ModelMap map, @RequestParam("user") String user, Integer offset,
+	public ModelAndView newChannel(ModelMap map, @RequestParam("user") String user, Integer offset,
 			Integer maxResults) {
+		//AllChannels chn=new AllChannels();
+		//map.addAttribute("AllChn", chn);
 		map.addAttribute("user", user);
 		List<AllChannels> l=channelService.getListByLCO(user,offset,maxResults);
 		map.addAttribute("count", channelService.count(user));
 		map.addAttribute("offset", offset);
-		for(AllChannels tmp: l){
-			System.out.println("NAME: "+tmp.getChannel_name());
-		}
+//		for(AllChannels tmp: l){
+//			System.out.println("NAME: "+tmp.getChannel_name());
+//		}
 		map.addAttribute("ChannelList", l);
-		return "NewChannel";
+		return new ModelAndView("NewChannel",map);
+	}
+	
+	
+	
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/addSingleChn", method = RequestMethod.GET)
+	public String addStudent( @RequestParam("chnName") String chn,  @RequestParam("msoPrice") String mso, 
+			   @RequestParam("lcoPrice") String lco,  ModelMap model, @RequestParam("user") String user) {
+		String result=null;
+		long id=System.currentTimeMillis();
+		System.out.println("Form Data: "+chn+",mso: "+mso+ ",lco: "+lco+","+user+","+id);
+		AllChannels newchn=new AllChannels();
+		newchn.setChannel_id(id);
+		newchn.setChannel_name(chn);
+		newchn.setLco_price(lco);
+		newchn.setMso_price(mso);
+		newchn.setLco_id(user);
+		newchn.setUpdated_on(getDate());
+		int val=channelService.add(newchn);
+		//int val=1;
+		System.out.println("value: "+val);
+		if(val==1)
+		{
+			result="New Channel Added Successfully!!!";
+		}else{
+			result="There may be Some Error Please Try Again";
+		}
+		Gson gson = new Gson();
+		String json = gson.toJson(result);
+		model.addAttribute("user", user);
+		return result;
+		// return new ModelAndView(json);
 	}
 	
 	@RequestMapping(value = "/lcoDetail", method = RequestMethod.GET)
@@ -215,7 +253,9 @@ public class LCOController {
 	@RequestMapping(value = "/allSubscriber", method = RequestMethod.GET)
 	public ModelAndView allSubscriber(ModelMap map, @RequestParam("user") String user,Integer offset,
 			Integer maxResults) {
-		
+	List<Subscriber> subs= userService.getByLCOId(user, offset, maxResults);
+	map.addAttribute("userList", subs);
+	map.addAttribute("count", userService.count(user));
 	map.addAttribute("user", user);
 	return new ModelAndView("AllUsers",map);
 	}
@@ -231,7 +271,9 @@ public class LCOController {
 	@RequestMapping(value = "/allComplaint", method = RequestMethod.GET)
 	public ModelAndView allComplaint(ModelMap map, @RequestParam("user") String user,Integer offset,
 			Integer maxResults) {
-		
+		List al=comservice.list(user, offset, maxResults);
+		map.addAttribute("userList", al);
+		map.addAttribute("count", comservice.count(user));
 	map.addAttribute("user", user);
 	return new ModelAndView("AllComp",map);
 	}
@@ -245,11 +287,19 @@ public class LCOController {
 	}
 	
 	@RequestMapping(value = "/allLM", method = RequestMethod.GET)
-	public ModelAndView allLM(ModelMap map, @RequestParam("user") String user,Integer offset,
-			Integer maxResults) {
-		
-	map.addAttribute("user", user);
-	return new ModelAndView("AllLineMan",map);
+	public ModelAndView allLM(ModelMap map, @RequestParam("user") String user, Integer offset, Integer maxResults) {
+		System.out.println("Old User Info Called");
+		LMUser userForm = new LMUser();
+		map.addAttribute("userForm", userForm);
+		List<LMUser> userList = lmuserservice.list(offset, maxResults);
+
+		map.addAttribute("count", lmuserservice.count());
+		map.addAttribute("offset", offset);
+		map.addAttribute("userList", userList);
+		map.addAttribute("id", user);
+
+		map.addAttribute("user", user);
+		return new ModelAndView("AllLineMan", map);
 	}
 	
 	@RequestMapping(value = "/stock", method = RequestMethod.GET)
@@ -268,7 +318,130 @@ public class LCOController {
 	return new ModelAndView("AddNewStock",map);
 	}
 	
+	@RequestMapping(value = "/searchLCOConByLCO", method = RequestMethod.GET)
+	public ModelAndView searchOlConByLCO(ModelMap map, @RequestParam("user") String user,
+			@ModelAttribute("subForm") Subscriber sub, @RequestParam("name") String name,
+			@RequestParam("fdate") String fdate, @RequestParam("edate") String edate,
+			@RequestParam("mobile") String mobile, @RequestParam("status") String status,
+			@RequestParam("stb_no") String stb, @RequestParam("pckg") String pckg, Integer offset, Integer maxResults) {
+		Subscriber userForm = new Subscriber();
+		map.addAttribute("subForm", userForm);
+		map.addAttribute("user", user);
+		System.out.println("status in searchLCOConByLCO: " + status);
+		if (status.equals("0"))
+			status = "";
+		List<Subscriber> tmp = userService.findByAnyone(user,fdate, edate, stb, name, mobile, status, pckg, offset,
+				maxResults);
+		System.out.println("tmp.size()***************: " + tmp.size());
+		if (tmp.size() < 1) {
+			map.addAttribute("error", "No Data Found!!!");
+			System.out.println("No Data Found........................");
+		} else {
+			map.addAttribute("count", userService.countForSearch(user,fdate, edate, stb, name, mobile, status, pckg));
+			map.addAttribute("offset", offset);
+			map.addAttribute("userList", tmp);
+		}
+
+		return new ModelAndView("AllUsers", map);
+	}
+
+
+	@RequestMapping(value = "/searchComplaint", method = RequestMethod.GET)
+	public ModelAndView searchComplaint(ModelMap map, @RequestParam("user") String user,
+			@RequestParam("VC_No") String VC_No, @RequestParam("fdate") String fdate,
+			@RequestParam("edate") String edate, @RequestParam("mobile") String mobile,
+			@RequestParam("status") String status, Integer offset, Integer maxResults) {
+		map.addAttribute("user", user);
+		System.out.println("VC no: " + VC_No + "user: " + user);
+		List<AllComplaints> tmp = comservice.listForSearch(user,fdate, edate, VC_No, mobile, status, offset,
+				maxResults);
+
+		System.out.println("tmp.size()***************: " + tmp.size());
+		if (tmp.size() < 1) {
+			map.addAttribute("error", "No Data Found!!!");
+			System.out.println("No Data Found........................");
+		} else {
+			map.addAttribute("userList", tmp);
+			map.addAttribute("count", comservice.countForSearch(user,fdate, edate, VC_No, mobile, status));
+			map.addAttribute("offset", offset);
+		}
+
+		return new ModelAndView("allComplaint", map);
+	}
+/**************************************************/
 	
 	
+	@ResponseBody
+	@RequestMapping(value = "/channelList", method = RequestMethod.POST)
+	public ModelAndView channelList(ModelMap model, @RequestParam("excelfile") MultipartFile excelfile,
+			@RequestParam("user") String id) {
+		try {
+
+			List<AllChannels> lstUser = new ArrayList<AllChannels>();
+			int i = 0;
+			System.out.println("file not found name \t" + excelfile.getInputStream());
+			// File file= new File();
+			HSSFWorkbook workbook = new HSSFWorkbook(excelfile.getInputStream());
+			String ss = excelfile.getName();
+			HSSFSheet worksheet = workbook.getSheetAt(0);
+			int noOfColumns = worksheet.getRow(0).getLastCellNum();
+			System.out.println("Column count \t" + noOfColumns);
+			if (noOfColumns == 3) {
+				while (i <= worksheet.getLastRowNum()) {
+					AllChannels user = new AllChannels();
+					HSSFRow row = worksheet.getRow(i++);
+					user.setChannel_name(row.getCell(0).getStringCellValue());
+					System.out.println("I am here 0\t " + row.getCell(0));
+					if(row.getCell(1).getCellType() == Cell.CELL_TYPE_NUMERIC){
+						user.setMso_price(row.getCell(1).getNumericCellValue()+"");
+					}else{
+						user.setMso_price(row.getCell(1).getStringCellValue());
+					}
+					
+					
+					if(row.getCell(2).getCellType() == Cell.CELL_TYPE_NUMERIC){
+						user.setLco_price(row.getCell(2).getNumericCellValue()+"");
+						System.out.println("I am here 000 \t" + row.getCell(2));
+					}else{
+						user.setLco_price(row.getCell(2).getStringCellValue());
+						System.out.println("I am here 000 \t" + row.getCell(2));
+					}
+					
+					user.setLco_id(id);
+					long channel_id = System.currentTimeMillis();
+					user.setChannel_id(channel_id);
+					user.setUpdated_on(getDate());
+					channelService.add(user);
+				
+				}
+				
+				model.addAttribute("user", id);
+			} else {
+				model.addAttribute("error", "File is Not Valid");
+				model.addAttribute("user", id);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return new ModelAndView("redirect:newChannel.html",model);
+	}
+//#######################################################################################
+public String getDate() {
+	String trnstamp = null;
+	try {
+		SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date now = new Date();
+		String strDate = sdfDate.format(now);
+		// System.out.println(strDate.toString());
+		trnstamp = strDate.toString();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	return trnstamp;
+}
+
+
+
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,16 @@ public class AllChannelsDaoImpl implements AllChannelsDao {
 				.uniqueResult();
 		sf.close();
 		return l;
+	}
+
+	@Override
+	public int add(AllChannels chn) {
+		Session sf=session.openSession();
+		Transaction tx=sf.beginTransaction();
+		sf.save(chn);
+		tx.commit();
+		sf.close();
+		return 1;
 	}
 
 }

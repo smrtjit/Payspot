@@ -92,7 +92,7 @@ public class AllComplaintdaoImpl implements AllComplaintdao {
 		if(VC_no==null || VC_no.equalsIgnoreCase(""))
 			System.out.println("VC_no is not available");
 		else{
-			criteria.add(Restrictions.eq("customer_vcno",VC_no));
+			criteria.add(Restrictions.eq("cust_remark",VC_no));
 		}
 		
 		if(mobile==null || mobile.equalsIgnoreCase(""))

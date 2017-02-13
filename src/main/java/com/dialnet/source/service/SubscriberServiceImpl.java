@@ -5,26 +5,22 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dialnet.source.dao.SubsriberDao;
-import com.dialnet.source.model.User;
+import com.dialnet.source.dao.SubscriberDao;
+import com.dialnet.source.model.Subscriber;
+
+
 
 @Service
-
 public class SubscriberServiceImpl implements SubscriberService {
 
 	@Autowired
-	private SubsriberDao subsriberdao;
+	private SubscriberDao subsriberdao;
 
-	@Override
-	public void add(User complaints) {
-		subsriberdao.add(complaints);
-
-	}
 
 	public boolean findByLogin(String userName, String password) {
 		System.out.println("Username\t" + userName + "\tPassword\t" + password);
-		User stud = subsriberdao.get(userName);
-		System.out.println("Username\t" + stud.getUsername() + "\tPassword\t" + stud.getPassword());
+		Subscriber stud = subsriberdao.getByID(userName);
+		System.out.println("Username\t" + stud.getUserName() + "\tPassword\t" + stud.getPassword());
 		if (stud == null) {
 			return false;
 		} else if (stud != null && stud.getPassword().equals(password)) {
@@ -33,95 +29,46 @@ public class SubscriberServiceImpl implements SubscriberService {
 			return false;
 	}
 
-	@Override
-	public void edit(User complaints) {
-		subsriberdao.edit(complaints);
-	}
 
 	@Override
-	public void delete(int complaints_No) {
-		subsriberdao.delete(complaints_No);
-	}
-
-	@Override
-	public User get(String username) {
+	public List<Subscriber> getByLCOId(String lco, Integer offset, Integer maxResults) {
 		// TODO Auto-generated method stub
-		return subsriberdao.get(username);
+		return subsriberdao.getByLCOId(lco, offset, maxResults);
 	}
 
+
 	@Override
-	public List getAll() {
+	public long count(String lco) {
 		// TODO Auto-generated method stub
-		return subsriberdao.getAll();
+		return subsriberdao.count(lco);
 	}
 
+
 	@Override
-	public User findByVCNO(String vcno) {
+	public Subscriber getByID(String id) {
 		// TODO Auto-generated method stub
-		return subsriberdao.findByVCNO(vcno);
+		return subsriberdao.getByID(id);
 	}
 
+
 	@Override
-	public User findByMobile(String vcno) {
+	public List<Subscriber> findByAnyone(String user, String sdate, String edate, String stb_no, String VC_no,
+			String mobile, String status, String pckg, Integer offset, Integer maxResults) {
 		// TODO Auto-generated method stub
-		return subsriberdao.findByMobile(vcno);
+		return subsriberdao.findByAnyone(user, sdate, edate, stb_no, VC_no, mobile, status, pckg, offset, maxResults);
 	}
 
+
 	@Override
-	public List<User> findByAnyone(String sdate, String edate, String stb_no, String VC_no, String mobile,
+	public Long countForSearch(String user, String sdate, String edate, String stb_no, String VC_no, String mobile,
 			String status, String pckg) {
 		// TODO Auto-generated method stub
-		return subsriberdao.findByAnyone(sdate, edate, stb_no, VC_no, mobile, status, pckg);
+		return subsriberdao.countForSearch(user, sdate, edate, stb_no, VC_no, mobile, status, pckg);
 	}
 
-	@Override
-	public List<User> findUserForBillGeneration(String user) {
-		// TODO Auto-generated method stub
-		return subsriberdao.findUserForBillGeneration(user);
-	}
+	
 
-	@Override
-	public boolean updateBillStatus(String user) {
-		// TODO Auto-generated method stub
-		return subsriberdao.updateBillStatus(user);
-	}
+	
 
-	@Override
-	public List<User> list(Integer offset, Integer maxResults) {
-		// TODO Auto-generated method stub
-		return subsriberdao.list(offset, maxResults);
-	}
-
-	@Override
-	public Long count() {
-		// TODO Auto-generated method stub
-		return subsriberdao.count();
-	}
-
-	@Override
-	public List<User> listForBill(String user, Integer offset, Integer maxResults) {
-		// TODO Auto-generated method stub
-		return subsriberdao.listForBill(user, offset, maxResults);
-	}
-
-	@Override
-	public Long countForBill(String user) {
-		// TODO Auto-generated method stub
-		return subsriberdao.countForBill(user);
-	}
-
-	@Override
-	public List userListForSearch(String sdate, String edate, String stb_no, String VC_no, String mobile, String status,
-			String pckg, Integer offset, Integer maxResults) {
-		// TODO Auto-generated method stub
-		return subsriberdao.userListForSearch(sdate, edate, stb_no, VC_no, mobile, status, pckg, offset, maxResults);
-	}
-
-	@Override
-	public Long countForSearch(String sdate, String edate, String stb_no, String VC_no, String mobile, String status,
-			String pckg) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 }

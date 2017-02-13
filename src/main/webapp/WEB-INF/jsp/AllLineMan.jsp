@@ -64,70 +64,35 @@
 		<div class="wrapper row3">
 			<main class="hoc container clear"> <!-- main body -->
 			<div class="row">
-				<form:form action="searchLCOConByLCO.html" method="get">
+				<form:form action="searchLMByLCO.html" method="get">
 					<input type="hidden" name="user" value="${user }" />
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
-							<input name="fdate" type="text" id="fdate" tabindex="1"
-								class="form-control" placeholder="From Date" />
-
-						</div>
-
-					</div>
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
-
-							<input name="edate" type="text" id="edate" tabindex="2"
-								class="form-control" placeholder="To Date" />
-
-						</div>
-					</div>
-
+					
 
 					<div class="col-sm-3">
 						<div style="margin-bottom: 10px">
-							<input name="stb_no" type="text" id="fdate" tabindex="3"
-								class="form-control" placeholder="STB No." />
+							<input name="username" type="text" id="fdate" tabindex="3"
+								class="form-control" placeholder="Employee ID." />
 						</div>
 
 					</div>
 
+				
 					<div class="col-sm-3">
 						<div style="margin-bottom: 10px">
+							<input name="desig" type="text"
+								id="ContentPlaceHolder1_txtmobile" tabindex="5"
+								class="form-control" placeholder="Designation" />
 
-							<input name="VC_No" type="text" id="ContentPlaceHolder1_txtvcno"
-								tabindex="4" class="form-control" placeholder="VC No." />
 						</div>
+
 					</div>
+
+				
 					<div class="col-sm-3">
 						<div style="margin-bottom: 10px">
 							<input name="mobile" type="text"
-								id="ContentPlaceHolder1_txtmobile" tabindex="5"
-								class="form-control" placeholder="Mobile No." />
-
-						</div>
-
-					</div>
-
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
-							<select name="status" id="ContentPlaceHolder1_ddlstatus"
-								tabindex="6" class="form-control">
-								<option value="0">Select</option>
-								<option value="Pending">Pending</option>
-								<option value="Live">Live</option>
-								<option value="Expire">Expire</option>
-
-							</select>
-
-						</div>
-
-					</div>
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
-							<input name="pckg" type="text"
 								id="ContentPlaceHolder1_txtpackage" tabindex="7"
-								class="form-control" placeholder="Package Name" />
+								class="form-control" placeholder="Mobile No." />
 
 						</div>
 
@@ -161,7 +126,7 @@
 						<div style="width: 40%;margin-left: 890px;/* font-size: 8px; */" class="col-sm-12">
 					<div style="margin-bottom: 0px">
 						<p>
-							Total Count : <span id="ContentPlaceHolder1_lblcount" style="font-weight: bold;"></span>
+							Total Count : <span id="ContentPlaceHolder1_lblcount" style="font-weight: bold;">${count}</span>
 						</p>
 					</div>
 				</div>
@@ -173,76 +138,31 @@
 						<tr>
 							<th scope="col"
 								style="width: 5%; background-color: rgb(119, 127, 177);">SNo.</th>
-							<th scope="col" style="background-color: rgb(119, 127, 177);">Customer
-								ID</th>
-							<th scope="col" style="background-color: rgb(119, 127, 177);">VC
-								No</th>
+							<th scope="col" style="background-color: rgb(119, 127, 177);">Employee ID</th>
 							<th scope="col" style="background-color: rgb(119, 127, 177);">Name</th>
 							<th scope="col" style="background-color: rgb(119, 127, 177);">Email</th>
-							<th scope="col" style="background-color: rgb(119, 127, 177);">Connection
-								Status</th>
-							<th scope="col" style="background-color: rgb(119, 127, 177);">Create
-								Time</th>
+							<th scope="col" style="background-color: rgb(119, 127, 177);">Mobile</th>
+							<th scope="col" style="background-color: rgb(119, 127, 177);">Address</th>
+							<th scope="col" style="background-color: rgb(119, 127, 177);">City</th>
+							<th scope="col" style="background-color: rgb(119, 127, 177);">Action</th>
 
 						</tr>
-						<tr>
-							<td>10</td>
-							<td>9876000010</td>
-							<td>7894125630</td>
-							<td>Parth Prattim</td>
-							<td>khan_golden@hotmail.com;</td>
-							<td>Live</td>
-
-							<td>1/2/2017 6:38:37 PM</td>
-						</tr>
-						<tr>
-							<td>10</td>
-							<td>9876000010</td>
-							<td>7894125630</td>
-							<td>Parth Prattim</td>
-							<td>khan_golden@hotmail.com;</td>
-							<td>Live</td>
-
-							<td>1/2/2017 6:38:37 PM</td>
-						</tr>
-						<tr>
-							<td>10</td>
-							<td>9876000010</td>
-							<td>7894125630</td>
-							<td>Parth Prattim</td>
-							<td>khan_golden@hotmail.com;</td>
-							<td>Live</td>
-
-							<td>1/2/2017 6:38:37 PM</td>
-						</tr>
-						<tr>
-							<td>10</td>
-							<td>9876000010</td>
-							<td>7894125630</td>
-							<td>Parth Prattim</td>
-							<td>khan_golden@hotmail.com;</td>
-							<td>Live</td>
-
-							<td>1/2/2017 6:38:37 PM</td>
-						</tr>
-						<!-- 								<tr> -->
-						<%-- 									<c:forEach items="${userList}" var="user" varStatus="itr"> --%>
-						<!-- 										<tr> -->
-						<%-- 											<td style="width: 5%;">${offset + itr.index +1 }</td> --%>
-						<%-- 											<td><a href="#" value=${user.username --%>
-						<%-- 												} --%>
-						<%-- 												data-modal-link="popup3">${user.username}</a></td> --%>
-
-						<%-- 											<td>${user.customer_vc_no}</td> --%>
-						<%-- 											<td>${user.customer_name}</td> --%>
-						<%-- 											<td>${user.customer_email}</td> --%>
-						<%-- 											<td>${user.connection_status}</td> --%>
-						<%-- 											<td>${user.timestamp}</td> --%>
-
-						<!-- 										</tr> -->
-						<%-- 									</c:forEach> --%>
-
-						<!-- 								</tr> -->
+						
+						<c:forEach items="${userList}" var="user" varStatus="itr">
+										<tr>
+											<td style="width: 5%;">${offset + itr.index +1 }</td>
+											<td>${user.username}</td>
+											<td>${user.firstName} ${user.lastName}</td>
+											<td>${user.email_id}</td>
+											<td>${user.mobile}</td>
+											<td>${user.address}</td>
+											<td>${user.city}</td>
+											<td>
+											 <a class="btn-primary btn btn-block" href="#" 
+												data-modal-id="popup2">Update</a>
+											</td>
+										</tr>
+									</c:forEach>
 					</table>
 
 					<tag:paginate max="15" offset="${offset}" count="${count}"

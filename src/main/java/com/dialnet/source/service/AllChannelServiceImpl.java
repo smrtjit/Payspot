@@ -27,4 +27,10 @@ public class AllChannelServiceImpl implements AllChannelService {
 		return dao.count(user);
 	}
 
+	@Override
+	public int add(AllChannels chn) {
+		// TODO Auto-generated method stub
+		return dao.add(chn);
+	}
+
 }

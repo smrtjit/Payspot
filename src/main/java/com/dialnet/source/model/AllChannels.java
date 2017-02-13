@@ -9,7 +9,7 @@ import javax.persistence.Table;
 public class AllChannels {
 
 	@Id
-	private int channel_id;
+	private long channel_id;
 	private String channel_name;
 	private String mso_price;
 	private String lco_price;
@@ -19,7 +19,7 @@ public class AllChannels {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public AllChannels(int channel_id, String channel_name, String mso_price, String lco_price, String lco_id,
+	public AllChannels(long channel_id, String channel_name, String mso_price, String lco_price, String lco_id,
 			String updated_on) {
 		super();
 		this.channel_id = channel_id;
@@ -29,10 +29,11 @@ public class AllChannels {
 		this.lco_id = lco_id;
 		this.updated_on = updated_on;
 	}
-	public int getChannel_id() {
+	
+	public long getChannel_id() {
 		return channel_id;
 	}
-	public void setChannel_id(int channel_id) {
+	public void setChannel_id(long channel_id) {
 		this.channel_id = channel_id;
 	}
 	public String getChannel_name() {

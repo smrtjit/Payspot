@@ -105,18 +105,16 @@
 
 									<div class="form-group"
 										style="margin-left: -200px;    margin-top: -120px;">
-										<label class="control-label col-md-2 col-md-offset-2"
-											for="id_title">Package Type</label>
+										<label class="control-label col-md-2 col-md-offset-2">Package Type</label>
 										<div class="col-md-8">
 											<div class="col-md-5">
 												<div class="form-group internal">
-													<select requried="requried " class="form-control "
-														id="id_title ">
-														<option>Select Type</option>
-														<option>Ms</option>
-														<option>Mrs</option>
-														<option>Miss</option>
-														<option>Dr</option>
+													<select required class="form-control">
+														<option value="None">Select Type</option>
+														<option value="Basic">Basic</option>
+														<option value="Add On">Add On</option>
+														<option value="A-La-Carte">A-La-Carte</option>
+														
 													</select>
 												</div>
 											</div>
@@ -124,24 +122,24 @@
 									</div>
 									<div class="form-group" style="margin-left: -200px;">
 										<label class="control-label col-md-2 col-md-offset-2"
-											for="id_title">Channel Name</label>
+											for="id_title">Package Name</label>
 										<div class="col-md-8">
 											<div class="col-md-5">
 												<div class="form-group internal">
 													<input requried="requried " class="form-control"
-														id="gst_no" placeholder="Channel Price" type="text">
+														id="gst_no" placeholder="Package Price" type="text">
 												</div>
 											</div>
 										</div>
 									</div>
 									<div class="form-group" style="margin-left: -200px;">
 										<label class="control-label col-md-2 col-md-offset-2"
-											for="id_title">Channel Price</label>
+											for="id_title">Package Price</label>
 										<div class="col-md-8">
 											<div class="col-md-5">
 												<div class="form-group internal">
 													<input requried="requried " class="form-control"
-														id="gst_no" placeholder="Channel Price" type="text">
+														id="gst_no" placeholder="Package Price" type="text">
 												</div>
 											</div>
 										</div>

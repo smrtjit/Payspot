@@ -64,91 +64,67 @@
 		<div class="wrapper row3">
 			<main class="hoc container clear"> <!-- main body -->
 			<div class="row">
-				<form:form action="searchLCOConByLCO.html" method="get">
-					<input type="hidden" name="user" value="${user }" />
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
-							<input name="fdate" type="text" id="fdate" tabindex="1"
-								class="form-control" placeholder="From Date" />
+				<form action="searchComplaint.html">
+						<input type="hidden" name="user" value="1111"  />
+						<div class="col-sm-2">
+							<div style="margin-bottom: 10px">
+								<input name="fdate" type="text"
+									id="fdate" tabindex="1"
+									class="form-control" placeholder="From Date" />
+							</div>
 
 						</div>
 
-					</div>
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
+						<div class="col-sm-2">
+							<div style="margin-bottom: 10px">
 
-							<input name="edate" type="text" id="edate" tabindex="2"
-								class="form-control" placeholder="To Date" />
+								<input name="edate" type="text"
+									id="edate"  tabindex="2"
+									class="form-control" placeholder="To Date" />
 
-						</div>
-					</div>
-
-
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
-							<input name="stb_no" type="text" id="fdate" tabindex="3"
-								class="form-control" placeholder="STB No." />
+							</div>
 						</div>
 
-					</div>
+						<div class="col-sm-2">
+							<div style="margin-bottom: 10px">
 
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
-
-							<input name="VC_No" type="text" id="ContentPlaceHolder1_txtvcno"
-								tabindex="4" class="form-control" placeholder="VC No." />
+								<input name="VC_No" type="text"
+									 tabindex="2"
+									class="form-control" placeholder="CAF Number" />
+							</div>
 						</div>
-					</div>
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
-							<input name="mobile" type="text"
-								id="ContentPlaceHolder1_txtmobile" tabindex="5"
-								class="form-control" placeholder="Mobile No." />
+						<div class="col-sm-2">
+							<div style="margin-bottom: 10px">
+								<input name="mobile" type="text"
+									 tabindex="1"
+									class="form-control" placeholder="Mobile No." />
+
+							</div>
 
 						</div>
-
-					</div>
-
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
-							<select name="status" id="ContentPlaceHolder1_ddlstatus"
-								tabindex="6" class="form-control">
-								<option value="0">Select</option>
-								<option value="Pending">Pending</option>
-								<option value="Live">Live</option>
-								<option value="Expire">Expire</option>
-
-							</select>
+						<div class="col-sm-2">
+							<div style="margin-bottom: 10px">
+								<input name="status" type="text"
+									 tabindex="2"
+									class="form-control" placeholder="Status" />
+							</div>
 
 						</div>
 
-					</div>
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
-							<input name="pckg" type="text"
-								id="ContentPlaceHolder1_txtpackage" tabindex="7"
-								class="form-control" placeholder="Package Name" />
+						<div class="col-sm-2">
+							<div style="margin-bottom: 10px">
+
+								<input type="submit"
+									name="submit"
+									value="Search" id="ContentPlaceHolder1_btn_search_request"
+									tabindex="30" class="btn-primary btn btn-block" />
+
+							</div>
 
 						</div>
+						<div class="nofound">   </div>
+						</form>
 
-					</div>
-
-
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
-
-							<input type="submit"
-								name="ctl00$ContentPlaceHolder1$btn_submit_request"
-								style="border-radius: 8px; padding: 4px;" value="Search"
-								id="ContentPlaceHolder1_btn_submit_request" tabindex="30"
-								class="btn-primary btn-color btn-block pull-left" />
-
-
-						</div>
-
-					</div>
-					<div class="nofound">${error}</div>
-				</form:form>
 
 			</div>
 
@@ -175,74 +151,29 @@
 								style="width: 5%; background-color: rgb(119, 127, 177);">SNo.</th>
 							<th scope="col" style="background-color: rgb(119, 127, 177);">Customer
 								ID</th>
-							<th scope="col" style="background-color: rgb(119, 127, 177);">VC
-								No</th>
+							<th scope="col" style="background-color: rgb(119, 127, 177);">CAF Number</th>
 							<th scope="col" style="background-color: rgb(119, 127, 177);">Name</th>
-							<th scope="col" style="background-color: rgb(119, 127, 177);">Email</th>
-							<th scope="col" style="background-color: rgb(119, 127, 177);">Connection
-								Status</th>
-							<th scope="col" style="background-color: rgb(119, 127, 177);">Create
-								Time</th>
-
+							<th scope="col" style="background-color: rgb(119, 127, 177);">Mobile</th>
+							<th scope="col" style="background-color: rgb(119, 127, 177);">Address</th>
+							<th scope="col" style="background-color: rgb(119, 127, 177);">Complaint Type</th>
+							<th scope="col" style="background-color: rgb(119, 127, 177);">Complaint Status</th>
 						</tr>
-						<tr>
-							<td>10</td>
-							<td>9876000010</td>
-							<td>7894125630</td>
-							<td>Parth Prattim</td>
-							<td>khan_golden@hotmail.com;</td>
-							<td>Live</td>
+						
+						<c:forEach items="${userList}" var="user" varStatus="itr">
+							<tr>
+								<td style="width: 5%;">${offset + itr.index +1 }</td>
+								<td><a href="#" value="${user.complaint_no}"
+									data-modal-link="popup3">${user.complaint_no}</a></td>
 
-							<td>1/2/2017 6:38:37 PM</td>
-						</tr>
-						<tr>
-							<td>10</td>
-							<td>9876000010</td>
-							<td>7894125630</td>
-							<td>Parth Prattim</td>
-							<td>khan_golden@hotmail.com;</td>
-							<td>Live</td>
-
-							<td>1/2/2017 6:38:37 PM</td>
-						</tr>
-						<tr>
-							<td>10</td>
-							<td>9876000010</td>
-							<td>7894125630</td>
-							<td>Parth Prattim</td>
-							<td>khan_golden@hotmail.com;</td>
-							<td>Live</td>
-
-							<td>1/2/2017 6:38:37 PM</td>
-						</tr>
-						<tr>
-							<td>10</td>
-							<td>9876000010</td>
-							<td>7894125630</td>
-							<td>Parth Prattim</td>
-							<td>khan_golden@hotmail.com;</td>
-							<td>Live</td>
-
-							<td>1/2/2017 6:38:37 PM</td>
-						</tr>
-						<!-- 								<tr> -->
-						<%-- 									<c:forEach items="${userList}" var="user" varStatus="itr"> --%>
-						<!-- 										<tr> -->
-						<%-- 											<td style="width: 5%;">${offset + itr.index +1 }</td> --%>
-						<%-- 											<td><a href="#" value=${user.username --%>
-						<%-- 												} --%>
-						<%-- 												data-modal-link="popup3">${user.username}</a></td> --%>
-
-						<%-- 											<td>${user.customer_vc_no}</td> --%>
-						<%-- 											<td>${user.customer_name}</td> --%>
-						<%-- 											<td>${user.customer_email}</td> --%>
-						<%-- 											<td>${user.connection_status}</td> --%>
-						<%-- 											<td>${user.timestamp}</td> --%>
-
-						<!-- 										</tr> -->
-						<%-- 									</c:forEach> --%>
-
-						<!-- 								</tr> -->
+								<td>${user.customer_caf}</td>
+								<td>${user.customer_name}</td>
+								<td>${user.customer_mobile}</td>
+								<td>${user.customer_add}</td>
+								<td>${user.complaint_type}</td>
+								<td>${user.complaint_status}</td>
+							</tr>
+						</c:forEach>
+						
 					</table>
 
 					<tag:paginate max="15" offset="${offset}" count="${count}"

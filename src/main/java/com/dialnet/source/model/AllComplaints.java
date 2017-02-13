@@ -28,7 +28,7 @@ public class AllComplaints {
 	
 	@NotEmpty
 	@Size(min = 1, max = 25)
-	private String customer_vcno;
+	private String customer_caf;
 	
 	@NotEmpty
 	@Size(min = 1, max = 500)
@@ -65,14 +65,14 @@ public class AllComplaints {
 
 
 
-	public AllComplaints(long complaint_no, String complaint_type, String complaint_status, String customer_vcno,
+	public AllComplaints(long complaint_no, String complaint_type, String complaint_status, String customer_caf,
 			String cust_remark, String open_date, String closing_remark, String closing_date, String creater_Id,
 			String customer_name, String customer_add, String customer_mobile, String lco_id) {
 		super();
 		this.complaint_no = complaint_no;
 		this.complaint_type = complaint_type;
 		this.complaint_status = complaint_status;
-		this.customer_vcno = customer_vcno;
+		this.customer_caf = customer_caf;
 		this.cust_remark = cust_remark;
 		this.open_date = open_date;
 		this.closing_remark = closing_remark;
@@ -129,12 +129,16 @@ public class AllComplaints {
 		this.complaint_status = complaint_status;
 	}
 	
-	public String getCustomer_vcno() {
-		return customer_vcno;
+	
+
+	public String getCustomer_caf() {
+		return customer_caf;
 	}
 
-	public void setCustomer_vcno(String customer_vcno) {
-		this.customer_vcno = customer_vcno;
+
+
+	public void setCustomer_caf(String customer_caf) {
+		this.customer_caf = customer_caf;
 	}
 
 	public String getCust_remark() {

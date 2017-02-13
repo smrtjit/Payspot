@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.dialnet.source.dao.LCOUserDao;
 import com.dialnet.source.model.LCOUser;
-import com.dialnet.source.model.User;
+
 
 @Service("lcoservice")
 public class LCOUserServiceImpl implements LCOUserService {

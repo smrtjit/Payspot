@@ -16,9 +16,24 @@
 	media="all">
 <link href="assets/css/circle.css" rel="stylesheet" />
 <link href="assets/css/bootstrap.css" rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
+<script>
+  $(document).ready(function() {
+	  $('#fdate').datepicker({
+		dateFormat : 'yy-mm-dd'
+		});
+	  $('#edate').datepicker({
+			dateFormat : 'yy-mm-dd'
+			});
 
-
+  });
+  </script>
 </head>
 <body id="top">
 	<div class="bgded overlay"
@@ -42,7 +57,7 @@
 								<li><a href="newConnn.html?user=${user }">Add
 										Subscriber</a></li>
 								<li><a href="newLineman.html?user=${user}">Add LineMan</a></li>
-								 <li><a href="addStock.html?user=${user}">Add Stock</a></li> 
+								<li><a href="addStock.html?user=${user}">Add Stock</a></li>
 								<li><a href="topUp.html?user=${user }">Topup</a></li>
 
 							</ul></li>
@@ -68,8 +83,9 @@
 					<input type="hidden" name="user" value="${user }" />
 					<div class="col-sm-3">
 						<div style="margin-bottom: 10px">
-							<input name="fdate" type="text" id="fdate" tabindex="1"
-								class="form-control" placeholder="From Date" />
+
+							<input name="fdate" id="fdate" tabindex="1" class="form-control"
+								placeholder="From Date" />
 
 						</div>
 
@@ -86,8 +102,8 @@
 
 					<div class="col-sm-3">
 						<div style="margin-bottom: 10px">
-							<input name="stb_no" type="text" id="fdate" tabindex="3"
-								class="form-control" placeholder="STB No." />
+							<input name="name" type="text" tabindex="3" class="form-control"
+								placeholder="Customer Name" />
 						</div>
 
 					</div>
@@ -95,8 +111,8 @@
 					<div class="col-sm-3">
 						<div style="margin-bottom: 10px">
 
-							<input name="VC_No" type="text" id="ContentPlaceHolder1_txtvcno"
-								tabindex="4" class="form-control" placeholder="VC No." />
+							<input name="stb_no" type="text" id="ContentPlaceHolder1_txtvcno"
+								tabindex="4" class="form-control" placeholder="STB No." />
 						</div>
 					</div>
 					<div class="col-sm-3">
@@ -156,101 +172,59 @@
 
 			<div class="col-sm-12">
 				<hr />
-				<div class="titleTd" style="width: 25%;margin-bottom: -35px;text-align: center;padding: 10px;font-size: x-large;color: #c4c1e8;background-color: dimgray;border-top-left-radius: 34px;border-top-right-radius: 54px;">All
-						Subscriber</div>
-						<div style="width: 40%;margin-left: 890px;/* font-size: 8px; */" class="col-sm-12">
+				<div class="titleTd"
+					style="width: 25%; margin-bottom: -35px; text-align: center; padding: 10px; font-size: x-large; color: #c4c1e8; background-color: dimgray; border-top-left-radius: 34px; border-top-right-radius: 54px;">All
+					Subscriber</div>
+				<div style="width: 40%; margin-left: 890px;" class="col-sm-12">
 					<div style="margin-bottom: 0px">
 						<p>
-							Total Count : <span id="ContentPlaceHolder1_lblcount" style="font-weight: bold;"></span>
+							Total Count : <span id="ContentPlaceHolder1_lblcount"
+								style="font-weight: bold;">${count }</span>
 						</p>
 					</div>
 				</div>
-					<table
-						class="table table-striped table-bordered table-hover fontsize"
-						cellspacing="0" rules="all" border="1"
-						id="ContentPlaceHolder1_gvdash"
-						style="width: 100%; border-collapse: collapse;">
-						<tr>
-							<th scope="col"
-								style="width: 5%; background-color: rgb(119, 127, 177);">SNo.</th>
-							<th scope="col" style="background-color: rgb(119, 127, 177);">Customer
-								ID</th>
-							<th scope="col" style="background-color: rgb(119, 127, 177);">VC
-								No</th>
-							<th scope="col" style="background-color: rgb(119, 127, 177);">Name</th>
-							<th scope="col" style="background-color: rgb(119, 127, 177);">Email</th>
-							<th scope="col" style="background-color: rgb(119, 127, 177);">Connection
-								Status</th>
-							<th scope="col" style="background-color: rgb(119, 127, 177);">Create
-								Time</th>
+				<table
+					class="table table-striped table-bordered table-hover fontsize"
+					cellspacing="0" rules="all" border="1"
+					id="ContentPlaceHolder1_gvdash"
+					style="width: 100%; border-collapse: collapse;">
+					<tr>
+						<th scope="col"
+							style="width: 5%; background-color: rgb(119, 127, 177);">SNo.</th>
+						<th scope="col" style="background-color: rgb(119, 127, 177);">CRF
+							No.</th>
+						<th scope="col" style="background-color: rgb(119, 127, 177);">CustomerID</th>
+						<th scope="col" style="background-color: rgb(119, 127, 177);">Name</th>
+						<th scope="col" style="background-color: rgb(119, 127, 177);">mobile</th>
+						<th scope="col" style="background-color: rgb(119, 127, 177);">Email</th>
+						<th scope="col" style="background-color: rgb(119, 127, 177);">Address</th>
 
-						</tr>
-						<tr>
-							<td>10</td>
-							<td>9876000010</td>
-							<td>7894125630</td>
-							<td>Parth Prattim</td>
-							<td>khan_golden@hotmail.com;</td>
-							<td>Live</td>
+					</tr>
+					<tr>
+						<c:forEach items="${userList}" var="user" varStatus="itr">
+							<tr>
+								<td style="width: 5%;">${offset + itr.index +1 }</td>
+								<td><a href="#" value="${user.CRFNo}"
+									data-modal-link="popup3">${user.userName}</a></td>
 
-							<td>1/2/2017 6:38:37 PM</td>
-						</tr>
-						<tr>
-							<td>10</td>
-							<td>9876000010</td>
-							<td>7894125630</td>
-							<td>Parth Prattim</td>
-							<td>khan_golden@hotmail.com;</td>
-							<td>Live</td>
+								<td>${user.userName}</td>
+								<td>${user.firstName}</td>
+								<td>${user.mobile}</td>
+								<td>${user.emailId}</td>
+								<td>${user.address}</td>
 
-							<td>1/2/2017 6:38:37 PM</td>
-						</tr>
-						<tr>
-							<td>10</td>
-							<td>9876000010</td>
-							<td>7894125630</td>
-							<td>Parth Prattim</td>
-							<td>khan_golden@hotmail.com;</td>
-							<td>Live</td>
+							</tr>
+						</c:forEach>
 
-							<td>1/2/2017 6:38:37 PM</td>
-						</tr>
-						<tr>
-							<td>10</td>
-							<td>9876000010</td>
-							<td>7894125630</td>
-							<td>Parth Prattim</td>
-							<td>khan_golden@hotmail.com;</td>
-							<td>Live</td>
+					</tr>
+				</table>
 
-							<td>1/2/2017 6:38:37 PM</td>
-						</tr>
-						<!-- 								<tr> -->
-						<%-- 									<c:forEach items="${userList}" var="user" varStatus="itr"> --%>
-						<!-- 										<tr> -->
-						<%-- 											<td style="width: 5%;">${offset + itr.index +1 }</td> --%>
-						<%-- 											<td><a href="#" value=${user.username --%>
-						<%-- 												} --%>
-						<%-- 												data-modal-link="popup3">${user.username}</a></td> --%>
+				<tag:paginate max="15" offset="${offset}" count="${count}"
+					uri="allSubscriber.html?user=${user}" next="&raquo;"
+					previous="&laquo;" />
+			</div>
 
-						<%-- 											<td>${user.customer_vc_no}</td> --%>
-						<%-- 											<td>${user.customer_name}</td> --%>
-						<%-- 											<td>${user.customer_email}</td> --%>
-						<%-- 											<td>${user.connection_status}</td> --%>
-						<%-- 											<td>${user.timestamp}</td> --%>
 
-						<!-- 										</tr> -->
-						<%-- 									</c:forEach> --%>
-
-						<!-- 								</tr> -->
-					</table>
-
-					<tag:paginate max="15" offset="${offset}" count="${count}"
-						uri="allSubscriber.html?user=${user}" next="&raquo;"
-						previous="&laquo;" />
-				</div>
-
-		
 
 			<!-- / main body -->
 			<div class="clear"></div>
@@ -330,7 +304,7 @@
 		<!-- ################################################################################################ -->
 		<a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
 		<!-- JAVASCRIPTS -->
-		<script src="layout/scripts/jquery.min.js"></script>
+
 		<script src="layout/scripts/jquery.backtotop.js"></script>
 		<script src="layout/scripts/jquery.mobilemenu.js"></script>
 </body>
