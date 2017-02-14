@@ -190,14 +190,14 @@
 					style="width: 100%; border-collapse: collapse;">
 					<tr>
 						<th scope="col"
-							style="width: 5%; background-color: rgb(119, 127, 177);">SNo.</th>
-						<th scope="col" style="background-color: rgb(119, 127, 177);">CRF
+							style="width: 5%; color: #FFFFFF;background-color: #12a59c;">SNo.</th>
+						<th scope="col"style="color: #FFFFFF;background-color: #12a59c;">CRF
 							No.</th>
-						<th scope="col" style="background-color: rgb(119, 127, 177);">CustomerID</th>
-						<th scope="col" style="background-color: rgb(119, 127, 177);">Name</th>
-						<th scope="col" style="background-color: rgb(119, 127, 177);">mobile</th>
-						<th scope="col" style="background-color: rgb(119, 127, 177);">Email</th>
-						<th scope="col" style="background-color: rgb(119, 127, 177);">Address</th>
+						<th scope="col"style="color: #FFFFFF;background-color: #12a59c;">CustomerID</th>
+						<th scope="col" style="color: #FFFFFF;background-color: #12a59c;">Name</th>
+						<th scope="col"style="color: #FFFFFF;background-color: #12a59c;" >mobile</th>
+						<th scope="col"style="color: #FFFFFF;background-color: #12a59c;">Email</th>
+						<th scope="col"style="color: #FFFFFF;background-color: #12a59c;">Address</th>
 
 					</tr>
 					<tr>

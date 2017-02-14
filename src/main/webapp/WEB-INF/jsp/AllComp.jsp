@@ -137,7 +137,7 @@
 						<div style="width: 40%;margin-left: 890px;/* font-size: 8px; */" class="col-sm-12">
 					<div style="margin-bottom: 0px">
 						<p>
-							Total Count : <span id="ContentPlaceHolder1_lblcount" style="font-weight: bold;"></span>
+							Total Count : <span id="ContentPlaceHolder1_lblcount" style="font-weight: bold;"> ${count}</span>
 						</p>
 					</div>
 				</div>
@@ -148,15 +148,15 @@
 						style="width: 100%; border-collapse: collapse;">
 						<tr>
 							<th scope="col"
-								style="width: 5%; background-color: rgb(119, 127, 177);">SNo.</th>
-							<th scope="col" style="background-color: rgb(119, 127, 177);">Customer
+								style="width: 5%; color: #FFFFFF;background-color: #12a59c;">SNo.</th>
+							<th scope="col" style="color: #FFFFFF;background-color: #12a59c;">Customer
 								ID</th>
-							<th scope="col" style="background-color: rgb(119, 127, 177);">CAF Number</th>
-							<th scope="col" style="background-color: rgb(119, 127, 177);">Name</th>
-							<th scope="col" style="background-color: rgb(119, 127, 177);">Mobile</th>
-							<th scope="col" style="background-color: rgb(119, 127, 177);">Address</th>
-							<th scope="col" style="background-color: rgb(119, 127, 177);">Complaint Type</th>
-							<th scope="col" style="background-color: rgb(119, 127, 177);">Complaint Status</th>
+							<th scope="col" style="color: #FFFFFF;background-color: #12a59c;">CAF Number</th>
+							<th scope="col" style="color: #FFFFFF;background-color: #12a59c;">Name</th>
+							<th scope="col" style="color: #FFFFFF;background-color: #12a59c;">Mobile</th>
+							<th scope="col" style="color: #FFFFFF;background-color: #12a59c;">Address</th>
+							<th scope="col" style="color: #FFFFFF;background-color: #12a59c;">Complaint Type</th>
+							<th scope="col" style="color: #FFFFFF;background-color: #12a59c;">Complaint Status</th>
 						</tr>
 						
 						<c:forEach items="${userList}" var="user" varStatus="itr">

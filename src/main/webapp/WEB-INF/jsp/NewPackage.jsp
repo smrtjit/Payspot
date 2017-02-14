@@ -207,12 +207,12 @@
 		<table>
 			<thead>
 				<tr>
-				<th style="text-align: center;width:8%;">SNo.</th>
-					<th style="text-align: center;">Name</th>
-					<th style="text-align: center;">Package Type</th>
-					<th style="text-align: center;">No. of Channels</th>
-					<th style="text-align: center;">Package Price</th>
-					<th style="text-align: center;">Edit</th>
+				<th style="text-align: center;width:8%; color: #FFFFFF;background-color: #12a59c;">SNo.</th>
+					<th style="text-align: center;color: #FFFFFF;background-color: #12a59c;">Name</th>
+					<th style="text-align: center;color: #FFFFFF;background-color: #12a59c;">Package Type</th>
+					<th style="text-align: center;color: #FFFFFF;background-color: #12a59c;">No. of Channels</th>
+					<th style="text-align: center;color: #FFFFFF;background-color: #12a59c;">Package Price</th>
+					<th style="text-align: center;color: #FFFFFF;background-color: #12a59c;">Edit</th>
 				</tr>
 			</thead>
 			<tbody>

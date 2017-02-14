@@ -49,68 +49,7 @@ public class AllComplaintdaoImpl implements AllComplaintdao {
 
 	}
 
-	public List<AllComplaints> getComplaintByVC(String complaints_No) {
 
-		System.out.println("complaints_No\t" + complaints_No);
-		Session sf = session.openSession();
-		Criteria c2 = sf.createCriteria(AllComplaints.class);
-		c2.add(Restrictions.eq("customer_vcno", complaints_No));
-		//AllComplaints product = (AllComplaints) sf.get(AllComplaints.class, Long.parseLong(complaints_No));
-		//System.out.println("customer_vcno: " + product);
-		List<AllComplaints> tmp=c2.list();
-		System.out.println("customer_vcno: " + tmp);
-		sf.close();
-		return tmp;
-	}
-
-	public List<AllComplaints> getAllComplaints() {
-		System.out.println("Call All Complaint \t");
-		Session sf = session.openSession();
-		List l= sf.createQuery("from AllComplaints").list();
-		sf.close();
-		return l;
-	}
-	
-	@Override
-	public List<AllComplaints> getByAnyOne(String sdate, String edate, String VC_no, String mobile, String status) {
-		System.out.println("sdate: "+sdate+",edate: "+edate+",VC_no: "+VC_no+",mobile: "+mobile+",pckg: "+status);
-		Session sf=session.openSession();
-		Criteria criteria = sf.createCriteria(AllComplaints.class); 
-		if(sdate==null || sdate.equalsIgnoreCase("")){
-			System.out.println("sdate is not available");
-		}
-		else{
-			criteria.add(Restrictions.gt("open_date",sdate+" 00:00:00"));
-		}
-		
-		if(edate==null || edate.equalsIgnoreCase(""))
-			System.out.println("edate is not available");
-		else{
-			criteria.add(Restrictions.lt("open_date",edate+" 59:59:59"));
-		}
-		
-		if(VC_no==null || VC_no.equalsIgnoreCase(""))
-			System.out.println("VC_no is not available");
-		else{
-			criteria.add(Restrictions.eq("cust_remark",VC_no));
-		}
-		
-		if(mobile==null || mobile.equalsIgnoreCase(""))
-			System.out.println("mobile is not available");
-		else
-		criteria.add(Restrictions.eq("customer_mobile",mobile));
-		if(status==null || status.equalsIgnoreCase(""))
-			System.out.println("pckg is not available");
-		else
-		criteria.add(Restrictions.eq("complaint_status",status));
-		
-		
-		List l= criteria.list();
-		sf.close();
-		return l;
-		
-	}
-	
 	
 	////////////////////////////////////////////////////For Pagination//////////////////////////////////////////////////////
 	
@@ -154,7 +93,7 @@ public class AllComplaintdaoImpl implements AllComplaintdao {
 		if(VC_no==null || VC_no.equalsIgnoreCase(""))
 			System.out.println("VC_no is not available");
 		else{
-			criteria.add(Restrictions.eq("customer_vcno",VC_no));
+			criteria.add(Restrictions.eq("customer_caf",VC_no));
 		}
 		
 		if(mobile==null || mobile.equalsIgnoreCase(""))
@@ -192,7 +131,7 @@ public class AllComplaintdaoImpl implements AllComplaintdao {
 		if(VC_no==null || VC_no.equalsIgnoreCase(""))
 			System.out.println("VC_no is not available");
 		else{
-			criteria.add(Restrictions.eq("customer_vcno",VC_no));
+			criteria.add(Restrictions.eq("customer_caf",VC_no));
 		}
 		
 		if(mobile==null || mobile.equalsIgnoreCase(""))

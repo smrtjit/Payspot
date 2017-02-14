@@ -99,11 +99,11 @@
 				<input type="file" name="excelfile" class="form-control"
 					onchange="example()" id="filename" /><br>
 				<script>
-					function example() {
-						debugger;
+					var chk=function example() {
+						
 						var _validFileExtensions = [ ".xls" ];
 						var arrInputs = document.getElementsByTagName("input");
-						alert('found');
+						
 						for (var i = 0; i < arrInputs.length; i++) {
 							var oInput = arrInputs[i];
 							if (oInput.type == "file") {
@@ -135,7 +135,6 @@
 								}
 							}
 						}
-						alert("done");
 						return true;
 						
 					}
@@ -146,6 +145,7 @@
 							return false;
 						}
 					}
+					
 				</script>
 
 			</div>
@@ -161,12 +161,12 @@
 		<table>
 			<thead>
 				<tr>
-					<th style="text-align: center;">SNo.</th>
-					<th style="text-align: center;">Name</th>
-					<th style="text-align: center;">MSO Price</th>
-					<th style="text-align: center;">LCO Price</th>
-					<th style="text-align: center;">Last Update</th>
-					<th style="text-align: center;">Edit</th>
+					<th style="text-align: center;color: #FFFFFF;background-color: #12a59c;">SNo.</th>
+					<th style="text-align: center;color: #FFFFFF;background-color: #12a59c;">Name</th>
+					<th style="text-align: center;color: #FFFFFF;background-color: #12a59c;">MSO Price</th>
+					<th style="text-align: center;color: #FFFFFF;background-color: #12a59c;">LCO Price</th>
+					<th style="text-align: center;color: #FFFFFF;background-color: #12a59c;">Last Update</th>
+					<th style="text-align: center;color: #FFFFFF;background-color: #12a59c;">Edit</th>
 				</tr>
 			</thead>
 			<tbody>

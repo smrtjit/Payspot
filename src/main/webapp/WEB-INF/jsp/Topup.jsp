@@ -390,16 +390,16 @@
 							style="width: 100%; border-collapse: collapse;">
 							<tr>
 								<th scope="col"
-									style="width: 5%; background-color: rgb(119, 127, 177);">SNo.</th>
-								<th scope="col" style="background-color: rgb(119, 127, 177);">Customer
+									style="width: 5%;color: #FFFFFF;background-color: #12a59c;">SNo.</th>
+								<th scope="col" style="color: #FFFFFF;background-color: #12a59c;">Customer
 									ID</th>
-								<th scope="col" style="background-color: rgb(119, 127, 177);">VC
+								<th scope="col" style="color: #FFFFFF;background-color: #12a59c;">VC
 									No</th>
-								<th scope="col" style="background-color: rgb(119, 127, 177);">Name</th>
-								<th scope="col" style="background-color: rgb(119, 127, 177);">Email</th>
-								<th scope="col" style="background-color: rgb(119, 127, 177);">Connection
+								<th scope="col" style="color: #FFFFFF;background-color: #12a59c;">Name</th>
+								<th scope="col" style="color: #FFFFFF;background-color: #12a59c;">Email</th>
+								<th scope="col" style="color: #FFFFFF;background-color: #12a59c;">Connection
 									Status</th>
-								<th scope="col" style="background-color: rgb(119, 127, 177);">Create
+								<th scope="col" style="color: #FFFFFF;background-color: #12a59c;">Create
 									Time</th>
 
 							</tr>

@@ -162,7 +162,7 @@ public class LMUserDaoImpl implements LMUserDao {
 		Criteria cr = sf.createCriteria(LMUser.class);
 		cr.add(Restrictions.eq("lco_id",lco));
 		ProjectionList proList = Projections.projectionList(); 
-		proList.add(Projections.property("name"));
+		proList.add(Projections.property("firstName"));
 		cr.setProjection(proList); 
 
 		List l= cr.list();

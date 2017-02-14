@@ -49,7 +49,7 @@ public class LMUserServiceImpl implements LMUserService {
 		if(stud==null){
 			return false;	
 		}
-		else if(stud != null && stud.getPassword().equals(pwd)) {
+		else if(stud != null && stud.getPASSWORD().equals(pwd)) {
 			return true;
 		} else
 			return false;	

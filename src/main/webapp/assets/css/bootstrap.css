@@ -402,7 +402,7 @@ hr {
 
 p {
   margin: 0 0 10px;
-  color: black;
+ color: #9a9898;
 }
 
 .lead {
@@ -6796,6 +6796,10 @@ td.hidden-lg {
 tr.visible-print {
   display: none !important;
 }
+.th {
+    color: #FFFFFF;
+    background-color: #12a59c;
+}
 
 th.visible-print,
 td.visible-print {
@@ -6823,4 +6827,5 @@ td.visible-print {
   td.hidden-print {
     display: none !important;
   }
+  
 }

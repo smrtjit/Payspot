@@ -63,12 +63,12 @@
 				<div class="row">
 					<div class="col-sm-3"></div>
 					<div class="col-sm-9" style="margin-top: px;margin-left: 220px;">
-						<a href="oldConnections.html?user=${user}"  class="buttongol btn-primary" >Connection<span class="badge">7</span ></a>
+						<a href= "allSubscriber.html?user=${user }" class="buttongol btn-primary" >Connection<span class="badge">7</span ></a>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<a href="allLCOComplain.html?user=${user}"  class="buttongol btn-success" >Complaint<span class="badge">3</span></a>
+						<a href="allComplaint.html?user=${user }"  class="buttongol btn-success" >Complaint<span class="badge">3</span></a>
 						
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<a href="allLCOCollection.html?user=${user}"  class="buttongol btn-danger" >Collection<span class="badge">5</span></a>
+						<a href="allCollection.html?user=${user }"  class="buttongol btn-danger" >Collection<span class="badge">5</span></a>
 						
 					</div>
 				</div>
