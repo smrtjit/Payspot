@@ -33,4 +33,10 @@ public class AllChannelServiceImpl implements AllChannelService {
 		return dao.add(chn);
 	}
 
+	@Override
+	public List<String> getAllName(String lco) {
+		// TODO Auto-generated method stub
+		return dao.getAllName(lco);
+	}
+
 }

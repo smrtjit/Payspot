@@ -96,48 +96,51 @@ label.control-label {
 	<div class="bgded overlay"
 		style="background-image: url('images/demo/backgrounds/01.png');">
 		<!-- ################################################################################################ -->
-   <div class="wrapper row1">
-    <header id="header" class="hoc clear"> 
-      <!-- ################################################################################################ -->
-      <div id="logo" class="fl_left">
-        <h1><a href="LCOHome.html?user=${user }">PaySpot</a></h1>
-      </div>
-      <nav id="mainav" class="fl_right">
-        <ul class="clear">
-            <li><a href="allSubscriber.html?user=${user }">Connection</a></li>
-              <li><a href="allCollection.html?user=${user }">Collection</a></li>
-               <li><a href="allComplaint.html?user=${user }">Complaint</a></li>
-          <li><a class="drop" href="#">Services</a>
-            <ul>
-         	  <li><a href="newConnn.html?user=${user }">Add Subscriber</a></li>
-              <li><a href="newLineman.html?user=${user}">Add LineMan</a></li>
-               <li><a href="addStock.html?user=${user}">Add Stock</a></li>       
-               <li><a href="topUp.html?user=${user }">Topup</a></li>           
-             
-            </ul>
-          </li>
-          <li><a class="drop" href="#">Repository</a>
-            <ul>
-             <li><a href="allLM.html?user=${user }">Line Man</a></li>
-               <li><a href="stock.html?user=${user }">Stock</a></li>
-              <li><a href="newPackage.html?user=${user }">Packages</a></li>                  
-              <li><a href="newChannel.html?user=${user}">Channels</a></li>
-              
-            </ul>
-          </li>
-          <li><a href="lcoDetail.html?user=${user }">Profile</a></li>
-          <li><a href="logOut.html?user=${user}" style="margin-right: -90px;">Log out</a></li>
-        </ul>
-      </nav>
-    </header>
-  </div>
+		<div class="wrapper row1">
+			<header id="header" class="hoc clear">
+				<!-- ################################################################################################ -->
+				<div id="logo" class="fl_left">
+					<h1>
+						<a href="LCOHome.html?user=${user }">PaySpot</a>
+					</h1>
+				</div>
+				<nav id="mainav" class="fl_right">
+					<ul class="clear">
+						<li><a href="allSubscriber.html?user=${user }">Connection</a></li>
+						<li><a href="allCollection.html?user=${user }">Collection</a></li>
+						<li><a href="allComplaint.html?user=${user }">Complaint</a></li>
+						<li><a class="drop" href="#">Services</a>
+							<ul>
+								<li><a href="newConnn.html?user=${user }">Add
+										Subscriber</a></li>
+								<li><a href="newLineman.html?user=${user}">Add LineMan</a></li>
+								<li><a href="addStock.html?user=${user}">Add Stock</a></li>
+								<li><a href="topUp.html?user=${user }">Topup</a></li>
+
+							</ul></li>
+						<li><a class="drop" href="#">Repository</a>
+							<ul>
+								<li><a href="allLM.html?user=${user }">Line Man</a></li>
+								<li><a href="stock.html?user=${user }">Stock</a></li>
+								<li><a href="newPackage.html?user=${user }">Packages</a></li>
+								<li><a href="newChannel.html?user=${user}">Channels</a></li>
+
+							</ul></li>
+						<li><a href="lcoDetail.html?user=${user }">Profile</a></li>
+						<li><a href="logOut.html?user=${user}"
+							style="margin-right: -90px;">Log out</a></li>
+					</ul>
+				</nav>
+			</header>
+		</div>
 		<div class="wrapper row3 ">
 			<main class="hoc container clear "> <!-- main body --> <!-- ################################################################################################ -->
 
 			<div class='container' style="margin-top: -128px;">
 				<div class='panel panel-primary dialog-panel'>
 					<div class='panel-heading'>
-						<h5 style="font-size: 18px;font-weight: 800;">Local Cable Operator Detail</h5>
+						<h5 style="font-size: 18px; font-weight: 800;">Local Cable
+							Operator Detail</h5>
 					</div>
 					<div class='panel-body'>
 						<form class='form-horizontal' role='form'>
@@ -147,21 +150,24 @@ label.control-label {
 								<div class='col-md-8'>
 									<div class='col-md-3'>
 										<div class='form-group internal'>
-										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">LCO Code</label>
-											<input requried class='form-control' 
-												readonly value='${LCODetail.loc_code }' type='text'>
+											<label for="name"
+												style="margin-bottom: 0px; font-size: 14px; font-weight: 400;">LCO
+												Code</label> <input requried class='form-control' readonly
+												value='${LCODetail.loc_code }' type='text'>
 										</div>
 									</div>
 									<div class='col-md-3 indent-small'>
 										<div class='form-group internal'>
-										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">Username</label>
+											<label for="name"
+												style="margin-bottom: 0px; font-size: 14px; font-weight: 400;">Username</label>
 											<input class='form-control' readonly
 												value='${LCODetail.login_id }' type='text'>
 										</div>
 									</div>
 									<div class='col-md-3 indent-small'>
 										<div class='form-group internal'>
-										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">Password</label>
+											<label for="name"
+												style="margin-bottom: 0px; font-size: 14px; font-weight: 400;">Password</label>
 											<input requried class='form-control' id='id_last_name'
 												readonly value='${LCODetail.password }' type="password">
 										</div>
@@ -169,55 +175,61 @@ label.control-label {
 
 								</div>
 							</div>
-					<hr>
+							<hr>
 							<div class='form-group' style="margin-left: -200px;">
 								<label class='control-label col-md-2 col-md-offset-2'
 									for='id_title'>Account Information</label>
 								<div class='col-md-8'>
 									<div class='col-md-3'>
 										<div class='form-group internal'>
-										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">JV Number</label>
-											<input requried class='form-control' id='id_first_name'
-												readonly value='${LCODetail.jv_no }' type='text'>
+											<label for="name"
+												style="margin-bottom: 0px; font-size: 14px; font-weight: 400;">JV
+												Number</label> <input requried class='form-control'
+												id='id_first_name' readonly value='${LCODetail.jv_no }'
+												type='text'>
 										</div>
 									</div>
 									<div class='col-md-3 indent-small'>
 										<div class='form-group internal'>
-										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">Direct Number</label>
-											<input class='form-control' id='id_middle_name' readonly
-												value='${LCODetail.direct_no }' type='text'>
+											<label for="name"
+												style="margin-bottom: 0px; font-size: 14px; font-weight: 400;">Direct
+												Number</label> <input class='form-control' id='id_middle_name'
+												readonly value='${LCODetail.direct_no }' type='text'>
 										</div>
 									</div>
 									<div class='col-md-3 indent-small'>
 										<div class='form-group internal'>
-										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">BRM PO Id</label>
-											<input requried class='form-control' id='id_last_name'
+											<label for="name"
+												style="margin-bottom: 0px; font-size: 14px; font-weight: 400;">BRM
+												PO Id</label> <input requried class='form-control' id='id_last_name'
 												readonly value='${LCODetail.brm_po_id }' type='text'>
 										</div>
 									</div>
 
 								</div>
 							</div>
-							
-							
+
+
 							<div class='form-group' style="margin-left: -200px;">
 								<label class='control-label col-md-2 col-md-offset-2'></label>
 								<div class='col-md-6'>
 									<div class='form-group'>
-										<div class='col-md-9' style="width: 72%;float: left; margin-right: 20px;"">
-											<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">Account No.</label>
-											 <input requried="requried "
-													class='form-control' id='address' readonly
-													value='${LCODetail.account_no }' type='text'>
-										
+										<div class='col-md-9'
+											style="width: 72%; float: left; margin-right: 20px;"">
+											<label for="name"
+												style="margin-bottom: 0px; font-size: 14px; font-weight: 400;">Account
+												No.</label> <input requried="requried " class='form-control'
+												id='address' readonly value='${LCODetail.account_no }'
+												type='text'>
+
 
 										</div>
 									</div>
-								
+
 								</div>
 							</div>
 							<hr>
-					
+
 
 							<div class='form-group' style="margin-left: -200px;">
 								<label class='control-label col-md-2 col-md-offset-2'
@@ -225,23 +237,29 @@ label.control-label {
 								<div class='col-md-8'>
 									<div class='col-md-3'>
 										<div class='form-group internal'>
-										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">First Name</label>
-											<input requried="requried " class='form-control' id='crf_no'
-												readonly value='${LCODetail.f_name }' type='text'>
+											<label for="name"
+												style="margin-bottom: 0px; font-size: 14px; font-weight: 400;">First
+												Name</label> <input requried="requried " class='form-control'
+												id='crf_no' readonly value='${LCODetail.f_name }'
+												type='text'>
 										</div>
 									</div>
 									<div class='col-md-3 indent-small'>
 										<div class='form-group internal'>
-										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">Middle Name</label>
-											<input requried="requried " class='form-control' id='crf_no'
-												readonly value='${LCODetail.m_name }' type='text'>
+											<label for="name"
+												style="margin-bottom: 0px; font-size: 14px; font-weight: 400;">Middle
+												Name</label> <input requried="requried " class='form-control'
+												id='crf_no' readonly value='${LCODetail.m_name }'
+												type='text'>
 										</div>
 									</div>
 									<div class='col-md-3 indent-small'>
 										<div class='form-group internal'>
-										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">Last Name</label>
-											<input requried="requried " class='form-control' id='gst_no'
-												readonly value='${LCODetail.l_name }' type="file ">
+											<label for="name"
+												style="margin-bottom: 0px; font-size: 14px; font-weight: 400;">Last
+												Name</label> <input requried="requried " class='form-control'
+												id='gst_no' readonly value='${LCODetail.l_name }'
+												type="file ">
 										</div>
 									</div>
 
@@ -253,16 +271,20 @@ label.control-label {
 								<div class='col-md-8'>
 									<div class='col-md-3'>
 										<div class='form-group internal'>
-										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">Mobile</label>
-										<input requried="requried " class='form-control'
-												id='mobile_no' readonly value='${LCODetail.mobile }'type='text'>
+											<label for="name"
+												style="margin-bottom: 0px; font-size: 14px; font-weight: 400;">Mobile</label>
+											<input requried="requried " class='form-control'
+												id='mobile_no' readonly value='${LCODetail.mobile }'
+												type='text'>
 										</div>
 									</div>
 									<div class='col-md-6 indent-small' style="width: 50.5%;">
 										<div class='form-group internal'>
-										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">Email</label>
-										<input requried="requried " class='form-control'
-												id='email_id' readonly value='${LCODetail.emaiil }' type='text'>
+											<label for="name"
+												style="margin-bottom: 0px; font-size: 14px; font-weight: 400;">Email</label>
+											<input requried="requried " class='form-control'
+												id='email_id' readonly value='${LCODetail.emaiil }'
+												type='text'>
 										</div>
 									</div>
 
@@ -275,38 +297,41 @@ label.control-label {
 								<div class='col-md-6'>
 									<div class='form-group'>
 										<div class='col-md-9' style="width: 72%;">
-										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">Add</label>
-											<input requried class='form-control' id='address'
-												readonly value='${LCODetail.address }' type='text'>
+											<label for="name"
+												style="margin-bottom: 0px; font-size: 14px; font-weight: 400;">Add</label>
+											<input requried class='form-control' id='address' readonly
+												value='${LCODetail.address }' type='text'>
 										</div>
 									</div>
-									
+
 								</div>
 							</div>
 
-								<div class='form-group' style="margin-left: -200px;">
+							<div class='form-group' style="margin-left: -200px;">
 								<label class='control-label col-md-2 col-md-offset-2'
 									for='id_title'></label>
 								<div class='col-md-8'>
 									<div class='col-md-4' style="width: 38%;">
 										<div class='form-group internal'>
-										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">State</label>
-											<input requried class='form-control' id='gst_no'
-												readonly value='${LCODetail.state }' type='text'>
+											<label for="name"
+												style="margin-bottom: 0px; font-size: 14px; font-weight: 400;">State</label>
+											<input requried class='form-control' id='gst_no' readonly
+												value='${LCODetail.state }' type='text'>
 										</div>
 									</div>
 
 									<div class='col-md-4 indent-small' style="width: 38%;">
 										<div class='form-group internal'>
-										<label for="name" style="margin-bottom: 0px;font-size: 14px;font-weight: 400;">City</label>
-											<input requried class='form-control' id='gst_no'
-												readonly value='${LCODetail.city }' type='text'>
+											<label for="name"
+												style="margin-bottom: 0px; font-size: 14px; font-weight: 400;">City</label>
+											<input requried class='form-control' id='gst_no' readonly
+												value='${LCODetail.city }' type='text'>
 										</div>
 									</div>
 
 								</div>
 							</div>
-							<hr/>
+							<hr />
 
 						</form>
 					</div>
@@ -352,64 +377,79 @@ label.control-label {
 		<!-- ################################################################################################ -->
 		<!-- ################################################################################################ -->
 		<div class="wrapper row4">
-  <footer id="footer" class="hoc clear"> 
-    <!-- ################################################################################################ -->
-    <div class="one_third first">
-      <h6 class="title">Quam aliquam ac</h6>
-      <p>Molestie metus non pharetra felis donec volutpat molestie ligula imperdiet laoreet dolor scelerisque eu nunc aliquet tortor erat ut tempus justo tristique.</p>
-      <p>Condimentum vivamus tempus nisi et augue fringilla aliquet mauris scelerisque sollicitudin justo non posuere nunc mollis facilisis purus imperdiet aliquet nisi consectetur et phasellus.</p>
-    </div>
-    <div class="one_third">
-      <h6 class="title">Morbi ullamcorper</h6>
-      <ul class="nospace linklist contact">
-        <li><i class="fa fa-map-marker"></i>
-          <address>
-          E-6 &amp; Kailash Coloney, <br>                
-          110042
-          </address>
-        </li>
-        <li><i class="fa fa-phone"></i> +91 (123) 456 7890</li>
-        <li><i class="fa fa-fax"></i> +00 (123) 456 7890</li>
-        <li><i class="fa fa-envelope-o"></i> Sahib@gmail.com</li>
-      </ul>
-    </div>
-    <div class="one_third">
-      <h6 class="title">Finibus mauris</h6>
-      <ul class="nospace linklist">
-        <li>
-          <article>
-            <h2 class="nospace font-x1"><a href="#">Suscipit mauris nunc</a></h2>
-            <time class="font-xs block btmspace-10" datetime="2045-04-06">Friday, 6<sup>th</sup> April 2045</time>
-            <p class="nospace">Euismod leo pulvinar a aenean vehicula varius eros convallis sagittis integer&hellip;</p>
-          </article>
-        </li>
-        <li>
-          <article>
-            <h2 class="nospace font-x1"><a href="#">Eros magna sed</a></h2>
-            <time class="font-xs block btmspace-10" datetime="2045-04-05">Thursday, 5<sup>th</sup> April 2045</time>
-            <p class="nospace">Posuere donec posuere elit condimentum aliquet eget eu elit sed eget massa&hellip;</p>
-          </article>
-        </li>
-      </ul>
-    </div>
-    <!-- ################################################################################################ -->
-  </footer>
-</div>
+			<footer id="footer" class="hoc clear">
+				<!-- ################################################################################################ -->
+				<div class="one_third first">
+					<h6 class="title">Quam aliquam ac</h6>
+					<p>Molestie metus non pharetra felis donec volutpat molestie
+						ligula imperdiet laoreet dolor scelerisque eu nunc aliquet tortor
+						erat ut tempus justo tristique.</p>
+					<p>Condimentum vivamus tempus nisi et augue fringilla aliquet
+						mauris scelerisque sollicitudin justo non posuere nunc mollis
+						facilisis purus imperdiet aliquet nisi consectetur et phasellus.</p>
+				</div>
+				<div class="one_third">
+					<h6 class="title">Morbi ullamcorper</h6>
+					<ul class="nospace linklist contact">
+						<li><i class="fa fa-map-marker"></i>
+							<address>
+								E-6 &amp; Kailash Coloney, <br> 110042
+							</address></li>
+						<li><i class="fa fa-phone"></i> +91 (123) 456 7890</li>
+						<li><i class="fa fa-fax"></i> +00 (123) 456 7890</li>
+						<li><i class="fa fa-envelope-o"></i> Sahib@gmail.com</li>
+					</ul>
+				</div>
+				<div class="one_third">
+					<h6 class="title">Finibus mauris</h6>
+					<ul class="nospace linklist">
+						<li>
+							<article>
+								<h2 class="nospace font-x1">
+									<a href="#">Suscipit mauris nunc</a>
+								</h2>
+								<time class="font-xs block btmspace-10" datetime="2045-04-06">
+									Friday, 6<sup>th</sup> April 2045
+								</time>
+								<p class="nospace">Euismod leo pulvinar a aenean vehicula
+									varius eros convallis sagittis integer&hellip;</p>
+							</article>
+						</li>
+						<li>
+							<article>
+								<h2 class="nospace font-x1">
+									<a href="#">Eros magna sed</a>
+								</h2>
+								<time class="font-xs block btmspace-10" datetime="2045-04-05">
+									Thursday, 5<sup>th</sup> April 2045
+								</time>
+								<p class="nospace">Posuere donec posuere elit condimentum
+									aliquet eget eu elit sed eget massa&hellip;</p>
+							</article>
+						</li>
+					</ul>
+				</div>
+				<!-- ################################################################################################ -->
+			</footer>
+		</div>
 		<!-- ################################################################################################ -->
 		<!-- ################################################################################################ -->
 		<!-- ################################################################################################ -->
 		<div class="wrapper row5">
-  <div id="copyright" class="hoc clear"> 
-    <!-- ################################################################################################ -->
-    <p class="fl_left">Copyright &copy; 2016 - All Rights Reserved - <a href="#">Payspot.in</a></p>
-  
-    <!-- ################################################################################################ -->
-  </div>
-</div>
+			<div id="copyright" class="hoc clear">
+				<!-- ################################################################################################ -->
+				<p class="fl_left">
+					Copyright &copy; 2016 - All Rights Reserved - <a href="#">Payspot.in</a>
+				</p>
+
+				<!-- ################################################################################################ -->
+			</div>
+		</div>
 		<!-- ################################################################################################ -->
 		<!-- ################################################################################################ -->
 		<!-- ################################################################################################ -->
-		<a id="backtotop " href="#top "><i class="fa fa-chevron-up "></i></a>
+
+		<a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
 		<!-- JAVASCRIPTS -->
 		<script src="layout/scripts/jquery.min.js "></script>
 		<script src="layout/scripts/jquery.backtotop.js "></script>

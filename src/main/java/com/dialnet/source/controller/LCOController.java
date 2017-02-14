@@ -232,10 +232,21 @@ public class LCOController {
 	@RequestMapping(value = "/newPackage", method = RequestMethod.GET)
 	public ModelAndView newPackage(ModelMap map, @RequestParam("user") String user, Integer offset,
 			Integer maxResults) {
+		PackageInfo pck=new PackageInfo();
+		map.addAttribute("PckgInfo", pck);
+		List ls=channelService.getAllName(user);
+		map.addAttribute("ChnList", ls);
+		////////////////////////////////////////////////////////////////////////
+		List ls2=new ArrayList();
+		ls2.add("Select Type");
+		ls2.add("Basic");
+		ls2.add("Add On");
+		ls2.add("A-La-Carte");
+		map.addAttribute("type", ls2);
 		List<PackageInfo> l = pckgservice.getAll(user, offset, maxResults);
-		for (PackageInfo tmp : l) {
-			System.out.println("NAME of Packages: " + tmp.getPckgName());
-		}
+//		for (PackageInfo tmp : l) {
+//			System.out.println("NAME of Packages: " + tmp.getPckgName());
+//		}
 		map.addAttribute("PckgList", l);
 		map.addAttribute("count", pckgservice.count(user));
 		map.addAttribute("offset", offset);
@@ -254,12 +265,25 @@ public class LCOController {
 	}
 
 	@RequestMapping(value = "/allCollection", method = RequestMethod.GET)
-	public ModelAndView allCollection(ModelMap map, @RequestParam("user") String user, Integer offset,
+	public ModelAndView allLCOCollection(ModelMap map, @RequestParam("user") String user, Integer offset,
 			Integer maxResults) {
-
+		List<AllCollections> userList = LCOCollectionRepository.list(user,offset, maxResults);
+		System.out.println("Calling....allCollection");
+		map.addAttribute("count", LCOCollectionRepository.count(user));
+		map.addAttribute("offset", offset);
+		/*
+		 * for (AllCollections temp : userList) {
+		 * System.out.println("User Name: "+temp.getCust_Name()+",Invoice No.: "
+		 * +temp.getInvoice());
+		 * 
+		 * }
+		 */
+		map.addAttribute("userList", userList);
 		map.addAttribute("user", user);
-		return new ModelAndView("AllCollection", map);
+		return new ModelAndView("AllCollectionData", map);
+
 	}
+	
 
 	@RequestMapping(value = "/allComplaint", method = RequestMethod.GET)
 	public ModelAndView allComplaint(ModelMap map, @RequestParam("user") String user, Integer offset,
@@ -459,6 +483,57 @@ public class LCOController {
 		}
 
 		return new ModelAndView("redirect:newChannel.html", model);
+	}
+	
+	
+	@RequestMapping(value = "/searchCollectionLCO", method = RequestMethod.GET)
+	public ModelAndView searchByanyOne(ModelMap map, @RequestParam("user") String user,
+			@RequestParam("VC_No") String VC_No, @RequestParam("fdate") String fdate,
+			@RequestParam("edate") String edate, @RequestParam("mobile") String mobile,
+			@RequestParam("status") String status, @RequestParam("agent") String agent, Integer offset,
+			Integer maxResults) {
+		map.addAttribute("user", user);
+		System.out.println("VC no: " + VC_No);
+		List<AllCollections> tmp = LCOCollectionRepository.getByAnyOne(user,fdate, edate, VC_No, mobile, status, agent,
+				offset, maxResults);
+
+		System.out.println("tmp.size()***************: " + tmp.size());
+		if (tmp.size() < 1) {
+			map.addAttribute("userList", tmp);
+			map.addAttribute("count","0");
+			map.addAttribute("error", "No Data Found!!!");
+			System.out.println("No Data Found........................");
+		} else {
+			map.addAttribute("userList", tmp);
+			map.addAttribute("count",
+					LCOCollectionRepository.countForSearch(user,fdate, edate, VC_No, mobile, status, agent));
+			map.addAttribute("offset", offset);
+		}
+
+		return new ModelAndView("AllCollectionData ", map);
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/addNewPckg", method = RequestMethod.GET)
+	public String addNewPckg(@RequestParam("pckg") String pckg, @RequestParam("type") String type,Model model,
+			@RequestParam("price") String price, @RequestParam("chnlist") String chnList, @RequestParam("user") String user) {
+		String result = null;
+		long id = System.currentTimeMillis();
+		System.out.println("Form Data: " + pckg + ",price: " + price + ",type: " + type + "," + user + "," + chnList);
+		
+		 int val=1;
+		System.out.println("value: " + val);
+		if (val == 1) {
+			result = "New Channel Added Successfully!!!";
+		} else {
+			result = "There may be Some Error Please Try Again";
+		}
+		Gson gson = new Gson();
+		String json = gson.toJson(result);
+		model.addAttribute("user", user);
+		return result;
+		// return new ModelAndView(json);
 	}
 
 	// #######################################################################################

@@ -25,18 +25,223 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<style type="text/css">
-.first-column {
-	width: 100%;
-	float: left;
+<style>
+select {
+	/*    margin: 50px; */
+	margin-bottom: 10px;
+	border: 1px solid #111;
+	background: transparent;
+	width: 150px;
+	padding: 5px 25px 5px 5px;
+	font-size: 13px;
+	border: 1px solid #ccc;
+	height: 30px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background: url(http://www.stackoverflow.com/favicon.ico) 96%/15%
+		no-repeat #eee;
+	border: 1px solid #111;
+}
+/*target Internet Explorer 9 and Internet Explorer 10:*/
+@media screen and (min-width:0\0) {
+	select {
+		background: none;
+		padding: 5px;
+	}
 }
 
-.second-column {
-	width: 114%;
-	float: right;
+.nofound {
+	color: red;
+	font-size: 3ex;
+	margin-left: 350px;
+	widows: 100%;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////// */
+.v-center {
+	height: 100vh;
+	width: 100%;
+	display: table;
+	position: relative;
+	text-align: center;
+}
+
+.v-center>div {
+	display: table-cell;
+	vertical-align: middle;
+	position: relative;
+	top: -10%;
+}
+
+.modal-box {
+	display: none;
+	position: absolute;
+	z-index: 1000;
+	width: 98%;
+	background: white;
+	border-bottom: 1px solid #aaa;
+	border-radius: 4px;
+	box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	background-clip: padding-box;
+}
+
+/* @media ( min-width : 32em) { */
+/* 	.modal-box { */
+/* 		width: 30%; */
+/* 	} */
+/* } */
+.v-center {
+	height: 100vh;
+	width: 100%;
+	display: table;
+	position: relative;
+	text-align: center;
+}
+
+.v-center>div {
+	display: table-cell;
+	vertical-align: middle;
+	position: relative;
+	top: -10%;
+}
+
+.btn:hover {
+	background-color: #ddd;
+	-webkit-transition: background-color 1s ease;
+	-moz-transition: background-color 1s ease;
+	transition: background-color 1s ease;
+}
+
+.btn-small {
+	padding: .75em 1em;
+	font-size: 0.8em;
+}
+
+.modal-box {
+	display: none;
+	position: absolute;
+	z-index: 1000;
+	width: 98%;
+	background: white;
+	border-bottom: 1px solid #aaa;
+	border-radius: 4px;
+	box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	background-clip: padding-box;
+}
+
+@media ( min-width : 32em) {
+	.modal-box {
+		width: 30%;
+	}
+}
+
+.modal-box header, .modal-box .modal-header {
+	padding: 1.25em 1.5em;
+	border-bottom: 1px solid #ddd;
+}
+
+.modal-box header h3, .modal-box header h4, .modal-box .modal-header h3,
+	.modal-box .modal-header h4 {
+	margin: 0;
+}
+
+.modal-box .modal-body {
+	padding: 2em 1.5em;
+}
+
+.modal-box footer, .modal-box .modal-footer {
+	padding: 1em;
+	border-top: 1px solid #ddd;
+	background: rgba(0, 0, 0, 0.02);
+	text-align: right;
+}
+
+.modal-overlay {
+	opacity: 0;
+	filter: alpha(opacity = 0);
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 900;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3) !important;
+}
+
+a.close {
+	line-height: 1;
+	font-size: 1.5em;
+	position: absolute;
+	top: 5%;
+	right: 2%;
+	text-decoration: none;
+	color: #bbb;
+}
+
+a.close:hover {
+	color: #222;
+	-webkit-transition: color 1s ease;
+	-moz-transition: color 1s ease;
+	transition: color 1s ease;
 }
 </style>
 
+
+<script>
+				$(function(){
+
+					var appendthis =  ("<div class='modal-overlay js-modal-close'></div>");
+
+						$('a[data-modal-id]').click(function(e) {
+							var url = $(this).attr('value');
+// 							document.getElementById("demo").innerHTML ="Complaint Number: "+url;
+							 
+							 var fields = url.split('#');
+							 var packname =  fields[0];;
+							 var mso_price = fields[1];
+							 var  lco_price= fields[2];
+							
+						
+							
+							document.getElementById('pkgname').innerHTML=packname;
+							document.getElementById('msoprice').value=mso_price;
+							document.getElementById('lcoprice').value=lco_price;
+							
+							alert(lco_price);
+							
+						
+													
+							//alert(url);
+						e.preventDefault();
+  						  $("body").append(appendthis);
+   						 $(".modal-overlay").fadeTo(500, 0.7);
+   						 //$(".js-modalbox").fadeIn(500);
+						var modalBox = $(this).attr('data-modal-id');
+						$('#'+modalBox).fadeIn($(this).data());
+						});  
+  
+  
+						$(".js-modal-close, .modal-overlay").click(function() {
+  						  $(".modal-box, .modal-overlay").fadeOut(500, function() {
+    				    $(".modal-overlay").remove();
+   				 });
+ 
+				});
+ 
+					$(window).resize(function() {
+  					  $(".modal-box").css({
+   					     top: ($(window).height() - $(".modal-box").outerHeight()) / 2,
+   				     left: ($(window).width() - $(".modal-box").outerWidth()) / 2
+   					 });
+							});
+ 
+				$(window).resize();
+ 
+				});
+				</script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.multiselect').multiselect();
@@ -82,28 +287,27 @@
 		</header>
 	</div>
 	<div class="wrapper row3">
-		<main class="hoc container clear">
-		 <!-- main body --> <!-- ################################################################################################ -->
-		
+		<main class="hoc container clear"> <!-- main body --> <!-- ################################################################################################ -->
+
 		<form action="channelList.html" method="post"
 			enctype="multipart/form-data">
 			<input type="hidden" name="user" value="${user }" />
 
-			<div class="col-sm-3" style="margin-left: -421px;margin-right: 0;"></div>
+			<div class="col-sm-3" style="margin-left: -421px; margin-right: 0;"></div>
 			<div class="col-sm-3" style="width: 55%;">
 
 				<h4>The Total Numbers of Channels are: ${count}</h4>
 			</div>
 			<div class="col-sm-3">
-			
+
 				<input type="file" name="excelfile" class="form-control"
 					onchange="example()" id="filename" /><br>
 				<script>
-					var chk=function example() {
-						
+					var chk = function example() {
+
 						var _validFileExtensions = [ ".xls" ];
 						var arrInputs = document.getElementsByTagName("input");
-						
+
 						for (var i = 0; i < arrInputs.length; i++) {
 							var oInput = arrInputs[i];
 							if (oInput.type == "file") {
@@ -120,7 +324,7 @@
 												.toLowerCase() == sCurExtension
 												.toLowerCase()) {
 											blnValid = true;
-											
+
 											break;
 										}
 									}
@@ -136,7 +340,7 @@
 							}
 						}
 						return true;
-						
+
 					}
 
 					function checkValue(data) {
@@ -145,11 +349,10 @@
 							return false;
 						}
 					}
-					
 				</script>
 
 			</div>
-			
+
 			<div class="col-sm-2">
 
 				<input type="submit" value="Upload"
@@ -161,12 +364,21 @@
 		<table>
 			<thead>
 				<tr>
-					<th style="text-align: center;color: #FFFFFF;background-color: #12a59c;">SNo.</th>
-					<th style="text-align: center;color: #FFFFFF;background-color: #12a59c;">Name</th>
-					<th style="text-align: center;color: #FFFFFF;background-color: #12a59c;">MSO Price</th>
-					<th style="text-align: center;color: #FFFFFF;background-color: #12a59c;">LCO Price</th>
-					<th style="text-align: center;color: #FFFFFF;background-color: #12a59c;">Last Update</th>
-					<th style="text-align: center;color: #FFFFFF;background-color: #12a59c;">Edit</th>
+					<th
+						style="text-align: center; color: #FFFFFF; background-color: #12a59c;">SNo.</th>
+					<th
+						style="text-align: center; color: #FFFFFF; background-color: #12a59c;">Name</th>
+					<th
+						style="text-align: center; color: #FFFFFF; background-color: #12a59c;">MSO
+						Price</th>
+					<th
+						style="text-align: center; color: #FFFFFF; background-color: #12a59c;">LCO
+						Price</th>
+					<th
+						style="text-align: center; color: #FFFFFF; background-color: #12a59c;">Last
+						Update</th>
+					<th
+						style="text-align: center; color: #FFFFFF; background-color: #12a59c;">Edit</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -174,11 +386,15 @@
 
 					<tr>
 						<td>${offset + itr.index +1 }</td>
-						<td>${bill.channel_name}</td>
+						<td><a href="#"
+							value="${bill.channel_name }#${bill.mso_price}#${bill.lco_price}"
+							data-modal-id="popup2">${bill.channel_name}</a></td>
+
+
 						<td>${bill.mso_price}</td>
 						<td>${bill.lco_price}</td>
 						<td>${bill.updated_on}</td>
-						<td style="text-align: center;"><a class="btn" href="#">Update</a></td>
+						<td style="text-align: center;"><a class="btn" href="#">Delete</a></td>
 
 					</tr>
 
@@ -210,7 +426,86 @@
 		</main>
 	</div>
 
+	<!-- 	Update model on Anckher Tag -->
 
+	<div id="popup2" class="modal-box">
+		<header style="background-color: #3eb3b3;">
+			<a href="#" class="js-modal-close close">×</a>
+			<h3 id="pkgname" />
+
+
+		</header>
+		<div class="modal-body">
+			<p id="remark" />
+
+			<div class="container">
+
+
+
+				<div class="form-inline marginBottom" style="margin-top: -98px;">
+					<div class="md-form" style="margin-bottom: 20px;">
+						<label for="form1" class="" style="color: black;">MSO
+							Price:</label> <input type="text" style="width: 74%; margin-left: 4%"
+							id="msoprice" class="form-control input1">
+
+					</div>
+				</div>
+				<div class="form-inline marginBottom">
+					<div class="md-form">
+						<label for="form1" class="" style="color: black;">LCO
+							Price:</label> <input type="text" style="width: 74%; margin-left: 4%"
+							id="lcoprice" class="form-control input1">
+
+					</div>
+				</div>
+
+				<br>
+				<input value="Submit!" type="submit" id="submit"  class="btn-primary btn btn-block" 
+					style="margin-top: 7%; margin-bottom: -26%;">
+				<script>
+								$("#submit").click( function() {
+									var id = $("#id1").text();
+								    var rem = $("#crem").val();
+								    var st =  $('select[name=selector]').val();
+								    $.ajax({  
+							            type : 'GET', 
+							            url: 'updateCompLCO.html',
+							            data: {
+							            	'id': id,
+							            	'remark': rem,
+							            	'status': st,
+							            	'user':  ${ user}
+							            },
+							            dataType: 'json',
+							       		cache: false,
+										beforeSend: function(xhr) 
+							                        {
+							                            xhr.setRequestHeader("Accept", "application/json");  
+							                            xhr.setRequestHeader("Content-Type", "application/json");  
+							                        },
+							         				success: function (data) {
+							         					 alert(data);
+							         					 $(".modal-overlay").remove();
+						           						
+								            },
+								            error: function(e){
+								            	
+								            }
+							            
+							        });
+								   
+								});
+								
+											 	 
+						  </script>
+
+
+			</div>
+
+		</div>
+	</div>
+
+	<!-- 			Ancher ag End -->
 
 	<div class="modal fade" id="channelmodel" role="dialog">
 		<div class="modal-dialog modal-lg" style="margin-top: 130px;">
@@ -262,68 +557,14 @@
 				</div>
 
 				<script>
-					function addNew() {
-						var chn = document.getElementById("channel").value;
-						var mso = document.getElementById("msoprice").value;
-						var lco = document.getElementById("lcoprice").value;
-						var id = document.getElementById("data").value;
-						alert("hello" + lco);
-						$.ajax({
-							type : 'GET',
-							url : 'addSingleChn.html',
-							data : {
-								'chnName' : chn,
-								'user' : id,
-								'lcoPrice' : lco,
-								'msoPrice' : mso
-							},
-							dataType : 'json',
-							cache : false,
-							beforeSend : function(xhr) {
-								xhr.setRequestHeader("Accept",
-										"application/json");
-								xhr.setRequestHeader("Content-Type",
-										"application/json");
-							},
-							success : function(data) {
-								alert(data);
-							},
-							error : function(e) {
-
-							}
-
-						});
-					}
-
-					function onDropDownChange() {
-						var reg = new RegExp('^[0-9]+$');
-						var chn = document.getElementById("channel").value;
-						var mso = document.getElementById("msoprice").value;
-						var lco = document.getElementById("lcoprice").value;
-						var id = document.getElementById("data").value;
-						var flag = "true";
-						if (chn === "") {
-							alert("please Enter the Channel Name!!");
-							flag = "false";
-						}
-						if (mso === "") {
-							alert("please Enter the MSO Price!!");
-							flag = "false";
-						} else if (!(/^[0-9]{1,10}$/.test(+mso))) {
-							alert("The Price must be Numeric");
-							flag = "false";
-						}
-
-						if (lco === "") {
-							alert("please Enter the LCO Price!!");
-							flag = "false";
-						} else if (!(/^[0-9]{1,10}$/.test(+lco))) {
-							alert("The Price must be Numeric");
-							flag = "false";
-						}
-
-						if (flag === "true") {
+						function addNew() {
+							var chn = document.getElementById("channel").value;
+							var mso = document.getElementById("msoprice").value;
+							var lco = document.getElementById("lcoprice").value;
+							var id = document.getElementById("data").value;
+							alert("hello" + lco);
 							$.ajax({
+								type : 'GET',
 								url : 'addSingleChn.html',
 								data : {
 									'chnName' : chn,
@@ -331,25 +572,76 @@
 									'lcoPrice' : lco,
 									'msoPrice' : mso
 								},
-								type : 'GET',
-								datatype : 'json',
+								dataType : 'json',
+								cache : false,
+								beforeSend : function(xhr) {
+									xhr.setRequestHeader("Accept",
+											"application/json");
+									xhr.setRequestHeader("Content-Type",
+											"application/json");
+								},
 								success : function(data) {
 									alert(data);
-									location.reload();
 								},
-								error : function() {
-									alert('something bad happened');
+								error : function(e) {
+
 								}
+
 							});
 						}
 
-					}
-				</script>
+						function onDropDownChange() {
+							var reg = new RegExp('^[0-9]+$');
+							var chn = document.getElementById("channel").value;
+							var mso = document.getElementById("msoprice").value;
+							var lco = document.getElementById("lcoprice").value;
+							var id = document.getElementById("data").value;
+							var flag = "true";
+							if (chn === "") {
+								alert("please Enter the Channel Name!!");
+								flag = "false";
+							}
+							if (mso === "") {
+								alert("please Enter the MSO Price!!");
+								flag = "false";
+							} else if (!(/^[0-9]{1,10}$/.test(+mso))) {
+								alert("The Price must be Numeric");
+								flag = "false";
+							}
 
-				<div class="modal-footer">
-					<!-- 								<button type="button" class="btn btn-default" -->
-					<!-- 									data-dismiss="modal">Close</button> -->
-				</div>
+							if (lco === "") {
+								alert("please Enter the LCO Price!!");
+								flag = "false";
+							} else if (!(/^[0-9]{1,10}$/.test(+lco))) {
+								alert("The Price must be Numeric");
+								flag = "false";
+							}
+
+							if (flag === "true") {
+								$.ajax({
+									url : 'addSingleChn.html',
+									data : {
+										'chnName' : chn,
+										'user' : id,
+										'lcoPrice' : lco,
+										'msoPrice' : mso
+									},
+									type : 'GET',
+									datatype : 'json',
+									success : function(data) {
+										alert(data);
+										location.reload();
+									},
+									error : function() {
+										alert('something bad happened');
+									}
+								});
+							}
+
+						}
+					</script>
+
+				<div class="modal-footer"></div>
 			</div>
 		</div>
 	</div>

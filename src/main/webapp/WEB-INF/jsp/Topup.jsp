@@ -483,25 +483,83 @@
 		}
 	</script>
 
-
+<div class="wrapper row4">
+		<footer id="footer" class="hoc clear">
+			<!-- ################################################################################################ -->
+			<div class="one_third first">
+				<h6 class="title">Quam aliquam ac</h6>
+				<p>Molestie metus non pharetra felis donec volutpat molestie
+					ligula imperdiet laoreet dolor scelerisque eu nunc aliquet tortor
+					erat ut tempus justo tristique.</p>
+				<p>Condimentum vivamus tempus nisi et augue fringilla aliquet
+					mauris scelerisque sollicitudin justo non posuere nunc mollis
+					facilisis purus imperdiet aliquet nisi consectetur et phasellus.</p>
+			</div>
+			<div class="one_third">
+				<h6 class="title">Morbi ullamcorper</h6>
+				<ul class="nospace linklist contact">
+					<li><i class="fa fa-map-marker"></i>
+						<address>
+							E-6 &amp; Kailash Coloney, <br> 110042
+						</address></li>
+					<li><i class="fa fa-phone"></i> +91 (123) 456 7890</li>
+					<li><i class="fa fa-fax"></i> +00 (123) 456 7890</li>
+					<li><i class="fa fa-envelope-o"></i> Sahib@gmail.com</li>
+				</ul>
+			</div>
+			<div class="one_third">
+				<h6 class="title">Finibus mauris</h6>
+				<ul class="nospace linklist">
+					<li>
+						<article>
+							<h2 class="nospace font-x1">
+								<a href="#">Suscipit mauris nunc</a>
+							</h2>
+							<time class="font-xs block btmspace-10" datetime="2045-04-06">
+								Friday, 6<sup>th</sup> April 2045
+							</time>
+							<p class="nospace">Euismod leo pulvinar a aenean vehicula
+								varius eros convallis sagittis integer&hellip;</p>
+						</article>
+					</li>
+					<li>
+						<article>
+							<h2 class="nospace font-x1">
+								<a href="#">Eros magna sed</a>
+							</h2>
+							<time class="font-xs block btmspace-10" datetime="2045-04-05">
+								Thursday, 5<sup>th</sup> April 2045
+							</time>
+							<p class="nospace">Posuere donec posuere elit condimentum
+								aliquet eget eu elit sed eget massa&hellip;</p>
+						</article>
+					</li>
+				</ul>
+			</div>
+			<!-- ################################################################################################ -->
+		</footer>
 	</div>
+	<!-- ################################################################################################ -->
+	<!-- ################################################################################################ -->
+	<!-- ################################################################################################ -->
+	<div class="wrapper row5">
+		<div id="copyright" class="hoc clear">
+			<!-- ################################################################################################ -->
+			<p class="fl_left">
+				Copyright &copy; 2016 - All Rights Reserved - <a href="#">Payspot.in</a>
+			</p>
 
-	<!-- Pushy JS -->
-
-	<script src="assets/js/pushy.min.js"></script>
-	<script src="assets/js/jquery-1.10.2.js"></script>
-	<script src="assets/js/bootstrap.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<link
-		href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.16/themes/humanity/jquery-ui.css"
-		rel="stylesheet" type="text/css" />
-	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+			<!-- ################################################################################################ -->
+		</div>
 	</div>
+	<!-- ################################################################################################ -->
+	<!-- ################################################################################################ -->
+	<!-- ################################################################################################ -->
+	<a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
 
-
-
-
-
+	<!-- JAVASCRIPTS -->
+	<script src="layout/scripts/jquery.min.js "></script>
+	<script src="layout/scripts/jquery.backtotop.js "></script>
+	<script src="layout/scripts/jquery.mobilemenu.js "></script>
 </body>
 </html>
-				

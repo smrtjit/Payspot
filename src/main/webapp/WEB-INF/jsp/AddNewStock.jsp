@@ -135,16 +135,21 @@
 								style="width: 100%; border-collapse: collapse;">
 								<tr>
 									<th scope="col"
-										style="width: 5%; color: #FFFFFF;background-color: #12a59c;">SNo.</th>
-									<th scope="col" style="color: #FFFFFF;background-color: #12a59c;">Customer
+										style="width: 5%; color: #FFFFFF; background-color: #12a59c;">SNo.</th>
+									<th scope="col"
+										style="color: #FFFFFF; background-color: #12a59c;">Customer
 										ID</th>
-									<th scope="col" style="color: #FFFFFF;background-color: #12a59c;">VC
-										No</th>
-									<th scope="col" style="color: #FFFFFF;background-color: #12a59c;">Name</th>
-									<th scope="col" style="color: #FFFFFF;background-color: #12a59c;">Email</th>
-									<th scope="col" style="color: #FFFFFF;background-color: #12a59c;">Connection
+									<th scope="col"
+										style="color: #FFFFFF; background-color: #12a59c;">VC No</th>
+									<th scope="col"
+										style="color: #FFFFFF; background-color: #12a59c;">Name</th>
+									<th scope="col"
+										style="color: #FFFFFF; background-color: #12a59c;">Email</th>
+									<th scope="col"
+										style="color: #FFFFFF; background-color: #12a59c;">Connection
 										Status</th>
-									<th scope="col" style="color: #FFFFFF;background-color: #12a59c;">Create
+									<th scope="col"
+										style="color: #FFFFFF; background-color: #12a59c;">Create
 										Time</th>
 
 								</tr>
@@ -185,81 +190,82 @@
 			</main>
 		</div>
 		<div class="wrapper row4">
-			<footer id="footer" class="hoc clear">
-				<!-- ################################################################################################ -->
-				<div class="one_third first">
-					<h6 class="title">Quam aliquam ac</h6>
-					<p>Molestie metus non pharetra felis donec volutpat molestie
-						ligula imperdiet laoreet dolor scelerisque eu nunc aliquet tortor
-						erat ut tempus justo tristique.</p>
-					<p>Condimentum vivamus tempus nisi et augue fringilla aliquet
-						mauris scelerisque sollicitudin justo non posuere nunc mollis
-						facilisis purus imperdiet aliquet nisi consectetur et phasellus.</p>
-				</div>
-				<div class="one_third">
-					<h6 class="title">Morbi ullamcorper</h6>
-					<ul class="nospace linklist contact">
-						<li><i class="fa fa-map-marker"></i>
-							<address>
-								E-6 &amp; Kailash Coloney, <br> 110042
-							</address></li>
-						<li><i class="fa fa-phone"></i> +91 (123) 456 7890</li>
-						<li><i class="fa fa-fax"></i> +00 (123) 456 7890</li>
-						<li><i class="fa fa-envelope-o"></i> Sahib@gmail.com</li>
-					</ul>
-				</div>
-				<div class="one_third">
-					<h6 class="title">Finibus mauris</h6>
-					<ul class="nospace linklist">
-						<li>
-							<article>
-								<h2 class="nospace font-x1">
-									<a href="#">Suscipit mauris nunc</a>
-								</h2>
-								<time class="font-xs block btmspace-10" datetime="2045-04-06">
-									Friday, 6<sup>th</sup> April 2045
-								</time>
-								<p class="nospace">Euismod leo pulvinar a aenean vehicula
-									varius eros convallis sagittis integer&hellip;</p>
-							</article>
-						</li>
-						<li>
-							<article>
-								<h2 class="nospace font-x1">
-									<a href="#">Eros magna sed</a>
-								</h2>
-								<time class="font-xs block btmspace-10" datetime="2045-04-05">
-									Thursday, 5<sup>th</sup> April 2045
-								</time>
-								<p class="nospace">Posuere donec posuere elit condimentum
-									aliquet eget eu elit sed eget massa&hellip;</p>
-							</article>
-						</li>
-					</ul>
-				</div>
-				<!-- ################################################################################################ -->
-			</footer>
-		</div>
-		<!-- ################################################################################################ -->
-		<!-- ################################################################################################ -->
-		<!-- ################################################################################################ -->
-		<div class="wrapper row5">
-			<div id="copyright" class="hoc clear">
-				<!-- ################################################################################################ -->
-				<p class="fl_left">
-					Copyright &copy; 2016 - All Rights Reserved - <a href="#">Payspot.in</a>
-				</p>
-
-				<!-- ################################################################################################ -->
+		<footer id="footer" class="hoc clear">
+			<!-- ################################################################################################ -->
+			<div class="one_third first">
+				<h6 class="title">Quam aliquam ac</h6>
+				<p>Molestie metus non pharetra felis donec volutpat molestie
+					ligula imperdiet laoreet dolor scelerisque eu nunc aliquet tortor
+					erat ut tempus justo tristique.</p>
+				<p>Condimentum vivamus tempus nisi et augue fringilla aliquet
+					mauris scelerisque sollicitudin justo non posuere nunc mollis
+					facilisis purus imperdiet aliquet nisi consectetur et phasellus.</p>
 			</div>
+			<div class="one_third">
+				<h6 class="title">Morbi ullamcorper</h6>
+				<ul class="nospace linklist contact">
+					<li><i class="fa fa-map-marker"></i>
+						<address>
+							E-6 &amp; Kailash Coloney, <br> 110042
+						</address></li>
+					<li><i class="fa fa-phone"></i> +91 (123) 456 7890</li>
+					<li><i class="fa fa-fax"></i> +00 (123) 456 7890</li>
+					<li><i class="fa fa-envelope-o"></i> Sahib@gmail.com</li>
+				</ul>
+			</div>
+			<div class="one_third">
+				<h6 class="title">Finibus mauris</h6>
+				<ul class="nospace linklist">
+					<li>
+						<article>
+							<h2 class="nospace font-x1">
+								<a href="#">Suscipit mauris nunc</a>
+							</h2>
+							<time class="font-xs block btmspace-10" datetime="2045-04-06">
+								Friday, 6<sup>th</sup> April 2045
+							</time>
+							<p class="nospace">Euismod leo pulvinar a aenean vehicula
+								varius eros convallis sagittis integer&hellip;</p>
+						</article>
+					</li>
+					<li>
+						<article>
+							<h2 class="nospace font-x1">
+								<a href="#">Eros magna sed</a>
+							</h2>
+							<time class="font-xs block btmspace-10" datetime="2045-04-05">
+								Thursday, 5<sup>th</sup> April 2045
+							</time>
+							<p class="nospace">Posuere donec posuere elit condimentum
+								aliquet eget eu elit sed eget massa&hellip;</p>
+						</article>
+					</li>
+				</ul>
+			</div>
+			<!-- ################################################################################################ -->
+		</footer>
+	</div>
+	<!-- ################################################################################################ -->
+	<!-- ################################################################################################ -->
+	<!-- ################################################################################################ -->
+	<div class="wrapper row5">
+		<div id="copyright" class="hoc clear">
+			<!-- ################################################################################################ -->
+			<p class="fl_left">
+				Copyright &copy; 2016 - All Rights Reserved - <a href="#">Payspot.in</a>
+			</p>
+
+			<!-- ################################################################################################ -->
 		</div>
-		<!-- ################################################################################################ -->
-		<!-- ################################################################################################ -->
-		<!-- ################################################################################################ -->
-		<a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
-		<!-- JAVASCRIPTS -->
-		<script src="layout/scripts/jquery.min.js"></script>
-		<script src="layout/scripts/jquery.backtotop.js"></script>
-		<script src="layout/scripts/jquery.mobilemenu.js"></script>
+	</div>
+	<!-- ################################################################################################ -->
+	<!-- ################################################################################################ -->
+	<!-- ################################################################################################ -->
+	<a id="backtotop" href="#top" style="visibility: visible;opacity: .5;"><i class="fa fa-chevron-up"></i></a>
+
+	<!-- JAVASCRIPTS -->
+	<script src="layout/scripts/jquery.min.js "></script>
+	<script src="layout/scripts/jquery.backtotop.js "></script>
+	<script src="layout/scripts/jquery.mobilemenu.js "></script>
 </body>
 </html>
