@@ -1,7 +1,12 @@
 package com.dialnet.source.model;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+
+@Entity
+@Table(name = "PackageDetail")
 public class PackageDetail {
 
 	@Id

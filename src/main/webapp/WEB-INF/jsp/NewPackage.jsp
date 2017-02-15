@@ -46,29 +46,34 @@
 <!-- ##########################################For Dynamic Table############################################################################ -->
 <SCRIPT language="javascript">
 	function addRow(tableID,valData) {
-		var table = document.getElementById(tableID);
+		if(valData=="NONE"){
+			alert("Please Select the Channel from the List");
+		}else{
+			var table = document.getElementById(tableID);
 
-		var rowCount = table.rows.length;
-		var row = table.insertRow(rowCount);
+			var rowCount = table.rows.length;
+			var row = table.insertRow(rowCount);
 
-		var cell1 = row.insertCell(0);
-		var element1 = document.createElement("input");
+			var cell1 = row.insertCell(0);
+			var element1 = document.createElement("input");
+			
+			element1.type = "checkbox";
+			element1.name = "chkbox[]";
+			cell1.appendChild(element1);
+
+			var cell2 = row.insertCell(1);
+			cell2.innerHTML = rowCount + 1;
+
+			var cell3 = row.insertCell(2);
+			var divTag = document.createElement("div"); 
+			divTag.innerHTML = valData;
+//	 		var element2 = document.createElement("input");
+//	 		element2.type = "text";
+//	 		element2.setAttribute("value", valData);
+//	 		element2.name = "txtbox[]";
+			cell3.appendChild(divTag);
+		}
 		
-		element1.type = "checkbox";
-		element1.name = "chkbox[]";
-		cell1.appendChild(element1);
-
-		var cell2 = row.insertCell(1);
-		cell2.innerHTML = rowCount + 1;
-
-		var cell3 = row.insertCell(2);
-		var divTag = document.createElement("div"); 
-		divTag.innerHTML = valData;
-// 		var element2 = document.createElement("input");
-// 		element2.type = "text";
-// 		element2.setAttribute("value", valData);
-// 		element2.name = "txtbox[]";
-		cell3.appendChild(divTag);
 
 	}
 
@@ -95,51 +100,78 @@
 	
 	function SubmitAllData(){
 		var allChn="";
+// 		$("#dataTable tr").each(function( i ) {
+// 			allChn=allChn+ $(this).text()+",";
+// 			 // alert("".concat("row: ", i, ", col: ", 3, ", value: ", $(this).text()));
+// 			});
 		
-		$("table#dataTable tr").each(function( i ) {
-			allChn=allChn+ $(this).text()+",";
-			 // alert("".concat("row: ", i, ", col: ", 3, ", value: ", $(this).text()));
-			});
-		var res = allChn.split(",");
-		 //alert(res);
-		 for (i = 1; i < res.length; i++) {
-			 res[i]= res[i].substring(1);
-			}
-		// alert("after 1"+res);
+		$('#dataTable tr td:nth-child(3)').each( function() {
+	       // alert($(this).text());
+	        allChn=allChn+ $(this).text()+",";
+	    });
+		 var res = allChn.split(",");
+		 var tmp=res.splice(1, res.length);
 		 var fList="";
-		 for (i = 1; i < res.length; i++) {
-			 fList= fList+res[i]+",";
+		 for (i = 0; i < tmp.length; i++) {
+			 fList= fList+tmp[i]+",";
 			}
 		 fList=fList.substring(0,fList.length-2);
-		  var e = document.getElementById("type");
+		// alert("fList:: "+fList);
+		 var e = document.getElementById("type");
 		 var ty = e.options[e.selectedIndex].value;
 		 var chn=document.getElementById('name').value;
 		 var price=document.getElementById('cost').value
-		 alert(fList+"     data,"+ty+","+chn+","+price);
-		 $.ajax({  
-	            type : 'GET', 
-	            url: 'addNewPckg.html',
-         data: {
-	            	
-	            	"user":  ${user},
-	            	"pckg": chn,
-	            	"type":ty,
-	            	"price": price,
-	            	"chnlist": fList
-         },
-	            dataType: 'json',
-	       		cache: false,
-				beforeSend: function(xhr) 
-         {
-                   xhr.setRequestHeader("Accept", "application/json");  
-               xhr.setRequestHeader("Content-Type", "application/json");  
-             },
-  			success: function (data) {
-  			   alert(data);
-            },
-		         error: function(e){
-		     }
-		 });
+		 var flag="false";
+		 if(ty=="Select Type"){
+			 alert("Please Select the Type First!!!");
+		 }else{
+			 if(chn==""){
+				 alert("Please Enter the Package Name!!!");
+			 }else{
+				 if(price==""){
+					 alert("Please Enter the Package Price!!!");
+				 }else{
+					 if (!(/^[0-9]{1,10}$/.test(+price))) {
+							alert("The Price must be Numeric");
+							
+						}else{
+							if(fList==""){
+								 alert("Please Select the Channel List for New Package!!!"); 
+							 }else{
+								 flag="true";
+							 }
+						}
+					 
+				 }
+			 }
+		 }
+		 if(flag=="true"){
+			 $.ajax({  
+		            type : 'GET', 
+		            url: 'addNewPckg.html',
+	         data: {
+		            	
+		            	"user":  ${user},
+		            	"pckg": chn,
+		            	"type":ty,
+		            	"price": price,
+		            	"chnlist": fList
+	         },
+		            dataType: 'json',
+		       		cache: false,
+					beforeSend: function(xhr) 
+	         {
+	                   xhr.setRequestHeader("Accept", "application/json");  
+	               xhr.setRequestHeader("Content-Type", "application/json");  
+	             },
+	  			success: function (data) {
+	  			   alert(data);
+	            },
+			         error: function(e){
+			     }
+			 });
+		 }
+		
 
 	}
 </SCRIPT>
@@ -267,8 +299,7 @@
 											<div class="form-group"
 												style="margin-left: 45px; margin-right: -65px; margin-top: -200px; overflow: scroll; height: 220px;">
 
-												<button onclick="deleteRow('dataTable')">Delete
-													Row</button>
+												<button onclick="deleteRow('dataTable')">Delete Row</button>
 
 												<TABLE id="dataTable">
 													<TR>

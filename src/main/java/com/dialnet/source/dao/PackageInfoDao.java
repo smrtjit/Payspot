@@ -12,6 +12,6 @@ public interface PackageInfoDao {
 	public Long count(String user);
 	public List<String> getAllPckgNames();
 	public PackageInfo getByName(String name);
-	
+	public int add(PackageInfo pckg); 
 	
 }

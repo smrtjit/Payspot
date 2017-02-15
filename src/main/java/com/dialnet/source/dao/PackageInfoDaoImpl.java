@@ -5,15 +5,17 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dialnet.source.model.PackageInfo;
 
+@Transactional
 @Repository("pack")
 public class PackageInfoDaoImpl implements PackageInfoDao {
 
@@ -72,6 +74,17 @@ public class PackageInfoDaoImpl implements PackageInfoDao {
 		// System.out.println("user: " + product);
 		sf.close();
 		return product;
+	}
+
+	@Override
+	public int add(PackageInfo pckg) {
+		Session sf = session.openSession();
+		Transaction tx= sf.beginTransaction();
+		sf.save(pckg);
+		tx.commit();
+		sf.close();
+		//System.out.println("Save AgentBillDetails done");
+		return 1;
 	}
 	
 

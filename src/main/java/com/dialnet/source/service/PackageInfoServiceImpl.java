@@ -15,7 +15,6 @@ public class PackageInfoServiceImpl implements PackageInfoService {
 	@Autowired
 	PackageInfoDao packageinfodao;
 	public PackageInfo getByID(String code) {
-		
 		return packageinfodao.getByID(code);
 	}
 
@@ -23,13 +22,11 @@ public class PackageInfoServiceImpl implements PackageInfoService {
 
 	@Override
 	public List<String> getAllPckgNames() {
-		
 		return packageinfodao.getAllPckgNames();
 	}
 
 	@Override
 	public PackageInfo getByName(String name) {
-		// TODO Auto-generated method stub
 		return packageinfodao.getByName(name);
 	}
 
@@ -37,7 +34,6 @@ public class PackageInfoServiceImpl implements PackageInfoService {
 
 	@Override
 	public List<PackageInfo> getAll(String user, Integer offset, Integer maxResults) {
-		// TODO Auto-generated method stub
 		return packageinfodao.getAll(user, offset, maxResults);
 	}
 
@@ -45,8 +41,14 @@ public class PackageInfoServiceImpl implements PackageInfoService {
 
 	@Override
 	public Long count(String user) {
-		// TODO Auto-generated method stub
 		return packageinfodao.count(user);
+	}
+
+
+
+	@Override
+	public int add(PackageInfo pckg) {
+		return packageinfodao.add(pckg);
 	}
 
 

@@ -51,6 +51,7 @@ import com.dialnet.source.model.Customer_Invoice1;
 import com.dialnet.source.model.LCOUser;
 import com.dialnet.source.model.LCO_Setting;
 import com.dialnet.source.model.LMUser;
+import com.dialnet.source.model.PackageDetail;
 import com.dialnet.source.model.PackageInfo;
 import com.dialnet.source.model.STBStock;
 import com.dialnet.source.model.Subscriber;
@@ -68,6 +69,7 @@ import com.dialnet.source.service.Cust_InvoiceService;
 import com.dialnet.source.service.CustomerInvoiceServiceImpl;
 import com.dialnet.source.service.LCOUserService;
 import com.dialnet.source.service.LMUserService;
+import com.dialnet.source.service.PackageDetailSercie;
 import com.dialnet.source.service.PackageInfoService;
 import com.dialnet.source.service.STBStockService;
 import com.dialnet.source.service.SubscriberService;
@@ -120,6 +122,9 @@ public class LCOController {
 
 	@Autowired
 	AllChannelService channelService;
+	
+	@Autowired
+	PackageDetailSercie pckgDetialservice;
 
 	String imagename = null;
 
@@ -178,15 +183,11 @@ public class LCOController {
 	@RequestMapping(value = "/newChannel", method = RequestMethod.GET)
 	public ModelAndView newChannel(ModelMap map, @RequestParam("user") String user, Integer offset,
 			Integer maxResults) {
-		// AllChannels chn=new AllChannels();
-		// map.addAttribute("AllChn", chn);
+
 		map.addAttribute("user", user);
 		List<AllChannels> l = channelService.getListByLCO(user, offset, maxResults);
 		map.addAttribute("count", channelService.count(user));
 		map.addAttribute("offset", offset);
-		// for(AllChannels tmp: l){
-		// System.out.println("NAME: "+tmp.getChannel_name());
-		// }
 		map.addAttribute("ChannelList", l);
 		return new ModelAndView("NewChannel", map);
 	}
@@ -232,21 +233,21 @@ public class LCOController {
 	@RequestMapping(value = "/newPackage", method = RequestMethod.GET)
 	public ModelAndView newPackage(ModelMap map, @RequestParam("user") String user, Integer offset,
 			Integer maxResults) {
-		PackageInfo pck=new PackageInfo();
+		PackageInfo pck = new PackageInfo();
 		map.addAttribute("PckgInfo", pck);
-		List ls=channelService.getAllName(user);
+		List ls = channelService.getAllName(user);
 		map.addAttribute("ChnList", ls);
 		////////////////////////////////////////////////////////////////////////
-		List ls2=new ArrayList();
+		List ls2 = new ArrayList();
 		ls2.add("Select Type");
 		ls2.add("Basic");
 		ls2.add("Add On");
 		ls2.add("A-La-Carte");
 		map.addAttribute("type", ls2);
 		List<PackageInfo> l = pckgservice.getAll(user, offset, maxResults);
-//		for (PackageInfo tmp : l) {
-//			System.out.println("NAME of Packages: " + tmp.getPckgName());
-//		}
+		// for (PackageInfo tmp : l) {
+		// System.out.println("NAME of Packages: " + tmp.getPckgName());
+		// }
 		map.addAttribute("PckgList", l);
 		map.addAttribute("count", pckgservice.count(user));
 		map.addAttribute("offset", offset);
@@ -267,7 +268,7 @@ public class LCOController {
 	@RequestMapping(value = "/allCollection", method = RequestMethod.GET)
 	public ModelAndView allLCOCollection(ModelMap map, @RequestParam("user") String user, Integer offset,
 			Integer maxResults) {
-		List<AllCollections> userList = LCOCollectionRepository.list(user,offset, maxResults);
+		List<AllCollections> userList = LCOCollectionRepository.list(user, offset, maxResults);
 		System.out.println("Calling....allCollection");
 		map.addAttribute("count", LCOCollectionRepository.count(user));
 		map.addAttribute("offset", offset);
@@ -283,7 +284,6 @@ public class LCOController {
 		return new ModelAndView("AllCollectionData", map);
 
 	}
-	
 
 	@RequestMapping(value = "/allComplaint", method = RequestMethod.GET)
 	public ModelAndView allComplaint(ModelMap map, @RequestParam("user") String user, Integer offset,
@@ -360,7 +360,7 @@ public class LCOController {
 				maxResults);
 		System.out.println("tmp.size()***************: " + tmp.size());
 		if (tmp.size() < 1) {
-			
+
 			map.addAttribute("error", "No Data Found!!!");
 			map.addAttribute("count", "0");
 			map.addAttribute("offset", offset);
@@ -392,7 +392,7 @@ public class LCOController {
 			model.addAttribute("count", lmuserservice.countForSearch("", id, desig, mobile));
 			model.addAttribute("offset", offset);
 		} else {
-			
+
 			model.addAttribute("error", "No Data Found!!!");
 			model.addAttribute("count", "0");
 			model.addAttribute("offset", offset);
@@ -429,6 +429,59 @@ public class LCOController {
 	}
 
 	/**************************************************/
+
+	@ResponseBody
+	@RequestMapping(value = "/deleteChannel", method = RequestMethod.GET)
+	public String deleteChannel(ModelMap map, @RequestParam("user") String user,
+			@RequestParam("chnl_id") String chnl_id, Integer offset, Integer maxResults) {
+
+		System.out.println("Welcome to Delete Controller parts");
+		List<AllChannels> l = channelService.getListByLCO(user, offset, maxResults);
+		String result = null;
+		System.out.println("chnl_id\t" + chnl_id);
+		int val = channelService.delete(chnl_id);
+		if (val > 0) {
+			result = "Data Successfully Delete";
+		} else {
+			result = "There is some Error Please Try again";
+		}
+
+		Gson gson = new Gson();
+		String json = gson.toJson(result);
+		map.addAttribute("count", channelService.count(user));
+		map.addAttribute("offset", offset);
+		map.addAttribute("ChannelList", l);
+		map.addAttribute("user", user);
+		return json;
+		// return new ModelAndView(json);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/updateChannel", method = RequestMethod.GET)
+	public String updateChannel(ModelMap map, @RequestParam("user") String user,
+			@RequestParam("pkgname") String pkgname, @RequestParam("msoprice") String msoprice,
+			@RequestParam("lcoprice") String lcoprice, @RequestParam("chnl_id") String chnl_id, Integer offset,
+			Integer maxResults) {
+		System.out.println("-" + msoprice + "--------" + lcoprice + "------5555555555555--" + pkgname + "--------------"
+				+ chnl_id);
+		int val = channelService.channelupdate(chnl_id, pkgname, msoprice, lcoprice);
+		map.addAttribute("user", user);
+		List<AllChannels> l = channelService.getListByLCO(user, offset, maxResults);
+		map.addAttribute("count", channelService.count(user));
+		map.addAttribute("offset", offset);
+		map.addAttribute("ChannelList", l);
+		System.out.println("****Channel Secuessfully Update****");
+		String result = null;
+		if (val > 0) {
+			result = "Data Updated Successfully";
+		} else {
+			result = "There is some Error Please Try again";
+		}
+		Gson gson = new Gson();
+		String json = gson.toJson(result);
+		map.addAttribute("user", user);
+		return json;
+	}
 
 	@ResponseBody
 	@RequestMapping(value = "/channelList", method = RequestMethod.POST)
@@ -484,8 +537,7 @@ public class LCOController {
 
 		return new ModelAndView("redirect:newChannel.html", model);
 	}
-	
-	
+
 	@RequestMapping(value = "/searchCollectionLCO", method = RequestMethod.GET)
 	public ModelAndView searchByanyOne(ModelMap map, @RequestParam("user") String user,
 			@RequestParam("VC_No") String VC_No, @RequestParam("fdate") String fdate,
@@ -494,37 +546,53 @@ public class LCOController {
 			Integer maxResults) {
 		map.addAttribute("user", user);
 		System.out.println("VC no: " + VC_No);
-		List<AllCollections> tmp = LCOCollectionRepository.getByAnyOne(user,fdate, edate, VC_No, mobile, status, agent,
+		List<AllCollections> tmp = LCOCollectionRepository.getByAnyOne(user, fdate, edate, VC_No, mobile, status, agent,
 				offset, maxResults);
 
 		System.out.println("tmp.size()***************: " + tmp.size());
 		if (tmp.size() < 1) {
 			map.addAttribute("userList", tmp);
-			map.addAttribute("count","0");
+			map.addAttribute("count", "0");
 			map.addAttribute("error", "No Data Found!!!");
 			System.out.println("No Data Found........................");
 		} else {
 			map.addAttribute("userList", tmp);
 			map.addAttribute("count",
-					LCOCollectionRepository.countForSearch(user,fdate, edate, VC_No, mobile, status, agent));
+					LCOCollectionRepository.countForSearch(user, fdate, edate, VC_No, mobile, status, agent));
 			map.addAttribute("offset", offset);
 		}
 
 		return new ModelAndView("AllCollectionData ", map);
 	}
-	
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/addNewPckg", method = RequestMethod.GET)
-	public String addNewPckg(@RequestParam("pckg") String pckg, @RequestParam("type") String type,Model model,
-			@RequestParam("price") String price, @RequestParam("chnlist") String chnList, @RequestParam("user") String user) {
+	public String addNewPckg(@RequestParam("pckg") String pckg, @RequestParam("type") String type, Model model,
+			@RequestParam("price") String price, @RequestParam("chnlist") String chnList,
+			@RequestParam("user") String user) {
 		String result = null;
+		String list[] = chnList.split(",");
 		long id = System.currentTimeMillis();
 		System.out.println("Form Data: " + pckg + ",price: " + price + ",type: " + type + "," + user + "," + chnList);
-		
-		 int val=1;
+		PackageInfo obj = new PackageInfo();
+		obj.setPckgID(id + "");
+		obj.setLcoID(user);
+		obj.setNoOfUser("0");
+		obj.setPckgName(pckg);
+		obj.setPckgType(type);
+		obj.setPrice(price);
+		obj.setTrnadte(getDate());
+		obj.setNoOfChannels(list.length + "");
+		int val = pckgservice.add(obj);
+		// int val=1;
 		System.out.println("value: " + val);
 		if (val == 1) {
+			for (int k = 0; k < list.length; k++) {
+				PackageDetail tmp = new PackageDetail();
+				tmp.setPckg_Id(id + "");
+				tmp.setChannel_Name(list[k]);
+				pckgDetialservice.add(tmp);
+			}
 			result = "New Channel Added Successfully!!!";
 		} else {
 			result = "There may be Some Error Please Try Again";
@@ -532,7 +600,7 @@ public class LCOController {
 		Gson gson = new Gson();
 		String json = gson.toJson(result);
 		model.addAttribute("user", user);
-		return result;
+		return json;
 		// return new ModelAndView(json);
 	}
 
