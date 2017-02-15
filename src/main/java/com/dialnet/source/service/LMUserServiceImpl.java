@@ -21,9 +21,8 @@ public class LMUserServiceImpl implements LMUserService {
 	}
 
 	@Override
-	public void edit(LMUser username) {
-		// TODO Auto-generated method stub
-
+	public int edit(LMUser obj) {
+		return dao.edit(obj);
 	}
 
 	@Override

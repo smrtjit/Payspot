@@ -17,6 +17,7 @@ public class LMUser {
 	
 	
 	private String PASSWORD;
+	private String pincode;
 	private String designation;
 	private String firstName;
 	private String middlename;

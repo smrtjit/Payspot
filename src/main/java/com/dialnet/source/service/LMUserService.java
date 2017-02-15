@@ -7,7 +7,7 @@ import com.dialnet.source.model.LMUser;
 public interface LMUserService {
 
 	public void add(LMUser username);
-	public void edit(LMUser username);
+	public int edit(LMUser username);
 	public void delete(String username);
 	public LMUser get(String username);
 	public List<LMUser> getAll();

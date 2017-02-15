@@ -53,6 +53,7 @@
 				<value>com.dialnet.source.model.LMUser</value>
 				<value>com.dialnet.source.model.AllComplaints</value>
 				<value>com.dialnet.source.model.PackageInfo</value>
+				<value>com.dialnet.source.model.PackageDetail</value>
 				<value>com.dialnet.source.model.LCOUser</value>
 				<value>com.dialnet.source.model.AllCollections</value>
 				<value>com.dialnet.source.model.STBStock</value>

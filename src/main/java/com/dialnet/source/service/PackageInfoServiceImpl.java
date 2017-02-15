@@ -52,4 +52,14 @@ public class PackageInfoServiceImpl implements PackageInfoService {
 	}
 
 
+
+	@Override
+	public int delete(String id) {
+		
+		return packageinfodao.delete(id) ;
+	}
+
+
+
+
 }

@@ -6,9 +6,9 @@ import com.dialnet.source.model.LMUser;
 
 public interface LMUserDao {
 
-	public void add(LMUser username);
-	public void edit(LMUser username);
-	public void delete(String username);
+	public void add(LMUser obj);
+	public int edit(LMUser obj);
+	public void delete(String obj);
 	public LMUser get(String username);
 	public List<LMUser> getAll();
 	public List<LMUser> list(Integer offset, Integer maxResults);

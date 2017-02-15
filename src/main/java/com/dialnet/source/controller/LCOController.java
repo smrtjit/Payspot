@@ -122,7 +122,7 @@ public class LCOController {
 
 	@Autowired
 	AllChannelService channelService;
-	
+
 	@Autowired
 	PackageDetailSercie pckgDetialservice;
 
@@ -176,18 +176,44 @@ public class LCOController {
 
 	@RequestMapping(value = "/newLineman", method = RequestMethod.GET)
 	public String newLineman(ModelMap map, @RequestParam("user") String user) {
+		LMUser lm = new LMUser();
+		List citylist = new ArrayList();
+		citylist.add("A");
+		citylist.add("B");
+		citylist.add("C");
+		citylist.add("D");
+		map.addAttribute("LMUSER", lm);
+		map.addAttribute("citylist", citylist);
 		map.addAttribute("user", user);
 		return "NewLineMan";
+	}
+
+	@RequestMapping(value = "/addLMUser", method = RequestMethod.GET)
+	public ModelAndView addLMUser(ModelMap map, @RequestParam("user") String user,
+			@ModelAttribute("LMUSER") LMUser lmuser) {
+		long id = System.currentTimeMillis();
+		lmuser.setUsername(id);
+		lmuser.setPASSWORD(getSaltString());
+
+		lmuserservice.add(lmuser);
+
+		System.out.println("Data Secuessfully Store");
+		map.addAttribute("user", user);
+		return new ModelAndView("redirect:newLineman.html", map);
 	}
 
 	@RequestMapping(value = "/newChannel", method = RequestMethod.GET)
 	public ModelAndView newChannel(ModelMap map, @RequestParam("user") String user, Integer offset,
 			Integer maxResults) {
-
+		// AllChannels chn=new AllChannels();
+		// map.addAttribute("AllChn", chn);
 		map.addAttribute("user", user);
 		List<AllChannels> l = channelService.getListByLCO(user, offset, maxResults);
 		map.addAttribute("count", channelService.count(user));
 		map.addAttribute("offset", offset);
+		// for(AllChannels tmp: l){
+		// System.out.println("NAME: "+tmp.getChannel_name());
+		// }
 		map.addAttribute("ChannelList", l);
 		return new ModelAndView("NewChannel", map);
 	}
@@ -431,59 +457,6 @@ public class LCOController {
 	/**************************************************/
 
 	@ResponseBody
-	@RequestMapping(value = "/deleteChannel", method = RequestMethod.GET)
-	public String deleteChannel(ModelMap map, @RequestParam("user") String user,
-			@RequestParam("chnl_id") String chnl_id, Integer offset, Integer maxResults) {
-
-		System.out.println("Welcome to Delete Controller parts");
-		List<AllChannels> l = channelService.getListByLCO(user, offset, maxResults);
-		String result = null;
-		System.out.println("chnl_id\t" + chnl_id);
-		int val = channelService.delete(chnl_id);
-		if (val > 0) {
-			result = "Data Successfully Delete";
-		} else {
-			result = "There is some Error Please Try again";
-		}
-
-		Gson gson = new Gson();
-		String json = gson.toJson(result);
-		map.addAttribute("count", channelService.count(user));
-		map.addAttribute("offset", offset);
-		map.addAttribute("ChannelList", l);
-		map.addAttribute("user", user);
-		return json;
-		// return new ModelAndView(json);
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "/updateChannel", method = RequestMethod.GET)
-	public String updateChannel(ModelMap map, @RequestParam("user") String user,
-			@RequestParam("pkgname") String pkgname, @RequestParam("msoprice") String msoprice,
-			@RequestParam("lcoprice") String lcoprice, @RequestParam("chnl_id") String chnl_id, Integer offset,
-			Integer maxResults) {
-		System.out.println("-" + msoprice + "--------" + lcoprice + "------5555555555555--" + pkgname + "--------------"
-				+ chnl_id);
-		int val = channelService.channelupdate(chnl_id, pkgname, msoprice, lcoprice);
-		map.addAttribute("user", user);
-		List<AllChannels> l = channelService.getListByLCO(user, offset, maxResults);
-		map.addAttribute("count", channelService.count(user));
-		map.addAttribute("offset", offset);
-		map.addAttribute("ChannelList", l);
-		System.out.println("****Channel Secuessfully Update****");
-		String result = null;
-		if (val > 0) {
-			result = "Data Updated Successfully";
-		} else {
-			result = "There is some Error Please Try again";
-		}
-		Gson gson = new Gson();
-		String json = gson.toJson(result);
-		map.addAttribute("user", user);
-		return json;
-	}
-
-	@ResponseBody
 	@RequestMapping(value = "/channelList", method = RequestMethod.POST)
 	public ModelAndView channelList(ModelMap model, @RequestParam("excelfile") MultipartFile excelfile,
 			@RequestParam("user") String id) {
@@ -604,6 +577,89 @@ public class LCOController {
 		// return new ModelAndView(json);
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/updateLM", method = RequestMethod.GET)
+	public String updateLM(@ModelAttribute("userForm") LMUser sub, Model model, @RequestParam("user") String user) {
+		String result = null;
+		LMUser lm = lmuserservice.get(sub.getUsername() + "");
+		sub.setIdentity_proof(lm.getIdentity_proof());
+		sub.setAdd_proof(lm.getAdd_proof());
+		sub.setAdd_proof_image_Name(lm.getAdd_proof_image_Name());
+		sub.setAdd_proof_type(lm.getAdd_proof_type());
+		sub.setIdentity_proof_image_name(lm.getIdentity_proof_image_name());
+		sub.setIdentity_proof_type(lm.getIdentity_proof_type());
+		sub.setLco_id(lm.getLco_id());
+		sub.setTrnadate(lm.getTrnadate());
+		int i = lmuserservice.edit(sub);
+		if (i == 1) {
+			result = "Detail Updated Successfully!!!";
+		} else {
+			result = "There may be Some Error Please Try Again";
+		}
+		Gson gson = new Gson();
+		String json = gson.toJson(result);
+		model.addAttribute("user", user);
+		return json;
+		//
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/deletePackage", method = RequestMethod.GET)
+	public String deletePackage(ModelMap map, @RequestParam("user") String user, @RequestParam("pak_id") String pak_id,
+			Integer offset, Integer maxResults) {
+
+		System.out.println("Welcome to Delete Controller parts");
+		PackageInfo pck = new PackageInfo();
+		map.addAttribute("PckgInfo", pck);
+		List ls = channelService.getAllName(user);
+		map.addAttribute("ChnList", ls);
+		List ls2 = new ArrayList();
+		ls2.add("Select Type");
+		ls2.add("Basic");
+		ls2.add("Add On");
+		ls2.add("A-La-Carte");
+		map.addAttribute("type", ls2);
+		List<PackageInfo> l = pckgservice.getAll(user, offset, maxResults);
+		map.addAttribute("PckgList", l);
+		map.addAttribute("count", pckgservice.count(user));
+		map.addAttribute("offset", offset);
+		map.addAttribute("user", user);
+		String result = null;
+
+		int val = pckgservice.delete(pak_id);
+
+		if (val > 0) {
+			int chk = pckgDetialservice.delete(pak_id);
+			System.out.println("Check for delete: " + chk);
+			if (chk > 0) {
+				result = "Data Deleted Successfully!!! ";
+			} else {
+				result = "There is some Error Please Try again";
+			}
+
+		} else {
+			result = "There is some Error Please Try again";
+		}
+
+		Gson gson = new Gson();
+		String json = gson.toJson(result);
+
+		return json;
+		// return new ModelAndView(json);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/getLMDetial", method = RequestMethod.GET)
+	public String getLMDetial(@RequestParam("user") String user, @RequestParam("Eid") String eid) {
+		String result = null;
+		LMUser lm = lmuserservice.get(eid);
+		Gson gson = new Gson();
+		String json = gson.toJson(lm);
+
+		return json;
+		// return new ModelAndView(json);
+	}
+
 	// #######################################################################################
 	public String getDate() {
 		String trnstamp = null;
@@ -617,6 +673,19 @@ public class LCOController {
 			e.printStackTrace();
 		}
 		return trnstamp;
+	}
+
+	String getSaltString() {
+		String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+		StringBuilder salt = new StringBuilder();
+		Random rnd = new Random();
+		while (salt.length() < 10) {
+			int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+			salt.append(SALTCHARS.charAt(index));
+		}
+		String saltStr = salt.toString();
+		return saltStr;
+
 	}
 
 }

@@ -86,6 +86,19 @@ public class PackageInfoDaoImpl implements PackageInfoDao {
 		//System.out.println("Save AgentBillDetails done");
 		return 1;
 	}
+
+	@Override
+	public int delete(String id) {
+		
+		Session sf = session.openSession();
+		PackageInfo obj=(PackageInfo)sf.get(PackageInfo.class, id);
+		Transaction tx= sf.beginTransaction();
+		sf.delete(obj);
+		tx.commit();
+		sf.close();
+		//System.out.println("Save AgentBillDetails done");
+		return 1;
+	}
 	
 
 }

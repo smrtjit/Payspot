@@ -1,5 +1,7 @@
-
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="tag" uri="/WEB-INF/taglibs/customTaglib.tld"%>
 <!DOCTYPE html>
 
 <html>
@@ -140,27 +142,31 @@ label.control-label {
 					<h4>Create New Line Man</h4>
 				</div>
 				<div class='panel-body'>
-					<form class='form-horizontal' role='form'>
+				<form:form action="addLMUser.html" method="get" class='form-horizontal' role='form'
+						commandName="LMUSER" autocomplete="off">
+						<input type="hidden" name="user" value="${user }" />
 						<div class='form-group' style="margin-left: -200px;">
 							<label class='control-label col-md-2 col-md-offset-2'
 								for='id_title'>Name</label>
 							<div class='col-md-8'>
 								<div class='col-md-3'>
 									<div class='form-group internal'>
-										<input requried class='form-control' id='id_first_name'
-											placeholder='First Name' type='text'>
+									<form:input path="firstName" placeholder='First Name' required="required" class='form-control'/>
+										
 									</div>
 								</div>
 								<div class='col-md-3 indent-small'>
 									<div class='form-group internal'>
-										<input class='form-control' id='id_middle_name'
-											placeholder='Middle Name' type='text'>
+									<form:input path="middlename" placeholder='Middle Name' required="required" class='form-control'/>
+<!-- 										<input class='form-control' id='id_middle_name' -->
+<!-- 											placeholder='Middle Name' type='text'> -->
 									</div>
 								</div>
 								<div class='col-md-3 indent-small'>
 									<div class='form-group internal'>
-										<input requried class='form-control' id='id_last_name'
-											placeholder='Last Name' type='text'>
+									<form:input path="lastName" placeholder='Last Name' required="required" class='form-control'/>
+<!-- 										<input required class='form-control' id='id_last_name' -->
+<!-- 											placeholder='Last Name' type='text'> -->
 									</div>
 								</div>
 
@@ -172,14 +178,16 @@ label.control-label {
 							<div class='col-md-8'>
 								<div class='col-md-3'>
 									<div class='form-group internal'>
-										<input requried="requried " class='form-control'
-											id='mobile_no' placeholder='Mobile Number' type='text'>
+									<form:input path="mobile" placeholder='Mobile Number' required="required" class='form-control'/>
+<!-- 										<input required="required " class='form-control' -->
+<!-- 											id='mobile_no' placeholder='Mobile Number' type='text'> -->
 									</div>
 								</div>
 								<div class='col-md-6 indent-small' style="width: 50.5%;">
 									<div class='form-group internal'>
-										<input requried="requried " class='form-control' id='email_id'
-											placeholder='Email ID' type='text'>
+									<form:input path="email_id" placeholder='Email ID' required="required" class='form-control'/>
+<!-- 										<input required="required " class='form-control' id='email_id' -->
+<!-- 											placeholder='Email ID' type='text'> -->
 									</div>
 								</div>
 
@@ -193,7 +201,7 @@ label.control-label {
 							<div class='col-md-8'>
 								<div class='col-md-3'>
 									<div class='form-group internal'>
-										<select requried="requried " class="form-control "
+										<select required="required " class="form-control "
 											id="id_title ">
 											<option>Select Type</option>
 											<option>Ms</option>
@@ -205,14 +213,16 @@ label.control-label {
 								</div>
 								<div class='col-md-3 indent-small'>
 									<div class='form-group internal'>
-										<input requried="requried " class='form-control' id='crf_no'
-											placeholder=' ID Number' type='text'>
+										<form:input path="identity_proof" placeholder='ID Number' required="required" class='form-control'/>
+<!-- 										<input required="required " class='form-control' id='crf_no' -->
+<!-- 											placeholder=' ID Number' type='text'> -->
 									</div>
 								</div>
 								<div class='col-md-3 indent-small'>
 									<div class='form-group internal'>
-										<input requried="requried " class='form-control' id='gst_no'
-											placeholder='GST Number' type='File'>
+<%-- 										<form:input path="firstName" placeholder='GST Number' required="required" class='form-control'/> --%>
+										<input required class='form-control' id='gst_no'
+											name='PhotoID' type='File'>
 									</div>
 								</div>
 
@@ -225,7 +235,7 @@ label.control-label {
 							<div class='col-md-8'>
 								<div class='col-md-3'>
 									<div class='form-group internal'>
-										<select requried="requried " class="form-control "
+										<select required="required " class="form-control "
 											id="id_title ">
 											<option>Select Type</option>
 											<option>Ms</option>
@@ -237,14 +247,16 @@ label.control-label {
 								</div>
 								<div class='col-md-3 indent-small'>
 									<div class='form-group internal'>
-										<input requried="requried " class='form-control' id='crf_no'
-											placeholder=' ID Number' type='text'>
+									<form:input path="add_proof" placeholder='ID Number' required="required" class='form-control'/>
+<!-- 										<input required="required " class='form-control' id='crf_no' -->
+<!-- 											placeholder=' ID Number' type='text'> -->
 									</div>
 								</div>
 								<div class='col-md-3 indent-small'>
 									<div class='form-group internal'>
-										<input requried="requried " class='form-control' id='gst_no'
-											placeholder='GST Number' type='File'>
+<%-- 									<form:input path="firstName" placeholder='GST Number' required="required" class='form-control'/> --%>
+										<input required="required " name="PhotoId" class='form-control' id='gst_no'
+											 type='File'>
 									</div>
 								</div>
 
@@ -256,8 +268,8 @@ label.control-label {
 							<div class='col-md-6'>
 								<div class='form-group'>
 									<div class='col-md-9' style="width: 72%;">
-										<input requried="requried " class='form-control' id='address'
-											placeholder='Address' type='text'>
+
+										<form:input path="Address" placeholder='Address' required="required" class='form-control'/>
 									</div>
 								</div>
 
@@ -315,20 +327,15 @@ label.control-label {
 								</div>
 								<div class='col-md-3 indent-small'>
 									<div class='form-group internal'>
-										<select requried="requried " class="form-control "
-											id="id_title ">
-											<option>Select City</option>
-											<option>Ms</option>
-											<option>Mrs</option>
-											<option>Miss</option>
-											<option>Dr</option>
-										</select>
+										<form:select required="true" path="city" class="form-control" >
+										<form:option value="">Select City</form:option>
+										<form:options items="${citylist}" />
+									</form:select>
 									</div>
 								</div>
 								<div class='col-md-3 indent-small'>
 									<div class='form-group internal'>
-										<input requried="requried " class='form-control'
-											id='id_middle_name' placeholder='Pin Code' type='text'>
+									<form:input path="Address" placeholder='Pin Code' required="required" class='form-control'/>
 									</div>
 								</div>
 
@@ -341,15 +348,17 @@ label.control-label {
 							<div class='col-md-8'>
 								<div class='col-md-4' style="width: 38%;">
 									<div class='form-group internal'>
-										<input requried="requried " class='form-control' id='gst_no'
-											placeholder='Role' type='text'>
+									<form:input path="designation" placeholder='Role' required="required" class='form-control'/>
+<!-- 										<input required="required " class='form-control' id='gst_no' -->
+<!-- 											placeholder='Role' type='text'> -->
 									</div>
 								</div>
 
 								<div class='col-md-4 indent-small' style="width: 38%;">
 									<div class='form-group internal'>
-										<input requried="requried " class='form-control' id='gst_no'
-											placeholder='Responsibility' type='text'>
+									<form:input path="responsibility" placeholder='Responsibility' required="required" class='form-control'/>
+<!-- 										<input required="required " class='form-control' id='gst_no' -->
+<!-- 											placeholder='Responsibility' type='text'> -->
 									</div>
 								</div>
 
@@ -369,7 +378,7 @@ label.control-label {
 									style='float: right; font-size: 13px;' type='submit'>Cancel</button>
 							</div>
 						</div>
-					</form>
+					</form:form>
 				</div>
 			</div>
 		</div>

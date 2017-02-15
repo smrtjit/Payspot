@@ -203,14 +203,16 @@ a.close:hover {
 							 var packname =  fields[0];;
 							 var mso_price = fields[1];
 							 var  lco_price= fields[2];
-							 var  channel_id= fields[3];
+							
 						
 							
 							document.getElementById('pkgname').innerHTML=packname;
 							document.getElementById('msoprice').value=mso_price;
 							document.getElementById('lcoprice').value=lco_price;
-							document.getElementById('chnlid').value=channel_id;
-									
+							
+							alert(lco_price);
+							
+						
 													
 							//alert(url);
 						e.preventDefault();
@@ -240,7 +242,12 @@ a.close:hover {
  
 				});
 				</script>
-
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.multiselect').multiselect();
+		$('.datepicker').datepicker();
+	});
+</script>
 </head>
 <body id="top">
 	<div class="wrapper row1">
@@ -378,18 +385,17 @@ a.close:hover {
 				<c:forEach items="${ChannelList}" var="bill" varStatus="itr">
 
 					<tr>
-					
 						<td>${offset + itr.index +1 }</td>
 						<td><a href="#"
-							value="${bill.channel_name }#${bill.mso_price}#${bill.lco_price}#${bill.channel_id}"
+							value="${bill.channel_name }#${bill.mso_price}#${bill.lco_price}"
 							data-modal-id="popup2">${bill.channel_name}</a></td>
 
 
 						<td>${bill.mso_price}</td>
 						<td>${bill.lco_price}</td>
 						<td>${bill.updated_on}</td>
-						<td style="text-align: center;"><button onclick="deletefunction('${bill.channel_id}');" class="btn">Delete</button></td>
-					
+						<td style="text-align: center;"><a class="btn" href="#">Delete</a></td>
+
 					</tr>
 
 				</c:forEach>
@@ -452,27 +458,22 @@ a.close:hover {
 
 					</div>
 				</div>
-				<input type="hidden" id="chnlid" >
+
 				<br>
 				<input value="Submit!" type="submit" id="submit"  class="btn-primary btn btn-block" 
 					style="margin-top: 7%; margin-bottom: -26%;">
-					
 				<script>
 								$("#submit").click( function() {
-									var pkname = $("#pkgname").text();
-								    var msprice = $("#msoprice").val();
-								    var lcprice = $("#lcoprice").val();
-								    var channel_id = $("#chnlid").val();
-								   	var st =  $('select[name=selector]').val();
-								   
+									var id = $("#id1").text();
+								    var rem = $("#crem").val();
+								    var st =  $('select[name=selector]').val();
 								    $.ajax({  
 							            type : 'GET', 
-							            url: 'updateChannel.html',
+							            url: 'updateCompLCO.html',
 							            data: {
-							            	'pkgname': pkname,
-							            	'msoprice': msprice,
-							            	'lcoprice': lcprice,
-							            	'chnl_id': channel_id,
+							            	'id': id,
+							            	'remark': rem,
+							            	'status': st,
 							            	'user':  ${ user}
 							            },
 							            dataType: 'json',
@@ -484,48 +485,18 @@ a.close:hover {
 							                        },
 							         				success: function (data) {
 							         					 alert(data);
-							         					location.reload();
+							         					 $(".modal-overlay").remove();
 						           						
-								          		    },
-										            error: function(e){
-										            	console.warn(e);
-										            	 alert(e);
-										            }
+								            },
+								            error: function(e){
+								            	
+								            }
 							            
-							      		  });
+							        });
 								   
 								});
 								
-									function deletefunction(id){
-										alert(id);
-										  $.ajax({  
-									            type : 'GET', 
-									            url: 'deleteChannel.html',
-									            data: {
-									            	'chnl_id': id,
-									            	'user':  ${ user}
-									            },
-									            dataType: 'json',
-									       		cache: false,
-												beforeSend: function(xhr) 
-									                        {
-									                            xhr.setRequestHeader("Accept", "application/json");  
-									                            xhr.setRequestHeader("Content-Type", "application/json");  
-									                        },
-									         				success: function (data) {
-									         					 alert(data);
-									         					location.reload();
-								           						
-										          		    },
-												            error: function(e){
-												            	console.warn(e);
-												            	 alert(e);
-												            }
-									            
-									      		  });
-										   
-										
-									}		 	 
+											 	 
 						  </script>
 
 

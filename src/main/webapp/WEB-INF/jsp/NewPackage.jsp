@@ -36,12 +36,223 @@
 }
 </style>
 
+<style>
+select {
+	/*    margin: 50px; */
+	margin-bottom: 10px;
+	border: 1px solid #111;
+	background: transparent;
+	width: 150px;
+	padding: 5px 25px 5px 5px;
+	font-size: 13px;
+	border: 1px solid #ccc;
+	height: 30px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background: url(http://www.stackoverflow.com/favicon.ico) 96%/15%
+		no-repeat #eee;
+	border: 1px solid #111;
+}
+/*target Internet Explorer 9 and Internet Explorer 10:*/
+@media screen and (min-width:0\0) {
+	select {
+		background: none;
+		padding: 5px;
+	}
+}
+
+.nofound {
+	color: red;
+	font-size: 3ex;
+	margin-left: 350px;
+	widows: 100%;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////// */
+.v-center {
+	height: 100vh;
+	width: 100%;
+	display: table;
+	position: relative;
+	text-align: center;
+}
+
+.v-center>div {
+	display: table-cell;
+	vertical-align: middle;
+	position: relative;
+	top: -10%;
+}
+
+.modal-box {
+	display: none;
+	position: absolute;
+	z-index: 1000;
+	width: 98%;
+	background: white;
+	border-bottom: 1px solid #aaa;
+	border-radius: 4px;
+	box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	background-clip: padding-box;
+}
+
+/* @media ( min-width : 32em) { */
+/* 	.modal-box { */
+/* 		width: 30%; */
+/* 	} */
+/* } */
+.v-center {
+	height: 100vh;
+	width: 100%;
+	display: table;
+	position: relative;
+	text-align: center;
+}
+
+.v-center>div {
+	display: table-cell;
+	vertical-align: middle;
+	position: relative;
+	top: -10%;
+}
+
+.btn:hover {
+	background-color: #ddd;
+	-webkit-transition: background-color 1s ease;
+	-moz-transition: background-color 1s ease;
+	transition: background-color 1s ease;
+}
+
+.btn-small {
+	padding: .75em 1em;
+	font-size: 0.8em;
+}
+
+.modal-box {
+	display: none;
+	position: absolute;
+	z-index: 1000;
+	width: 98%;
+	background: white;
+	border-bottom: 1px solid #aaa;
+	border-radius: 4px;
+	box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	background-clip: padding-box;
+}
+
+@media ( min-width : 32em) {
+	.modal-box {
+		width: 40%;
+	}
+}
+
+.modal-box header, .modal-box .modal-header {
+	padding: 1.25em 1.5em;
+	border-bottom: 1px solid #ddd;
+}
+
+.modal-box header h3, .modal-box header h4, .modal-box .modal-header h3,
+	.modal-box .modal-header h4 {
+	margin: 0;
+}
+
+.modal-box .modal-body {
+	padding: 2em 1.5em;
+}
+
+.modal-box footer, .modal-box .modal-footer {
+	padding: 1em;
+	border-top: 1px solid #ddd;
+	background: rgba(0, 0, 0, 0.02);
+	text-align: right;
+}
+
+.modal-overlay {
+	opacity: 0;
+	filter: alpha(opacity = 0);
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 900;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3) !important;
+}
+
+a.close {
+	line-height: 1;
+	font-size: 1.5em;
+	position: absolute;
+	top: 5%;
+	right: 2%;
+	text-decoration: none;
+	color: #bbb;
+}
+
+a.close:hover {
+	color: #222;
+	-webkit-transition: color 1s ease;
+	-moz-transition: color 1s ease;
+	transition: color 1s ease;
+}
+</style>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.multiselect').multiselect();
 		$('.datepicker').datepicker();
 	});
 </script>
+<script>
+				$(function(){
+
+					var appendthis =  ("<div class='modal-overlay js-modal-close'></div>");
+
+						$('a[data-modal-id]').click(function(e) {
+							var url = $(this).attr('value');
+// 							document.getElementById("demo").innerHTML ="Complaint Number: "+url;
+							 
+							 var fields = url.split('#');
+							 var packname =  fields[0];;
+							 var pak_type = fields[1];
+							 var  no_of_channel= fields[2];
+							 var  pak_price= fields[3];
+						
+							
+							document.getElementById('pkgname').innerHTML=packname;
+							document.getElementById('pkgprice').value=pak_price;
+									
+													
+							alert(url);
+						e.preventDefault();
+  						  $("body").append(appendthis);
+   						 $(".modal-overlay").fadeTo(500, 0.7);
+   						 //$(".js-modalbox").fadeIn(500);
+						var modalBox = $(this).attr('data-modal-id');
+						$('#'+modalBox).fadeIn($(this).data());
+						});  
+  
+  
+						$(".js-modal-close, .modal-overlay").click(function() {
+  						  $(".modal-box, .modal-overlay").fadeOut(500, function() {
+    				    $(".modal-overlay").remove();
+   				 });
+ 
+				});
+ 
+					$(window).resize(function() {
+  					  $(".modal-box").css({
+   					     top: ($(window).height() - $(".modal-box").outerHeight()) / 2,
+   				     left: ($(window).width() - $(".modal-box").outerWidth()) / 2
+   					 });
+							});
+ 
+				$(window).resize();
+ 
+				});
+				</script>
 
 <!-- ##########################################For Dynamic Table############################################################################ -->
 <SCRIPT language="javascript">
@@ -49,29 +260,41 @@
 		if(valData=="NONE"){
 			alert("Please Select the Channel from the List");
 		}else{
-			var table = document.getElementById(tableID);
+			var flag="true";
+			$('#dataTable tr td:nth-child(3)').each( function() {
+			       // alert($(this).text());
+			        if($(this).text()==valData){
+			        	flag="false";
+			        }
+			    });
+			if(flag=="true"){
+				var table = document.getElementById(tableID);
 
-			var rowCount = table.rows.length;
-			var row = table.insertRow(rowCount);
+				var rowCount = table.rows.length;
+				var row = table.insertRow(rowCount);
 
-			var cell1 = row.insertCell(0);
-			var element1 = document.createElement("input");
+				var cell1 = row.insertCell(0);
+				var element1 = document.createElement("input");
+				
+				element1.type = "checkbox";
+				element1.name = "chkbox[]";
+				cell1.appendChild(element1);
+
+				var cell2 = row.insertCell(1);
+				cell2.innerHTML = rowCount + 1;
+
+				var cell3 = row.insertCell(2);
+				var divTag = document.createElement("div"); 
+				divTag.innerHTML = valData;
+//		 		var element2 = document.createElement("input");
+//		 		element2.type = "text";
+//		 		element2.setAttribute("value", valData);
+//		 		element2.name = "txtbox[]";
+				cell3.appendChild(divTag);
+			}else{
+				alert("This Channel is Already in List!!!")
+			}
 			
-			element1.type = "checkbox";
-			element1.name = "chkbox[]";
-			cell1.appendChild(element1);
-
-			var cell2 = row.insertCell(1);
-			cell2.innerHTML = rowCount + 1;
-
-			var cell3 = row.insertCell(2);
-			var divTag = document.createElement("div"); 
-			divTag.innerHTML = valData;
-//	 		var element2 = document.createElement("input");
-//	 		element2.type = "text";
-//	 		element2.setAttribute("value", valData);
-//	 		element2.name = "txtbox[]";
-			cell3.appendChild(divTag);
 		}
 		
 
@@ -166,6 +389,7 @@
 	             },
 	  			success: function (data) {
 	  			   alert(data);
+	  			 location.reload();
 	            },
 			         error: function(e){
 			     }
@@ -222,26 +446,31 @@
 						class="btn-lg btn-primary" data-toggle="modal"
 						data-target="#channelmodel" style="padding: 4px 8px;">Add
 						New Package</button></li>
+				<li class="fl_left">
+					<h4>The Total Numbers of Channels are: ${count}</h4>
+				</li>
 
 				<div class="modal fade" id="channelmodel" role="dialog">
 					<div class="modal-dialog modal-lg" style="margin-top: 170px;">
 						<div class="modal-content" style="margin: -124px;">
-							<div class="modal-header">
+							<div class="modal-header"
+								style="background-color: #3eb3b3; color: white;">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title">Modal Header</h4>
+								<h4 class="modal-title">Add New Package</h4>
 							</div>
-							<div class="modal-body" style="margin: 70px; margin-top: 120px;">
+							<div class="modal-body"
+								style="margin: 70px; margin-top: 120px; margin-bottom: -29px;">
 								<form:form method="get" modelAttribute="PckgInfo">
 									<div class="first-column">
 										<!-- Your first column here -->
 
 
 										<div class="form-group"
-											style="margin-left: -200px; margin-top: -120px;">
+											style="margin-left: -207px; margin-top: -120px;">
 											<label class="control-label col-md-2 col-md-offset-2">Package
 												Type</label>
-											<div class="col-md-8">
-												<div class="col-md-5">
+											<div class="col-md-4">
+												<div class="col-md-10">
 													<div class="form-group internal">
 														<form:select path="PckgType" class="form-control"
 															id="type">
@@ -252,11 +481,11 @@
 												</div>
 											</div>
 										</div>
-										<div class="form-group" style="margin-left: -200px;">
+										<div class="form-group" style="margin-left: -208px;">
 											<label class="control-label col-md-2 col-md-offset-2"
 												for="id_title">Package Name</label>
-											<div class="col-md-8">
-												<div class="col-md-5">
+											<div class="col-md-4">
+												<div class="col-md-10">
 													<div class="form-group internal">
 														<input requried="requried " class="form-control" id="name"
 															placeholder="Package Name" type="text">
@@ -264,11 +493,11 @@
 												</div>
 											</div>
 										</div>
-										<div class="form-group" style="margin-left: -200px;">
+										<div class="form-group" style="margin-left: -209px;">
 											<label class="control-label col-md-2 col-md-offset-2"
 												for="id_title">Package Price</label>
-											<div class="col-md-8">
-												<div class="col-md-5">
+											<div class="col-md-4">
+												<div class="col-md-10">
 													<div class="form-group internal">
 														<input requried="requried " class="form-control" id="cost"
 															placeholder="Package Price" type="text">
@@ -276,11 +505,11 @@
 												</div>
 											</div>
 										</div>
-										<div class="form-group" style="margin-left: -200px;">
+										<div class="form-group" style="margin-left: -210px;">
 											<label class="control-label col-md-2 col-md-offset-2"
 												for="id_title">Channel</label>
-											<div class="col-md-8">
-												<div class="col-md-5">
+											<div class="col-md-4">
+												<div class="col-md-10">
 													<div class="form-group internal">
 														<form:select path="NoOfChannels" class="form-control"
 															onchange="addRow('dataTable',this.value);">
@@ -291,85 +520,245 @@
 												</div>
 											</div>
 										</div>
-
-									</div>
-
-									<div class="second-column">
-										<div class="verticalLine" style="margin-left: 800px;">
-											<div class="form-group"
-												style="margin-left: 45px; margin-right: -65px; margin-top: -200px; overflow: scroll; height: 220px;">
-
-												<button onclick="deleteRow('dataTable')">Delete Row</button>
-
-												<TABLE id="dataTable">
-													<TR>
-														<TD style="width: 10%">Select</TD>
-														<TD style="width: 10%">1</TD>
-														<TD>Channel Name</TD>
-
-													</TR>
-												</TABLE>
-
-
-											</div>
-										</div>
-
-									</div>
-									<input type="button" value="Submit" class="form-control"
-										style="width: 40%; background-color: darkgray; color: white; margin-left: 7%;"
-										onclick="SubmitAllData();">
 								</form:form>
 							</div>
-							<div class="modal-footer"></div>
+
+							<div class="second-column">
+								<div class="verticalLine" style="margin-left: 800px;">
+									<div class="form-group"
+										style="margin-left: 45px; margin-right: -65px; margin-top: -200px; overflow: scroll; height: 220px;">
+
+										<button onclick="deleteRow('dataTable')" class="btn"
+											style="margin-bottom: 10px;">Delete Row</button>
+
+										<TABLE id="dataTable">
+											<TR>
+												<TD style="width: 10%">Select</TD>
+												<TD style="width: 10%">1</TD>
+												<TD>Channel Name</TD>
+
+											</TR>
+										</TABLE>
+
+
+									</div>
+								</div>
+
+							</div>
+							<input type="button" value="Submit" class="form-control"
+								style="width: 40%; background-color: darkgray; color: white; margin-left: 7%;"
+								onclick="SubmitAllData();">
+
 						</div>
+						<div class="modal-footer"></div>
+					</div>
+				</div>
+	</div>
+
+
+	</ul>
+	</nav>
+	<hr>
+	<table>
+		<thead>
+			<tr>
+				<th
+					style="text-align: center; width: 8%; color: #FFFFFF; background-color: #12a59c;">SNo.</th>
+				<th
+					style="text-align: center; color: #FFFFFF; background-color: #12a59c;">Name</th>
+				<th
+					style="text-align: center; color: #FFFFFF; background-color: #12a59c;">Package
+					Type</th>
+				<th
+					style="text-align: center; color: #FFFFFF; background-color: #12a59c;">No.
+					of Channels</th>
+				<th
+					style="text-align: center; color: #FFFFFF; background-color: #12a59c;">Package
+					Price</th>
+				<th
+					style="text-align: center; color: #FFFFFF; background-color: #12a59c;">Edit</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${PckgList}" var="list" varStatus="itr">
+
+				<tr>
+					<td style="text-align: center;">${offset + itr.index +1 }</td>
+					<td style="text-align: center;"><a href="#"
+						value="${list.pckgName}#${list.pckgType}#${list.noOfChannels}#${list.price}"
+						data-modal-id="popup2">${list.pckgName}</a></td>
+					<td style="text-align: center;">${list.pckgType}</td>
+					<td style="text-align: center;">${list.noOfChannels}</td>
+					<td style="text-align: center;">${list.price}</td>
+
+					<td style="text-align: center;"><button
+							onclick="deletefunction('${list.pckgID}');" class="btn">Delete</button></td>
+
+				</tr>
+
+			</c:forEach>
+
+
+		</tbody>
+	</table>
+	<!-- 	Popup Model -->
+
+	<div id="popup2" class="modal-box">
+		<header style="background-color: #3eb3b3;">
+			<a href="#" class="js-modal-close close">×</a>
+			<h3 id="pkgname" />
+
+
+		</header>
+		<div class="modal-body">
+			<p id="remark" />
+
+			<div class="container" style="margin-bottom: -95px;">
+
+
+
+
+				<div class="form-inline marginBottom" style="margin-top: -98px;">
+					<div class="md-form" style="margin-bottom: 20px;">
+						<label for="form1" class="" style="color: black;">Package
+							Price:</label> <input type="text" style="width: 70%; margin-left: 4%"
+							id="pkgprice" class="form-control input1">
+
+					</div>
+				</div>
+				<div class="form-inline marginBottom">
+					<div class="md-form" style="margin-bottom: 20px;">
+						<label for="form1" class="" style="color: black;">Add
+							Channel </label> <select style="width: 70%; margin-left: 6%"
+							id="pkgprice" class="form-control input1">
+							<option>1</option>
+							<option>1</option>
+							<option>1</option>
+							<option>1</option>
+							<option>1</option>
+
+						</select>
+
 					</div>
 				</div>
 
+				<table style="width: 94%">
+					<thead>
+						<tr>
+							<th
+								style="text-align: center; width: 80%; color: #FFFFFF; background-color: #12a59c;">Channel
+								Name</th>
+							<th
+								style="text-align: center; color: #FFFFFF; background-color: #12a59c;">Remove</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>hello 1</td>
+							<td>remove</td>
+						</tr>
+						<tr>
+							<td>hello 2</td>
+							<td>remove</td>
+						</tr>
 
-			</ul>
-		</nav>
-		<hr>
-		<table>
-			<thead>
-				<tr>
-					<th
-						style="text-align: center; width: 8%; color: #FFFFFF; background-color: #12a59c;">SNo.</th>
-					<th
-						style="text-align: center; color: #FFFFFF; background-color: #12a59c;">Name</th>
-					<th
-						style="text-align: center; color: #FFFFFF; background-color: #12a59c;">Package
-						Type</th>
-					<th
-						style="text-align: center; color: #FFFFFF; background-color: #12a59c;">No.
-						of Channels</th>
-					<th
-						style="text-align: center; color: #FFFFFF; background-color: #12a59c;">Package
-						Price</th>
-					<th
-						style="text-align: center; color: #FFFFFF; background-color: #12a59c;">Edit</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${PckgList}" var="list" varStatus="itr">
+					</tbody>
+				</table>
 
-					<tr>
-						<td style="text-align: center;">${offset + itr.index +1 }</td>
-						<td style="text-align: center;"><a href="#">${list.pckgName}</a></td>
-						<td style="text-align: center;">${list.pckgType}</td>
-						<td style="text-align: center;">${list.noOfChannels}</td>
-						<td style="text-align: center;">${list.price}</td>
+				<script>
+								$("#submit").click( function() {
+									var pkname = $("#pkgname").text();
+								    var msprice = $("#msoprice").val();
+								    var lcprice = $("#lcoprice").val();
+								    var channel_id = $("#chnlid").val();
+								   	var st =  $('select[name=selector]').val();
+								   
+								    $.ajax({  
+							            type : 'GET', 
+							            url: 'updateChannel.html',
+							            data: {
+							            	'pkgname': pkname,
+							            	'msoprice': msprice,
+							            	'lcoprice': lcprice,
+							            	'chnl_id': channel_id,
+							            	'user':  ${ user}
+							            },
+							            dataType: 'json',
+							       		cache: false,
+										beforeSend: function(xhr) 
+							                        {
+							                            xhr.setRequestHeader("Accept", "application/json");  
+							                            xhr.setRequestHeader("Content-Type", "application/json");  
+							                        },
+							         				success: function (data) {
+							         					 alert(data);
+							         					location.reload();
+						           						
+								          		    },
+										            error: function(e){
+										            	console.warn(e);
+										            	 alert(e);
+										            }
+							            
+							      		  });
+								   
+								});
+								
+									 	 
+						  </script>
 
-						<td style="text-align: center;"><a class="btn" href="#">Delete</a></td>
 
-					</tr>
+			</div>
 
-				</c:forEach>
+		</div>
+		<button class="btn" style="margin-left: 43%; margin-bottom: 18px;">Update</button>
+	</div>
 
-			</tbody>
-		</table>
-		<tag:paginate max="15" offset="${offset}" count="${count}"
-			uri="newPackage.html?user=${user}" next="&raquo;" previous="&laquo;" />
-		</main>
+
+
+	<!-- < Popup Model End -->
+	<script type="text/javascript">
+		function deletefunction(id){
+			var r = confirm("Do you Really want to Delete the Channel from the Database!");
+		    if (r == true){
+
+				  $.ajax({  
+			            type : 'GET', 
+			            url: 'deletePackage.html',
+			            data: {
+			            	'pak_id': id,
+			            	'user':  ${ user}
+			            },
+			            dataType: 'json',
+			       		cache: false,
+						beforeSend: function(xhr) 
+			                        {
+			                            xhr.setRequestHeader("Accept", "application/json");  
+			                            xhr.setRequestHeader("Content-Type", "application/json");  
+			                        },
+			         				success: function (data) {
+			         					 alert(data);
+			         					location.reload();
+		           						
+				          		    },
+						            error: function(e){
+						            	console.warn(e);
+						            	 alert(e);
+						            }
+			            
+			      		  });
+		    }else{
+		    	
+		    }
+			   
+			
+		}		 
+		
+		
+		</script>
+	<tag:paginate max="15" offset="${offset}" count="${count}"
+		uri="newPackage.html?user=${user}" next="&raquo;" previous="&laquo;" />
+	</main>
 	</div>
 	<div class="wrapper row4">
 		<footer id="footer" class="hoc clear">

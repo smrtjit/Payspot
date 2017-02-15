@@ -17,4 +17,9 @@ public class PackageDetailSercieImpl implements PackageDetailSercie {
 		return dao.add(obj);
 	}
 
+	@Override
+	public int delete(String id) {
+		return dao.delete(id);
+	}
+
 }

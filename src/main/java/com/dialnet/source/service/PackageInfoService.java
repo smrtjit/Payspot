@@ -13,4 +13,5 @@ public interface PackageInfoService {
 	public List<String> getAllPckgNames();
 	public PackageInfo getByName(String name);
 	public int add(PackageInfo pckg); 
+	public int delete(String id);
 }

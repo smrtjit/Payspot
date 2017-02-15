@@ -2,6 +2,8 @@ package com.dialnet.source.dao;
 
 import java.util.List;
 
+import org.hibernate.Transaction;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -27,16 +29,22 @@ public class LMUserDaoImpl implements LMUserDao {
 	private SessionFactory dao;
 
 	@Override
-	public void add(LMUser username) {
+	public void add(LMUser obj) {
 		Session sf = dao.openSession();
-		sf.save(username);
+		Transaction tx= sf.beginTransaction();
+		sf.save(obj);
+		tx.commit();
 		sf.close();
 	}
 
 	@Override
-	public void edit(LMUser username) {
-		// TODO Auto-generated method stub
-
+	public int edit(LMUser obj) {
+		Session sf = dao.openSession();
+		Transaction tx= sf.beginTransaction();
+		sf.delete(obj);
+		tx.commit();
+		sf.close();
+		return 1;
 	}
 
 	@Override
@@ -49,7 +57,7 @@ public class LMUserDaoImpl implements LMUserDao {
 	public LMUser get(String username) {
 		Session sf = dao.openSession();
 		Criteria c2 = sf.createCriteria(LMUser.class);
-		c2.add(Restrictions.eq("username", username));
+		c2.add(Restrictions.eq("username", Long.parseLong(username)));
 		//System.out.println("LMUser Id: " + username);
 		LMUser product = (LMUser) c2.uniqueResult();
 		// LCOUser product = (LCOUser) sf.get(LMUser.class,
