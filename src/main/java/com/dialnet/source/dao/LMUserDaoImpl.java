@@ -41,7 +41,7 @@ public class LMUserDaoImpl implements LMUserDao {
 	public int edit(LMUser obj) {
 		Session sf = dao.openSession();
 		Transaction tx= sf.beginTransaction();
-		sf.delete(obj);
+		sf.saveOrUpdate(obj);
 		tx.commit();
 		sf.close();
 		return 1;

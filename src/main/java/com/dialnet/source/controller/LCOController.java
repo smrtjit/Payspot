@@ -577,30 +577,25 @@ public class LCOController {
 		// return new ModelAndView(json);
 	}
 
-	@ResponseBody
-	@RequestMapping(value = "/updateLM", method = RequestMethod.GET)
-	public String updateLM(@ModelAttribute("userForm") LMUser sub, Model model, @RequestParam("user") String user) {
-		String result = null;
-		LMUser lm = lmuserservice.get(sub.getUsername() + "");
-		sub.setIdentity_proof(lm.getIdentity_proof());
-		sub.setAdd_proof(lm.getAdd_proof());
-		sub.setAdd_proof_image_Name(lm.getAdd_proof_image_Name());
-		sub.setAdd_proof_type(lm.getAdd_proof_type());
-		sub.setIdentity_proof_image_name(lm.getIdentity_proof_image_name());
-		sub.setIdentity_proof_type(lm.getIdentity_proof_type());
-		sub.setLco_id(lm.getLco_id());
-		sub.setTrnadate(lm.getTrnadate());
-		int i = lmuserservice.edit(sub);
-		if (i == 1) {
-			result = "Detail Updated Successfully!!!";
-		} else {
-			result = "There may be Some Error Please Try Again";
-		}
-		Gson gson = new Gson();
-		String json = gson.toJson(result);
-		model.addAttribute("user", user);
-		return json;
-		//
+	@RequestMapping(value = "/updateLM", method = RequestMethod.POST)
+	public ModelAndView updateLM(@ModelAttribute("userForm") LMUser sub, ModelMap model, @RequestParam("user") String user
+	, @RequestParam("lmID") String lmid) {
+	String result = null;
+	System.out.println("updateLM User: "+user+",LMID: "+lmid);
+	LMUser lm = lmuserservice.get(lmid);
+	sub.setUsername(Long.parseLong(lmid));
+	sub.setIdentity_proof(lm.getIdentity_proof());
+	sub.setAdd_proof(lm.getAdd_proof());
+	sub.setAdd_proof_image_Name(lm.getAdd_proof_image_Name());
+	sub.setAdd_proof_type(lm.getAdd_proof_type());
+	sub.setIdentity_proof_image_name(lm.getIdentity_proof_image_name());
+	sub.setIdentity_proof_type(lm.getIdentity_proof_type());
+	sub.setLco_id(lm.getLco_id());
+	sub.setTrnadate(lm.getTrnadate());
+	int i = lmuserservice.edit(sub);
+	model.addAttribute("user", user);
+	return new ModelAndView("redirect:allLM.html",model);
+	//
 	}
 
 	@ResponseBody

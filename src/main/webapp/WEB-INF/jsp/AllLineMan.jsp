@@ -386,7 +386,7 @@ var appendthis =  ("<div class='modal-overlay js-modal-close'></div>");
 		<div class="modal-body" style="padding-left: 0; padding: 0px;">
 			<div class='panel panel-primary dialog-panel'>
 				<div class='panel-body'>
-					<form:form action="updateLM.html?user=${user}" method="post" modelAttribute="userForm" class='form-horizontal' role='form'>
+					<form:form action="updateLM.html" method="post" modelAttribute="userForm" class='form-horizontal' role='form'>
 							<input type="hidden" name="user" value="${user}"/>
 							<input type="hidden" name="lmID" id="lmid"/>
 						<div class='form-group' style="margin-left: -200px;">
