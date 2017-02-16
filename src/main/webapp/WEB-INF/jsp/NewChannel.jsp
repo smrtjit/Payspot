@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -57,7 +56,6 @@ select {
 	margin-left: 350px;
 	widows: 100%;
 }
-
 /* ////////////////////////////////////////////////////////////////////////////////////// */
 .v-center {
 	height: 100vh;
@@ -86,7 +84,6 @@ select {
 	border: 1px solid rgba(0, 0, 0, 0.1);
 	background-clip: padding-box;
 }
-
 /* @media ( min-width : 32em) { */
 /* 	.modal-box { */
 /* 		width: 30%; */
@@ -192,9 +189,7 @@ a.close:hover {
 
 <script>
 				$(function(){
-
 					var appendthis =  ("<div class='modal-overlay js-modal-close'></div>");
-
 						$('a[data-modal-id]').click(function(e) {
 							var url = $(this).attr('value');
 // 							document.getElementById("demo").innerHTML ="Complaint Number: "+url;
@@ -203,16 +198,14 @@ a.close:hover {
 							 var packname =  fields[0];;
 							 var mso_price = fields[1];
 							 var  lco_price= fields[2];
-							
+							 var  channel_id= fields[3];
 						
 							
 							document.getElementById('pkgname').innerHTML=packname;
 							document.getElementById('msoprice').value=mso_price;
 							document.getElementById('lcoprice').value=lco_price;
-							
-							alert(lco_price);
-							
-						
+							document.getElementById('chnlid').value=channel_id;
+									
 													
 							//alert(url);
 						e.preventDefault();
@@ -242,12 +235,7 @@ a.close:hover {
  
 				});
 				</script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('.multiselect').multiselect();
-		$('.datepicker').datepicker();
-	});
-</script>
+
 </head>
 <body id="top">
 	<div class="wrapper row1">
@@ -304,15 +292,12 @@ a.close:hover {
 					onchange="example()" id="filename" /><br>
 				<script>
 					var chk = function example() {
-
 						var _validFileExtensions = [ ".xls" ];
 						var arrInputs = document.getElementsByTagName("input");
-
 						for (var i = 0; i < arrInputs.length; i++) {
 							var oInput = arrInputs[i];
 							if (oInput.type == "file") {
 								var sFileName = oInput.value;
-
 								if (sFileName.length > 0) {
 									var blnValid = false;
 									for (var j = 0; j < _validFileExtensions.length; j++) {
@@ -324,7 +309,6 @@ a.close:hover {
 												.toLowerCase() == sCurExtension
 												.toLowerCase()) {
 											blnValid = true;
-
 											break;
 										}
 									}
@@ -340,9 +324,7 @@ a.close:hover {
 							}
 						}
 						return true;
-
 					}
-
 					function checkValue(data) {
 						if (data == null || data == "") {
 							alert('Please select the File First!!!');
@@ -385,16 +367,18 @@ a.close:hover {
 				<c:forEach items="${ChannelList}" var="bill" varStatus="itr">
 
 					<tr>
+
 						<td>${offset + itr.index +1 }</td>
 						<td><a href="#"
-							value="${bill.channel_name }#${bill.mso_price}#${bill.lco_price}"
+							value="${bill.channel_name }#${bill.mso_price}#${bill.lco_price}#${bill.channel_id}"
 							data-modal-id="popup2">${bill.channel_name}</a></td>
 
 
 						<td>${bill.mso_price}</td>
 						<td>${bill.lco_price}</td>
 						<td>${bill.updated_on}</td>
-						<td style="text-align: center;"><a class="btn" href="#">Delete</a></td>
+						<td style="text-align: center;"><button
+								onclick="deletefunction('${bill.channel_id}');" class="btn">Delete</button></td>
 
 					</tr>
 
@@ -458,22 +442,27 @@ a.close:hover {
 
 					</div>
 				</div>
-
-				<br>
-				<input value="Submit!" type="submit" id="submit"  class="btn-primary btn btn-block" 
+				<input type="hidden" id="chnlid"> <br> <input
+					value="Submit!" type="submit" id="submit"
+					class="btn-primary btn btn-block"
 					style="margin-top: 7%; margin-bottom: -26%;">
+
 				<script>
 								$("#submit").click( function() {
-									var id = $("#id1").text();
-								    var rem = $("#crem").val();
-								    var st =  $('select[name=selector]').val();
+									var pkname = $("#pkgname").text();
+								    var msprice = $("#msoprice").val();
+								    var lcprice = $("#lcoprice").val();
+								    var channel_id = $("#chnlid").val();
+								   	var st =  $('select[name=selector]').val();
+								   
 								    $.ajax({  
 							            type : 'GET', 
-							            url: 'updateCompLCO.html',
+							            url: 'updateChannel.html',
 							            data: {
-							            	'id': id,
-							            	'remark': rem,
-							            	'status': st,
+							            	'pkgname': pkname,
+							            	'msoprice': msprice,
+							            	'lcoprice': lcprice,
+							            	'chnl_id': channel_id,
 							            	'user':  ${ user}
 							            },
 							            dataType: 'json',
@@ -485,18 +474,53 @@ a.close:hover {
 							                        },
 							         				success: function (data) {
 							         					 alert(data);
-							         					 $(".modal-overlay").remove();
+							         					location.reload();
 						           						
-								            },
-								            error: function(e){
-								            	
-								            }
+								          		    },
+										            error: function(e){
+										            	console.warn(e);
+										            	 alert(e);
+										            }
 							            
-							        });
+							      		  });
 								   
 								});
 								
-											 	 
+									function deletefunction(id){
+										var r = confirm("Do you Really want to Delete the Channel from the Database!");
+									    if (r == true){
+									    	$.ajax({  
+									            type : 'GET', 
+									            url: 'deleteChannel.html',
+									            data: {
+									            	'chnl_id': id,
+									            	'user':  ${ user}
+									            },
+									            dataType: 'json',
+									       		cache: false,
+												beforeSend: function(xhr) 
+									                        {
+									                            xhr.setRequestHeader("Accept", "application/json");  
+									                            xhr.setRequestHeader("Content-Type", "application/json");  
+									                        },
+									         				success: function (data) {
+									         					 alert(data);
+									         					location.reload();
+								           						
+										          		    },
+												            error: function(e){
+												            	console.warn(e);
+												            	 alert(e);
+												            }
+									            
+									      		  });
+										   
+									    }else{
+									    	
+									    }
+										  
+										
+									}		 	 
 						  </script>
 
 
@@ -584,12 +608,9 @@ a.close:hover {
 									alert(data);
 								},
 								error : function(e) {
-
 								}
-
 							});
 						}
-
 						function onDropDownChange() {
 							var reg = new RegExp('^[0-9]+$');
 							var chn = document.getElementById("channel").value;
@@ -608,7 +629,6 @@ a.close:hover {
 								alert("The Price must be Numeric");
 								flag = "false";
 							}
-
 							if (lco === "") {
 								alert("please Enter the LCO Price!!");
 								flag = "false";
@@ -616,7 +636,6 @@ a.close:hover {
 								alert("The Price must be Numeric");
 								flag = "false";
 							}
-
 							if (flag === "true") {
 								$.ajax({
 									url : 'addSingleChn.html',
@@ -637,7 +656,6 @@ a.close:hover {
 									}
 								});
 							}
-
 						}
 					</script>
 
@@ -715,7 +733,6 @@ a.close:hover {
 			<!-- ################################################################################################ -->
 		</div>
 	</div>
-	<!-- ################################################################################################ -->
 	<!-- ################################################################################################ -->
 	<!-- ################################################################################################ -->
 	<a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>

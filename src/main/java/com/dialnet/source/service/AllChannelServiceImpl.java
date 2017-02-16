@@ -38,5 +38,14 @@ public class AllChannelServiceImpl implements AllChannelService {
 		// TODO Auto-generated method stub
 		return dao.getAllName(lco);
 	}
+	public int delete(String channel_id){
+		return dao.delete(channel_id);
+	}
+
+	@Override
+	public int channelupdate(String channelid, String channelname, String msoprice, String lcoprice) {
+		// TODO Auto-generated method stub
+		return dao.channelupdate(channelid, channelname, msoprice, lcoprice);
+	}
 
 }

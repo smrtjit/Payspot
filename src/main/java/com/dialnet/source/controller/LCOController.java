@@ -578,25 +578,79 @@ public class LCOController {
 	}
 
 	@RequestMapping(value = "/updateLM", method = RequestMethod.POST)
-	public ModelAndView updateLM(@ModelAttribute("userForm") LMUser sub, ModelMap model, @RequestParam("user") String user
-	, @RequestParam("lmID") String lmid) {
-	String result = null;
-	System.out.println("updateLM User: "+user+",LMID: "+lmid);
-	LMUser lm = lmuserservice.get(lmid);
-	sub.setUsername(Long.parseLong(lmid));
-	sub.setIdentity_proof(lm.getIdentity_proof());
-	sub.setAdd_proof(lm.getAdd_proof());
-	sub.setAdd_proof_image_Name(lm.getAdd_proof_image_Name());
-	sub.setAdd_proof_type(lm.getAdd_proof_type());
-	sub.setIdentity_proof_image_name(lm.getIdentity_proof_image_name());
-	sub.setIdentity_proof_type(lm.getIdentity_proof_type());
-	sub.setLco_id(lm.getLco_id());
-	sub.setTrnadate(lm.getTrnadate());
-	int i = lmuserservice.edit(sub);
-	model.addAttribute("user", user);
-	return new ModelAndView("redirect:allLM.html",model);
-	//
+	public ModelAndView updateLM(@ModelAttribute("userForm") LMUser sub, ModelMap model,
+			@RequestParam("user") String user, @RequestParam("lmID") String lmid) {
+		String result = null;
+		System.out.println("updateLM User: " + user + ",LMID: " + lmid);
+		LMUser lm = lmuserservice.get(lmid);
+		sub.setUsername(Long.parseLong(lmid));
+		sub.setIdentity_proof(lm.getIdentity_proof());
+		sub.setAdd_proof(lm.getAdd_proof());
+		sub.setAdd_proof_image_Name(lm.getAdd_proof_image_Name());
+		sub.setAdd_proof_type(lm.getAdd_proof_type());
+		sub.setIdentity_proof_image_name(lm.getIdentity_proof_image_name());
+		sub.setIdentity_proof_type(lm.getIdentity_proof_type());
+		sub.setLco_id(lm.getLco_id());
+		sub.setTrnadate(lm.getTrnadate());
+		int i = lmuserservice.edit(sub);
+		model.addAttribute("user", user);
+		return new ModelAndView("redirect:allLM.html", model);
+		//
 	}
+	
+	
+	@ResponseBody
+		@RequestMapping(value = "/updateChannel", method = RequestMethod.GET)
+		public String updateChannel(ModelMap map, @RequestParam("user") String user,
+				@RequestParam("pkgname") String pkgname, @RequestParam("msoprice") String msoprice,
+				@RequestParam("lcoprice") String lcoprice, @RequestParam("chnl_id") String chnl_id, Integer offset,
+				Integer maxResults) {
+			System.out.println("-" + msoprice + "--------" + lcoprice + "------5555555555555--" + pkgname + "--------------"
+					+ chnl_id);
+			int val = channelService.channelupdate(chnl_id, pkgname, msoprice, lcoprice);
+			map.addAttribute("user", user);
+			List<AllChannels> l = channelService.getListByLCO(user, offset, maxResults);
+			map.addAttribute("count", channelService.count(user));
+			map.addAttribute("offset", offset);
+			map.addAttribute("ChannelList", l);
+			System.out.println("****Channel Secuessfully Update****");
+			String result = null;
+			if (val > 0) {
+				result = "Data Updated Successfully";
+			} else {
+				result = "There is some Error Please Try again";
+			}
+			Gson gson = new Gson();
+			String json = gson.toJson(result);
+			map.addAttribute("user", user);
+		return json;
+		}
+	
+	@ResponseBody
+		@RequestMapping(value = "/deleteChannel", method = RequestMethod.GET)
+		public String deleteChannel(ModelMap map, @RequestParam("user") String user,
+				@RequestParam("chnl_id") String chnl_id, Integer offset, Integer maxResults) {
+	
+			System.out.println("Welcome to Delete Controller parts");
+		List<AllChannels> l = channelService.getListByLCO(user, offset, maxResults);
+			String result = null;
+			System.out.println("chnl_id\t" + chnl_id);
+			int val = channelService.delete(chnl_id);
+			if (val > 0) {
+				result = "Data Successfully Delete";
+			} else {
+				result = "There is some Error Please Try again";
+			}
+	
+			Gson gson = new Gson();
+		String json = gson.toJson(result);
+			map.addAttribute("count", channelService.count(user));
+			map.addAttribute("offset", offset);
+			map.addAttribute("ChannelList", l);
+			map.addAttribute("user", user);
+			return json;
+		// return new ModelAndView(json);
+		}
 
 	@ResponseBody
 	@RequestMapping(value = "/deletePackage", method = RequestMethod.GET)

@@ -719,7 +719,7 @@ a.close:hover {
 	<!-- < Popup Model End -->
 	<script type="text/javascript">
 		function deletefunction(id){
-			var r = confirm("Do you Really want to Delete the Channel from the Database!");
+			var r = confirm("Do you Really want to Delete the Package from the Database!");
 		    if (r == true){
 
 				  $.ajax({  
