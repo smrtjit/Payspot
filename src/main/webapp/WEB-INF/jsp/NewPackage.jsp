@@ -206,6 +206,7 @@ a.close:hover {
 	});
 </script>
 <script>
+var  pckgid=null;
 				$(function(){
 
 					var appendthis =  ("<div class='modal-overlay js-modal-close'></div>");
@@ -219,13 +220,44 @@ a.close:hover {
 							 var pak_type = fields[1];
 							 var  no_of_channel= fields[2];
 							 var  pak_price= fields[3];
-						
+							   pckgid= fields[4];
+							 $.ajax({  
+						            type : 'GET', 
+						            url: 'getChannelList.html',
+					         data: {
+						            	
+						            	"user":  ${user},
+						            	"pckgId": pckgid,
+						            	
+					         },
+						            dataType: 'json',
+						       		cache: false,
+									beforeSend: function(xhr) 
+					         {
+					                   xhr.setRequestHeader("Accept", "application/json");  
+					               xhr.setRequestHeader("Content-Type", "application/json");  
+					             },
+					  			success: function (json) {
+					  			   //alert(json);
+					  			 var tr;
+					  			        for (var i = 0; i < json.length; i++) {
+					  			            tr = $('<tr/>');
+					  			            tr.append("<td>" + json[i] + "</td>");
+					  			            tr.append("<td> <input type='button' value='Remove' onclick='deleteRowTable(this)'/> </td>");
+					  			            $('#chnListTable').append(tr);
+					  			        }
+					  			   
+					  			 
+					            },
+							         error: function(e){
+							     }
+							 });
 							
 							document.getElementById('pkgname').innerHTML=packname;
 							document.getElementById('pkgprice').value=pak_price;
 									
 													
-							alert(url);
+							
 						e.preventDefault();
   						  $("body").append(appendthis);
    						 $(".modal-overlay").fadeTo(500, 0.7);
@@ -252,6 +284,91 @@ a.close:hover {
 				$(window).resize();
  
 				});
+				
+				
+				function deleteRowTable(r) {
+				    var i = r.parentNode.parentNode.rowIndex;
+				    document.getElementById("chnListTable").deleteRow(i);
+				}
+				
+				
+				function addRowTable(data){
+					var flag="true";
+					$('#chnListTable tr td:nth-child(1)').each( function() {
+					       // alert($(this).text());
+					        if($(this).text()==data){
+					        	flag="false";
+					        }
+					    });
+					//alert(data+","+flag);
+					if(flag=="true"){
+					tr = $('<tr/>');
+			            tr.append("<td>" + data + "</td>");
+			            tr.append("<td> <input type='button' value='Remove' onclick='deleteRowTable(this)'/> </td>");
+			            $('#chnListTable').append(tr);
+				}else{
+					alert("This Channel is Already Present in The Package List");
+				}
+				}
+				
+				
+				
+				function updatePackage(){
+					var flag="false";
+				    var allChn="";
+					$('#chnListTable tr td:nth-child(1)').each( function() {
+					        //alert($(this).text());
+					        allChn=allChn+ $(this).text()+",";
+					    });
+						var tmp = allChn.split(",");
+						 //alert("tmp: "+tmp);
+						 var fList="";
+						 for (i = 0; i < tmp.length; i++) {
+							 fList= fList+tmp[i]+",";
+							}
+						 
+						 fList=fList.substring(0,fList.length-2);
+						 
+					//var id=document.getElementById("pkgname").getAttribute('value');;
+					var price=document.getElementById("pkgprice").value;
+					
+// 					 if(price==""){
+// 						alert("please Provide the Package Price");
+// 					}else if(flist==""){
+// 						alert("The Channel List must contain minimum 1 Channle");
+// 					}else{
+// 						flag="true";
+// 					}
+					 alert("id: "+pckgid+","+price+"flag: "+flag);
+					 if(flag=="flase"){
+						 alert(id+",price: "+price+",flist: "+flist);
+						 $.ajax({  
+					            type : 'GET', 
+					            url: 'updatePckg.html',
+				         data: {
+					            	
+					            	"user":  ${user},
+					            	"pckg": pckgid,
+					            	"price": price,
+					            	"chnlist": fList
+				         },
+					            dataType: 'json',
+					       		cache: false,
+								beforeSend: function(xhr) 
+				         {
+				                   xhr.setRequestHeader("Accept", "application/json");  
+				               xhr.setRequestHeader("Content-Type", "application/json");  
+				             },
+				  			success: function (data) {
+				  			   alert(data);
+				  			 location.reload();
+				            },
+						         error: function(e){
+						     }
+						 });
+					 }
+					
+				}
 				</script>
 
 <!-- ##########################################For Dynamic Table############################################################################ -->
@@ -301,7 +418,7 @@ a.close:hover {
 	}
 
 	function deleteRow(tableID) {
-		alert("hello");
+		//alert("hello");
 		try {
 			var table = document.getElementById(tableID);
 			var rowCount = table.rows.length;
@@ -585,7 +702,7 @@ a.close:hover {
 				<tr>
 					<td style="text-align: center;">${offset + itr.index +1 }</td>
 					<td style="text-align: center;"><a href="#"
-						value="${list.pckgName}#${list.pckgType}#${list.noOfChannels}#${list.price}"
+						value="${list.pckgName}#${list.pckgType}#${list.noOfChannels}#${list.price}#${list.pckgID}"
 						data-modal-id="popup2">${list.pckgName}</a></td>
 					<td style="text-align: center;">${list.pckgType}</td>
 					<td style="text-align: center;">${list.noOfChannels}</td>
@@ -610,15 +727,10 @@ a.close:hover {
 
 
 		</header>
-		<div class="modal-body">
-			<p id="remark" />
+	
 
-			<div class="container" style="margin-bottom: -95px;">
-
-
-
-
-				<div class="form-inline marginBottom" style="margin-top: -98px;">
+			<div class="container" style="margin-bottom: -95px;margin-top: 30px;">
+<div class="form-inline marginBottom" style="margin-top: -98px;">
 					<div class="md-form" style="margin-bottom: 20px;">
 						<label for="form1" class="" style="color: black;">Package
 							Price:</label> <input type="text" style="width: 70%; margin-left: 4%"
@@ -627,44 +739,35 @@ a.close:hover {
 					</div>
 				</div>
 				<div class="form-inline marginBottom">
-					<div class="md-form" style="margin-bottom: 20px;">
-						<label for="form1" class="" style="color: black;">Add
-							Channel </label> <select style="width: 70%; margin-left: 6%"
-							id="pkgprice" class="form-control input1">
-							<option>1</option>
-							<option>1</option>
-							<option>1</option>
-							<option>1</option>
-							<option>1</option>
-
-						</select>
-
-					</div>
+					<form:form method="get" modelAttribute="PckgInfo">
+						<div class="md-form" style="margin-bottom: 20px;">
+							<label for="form1" class="" style="color: black;">Add
+								Channel </label>
+							<form:select path="NoOfChannels"
+								style="width: 70%; margin-left: 6%" id="pkgprice"
+								onchange="addRowTable(this.value);" class="form-control input1">
+								<form:option value="NONE" label="Select Channel" />
+								<form:options items="${ChnList}" />
+							</form:select>
+						</div>
+					</form:form>
 				</div>
+				<div style='overflow: scroll; height: 170px;'>
+					<table style="width: 94%" id="chnListTable">
+						<thead>
+							<tr>
+								<th
+									style="text-align: center; width: 80%; color: #FFFFFF; background-color: #12a59c;">Channel
+									Name</th>
+								<th
+									style="text-align: center; color: #FFFFFF; background-color: #12a59c;">Remove</th>
+							</tr>
+						</thead>
+						<tbody>
 
-				<table style="width: 94%">
-					<thead>
-						<tr>
-							<th
-								style="text-align: center; width: 80%; color: #FFFFFF; background-color: #12a59c;">Channel
-								Name</th>
-							<th
-								style="text-align: center; color: #FFFFFF; background-color: #12a59c;">Remove</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>hello 1</td>
-							<td>remove</td>
-						</tr>
-						<tr>
-							<td>hello 2</td>
-							<td>remove</td>
-						</tr>
-
-					</tbody>
-				</table>
-
+						</tbody>
+					</table>
+				</div>
 				<script>
 								$("#submit").click( function() {
 									var pkname = $("#pkgname").text();
@@ -710,8 +813,7 @@ a.close:hover {
 
 			</div>
 
-		</div>
-		<button class="btn" style="margin-left: 43%; margin-bottom: 18px;">Update</button>
+		<button onclick="updatePackage();" class="btn" style="margin-left: 43%; margin-bottom: 18px;">Update</button>
 	</div>
 
 

@@ -57,7 +57,7 @@
 				<value>com.dialnet.source.model.LCOUser</value>
 				<value>com.dialnet.source.model.AllCollections</value>
 				<value>com.dialnet.source.model.STBStock</value>
-				<value>com.dialnet.source.model.VCStock</value>
+				<value>com.dialnet.source.model.Citys</value>
 				<value>com.dialnet.source.model.Cust_Invoice</value>
 				<value>com.dialnet.source.model.TaxInformation</value>
 				<value>com.dialnet.source.model.Customer_Invoice1</value>
@@ -71,7 +71,7 @@
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
+<!-- 				<prop key="hibernate.hbm2ddl.auto">update</prop> -->
 				 <prop key="hibernate.c3p0.timeout">100</prop>
 				 <prop key="hibernate.c3p0.min_size">5</prop>
 				<prop key="hibernate.c3p0.max_size">10</prop>

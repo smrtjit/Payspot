@@ -142,8 +142,13 @@ label.control-label {
 					<h4>Create New Line Man</h4>
 				</div>
 				<div class='panel-body'>
-				<form:form action="addLMUser.html" method="get" class='form-horizontal' role='form'
+					<form:form action="addLMUser.html" method="get" name="myForm"
+						onsubmit="uploadImage();" class='form-horizontal' role='form'
 						commandName="LMUSER" autocomplete="off">
+
+						<form:hidden path="identity_proof_image_name" id="id_image" />
+						<form:hidden path="add_proof_image_Name" id="add_image" />
+
 						<input type="hidden" name="user" value="${user }" />
 						<div class='form-group' style="margin-left: -200px;">
 							<label class='control-label col-md-2 col-md-offset-2'
@@ -151,23 +156,44 @@ label.control-label {
 							<div class='col-md-8'>
 								<div class='col-md-3'>
 									<div class='form-group internal'>
-									<form:input path="firstName" placeholder='First Name' required="required" class='form-control'/>
+										<form:input path="firstName" placeholder='First Name'
+										name="fname"	required="required" class='form-control'
+										 pattern=".{5,}" maxlength="25" onkeypress="return onlyAlphabets(event,this)"  />
 										
 									</div>
 								</div>
+								<script type="text/javascript">
+								function onlyAlphabets(e, t) {
+						            try {
+						                if (window.event) {
+						                    var charCode = window.event.keyCode;
+						                }
+						                else if (e) {
+						                    var charCode = e.which;
+						                }
+						                else { return true; }
+						                if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+						                	 return true;
+						                else
+						                    return false;
+						            }
+						            catch (err) {
+						                alert(err.Description);
+						            }
+						        }
+								</script>
 								<div class='col-md-3 indent-small'>
 									<div class='form-group internal'>
-									<form:input path="middlename" placeholder='Middle Name' required="required" class='form-control'/>
-<!-- 										<input class='form-control' id='id_middle_name' -->
-<!-- 											placeholder='Middle Name' type='text'> -->
-									</div>
+										<form:input path="middlename" placeholder='Middle Name'
+											class='form-control' />
+										</div>
 								</div>
 								<div class='col-md-3 indent-small'>
 									<div class='form-group internal'>
-									<form:input path="lastName" placeholder='Last Name' required="required" class='form-control'/>
-<!-- 										<input required class='form-control' id='id_last_name' -->
-<!-- 											placeholder='Last Name' type='text'> -->
-									</div>
+										<form:input path="lastName" placeholder='Last Name'
+										name="lname"	required="required" class='form-control'
+										 pattern=".{5,}" maxlength="25" onkeypress="return onlyAlphabets(event,this)"  />
+										</div>
 								</div>
 
 							</div>
@@ -178,16 +204,19 @@ label.control-label {
 							<div class='col-md-8'>
 								<div class='col-md-3'>
 									<div class='form-group internal'>
-									<form:input path="mobile" placeholder='Mobile Number' required="required" class='form-control'/>
-<!-- 										<input required="required " class='form-control' -->
-<!-- 											id='mobile_no' placeholder='Mobile Number' type='text'> -->
+										<form:input path="mobile" placeholder='Mobile Number' name="mobileno"
+											required="required" class='form-control'
+											title="MINIMUM SIZE" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+											 pattern=".{10,}" maxlength="12" />
 									</div>
 								</div>
 								<div class='col-md-6 indent-small' style="width: 50.5%;">
 									<div class='form-group internal'>
-									<form:input path="email_id" placeholder='Email ID' required="required" class='form-control'/>
-<!-- 										<input required="required " class='form-control' id='email_id' -->
-<!-- 											placeholder='Email ID' type='text'> -->
+										<form:input path="email_id" placeholder='Email ID' name="EMail"
+											required="required" class='form-control'
+											pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" />
+										<!-- 										<input required="required " class='form-control' id='email_id' -->
+										<!-- 											placeholder='Email ID' type='text'> -->
 									</div>
 								</div>
 
@@ -201,28 +230,62 @@ label.control-label {
 							<div class='col-md-8'>
 								<div class='col-md-3'>
 									<div class='form-group internal'>
-										<select required="required " class="form-control "
-											id="id_title ">
-											<option>Select Type</option>
-											<option>Ms</option>
-											<option>Mrs</option>
-											<option>Miss</option>
-											<option>Dr</option>
-										</select>
+										<form:select name="identyproof" required="true"
+											path="identity_proof_type" class="form-control">
+											<form:option value="">Select Type</form:option>
+											<form:options items="${profftype}" />
+										</form:select>
 									</div>
 								</div>
 								<div class='col-md-3 indent-small'>
 									<div class='form-group internal'>
-										<form:input path="identity_proof" placeholder='ID Number' required="required" class='form-control'/>
-<!-- 										<input required="required " class='form-control' id='crf_no' -->
-<!-- 											placeholder=' ID Number' type='text'> -->
+										<form:input path="identity_proof" placeholder='ID Number'
+											required="required" class='form-control'
+											title="MINIMUM SIZE" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+											 pattern=".{6,}" maxlength="16"  />
+
 									</div>
 								</div>
 								<div class='col-md-3 indent-small'>
 									<div class='form-group internal'>
-<%-- 										<form:input path="firstName" placeholder='GST Number' required="required" class='form-control'/> --%>
-										<input required class='form-control' id='gst_no'
-											name='PhotoID' type='File'>
+										<input type="file" name="uploadimage" id="myFile"
+											required="required" multiple="" size="50"
+											onchange="myFunction()" class="form-control"
+											placeholder="Upload file">
+										<script>
+											function myFunction(){
+										    var x = document.getElementById("myFile");
+										    var x1 = document.getElementById("myFile").value;
+										    var tmp=x1.split("\\");
+										    var filename=tmp[tmp.length-1];
+										    alert(filename);
+										    document.getElementById('id_image').value=filename;
+										    var formData = new FormData();
+										    formData.append('uploadimage', $('input[type=file]')[0].files[0]);
+										    var txt = "";
+										    if ('files' in x) {
+										        if (x.files.length == 0) {
+										         } else {
+										        	 var file;
+										        	  for (var i = 0; i < x.files.length; i++) {
+										               file = x.files[i];
+										    			
+										            }
+										        	  
+										        }
+										    } 
+										    else {
+										        if (x.value == "") {
+										            txt += "Select one or more files.";
+										        } else {
+										            txt += "The files property is not supported by your browser!";
+										            txt  += "<br>The path of the selected file: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead. 
+										        }
+										    }
+										    document.getElementById("demo").innerHTML = txt;
+										}
+										
+										</script>
 									</div>
 								</div>
 
@@ -235,28 +298,101 @@ label.control-label {
 							<div class='col-md-8'>
 								<div class='col-md-3'>
 									<div class='form-group internal'>
-										<select required="required " class="form-control "
-											id="id_title ">
-											<option>Select Type</option>
-											<option>Ms</option>
-											<option>Mrs</option>
-											<option>Miss</option>
-											<option>Dr</option>
-										</select>
+										<form:select name="addproftype" required="true"
+											path="add_proof_type" class="form-control">
+											<form:option value="">Select Type</form:option>
+											<form:options items="${profftype}" />
+										</form:select>
 									</div>
 								</div>
 								<div class='col-md-3 indent-small'>
 									<div class='form-group internal'>
-									<form:input path="add_proof" placeholder='ID Number' required="required" class='form-control'/>
-<!-- 										<input required="required " class='form-control' id='crf_no' -->
-<!-- 											placeholder=' ID Number' type='text'> -->
+										<form:input path="add_proof" placeholder='ID Number'
+											required="required" class='form-control'
+											title="MINIMUM SIZE" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+											 pattern=".{6,}" maxlength="16"  />
+										<!-- 										<input required="required " class='form-control' id='crf_no' -->
+										<!-- 											placeholder=' ID Number' type='text'> -->
 									</div>
 								</div>
 								<div class='col-md-3 indent-small'>
 									<div class='form-group internal'>
-<%-- 									<form:input path="firstName" placeholder='GST Number' required="required" class='form-control'/> --%>
-										<input required="required " name="PhotoId" class='form-control' id='gst_no'
-											 type='File'>
+										<input type="file" name="uploadimage1" id="myFile1"
+											required="required" multiple="" size="50"
+											onchange="myFunction1()" class="form-control"
+											placeholder="Upload file">
+										<script>
+											function myFunction1(){
+										    var x = document.getElementById("myFile1");
+										    var x1 = document.getElementById("myFile1").value;
+										    var tmp=x1.split("\\");
+										    var filename=tmp[tmp.length-1];
+										    document.getElementById('add_image').value=filename;
+										    var formData = new FormData();
+										    formData.append('uploadimage1', $('input[type=file]')[0].files[0]);
+										    var txt = "";
+										    if ('files' in x) {
+										        if (x.files.length == 0) {
+										         } else {
+										        	 var file;
+										        	  for (var i = 0; i < x.files.length; i++) {
+										               file = x.files[i];
+										    			
+										            }
+										        	  
+										        }
+										    } 
+										    else {
+										        if (x.value == "") {
+										            txt += "Select one or more files.";
+										        } else {
+										            txt += "The files property is not supported by your browser!";
+										            txt  += "<br>The path of the selected file: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead. 
+										        }
+										    }
+										    document.getElementById("demo").innerHTML = txt;
+										}
+											
+										function uploadImage(){
+											 var formData = new FormData();
+											    formData.append('uploadimage', $('input[type=file]')[0].files[0]);
+											 $.ajax({
+								                    url : 'imageupload.html?user=1111',
+								                    data : formData,
+								                    enctype: 'multipart/form-data',
+							
+								                    processData : false,
+								                    contentType : false,
+								                    type : 'POST',
+								                    success : function(data) {
+								                    },
+								                    error : function(err) {
+								                        alert(err);
+								                    }
+								                });
+											 
+											 
+											 var formData1 = new FormData();
+											 var fileInputElement = document.getElementById("myFile1");
+											  formData1.append("uploadimage", fileInputElement.files[0]);
+											   // formData1.append('uploadimage', document.getElementById('uploadimage1')[0].files[0]);
+											 $.ajax({
+								                    url : 'imageupload.html?user=1111',
+								                    data : formData1,
+								                    enctype: 'multipart/form-data',
+							
+								                    processData : false,
+								                    contentType : false,
+								                    type : 'POST',
+								                    success : function(data) {
+								                    },
+								                    error : function(err) {
+								                        alert(err);
+								                    }
+								                });
+											
+										}	
+										</script>
 									</div>
 								</div>
 
@@ -269,7 +405,8 @@ label.control-label {
 								<div class='form-group'>
 									<div class='col-md-9' style="width: 72%;">
 
-										<form:input path="Address" placeholder='Address' required="required" class='form-control'/>
+										<form:input path="Address" placeholder='Address'
+											required="required" class='form-control' />
 									</div>
 								</div>
 
@@ -284,58 +421,110 @@ label.control-label {
 							<div class='col-md-8'>
 								<div class='col-md-3'>
 									<div class='form-group internal'>
-										<select class="form-control " id="id_title ">
-											<option>Select State</option>
-											<option value=" ">Andaman and Nicobar Islands</option>
-											<option value=" ">Andhra Pradesh</option>
-											<option value=" ">Arunachal Pradesh</option>
-											<option value=" ">Assam</option>
-											<option value=" ">Bihar</option>
-											<option value=" ">Chhattisgarh</option>
-											<option value=" ">Chandigarh</option>
-											<option value=" ">Dadra and Nagar Haveli</option>
-											<option value=" ">Daman and Diu</option>
-											<option value=" ">Delhi</option>
-											<option value=" ">Goa</option>
-											<option value=" ">Gujarat</option>
-											<option value=" ">Haryana</option>
-											<option value=" ">Himachal Pradesh</option>
-											<option value=" ">Jammu & Kashmir</option>
-											<option value=" ">Jharkhand</option>
-											<option value=" ">Karnataka</option>
-											<option value=" ">Kerala</option>
-											<option value=" ">Madhya Pradesh</option>
-											<option value=" ">Maharashtra</option>
-											<option value=" ">Manipur</option>
-											<option value=" ">Meghalaya</option>
-											<option value=" ">Mizoram</option>
-											<option value=" ">Nagaland</option>
-											<option value=" ">Odisha</option>
-											<option value=" ">Punjab</option>
-											<option value=" ">Rajasthan</option>
-											<option value=" ">Sikkim</option>
-											<option value=" ">Tamil Nadu</option>
-											<option value=" ">Telangana</option>
-											<option value=" ">Tripura</option>
-											<option value=" ">Uttar Pradesh</option>
-											<option value=" ">Uttarakhand</option>
-											<option value=" ">West Bengal</option>
-											<option value=" ">Lakshadweep</option>
-											<option value=" ">Puducherry</option>
-										</select>
+										<form:select path="State" class="form-control" id="mySelect"
+											onchange="myFunc()">
+											<form:option value="0" label="Select State" />
+											<form:option value="Andaman and Nicobar Islands"
+												label="Andaman and Nicobar Islands" />
+											<form:option value="Andhra Pradesh" label="Andhra Pradesh" />
+											<form:option value="Arunachal Pradesh"
+												label="Arunachal Pradesh" />
+											<form:option value="Assam" label="Assam" />
+											<form:option value="Bihar" label="Bihar" />
+											<form:option value="Chhattisgarh" label="Chhattisgarh" />
+											<form:option value="Chandigarh" label="Chandigarh" />
+											<form:option value="Dadra and Nagar Haveli"
+												label="Dadra and Nagar Haveli" />
+											<form:option value="Daman and Diu" label="Daman and Diu" />
+											<form:option value="Delhi" label="Delhi" />
+											<form:option value="Goa" label="Goa" />
+											<form:option value="Gujarat" label="Gujarat" />
+											<form:option value="Haryana" label="Haryana" />
+											<form:option value="Himachal Pradesh"
+												label="Himachal Pradesh" />
+											<form:option value="Jammu & Kashmir" label="Jammu & Kashmir" />
+											<form:option value="Jharkhand" label="Jharkhand" />
+											<form:option value="Karnataka" label="Karnataka" />
+											<form:option value="Kerala" label="Kerala" />
+											<form:option value="Madhya Pradesh" label="Madhya Pradesh" />
+											<form:option value="Maharashtra" label="Maharashtra" />
+											<form:option value="Manipur" label="Manipur" />
+											<form:option value="Meghalaya" label="Meghalaya" />
+											<form:option value="Mizoram" label="Mizoram" />
+											<form:option value="Nagaland" label="Nagaland" />
+											<form:option value="Odisha" label="Odisha" />
+											<form:option value="Punjab" label="Punjab" />
+											<form:option value="Rajasthan" label="Rajasthan" />
+											<form:option value="Sikkim" label="Sikkim" />
+											<form:option value="Tamil Nadu" label="Tamil Nadu" />
+											<form:option value="Telangana" label="Telangana" />
+											<form:option value="Tripura" label="Tripura" />
+											<form:option value="Uttar Pradesh" label="Uttar Pradesh" />
+											<form:option value="Uttarakhand" label="Uttarakhand" />
+											<form:option value="West Bengal" label="West Bengal" />
+											<form:option value="Lakshadweep" label="Lakshadweep" />
+											<form:option value="Puducherry" label="Puducherry" />
+
+										</form:select>
+										<script type="text/javascript">
+											function myFunc() {
+												var selectedValue = $("#mySelect").val();
+												 $.ajax({  
+											            type : 'GET', 
+											            url: 'getCityName.html',
+											            data: {
+											            	
+											            	'cityname': selectedValue,
+											            	'user':  ${ user}
+											            },
+											            dataType: 'json',
+											       		cache: false,
+														beforeSend: function(xhr) 
+											                        {
+											                            xhr.setRequestHeader("Accept", "application/json");  
+											                            xhr.setRequestHeader("Content-Type", "application/json");  
+											                        },
+											         				success: function (data) {
+											         				      var html = '';
+											         	                  var len = data.length;
+											         	                  for(var i=0; i<len; i++){
+											         	                       html += '<option value="' + data[i] + '">' + data[i] + '</option>';
+											         	                   }
+											         	                 $('#city')
+											         	                .find('option')
+											         	                .remove()
+											         	                .end()
+											         	                .append('<option value="None">Select City</option>')
+											         	                .val('whatever')
+											         	            ;
+											         	                  $('#city').append(html);
+										           						
+												          		    },
+														            error: function(e){
+														            	console.warn(e);
+														            	
+														            }
+											            
+											      		  });
+											}
+										</script>
 									</div>
 								</div>
 								<div class='col-md-3 indent-small'>
 									<div class='form-group internal'>
-										<form:select required="true" path="city" class="form-control" >
-										<form:option value="">Select City</form:option>
-										<form:options items="${citylist}" />
-									</form:select>
+										<form:select name="cities" required="true" path="city"
+											id="city" class="form-control">
+											<form:option value="">Select City</form:option>
+											<%-- 											<form:options items="${cityList}" /> --%>
+										</form:select>
 									</div>
 								</div>
 								<div class='col-md-3 indent-small'>
 									<div class='form-group internal'>
-									<form:input path="Address" placeholder='Pin Code' required="required" class='form-control'/>
+										<form:input path="pincode" placeholder='Pin Code'
+											required="required" class='form-control'
+											title="MINIMUM SIZE" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+											 pattern=".{6,}" maxlength="6"  />
 									</div>
 								</div>
 
@@ -348,17 +537,21 @@ label.control-label {
 							<div class='col-md-8'>
 								<div class='col-md-4' style="width: 38%;">
 									<div class='form-group internal'>
-									<form:input path="designation" placeholder='Role' required="required" class='form-control'/>
-<!-- 										<input required="required " class='form-control' id='gst_no' -->
-<!-- 											placeholder='Role' type='text'> -->
+										<form:input path="designation" placeholder='Role'
+											required="required" class='form-control'
+											 pattern=".{5,}" maxlength="25" onkeypress="return onlyAlphabets(event,this)"  />
+										<!-- 										<input required="required " class='form-control' id='gst_no' -->
+										<!-- 											placeholder='Role' type='text'> -->
 									</div>
 								</div>
 
 								<div class='col-md-4 indent-small' style="width: 38%;">
 									<div class='form-group internal'>
-									<form:input path="responsibility" placeholder='Responsibility' required="required" class='form-control'/>
-<!-- 										<input required="required " class='form-control' id='gst_no' -->
-<!-- 											placeholder='Responsibility' type='text'> -->
+										<form:input path="responsibility" placeholder='Responsibility'
+											required="required" class='form-control'
+											 pattern=".{5,}" maxlength="25" onkeypress="return onlyAlphabets(event,this)"  />
+										<!-- 										<input required="required " class='form-control' id='gst_no' -->
+										<!-- 											placeholder='Responsibility' type='text'> -->
 									</div>
 								</div>
 
@@ -495,6 +688,60 @@ label.control-label {
 	<!-- ################################################################################################ -->
 	<a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
 
+<script type="text/javascript">
+   
+      // Form validation code will come here.
+      function validate()
+      {
+      
+         if( document.myForm.fname.value == "" )
+         {
+            alert( "Please provide your name!" );
+            document.myForm.fname.focus() ;
+            return false;
+         }
+
+         if( document.myForm.lname.value == "" )
+         {
+            alert( "Please provide your name!" );
+            document.myForm.lname.focus() ;
+            return false;
+         }
+         
+         
+         if( document.myForm.mobileno.value == "" )
+         {
+            alert( "Please provide your Email!" );
+            document.myForm.mobileno.focus() ;
+            return false;
+         }
+         
+         if( document.myForm.EMail.value == "" )
+         {
+            alert( "Please provide your Email!" );
+            document.myForm.EMail.focus() ;
+            return false;
+         }
+         
+         if( document.myForm.Zip.value == "" ||
+         isNaN( document.myForm.Zip.value ) ||
+         document.myForm.Zip.value.length != 5 )
+         {
+            alert( "Please provide a zip in the format #####." );
+            document.myForm.Zip.focus() ;
+            return false;
+         }
+         
+         if( document.myForm.Country.value == "-1" )
+         {
+            alert( "Please provide your country!" );
+            return false;
+         }
+         return( true );
+      }
+   
+</script>
+	
 	<!-- JAVASCRIPTS -->
 	<script src="layout/scripts/jquery.min.js "></script>
 	<script src="layout/scripts/jquery.backtotop.js "></script>

@@ -504,9 +504,10 @@ a.close:hover {
 				</script>
 	<div id="popup2" class="modal-box">
 		<header
-			style="border-bottom-color: #0a7777; background-color: #3eb3b3;">
-			
-			<a href="#" class="js-modal-close close"style="line-height: 0; font-size: 3.5em; position: absolute; top: 7%; right: 1%; text-decoration: none; color: #0b212f;opacity: 15.2;">×</a>
+			style="border-bottom-color: #0a7777; background-color: #3eb3b3; padding: 1px;">
+
+			<a href="#" class="js-modal-close close"
+				style="line-height: 0; font-size: 2.5em; position: absolute; top: 4%; right: 1%; text-decoration: none; color: #0b212f; opacity: 15.2;">×</a>
 			<table style="border-color: #3eb3b3;">
 				<tbody>
 					<tr>
@@ -522,109 +523,109 @@ a.close:hover {
 
 
 		</header>
-		<div class="modal-body" style="margin-top: -105px;    margin-bottom: -91px;">
-			<p id="remark" />
 
-			<div class="container">
-				<%-- 					<form id="contact" action="#"> --%>
+		<div class="container" style="padding: 10px 0;">
+			<%-- 					<form id="contact" action="#"> --%>
 
-				<div class="form-inline marginBottom">
-					<div class="md-form">
-						<div class='col-md-8' style="margin-bottom: 22px;">
-							<div class="form-group internal">
-								<label for="name"
-									style="width: 330%; margin-left: -306px; margin-bottom: 9px; font-size: 12px; font-weight: 400; color: black;">VC
-									Number</label> <input type="text" id="vcnumber"
-									style="width: 150%; margin-left: -156.5%;" class="form-control"
-									readonly="">
-							</div>
-							<div class='col-md-3 indent-small'>
-								<div class='form-group internal'>
-									<label for="name"
-										style="width:250%;margin-left: 241%;margin-bottom: 9px; font-size: 12px; font-weight: 400; color: black;">Name</label>
-									<input type='text' id='customername'
-										style="width: 264%;margin-left: 241%;" class="form-control"
-										readonly />
-								</div>
-							</div>
-							<div class='col-md-3 indent-small'>
-								<div class='form-group internal'>
-									<label for="name"
-										style="width: 250%;margin-left: 391.5%;margin-bottom: 9px; font-size: 12px; font-weight: 400; color: black;">Mobile</label>
-									<input type='text' id='mob'
-										style="width: 250%;margin-left: 391.5%;" class="form-control"
-										readonly />
-								</div>
-							</div>
-
+			<div class="form-inline marginBottom">
+				<div class="md-form">
+					<div class='col-md-8' style="margin-bottom: 22px;">
+						<div class="form-group internal">
+							<label for="name"
+								style="width: 330%; margin-left: -306px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">VC
+								Number</label> <input type="text" id="vcnumber"
+								style="width: 140%; margin-left: -156.5%;" class="form-control"
+								readonly="">
 						</div>
-						<!-- 						<div> -->
-<!-- 						<p class="p1">VC Number</p> -->
-<!-- 						<input type='text' id='vcnumber'style="width: 30%; margin-left: 0%" class="form-control"readonly /> -->
-<!-- 						<input type='text' id='customername'style="width: 30%; margin-left: 4.5%" class="form-control"readonly /> -->
-<!-- 						 <input type='text' id='mob'style="width: 30%; margin-left: 4.5%" class="form-control"readonly /> -->
-<!-- 						</div> -->
-						<br>
-						<textarea type="text" id='rem' name="remark" class="form-control"
-							readonly style="overflow: auto; resize: none"></textarea>
+						<div class='col-md-3 indent-small'>
+							<div class='form-group internal'>
+								<label for="name"
+									style="width: 230%; margin-left: 240%; margin-bottom: 1px; font-size: 12px; font-weight: 400; color: black;">Name</label>
+								<input type='text' id='customername'
+									style="width: 230%; margin-left: 240%;" class="form-control"
+									readonly />
+							</div>
+						</div>
+						<div class='col-md-3 indent-small'>
+							<div class='form-group internal'>
+								<label for="name"
+									style="width: 230%; margin-left: 378.5%; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Mobile</label>
+								<input type='text' id='mob'
+									style="width: 230%; margin-left: 378.5%;" class="form-control"
+									readonly />
+							</div>
+						</div>
+
 					</div>
+
 					<br>
-					<div>
-						<textarea type="text" id="crem" name="message"
-							placeholder="Message" class="form-control"
-							style="overflow: auto; resize: none"></textarea>
-						<br>
-					</div>
+					<textarea type="text" id='rem' name="remark" class="form-control"
+						readonly
+						style="overflow: auto; margin-left: 23px; width: 95%; resize: none"></textarea>
+				</div>
+				<br>
+				<div>
+					<textarea required type="text" id="crem" name="message"
+						placeholder="Message" class="form-control"
+						style="overflow: auto;margin-left: 23px; width: 95%; resize: none"; ></textarea>
 					<br>
-					<div>
-						<select name=selector id="type"
-							style="width: 272px; height: 30px; color: black;">
-							<option value="Open">Open</option>
-							<option value="Pending">Pending</option>
-							<option value="Close">Close</option>
-						</select>
-					</div>
-					<br> <input value="Submit!" type="submit" id="submit"
-						class="btn-primary btn btn-block"
-						style="width: 29%; margin-left: 35%;">
-					<script>
+				</div>
+				<br>
+				<div>
+					<select required name=selector id="type" 
+						style="width: 272px; height: 30px;margin-left: 22px; color: black;">
+						<option value="">Select Status</option>
+						<option value="Open">Open</option>
+						<option value="Pending">Pending</option>
+						<option value="Close">Close</option>
+					</select>
+				</div>
+				<br> <input value="Submit!" type="submit" id="submit"
+					class="btn-primary btn btn-block"
+					style="width: 29%;height:26px;font-size: 12px; margin-left: 35%;">
+				<script>
 								$("#submit").click( function() {
 									var id = $("#id1").text();
 								    var rem = $("#crem").val();
 								    var st =  $('select[name=selector]').val();
-								    $.ajax({  
-							            type : 'GET', 
-							            url: 'updateCompLCO.html',
-							            data: {
-							            	'id': id,
-							            	'remark': rem,
-							            	'status': st,
-							            	'user':  ${ user}
-							            },
-							            dataType: 'json',
-							       		cache: false,
-										beforeSend: function(xhr) 
-							                        {
-							                            xhr.setRequestHeader("Accept", "application/json");  
-							                            xhr.setRequestHeader("Content-Type", "application/json");  
-							                        },
-							         				success: function (data) {
-							         					 alert(data);
-							         					 $(".modal-overlay").remove();
-						           						
-								            },
-								            error: function(e){
-								            	
-								            }
-							            
-							        });
+								    if(st==""){
+								    	alert("Please Select the Type");
+								    }else{
+								    	  $.ajax({  
+									            type : 'GET', 
+									            url: 'updateCompLCO.html',
+									            data: {
+									            	'id': id,
+									            	'remark': rem,
+									            	'status': st,
+									            	'user':  ${ user}
+									            },
+									            dataType: 'json',
+									       		cache: false,
+												beforeSend: function(xhr) 
+									                        {
+									                            xhr.setRequestHeader("Accept", "application/json");  
+									                            xhr.setRequestHeader("Content-Type", "application/json");  
+									                        },
+									         				success: function (data) {
+									         					 alert(data);
+									         					location.reload();
+								           						
+										            },
+										            error: function(e){
+										            	
+										            }
+									            
+									        });
+								    }
+								  
 								   
 								});
 								
 											 	 
 						  </script>
-				</div>
-
 			</div>
+
+		</div>
 </body>
 </html>

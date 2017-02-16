@@ -7,7 +7,7 @@
     <property name="hibernate.connection.url">jdbc:mysql://103.16.143.176:3306/TV_CableMain</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">redhat@123!@#</property>
-    <property name="hibernate.hbm2ddl.auto">update</property>
+<!--     <property name="hibernate.hbm2ddl.auto">update</property> -->
     <property name="hibernate.show_sql">true</property>
 
   </session-factory>

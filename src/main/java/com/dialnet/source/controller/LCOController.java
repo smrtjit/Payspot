@@ -3,16 +3,13 @@ package com.dialnet.source.controller;
 
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
+
 import java.util.Date;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,9 +19,7 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,25 +40,23 @@ import com.dialnet.source.model.AllChannels;
 import com.dialnet.source.model.AllCollections;
 import com.dialnet.source.model.AllComplaints;
 import com.dialnet.source.model.BulkRechargeAmount;
-import com.dialnet.source.model.BulkRechargeAmountList;
-import com.dialnet.source.model.Cust_Invoice;
-import com.dialnet.source.model.Customer_Invoice1;
+import com.dialnet.source.model.Citys;
 import com.dialnet.source.model.LCOUser;
-import com.dialnet.source.model.LCO_Setting;
+
 import com.dialnet.source.model.LMUser;
 import com.dialnet.source.model.PackageDetail;
 import com.dialnet.source.model.PackageInfo;
 import com.dialnet.source.model.STBStock;
 import com.dialnet.source.model.Subscriber;
-import com.dialnet.source.model.TaxInformation;
 
 //import com.dialnet.source.model.LCOUserRegistration;
 import com.dialnet.source.model.UserLogin;
-import com.dialnet.source.model.VCStock;
+
 import com.dialnet.source.service.AgentBillDetailsService;
 import com.dialnet.source.service.AllChannelService;
 import com.dialnet.source.service.AllCollectionService;
 import com.dialnet.source.service.AllComplaintService;
+import com.dialnet.source.service.CityService;
 import com.dialnet.source.service.CustSettingService;
 import com.dialnet.source.service.Cust_InvoiceService;
 import com.dialnet.source.service.CustomerInvoiceServiceImpl;
@@ -74,7 +67,7 @@ import com.dialnet.source.service.PackageInfoService;
 import com.dialnet.source.service.STBStockService;
 import com.dialnet.source.service.SubscriberService;
 import com.dialnet.source.service.TaxInfoService;
-import com.dialnet.source.service.VCStockService;
+
 import com.google.gson.Gson;
 
 @Controller
@@ -95,9 +88,6 @@ public class LCOController {
 
 	@Autowired
 	public STBStockService stbService;
-
-	@Autowired
-	public VCStockService vcService;
 
 	@Autowired
 	LMUserService lmuserservice;
@@ -125,6 +115,9 @@ public class LCOController {
 
 	@Autowired
 	PackageDetailSercie pckgDetialservice;
+
+	@Autowired
+	CityService citystate;
 
 	String imagename = null;
 
@@ -177,13 +170,15 @@ public class LCOController {
 	@RequestMapping(value = "/newLineman", method = RequestMethod.GET)
 	public String newLineman(ModelMap map, @RequestParam("user") String user) {
 		LMUser lm = new LMUser();
-		List citylist = new ArrayList();
-		citylist.add("A");
-		citylist.add("B");
-		citylist.add("C");
-		citylist.add("D");
+		List profftype = new ArrayList();
+		profftype.add("PAN Card");
+		profftype.add("Adhaar Card");
+		profftype.add("Passport");
+		profftype.add("Driving License");
+		profftype.add("Arms Licence");
+		profftype.add("Election Commission ID Card ");
 		map.addAttribute("LMUSER", lm);
-		map.addAttribute("citylist", citylist);
+		map.addAttribute("profftype", profftype);
 		map.addAttribute("user", user);
 		return "NewLineMan";
 	}
@@ -191,8 +186,12 @@ public class LCOController {
 	@RequestMapping(value = "/addLMUser", method = RequestMethod.GET)
 	public ModelAndView addLMUser(ModelMap map, @RequestParam("user") String user,
 			@ModelAttribute("LMUSER") LMUser lmuser) {
+
 		long id = System.currentTimeMillis();
 		lmuser.setUsername(id);
+		lmuser.setLco_id(user);
+		lmuser.setTrnadate(getDate());
+
 		lmuser.setPASSWORD(getSaltString());
 
 		lmuserservice.add(lmuser);
@@ -359,6 +358,10 @@ public class LCOController {
 	@RequestMapping(value = "/stock", method = RequestMethod.GET)
 	public ModelAndView stock(ModelMap map, @RequestParam("user") String user, Integer offset, Integer maxResults) {
 
+		List<STBStock> stb = stbService.list(user, offset, maxResults);
+		map.addAttribute("StbList", stb);
+		map.addAttribute("count", stbService.count(user));
+		map.addAttribute("offset", offset);
 		map.addAttribute("user", user);
 		return new ModelAndView("TotalStock", map);
 	}
@@ -597,60 +600,78 @@ public class LCOController {
 		return new ModelAndView("redirect:allLM.html", model);
 		//
 	}
-	
-	
+
 	@ResponseBody
-		@RequestMapping(value = "/updateChannel", method = RequestMethod.GET)
-		public String updateChannel(ModelMap map, @RequestParam("user") String user,
-				@RequestParam("pkgname") String pkgname, @RequestParam("msoprice") String msoprice,
-				@RequestParam("lcoprice") String lcoprice, @RequestParam("chnl_id") String chnl_id, Integer offset,
-				Integer maxResults) {
-			System.out.println("-" + msoprice + "--------" + lcoprice + "------5555555555555--" + pkgname + "--------------"
-					+ chnl_id);
-			int val = channelService.channelupdate(chnl_id, pkgname, msoprice, lcoprice);
-			map.addAttribute("user", user);
-			List<AllChannels> l = channelService.getListByLCO(user, offset, maxResults);
-			map.addAttribute("count", channelService.count(user));
-			map.addAttribute("offset", offset);
-			map.addAttribute("ChannelList", l);
-			System.out.println("****Channel Secuessfully Update****");
-			String result = null;
-			if (val > 0) {
-				result = "Data Updated Successfully";
-			} else {
-				result = "There is some Error Please Try again";
-			}
-			Gson gson = new Gson();
-			String json = gson.toJson(result);
-			map.addAttribute("user", user);
-		return json;
+	@RequestMapping(value = "/updateCompLCO", method = RequestMethod.GET)
+	public String updateCompLCO(@RequestParam("user") String user, @RequestParam("id") String cId,
+			@RequestParam("remark") String cremark, @RequestParam("status") String status, ModelMap model) {
+		System.out.println("Invoice Details check data: " + cId + "," + user + "," + cremark + "," + status);
+		int al = comservice.edit(cId, cremark, status);
+		String result = null;
+		if (al > 0) {
+			result = "The Status is Updated Successfully";
+		} else {
+			result = "There is some Error Please Try again";
 		}
-	
-	@ResponseBody
-		@RequestMapping(value = "/deleteChannel", method = RequestMethod.GET)
-		public String deleteChannel(ModelMap map, @RequestParam("user") String user,
-				@RequestParam("chnl_id") String chnl_id, Integer offset, Integer maxResults) {
-	
-			System.out.println("Welcome to Delete Controller parts");
-		List<AllChannels> l = channelService.getListByLCO(user, offset, maxResults);
-			String result = null;
-			System.out.println("chnl_id\t" + chnl_id);
-			int val = channelService.delete(chnl_id);
-			if (val > 0) {
-				result = "Data Successfully Delete";
-			} else {
-				result = "There is some Error Please Try again";
-			}
-	
-			Gson gson = new Gson();
+		Gson gson = new Gson();
 		String json = gson.toJson(result);
-			map.addAttribute("count", channelService.count(user));
-			map.addAttribute("offset", offset);
-			map.addAttribute("ChannelList", l);
-			map.addAttribute("user", user);
-			return json;
+		model.addAttribute("user", user);
+		return json;
 		// return new ModelAndView(json);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/updateChannel", method = RequestMethod.GET)
+	public String updateChannel(ModelMap map, @RequestParam("user") String user,
+			@RequestParam("pkgname") String pkgname, @RequestParam("msoprice") String msoprice,
+			@RequestParam("lcoprice") String lcoprice, @RequestParam("chnl_id") String chnl_id, Integer offset,
+			Integer maxResults) {
+		System.out.println("-" + msoprice + "--------" + lcoprice + "------5555555555555--" + pkgname + "--------------"
+				+ chnl_id);
+		int val = channelService.channelupdate(chnl_id, pkgname, msoprice, lcoprice);
+		map.addAttribute("user", user);
+		List<AllChannels> l = channelService.getListByLCO(user, offset, maxResults);
+		map.addAttribute("count", channelService.count(user));
+		map.addAttribute("offset", offset);
+		map.addAttribute("ChannelList", l);
+		System.out.println("****Channel Secuessfully Update****");
+		String result = null;
+		if (val > 0) {
+			result = "Data Updated Successfully";
+		} else {
+			result = "There is some Error Please Try again";
 		}
+		Gson gson = new Gson();
+		String json = gson.toJson(result);
+		map.addAttribute("user", user);
+		return json;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/deleteChannel", method = RequestMethod.GET)
+	public String deleteChannel(ModelMap map, @RequestParam("user") String user,
+			@RequestParam("chnl_id") String chnl_id, Integer offset, Integer maxResults) {
+
+		System.out.println("Welcome to Delete Controller parts");
+		List<AllChannels> l = channelService.getListByLCO(user, offset, maxResults);
+		String result = null;
+		System.out.println("chnl_id\t" + chnl_id);
+		int val = channelService.delete(chnl_id);
+		if (val > 0) {
+			result = "Data Successfully Delete";
+		} else {
+			result = "There is some Error Please Try again";
+		}
+
+		Gson gson = new Gson();
+		String json = gson.toJson(result);
+		map.addAttribute("count", channelService.count(user));
+		map.addAttribute("offset", offset);
+		map.addAttribute("ChannelList", l);
+		map.addAttribute("user", user);
+		return json;
+		// return new ModelAndView(json);
+	}
 
 	@ResponseBody
 	@RequestMapping(value = "/deletePackage", method = RequestMethod.GET)
@@ -709,6 +730,36 @@ public class LCOController {
 		// return new ModelAndView(json);
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/getCityName", method = RequestMethod.GET)
+	public String getCityName(ModelMap map, @RequestParam("user") String user,
+			@RequestParam("cityname") String cityname) {
+		System.out.println("-" + cityname + "--------------5555555555555------------");
+		List<String> citys = citystate.getBycity_state(cityname);
+		for (String ss : citys)
+			System.out.println("****Channel Secuessfully Update****" + ss);
+		Gson gson = new Gson();
+		String json = gson.toJson(citys);
+		map.addAttribute("user", user);
+		map.addAttribute("cityList", citys);
+		return json;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/getChannelList", method = RequestMethod.GET)
+	public String getChannelList(@RequestParam("user") String user, @RequestParam("pckgId") String pckg) {
+		String result = null;
+		List<String> lm = pckgDetialservice.getChannelByPckg(pckg);
+		for (String tmp : lm) {
+			System.out.println("Channel List: " + tmp);
+		}
+		Gson gson = new Gson();
+		String json = gson.toJson(lm);
+
+		return json;
+		// return new ModelAndView(json);
+	}
+
 	// #######################################################################################
 	public String getDate() {
 		String trnstamp = null;
@@ -734,6 +785,36 @@ public class LCOController {
 		}
 		String saltStr = salt.toString();
 		return saltStr;
+
+	}
+
+	/************* Image Upload **********/
+	@RequestMapping(value = "/imageupload", method = RequestMethod.POST)
+	public @ResponseBody String upload(HttpSession session, HttpServletResponse response, Model model,
+			@RequestParam("uploadimage") MultipartFile uploadimage, @RequestParam("user") String id) {
+		String addpath = null;
+		if (!uploadimage.isEmpty()) {
+			System.out.println("******************** upload file ***************************");
+			String path = session.getServletContext().getRealPath("/");
+			String filename = uploadimage.getOriginalFilename();
+			addpath = path + filename;
+			imagename = filename;
+			System.out.println(addpath);
+			try {
+				byte barr[] = uploadimage.getBytes();
+
+				BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(path + "/" + filename));
+				bout.write(barr);
+				bout.flush();
+				bout.close();
+
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+
+		}
+		model.addAttribute("addpath", addpath);
+		return "";
 
 	}
 

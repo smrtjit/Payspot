@@ -40,14 +40,16 @@ public class LMUser {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public LMUser(Long username, String pASSWORD, String designation, String firstName, String middlename,
-			String lastName, String email_id, String mobile, String address, String city, String state,
-			String identity_proof, String add_proof, String responsibility, String add_proof_type,
+
+	public LMUser(Long username, String pASSWORD, String pincode, String designation, String firstName,
+			String middlename, String lastName, String email_id, String mobile, String address, String city,
+			String state, String identity_proof, String add_proof, String responsibility, String add_proof_type,
 			String add_proof_image_Name, String identity_proof_type, String identity_proof_image_name, String lco_id,
 			String trnadate) {
 		super();
 		this.username = username;
 		PASSWORD = pASSWORD;
+		this.pincode = pincode;
 		this.designation = designation;
 		this.firstName = firstName;
 		this.middlename = middlename;
@@ -67,6 +69,15 @@ public class LMUser {
 		this.lco_id = lco_id;
 		this.trnadate = trnadate;
 	}
+
+	public String getPincode() {
+		return pincode;
+	}
+
+	public void setPincode(String pincode) {
+		this.pincode = pincode;
+	}
+
 	public Long getUsername() {
 		return username;
 	}

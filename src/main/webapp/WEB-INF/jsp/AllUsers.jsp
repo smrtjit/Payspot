@@ -23,22 +23,193 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
-<script>
-  $(document).ready(function() {
-	  $('#fdate').datepicker({
-		dateFormat : 'yy-mm-dd'
-		});
-	  $('#edate').datepicker({
-			dateFormat : 'yy-mm-dd'
-			});
+<style>
+/* ////////////////////////////////////////////////////////////////////////////////////// */
+.v-center {
+	height: 100vh;
+	width: 100%;
+	display: table;
+	position: relative;
+	text-align: center;
+}
 
-  });
-  </script>
+.v-center>div {
+	display: table-cell;
+	vertical-align: middle;
+	position: relative;
+	top: -10%;
+}
+
+.btn {
+	font-size: 2.5vmin;
+	padding: 0.15em .75em;
+	/*   background-color: #fff; */
+	border: 1px solid #bbb;
+	/*   color: #333; */
+	text-decoration: none;
+	display: inline;
+	/*   border-radius: 4px; */
+	-webkit-transition: background-color 1s ease;
+	-moz-transition: background-color 1s ease;
+	transition: background-color 1s ease;
+}
+
+.btn
+:hover {
+	background-color: #ddd;
+	-webkit-transition: background-color 1s ease;
+	-moz-transition: background-color 1s ease;
+	transition: background-color 1s ease;
+}
+
+.btn-small {
+	padding: .75em 1em;
+	font-size: 0.8em;
+}
+
+.modal-box {
+	display: none;
+	position: absolute;
+	z-index: 1000;
+	width: 98%;
+	background: white;
+	border-bottom: 1px solid #aaa;
+	border-radius: 4px;
+	box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	background-clip: padding-box;
+}
+
+@media ( min-width : 32em) {
+	.modal-box {
+		width: 70%;
+	}
+}
+
+h2 {
+	margin: 1.75em 0 0;
+	font-size: 5vw;
+}
+
+h3 {
+	font-size: 1.3em;
+}
+
+.v-center {
+	height: 100vh;
+	width: 100%;
+	display: table;
+	position: relative;
+	text-align: center;
+}
+
+.v-center>div {
+	display: table-cell;
+	vertical-align: middle;
+	position: relative;
+	top: -10%;
+}
+
+.btn {
+	font-size: 2.5vmin;
+	padding: 0.15em .75em;
+	/*   background-color: #fff; */
+	border: 1px solid #bbb;
+	/*   color: #333; */
+	text-decoration: none;
+	display: inline;
+	/*   border-radius: 4px; */
+	-webkit-transition: background-color 1s ease;
+	-moz-transition: background-color 1s ease;
+	transition: background-color 1s ease;
+}
+
+.btn:hover {
+	background-color: #ddd;
+	-webkit-transition: background-color 1s ease;
+	-moz-transition: background-color 1s ease;
+	transition: background-color 1s ease;
+}
+
+.btn-small {
+	padding: .75em 1em;
+	font-size: 0.8em;
+}
+
+.modal-box {
+	display: none;
+	position: absolute;
+	z-index: 1000;
+	width: 98%;
+	background: white;
+	border-bottom: 1px solid #aaa;
+	border-radius: 4px;
+	box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	background-clip: padding-box;
+}
+
+@media ( min-width : 32em) {
+	.modal-box {
+		width: 70%;
+	}
+}
+
+.modal-box header, .modal-box .modal-header {
+	padding: 1.25em 1.5em;
+	border-bottom: 1px solid #ddd;
+}
+
+.modal-box header h3, .modal-box header h4, .modal-box .modal-header h3,
+	.modal-box .modal-header h4 {
+	margin: 0;
+}
+
+.modal-box .modal-body {
+	padding: 2em 1.5em;
+}
+
+.modal-box footer, .modal-box .modal-footer {
+	padding: 1em;
+	border-top: 1px solid #ddd;
+	background: rgba(0, 0, 0, 0.02);
+	text-align: right;
+}
+
+.modal-overlay {
+	opacity: 0;
+	filter: alpha(opacity = 0);
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 900;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3) !important;
+}
+
+a.close {
+	line-height: 1;
+	font-size: 1.5em;
+	position: absolute;
+	top: 5%;
+	right: 2%;
+	text-decoration: none;
+	color: #bbb;
+}
+
+a.close:hover {
+	color: #222;
+	-webkit-transition: color 1s ease;
+	-moz-transition: color 1s ease;
+	transition: color 1s ease;
+}
+</style>
+
+
 </head>
 <body id="top">
-	<div class="bgded overlay"
-		style="background-image: url('images/demo/backgrounds/01.png');">
-		<!-- ################################################################################################ -->
+
 		<div class="wrapper row1">
 			<header id="header" class="hoc clear">
 				<!-- ################################################################################################ -->
@@ -190,22 +361,23 @@
 					style="width: 100%; border-collapse: collapse;">
 					<tr>
 						<th scope="col"
-							style="width: 5%; color: #FFFFFF;background-color: #12a59c;">SNo.</th>
-						<th scope="col"style="color: #FFFFFF;background-color: #12a59c;">CRF
+							style="width: 5%; color: #FFFFFF; background-color: #12a59c;">SNo.</th>
+						<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">CRF
 							No.</th>
-						<th scope="col"style="color: #FFFFFF;background-color: #12a59c;">CustomerID</th>
-						<th scope="col" style="color: #FFFFFF;background-color: #12a59c;">Name</th>
-						<th scope="col"style="color: #FFFFFF;background-color: #12a59c;" >mobile</th>
-						<th scope="col"style="color: #FFFFFF;background-color: #12a59c;">Email</th>
-						<th scope="col"style="color: #FFFFFF;background-color: #12a59c;">Address</th>
+						<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">CustomerID</th>
+						<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Name</th>
+						<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">mobile</th>
+						<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Email</th>
+						<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Address</th>
 
 					</tr>
 					<tr>
 						<c:forEach items="${userList}" var="user" varStatus="itr">
 							<tr>
 								<td style="width: 5%;">${offset + itr.index +1 }</td>
+
 								<td><a href="#" value="${user.CRFNo}"
-									data-modal-link="popup3">${user.userName}</a></td>
+									data-modal-id="popup2">${user.userName}</a></td>
 
 								<td>${user.userName}</td>
 								<td>${user.firstName}</td>
@@ -307,5 +479,125 @@
 
 		<script src="layout/scripts/jquery.backtotop.js"></script>
 		<script src="layout/scripts/jquery.mobilemenu.js"></script>
+
+		<script>
+			$(function() {
+
+				var appendthis = ("<div class='modal-overlay js-modal-close'></div>");
+
+				$('a[data-modal-id]').click(function(e) {
+
+					var url = $(this).attr('value');
+
+					// 							document.getElementById("demo").innerHTML ="Complaint Number: "+url;
+
+					var fields = url.split('#');
+
+					var id = fields[0];
+					;
+
+					document.getElementById('id1').innerHTML = id;
+
+					e.preventDefault();
+					$("body").append(appendthis);
+					$(".modal-overlay").fadeTo(500, 0.7);
+					//$(".js-modalbox").fadeIn(500);
+					var modalBox = $(this).attr('data-modal-id');
+					$('#' + modalBox).fadeIn($(this).data());
+				});
+
+				$(".js-modal-close, .modal-overlay").click(function() {
+					$(".modal-box, .modal-overlay").fadeOut(500, function() {
+						$(".modal-overlay").remove();
+					});
+
+				});
+
+				$(window).resize(
+						function() {
+							$(".modal-box")
+									.css(
+											{
+												top : ($(window).height() - $(
+														".modal-box")
+														.outerHeight()) / 2,
+												left : ($(window).width() - $(
+														".modal-box")
+														.outerWidth()) / 2
+											});
+						});
+
+				$(window).resize();
+
+			});
+		</script>
+		<div id="popup2" class="modal-box">
+			<header
+				style="border-bottom-color: #0a7777; background-color: #3eb3b3; padding: 1px;">
+
+				<a href="#" class="js-modal-close close"
+					style="line-height: 0; font-size: 2.5em; position: absolute; top: 4%; right: 1%; text-decoration: none; color: #0b212f; opacity: 15.2;">×</a>
+				<table style="border-color: #3eb3b3;">
+					<tbody>
+						<tr>
+							<td style="width: 27%; color: #ffffff; border-color: #3eb3b3;">
+								<h3>Complaint ID:</h3>
+							</td>
+							<td style="border-color: #3eb3b3;">
+								<h3 id="id1" style="width: 27%; color: #ffffff;">123456789</h3>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+
+			</header>
+
+			<div class="container" style="padding: 10px 0;">
+				<%-- 					<form id="contact" action="#"> --%>
+
+				<div class="form-inline marginBottom">
+					<div class="md-form">
+						<div class='col-md-8' style="margin-bottom: 22px;">
+							<div class="form-group internal">
+								<label for="name"
+									style="width: 330%; margin-left: -306px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">VC
+									Number</label> <input type="text"
+									style="width: 140%; margin-left: -156.5%;" class="form-control"
+									readonly="">
+							</div>
+							<div class='col-md-3 indent-small'>
+								<div class='form-group internal'>
+									<label for="name"
+										style="width: 230%; margin-left: 240%; margin-bottom: 1px; font-size: 12px; font-weight: 400; color: black;">Name</label>
+									<input type='text' style="width: 230%; margin-left: 240%;"
+										class="form-control" readonly />
+								</div>
+							</div>
+							<div class='col-md-3 indent-small'>
+								<div class='form-group internal'>
+									<label for="name"
+										style="width: 230%; margin-left: 378.5%; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Mobile</label>
+									<input type='text' style="width: 230%; margin-left: 378.5%;"
+										class="form-control" readonly />
+								</div>
+							</div>
+
+						</div>
+
+						<br>
+						<textarea type="text" name="remark" class="form-control" readonly
+							style="overflow: auto; margin-left: 23px; width: 95%; resize: none"></textarea>
+					</div>
+					<br>
+					
+					<br> <input value="Submit!" type="submit" id="submit"
+						class="btn-primary btn btn-block"
+						style="width: 29%; height: 26px; font-size: 12px; margin-left: 35%;">
+
+				</div>
+
+			</div>
+		</div>
 </body>
 </html>

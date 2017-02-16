@@ -13,11 +13,6 @@ public class STBStockServiceImpl implements STBStockService {
 
 	@Autowired
 	STBStockDao dao;
-	
-	@Override
-	public List<STBStock> getAllVCStock() {
-		return dao.getAllVCStock();
-	}
 
 	@Override
 	public STBStock getBySTBNo(String stb) {
@@ -25,29 +20,19 @@ public class STBStockServiceImpl implements STBStockService {
 	}
 
 	@Override
-	public List<STBStock> getByStatus(String stutus) {
-		return dao.getByStatus(stutus);
+	public List<STBStock> getByStatus(String user,String stutus) {
+		return dao.getByStatus(user, stutus);
 	}
 
 	@Override
-	public int upSTB(String stb, String status) {
-		return dao.upSTB(stb, status);
+	public List<STBStock> list(String user, Integer offset, Integer maxResults) {
+		return dao.list(user, offset, maxResults);
 	}
 
 	@Override
-	public List<STBStock> list(Integer offset, Integer maxResults) {
-		return dao.list(offset, maxResults);
+	public Long count(String user) {
+		return dao.count(user);
 	}
-
-	@Override
-	public Long count() {
-		return dao.count();
-	}
-
-	@Override
-	public void add(STBStock stock) {
-		dao.add(stock);
-		
-	}
-
+	
+	
 }

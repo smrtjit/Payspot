@@ -7,6 +7,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -45,6 +47,20 @@ public class PackageDetailDaoImpl implements PackageDetailDao {
 		  sf.close();
 		
 		return 1;
+	}
+
+	@Override
+	public List<String> getChannelByPckg(String pckg) {
+		Session sf = session.openSession();
+		Criteria cr = sf.createCriteria(PackageDetail.class);
+		cr.add(Restrictions.eq("Pckg_Id", pckg));
+		ProjectionList proList = Projections.projectionList(); 
+		proList.add(Projections.property("Channel_Name"));
+		cr.setProjection(proList); 
+
+		List l= cr.list();
+		sf.close();
+		return l;
 	}
 
 }
