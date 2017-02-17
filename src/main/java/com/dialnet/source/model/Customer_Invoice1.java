@@ -14,6 +14,9 @@ public class Customer_Invoice1 {
 	
 	String User_Id;
 	String User_Name;
+	String mobile_no;
+	String email;
+	String address;
 	String Vc_No;
 	String Billing_Date;
 	String DueDate;
@@ -44,15 +47,33 @@ public class Customer_Invoice1 {
 	}
 	
 
-	public Customer_Invoice1(String invoice_No, String user_Id, String user_Name, String vc_No, String billing_Date,
-			String dueDate, String package_Name, String package_Cost, String service_Tax, String entertain_Tax,
-			String other_Tax, String prevoius_Bal, String advance_Amt, String lastPaid_Amt, String total_Amount,
-			String totalAmt_AftDueDate, String latePay_Charges, String discount, String paid_Amt, String agent_Id,
-			String date_of_paid, String bill_status, String trndate, String lco_id) {
+	
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public Customer_Invoice1(String invoice_No, String user_Id, String user_Name, String mobile_no, String email,
+			String address, String vc_No, String billing_Date, String dueDate, String package_Name, String package_Cost,
+			String service_Tax, String entertain_Tax, String other_Tax, String prevoius_Bal, String advance_Amt,
+			String lastPaid_Amt, String total_Amount, String totalAmt_AftDueDate, String latePay_Charges,
+			String discount, String paid_Amt, String agent_Id, String date_of_paid, String bill_status, String trndate,
+			String lco_id) {
 		super();
 		Invoice_No = invoice_No;
 		User_Id = user_Id;
 		User_Name = user_Name;
+		this.mobile_no = mobile_no;
+		this.email = email;
+		this.address = address;
 		Vc_No = vc_No;
 		Billing_Date = billing_Date;
 		DueDate = dueDate;
@@ -74,6 +95,12 @@ public class Customer_Invoice1 {
 		this.bill_status = bill_status;
 		this.trndate = trndate;
 		this.lco_id = lco_id;
+	}
+	public String getMobile_no() {
+		return mobile_no;
+	}
+	public void setMobile_no(String mobile_no) {
+		this.mobile_no = mobile_no;
 	}
 	public Customer_Invoice1() {
 		super();

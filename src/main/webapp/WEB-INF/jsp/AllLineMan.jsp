@@ -162,43 +162,42 @@ var appendthis =  ("<div class='modal-overlay js-modal-close'></div>");
 </head>
 <body id="top">
 
-	<!-- ################################################################################################ -->
 	<div class="wrapper row1">
-		<header id="header" class="hoc clear">
-			<!-- ################################################################################################ -->
-			<div id="logo" class="fl_left">
-				<h1>
-					<a href="LCOHome.html?user=${user }">PaySpot</a>
-				</h1>
-			</div>
-			<nav id="mainav" class="fl_right">
-				<ul class="clear">
-					<li><a href="allSubscriber.html?user=${user }">Connection</a></li>
-					<li><a href="allCollection.html?user=${user }">Collection</a></li>
-					<li><a href="allComplaint.html?user=${user }">Complaint</a></li>
-					<li><a class="drop" href="#">Services</a>
-						<ul>
-							<li><a href="newConnn.html?user=${user }">Add Subscriber</a></li>
-							<li><a href="newLineman.html?user=${user}">Add LineMan</a></li>
-							<li><a href="addStock.html?user=${user}">Add Stock</a></li>
-							<li><a href="topUp.html?user=${user }">Topup</a></li>
-
-						</ul></li>
-					<li><a class="drop" href="#">Repository</a>
-						<ul>
-							<li><a href="allLM.html?user=${user }">Line Man</a></li>
-							<li><a href="stock.html?user=${user }">Stock</a></li>
-							<li><a href="newPackage.html?user=${user }">Packages</a></li>
-							<li><a href="newChannel.html?user=${user}">Channels</a></li>
-
-						</ul></li>
-					<li><a href="lcoDetail.html?user=${user }">Profile</a></li>
-					<li><a href="logOut.html?user=${user}"
-						style="margin-right: -90px;">Log out</a></li>
-				</ul>
-			</nav>
-		</header>
-	</div>
+    <header id="header" class="hoc clear"> 
+      <!-- ################################################################################################ -->
+      <div id="logo" class="fl_left">
+        <h1><a href="LCOHome.html?user=${user }">PaySpot</a></h1>
+      </div>
+      <nav id="mainav" class="fl_right">
+        <ul class="clear">
+            <li><a href="allSubscriber.html?user=${user }">Connection</a></li>
+              <li><a href="allCollection.html?user=${user }">Collection</a></li>
+               <li><a href="allComplaint.html?user=${user }">Complaint</a></li>
+          <li><a class="drop" href="#">Services</a>
+            <ul>
+         	  <li><a href="newConnn.html?user=${user }">Add Subscriber</a></li>
+              <li><a href="newLineman.html?user=${user}">Add LineMan</a></li>    
+               <li><a href="addStock.html?user=${user}">Add Stock</a></li>   
+               <li><a href="billDownload.html?user=${user}">Download Bill</a></li>      
+               <li><a href="topUp.html?user=${user }">Topup</a></li>           
+             
+            </ul>
+          </li>
+          <li><a class="drop" href="#">Repository</a>
+            <ul>
+             <li><a href="allLM.html?user=${user }">Line Man</a></li>
+               <li><a href="stock.html?user=${user }">Stock</a></li>
+              <li><a href="newPackage.html?user=${user }">Packages</a></li>                  
+              <li><a href="newChannel.html?user=${user}">Channels</a></li>
+              
+            </ul>
+          </li>
+          <li><a href="lcoDetail.html?user=${user }">Profile</a></li>
+          <li><a href="logOut.html?user=${user}" style="margin-right: -90px;">Log out</a></li>
+        </ul>
+      </nav>
+    </header>
+  </div>
 	<div class="wrapper row3">
 		<main class="hoc container clear"> <!-- main body -->
 		<div class="row">

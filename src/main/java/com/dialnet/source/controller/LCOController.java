@@ -40,7 +40,9 @@ import com.dialnet.source.model.AllChannels;
 import com.dialnet.source.model.AllCollections;
 import com.dialnet.source.model.AllComplaints;
 import com.dialnet.source.model.BulkRechargeAmount;
+import com.dialnet.source.model.BulkRechargeAmountList;
 import com.dialnet.source.model.Citys;
+import com.dialnet.source.model.Customer_Invoice1;
 import com.dialnet.source.model.LCOUser;
 
 import com.dialnet.source.model.LMUser;
@@ -163,8 +165,25 @@ public class LCOController {
 
 	@RequestMapping(value = "/newConnn", method = RequestMethod.GET)
 	public String newConnn(ModelMap map, @RequestParam("user") String user) {
+		Subscriber sub = new Subscriber();
+		map.addAttribute("NewSubscriber", sub);
+		List<String> basic = pckgservice.getPckgByType(user, "Basic");
+		map.addAttribute("BASIC", basic);
+
+		List<String> stb = stbService.getAllAvlSTB(user);
+		map.addAttribute("STB", stb);
 		map.addAttribute("user", user);
 		return "NewConnection";
+	}
+
+	@RequestMapping(value = "/billDownload", method = RequestMethod.GET)
+	public ModelAndView billDownload(ModelMap map, @RequestParam("user") String user, Integer offset,
+			Integer maxResults) {
+		List<Customer_Invoice1> subs = invoice1.getByStatus("Pending");
+		map.addAttribute("userList", subs);
+		map.addAttribute("count", userService.count(user));
+		map.addAttribute("user", user);
+		return new ModelAndView("BillDownload", map);
 	}
 
 	@RequestMapping(value = "/newLineman", method = RequestMethod.GET)
@@ -556,7 +575,7 @@ public class LCOController {
 		obj.setNoOfUser("0");
 		obj.setPckgName(pckg);
 		obj.setPckgType(type);
-		obj.setPrice(price);
+		obj.setPrice(Long.parseLong(price));
 		obj.setTrnadte(getDate());
 		obj.setNoOfChannels(list.length + "");
 		int val = pckgservice.add(obj);
@@ -760,6 +779,216 @@ public class LCOController {
 		// return new ModelAndView(json);
 	}
 
+	@RequestMapping(value = "/bulkSheet", method = RequestMethod.POST)
+	public ModelAndView processExcel(ModelMap model, @RequestParam("excelfile") MultipartFile excelfile,
+			@RequestParam("user") String id) {
+		try {
+			AgentBillDetails cust = new AgentBillDetails();
+			List pck = lmuserservice.getAllAgentNames(id);
+			List paymentType = new ArrayList();
+			paymentType.add("Cash");
+			paymentType.add("Cheque");
+			paymentType.add("Wallet");
+			paymentType.add("Others");
+			model.addAttribute("paymentType", paymentType);
+			model.addAttribute("agentName", pck);
+			model.addAttribute("bulkInfoForm", cust);
+
+			BulkRechargeAmountList bulk = new BulkRechargeAmountList();
+			List<BulkRechargeAmount> lstUser = new ArrayList<BulkRechargeAmount>();
+			int i = 0;
+			System.out.println("file not found name \t" + excelfile.getInputStream());
+			// File file= new File();
+			HSSFWorkbook workbook = new HSSFWorkbook(excelfile.getInputStream());
+			String ss = excelfile.getName();
+			HSSFSheet worksheet = workbook.getSheetAt(0);
+			int noOfColumns = worksheet.getRow(0).getLastCellNum();
+			System.out.println("Column count \t" + noOfColumns);
+			if (noOfColumns == 8) {
+				while (i <= worksheet.getLastRowNum()) {
+					BulkRechargeAmount user = new BulkRechargeAmount();
+					HSSFRow row = worksheet.getRow(i++);
+					user.setInvoiceid((int) row.getCell(0).getNumericCellValue());
+					System.out.println("I am here 0\t " + row.getCell(0));
+
+					user.setCustomerid((int) row.getCell(1).getNumericCellValue());
+					System.out.println("I am here 0\t " + row.getCell(1));
+
+					user.setCustomername(row.getCell(2).getStringCellValue());
+					System.out.println("I am here 1 \t" + row.getCell(2));
+
+					user.setCustomeraddress(row.getCell(3).getStringCellValue());
+					System.out.println("I am here 2\t" + row.getCell(3));
+
+					user.setCustomerpackagename(row.getCell(4).getStringCellValue());
+					System.out.println("I am here 3 \t" + row.getCell(4));
+
+					user.setCustomermobileno(row.getCell(5).getStringCellValue());
+					System.out.println("I am here 4\t" + row.getCell(5));
+
+					user.setCustomeremailid(row.getCell(6).getStringCellValue());
+					System.out.println("I am here 5\t" + row.getCell(6));
+
+					user.setCustomeramountofrecharge((float) row.getCell(7).getNumericCellValue());
+					System.out.println("I am here 6\t" + row.getCell(7));
+					lstUser.add(user);
+				}
+				model.addAttribute("persons", lstUser);
+				bulk.setBulkInfo(lstUser);
+
+				System.out.println("List Size: " + bulk.getBulkInfo().size());
+				model.addAttribute("bulkData", bulk);
+			} else {
+				model.addAttribute("error", "File is Not Valid");
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		model.addAttribute("user", id);
+		return new ModelAndView("Topup", model);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/accountDetail", method = RequestMethod.GET)
+	public String accountDetail(@RequestParam("user") String user, @RequestParam("invoice") String invoiceid,
+			ModelMap model) {
+		Gson gson = new Gson();
+		String json = null;
+		System.out.println("Invoice Details check data: " + invoiceid + "," + user);
+		Customer_Invoice1 result = invoice1.getByInvoiceId(invoiceid);
+		if (result != null) {
+			json = gson.toJson(result);
+			System.out.println("Result: " + result.getInvoice_No());
+		} else
+			json = gson.toJson("Data Not Found");
+
+		model.addAttribute("user", user);
+		return json;
+		// return new ModelAndView(json);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/allUsersData", method = RequestMethod.GET)
+	public String allUsersData(@RequestParam("user") String user, @RequestParam("userid") String userid,
+			ModelMap model) {
+		Gson gson = new Gson();
+		String json = null;
+		System.out.println("+++++++++++++/////////----------------" + userid);
+		Subscriber subdata = userService.getByID(userid);
+		if (subdata != null) {
+			json = gson.toJson(subdata);
+			System.out.println("Result: " + subdata.getPassword());
+		} else
+			json = gson.toJson("Data Not Found");
+
+		model.addAttribute("user", user);
+		return json;
+		// return new ModelAndView(json);
+	}
+
+	@RequestMapping(value = "/saveBulkByLCO", method = RequestMethod.GET)
+	public ModelAndView saveBulkByLCO(@ModelAttribute("bulkInfoForm") AgentBillDetails sub, ModelMap map,
+			@RequestParam("user") String user) {
+		// System.out.println("AgentBillDetails Detail: "+sub.getCustId());
+		// System.out.println("calling saveBulkByLCO: "+sub.getInvoice_id());
+		Customer_Invoice1 tmpdata = invoice1.getByInvoiceId(sub.getInvoice_id());
+		sub.setFromDate(tmpdata.getDueDate());
+		sub.setToDate(tmpdata.getBilling_Date());
+		sub.setCustId(tmpdata.getUser_Id());
+		sub.setTotalAmt(tmpdata.getTotal_Amount());
+		sub.setInstatus("Aprroved");
+		sub.setApprovedBy(user);
+		sub.setApprovalDate(getDate());
+		int i = agentbillservice.saveDetail(sub);
+
+		Subscriber u = userService.getByID(tmpdata.getUser_Id());
+		AllCollections col = new AllCollections();
+		col.setInvoice(sub.getInvoice_id());
+		col.setVC_No(tmpdata.getVc_No());
+		col.setCust_mobile(u.getMobile());
+		col.setCust_Name(tmpdata.getUser_Name());
+		col.setCurrent_Pckg(tmpdata.getPackage_Name());
+		col.setRecharge_Amount(tmpdata.getTotal_Amount());
+		col.setPaid_Amount(sub.getReceivedAmt());
+		col.setDiscount(tmpdata.getDiscount());
+		col.setPayment_Mode("OffLine");
+		col.setPayment_Status("Approved");
+		col.setCollecting_Agent(sub.getAgentId());
+		col.setLco_Id(user);
+		col.setPayment_Type(sub.getPayment_Type());
+		col.setApproval_ID(user);
+		col.setRefernceId(sub.getReferenceId());
+		col.setApproval_Date(getDate());
+		col.setTrndate(getDate());
+		col.setRemark(sub.getRemark());
+		LCOCollectionRepository.saveDetail(col);
+		int i2 = invoice1.updateInvoiceDetail(sub.getInvoice_id(), sub.getReceivedAmt(), sub.getAgentId(), getDate(),
+				"Pending");
+		map.addAttribute("user", user);
+		return new ModelAndView("redirect:topUp.html", map);
+	}
+
+	@RequestMapping(value = "/uploadBulkTopup", method = RequestMethod.POST)
+	public String uploadBulkTopup(@RequestParam("user") String user,
+			@ModelAttribute("bulkData") BulkRechargeAmountList bulk, ModelMap model) {
+		System.out.println("uploadBulkTopup: " + user + ",sub: " + bulk);
+		List<BulkRechargeAmount> contacts = bulk.getBulkInfo();
+		System.out.println("Object List: " + contacts);
+		if (null != contacts && contacts.size() > 0) {
+			for (BulkRechargeAmount contact : contacts) {
+				int i2 = invoice1.updateInvoiceDetail(contact.getInvoiceid() + "",
+						contact.getCustomeramountofrecharge() + "", user, getDate(), "Approved");
+
+				Customer_Invoice1 tmpdata = invoice1.getByInvoiceId(contact.getInvoiceid() + "");
+
+				AgentBillDetails sub = new AgentBillDetails();
+				sub.setInvoice_id(contact.getInvoiceid() + "");
+				sub.setReceivedAmt(contact.getCustomeramountofrecharge() + "");
+				sub.setAgentId(user);
+				sub.setReferenceId("NA");
+				sub.setRemark("NA");
+				sub.setPayment_Type("NA");
+				sub.setFromDate(tmpdata.getDueDate());
+				sub.setToDate(tmpdata.getBilling_Date());
+				sub.setCustId(tmpdata.getUser_Id());
+				sub.setTotalAmt(tmpdata.getTotal_Amount());
+				sub.setInstatus("Aprroved");
+				sub.setApprovedBy(user);
+				sub.setApprovalDate(getDate());
+				int i = agentbillservice.saveDetail(sub);
+
+				Subscriber u = userService.getByID(tmpdata.getUser_Id());
+				AllCollections col = new AllCollections();
+				col.setInvoice(contact.getInvoiceid() + "");
+				col.setVC_No(tmpdata.getVc_No());
+				col.setCust_mobile(u.getMobile());
+				col.setCust_Name(tmpdata.getUser_Name());
+				col.setCurrent_Pckg(tmpdata.getPackage_Name());
+				col.setRecharge_Amount(tmpdata.getTotal_Amount());
+				col.setPaid_Amount(contact.getCustomeramountofrecharge() + "");
+				col.setDiscount(tmpdata.getDiscount());
+				col.setPayment_Mode("OffLine");
+				col.setPayment_Status("Approved");
+				col.setCollecting_Agent(user);
+				col.setLco_Id(user);
+				col.setPayment_Type("OffLine");
+				col.setApproval_ID(user);
+				col.setRefernceId("NA");
+				col.setApproval_Date(getDate());
+				col.setTrndate(getDate());
+				col.setRemark("NA");
+				LCOCollectionRepository.saveDetail(col);
+
+				System.out.printf("Data in Loop%s \t ", contact.getCustomeremailid());
+			}
+		} else {
+			System.out.println("Data is NULL");
+		}
+		model.addAttribute("user", user);
+		return "redirect:lcoTopup.html";
+	}
+
 	// #######################################################################################
 	public String getDate() {
 		String trnstamp = null;
@@ -816,6 +1045,145 @@ public class LCOController {
 		model.addAttribute("addpath", addpath);
 		return "";
 
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/updatePckg", method = RequestMethod.GET)
+	public String updatePckg(@RequestParam("user") String user, @RequestParam("pckg") String pckg,
+			@RequestParam("price") String cost, @RequestParam("chnlist") String list) {
+		String result = null;
+		String channels[] = list.split(",");
+		PackageInfo tmp = pckgservice.getByID(pckg);
+		PackageInfo obj = new PackageInfo();
+		obj.setLcoID(user);
+		obj.setPckgType(tmp.getPckgType());
+		obj.setNoOfUser(tmp.getNoOfUser());
+		obj.setPrice(Long.parseLong(cost));
+		obj.setTrnadte(getDate());
+		obj.setPckgName(tmp.getPckgName());
+		obj.setNoOfChannels(channels.length + "");
+		obj.setPckgID(pckg);
+		int i = pckgservice.editPckg(obj);
+		int chk = 0;
+		if (i == 1) {
+			chk = pckgDetialservice.delete(pckg);
+			for (int k = 0; k < channels.length; k++) {
+				PackageDetail pd = new PackageDetail();
+				pd.setPckg_Id(pckg + "");
+				pd.setChannel_Name(channels[k]);
+				pckgDetialservice.add(pd);
+			}
+
+		}
+		if (i == 1 && chk == 1) {
+			result = "Package Update Successfully";
+		} else {
+			result = "There may be some ERROR Please Try Again";
+		}
+		Gson gson = new Gson();
+		String json = gson.toJson(result);
+		return json;
+
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/getAddOnPckg", method = RequestMethod.GET)
+	public String getAddOnPckg(@RequestParam("user") String user) {
+		List<String> addon = pckgservice.getPckgByType(user, "Add On");
+		for (String tmp : addon) {
+			System.out.println("Add on Pckg: " + tmp);
+		}
+		Gson gson = new Gson();
+		String json = gson.toJson(addon);
+
+		return json;
+		// return new ModelAndView(json);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/getALCarte", method = RequestMethod.GET)
+	public String getALCarte(@RequestParam("user") String user) {
+		List<String> al = pckgservice.getPckgByType(user, "A-La-Carte");
+		for (String tmp : al) {
+			System.out.println("A la Carte Pckg: " + tmp);
+		}
+		Gson gson = new Gson();
+		String json = gson.toJson(al);
+
+		return json;
+		// return new ModelAndView(json);
+	}
+
+	@RequestMapping(value = "/addSubscriber", method = RequestMethod.POST)
+	public ModelAndView addSubscriber(ModelMap map, @RequestParam("user") String user,
+			@ModelAttribute("NewSubscriber") Subscriber sub, @RequestParam("addpckg") String adonList,
+			@RequestParam("allpckg") String alList) {
+		sub.setUserName(System.currentTimeMillis());
+		sub.setPassword(getSaltString());
+		sub.setLcoId(user);
+		sub.setTrndate(getDate());
+		sub.setAccountBalance("0");
+		sub.setSTB_IssuedOn(getDate());
+		sub.setReturnSTB("NA");
+		sub.setStandBySTBIssued("NA");
+		sub.setSubStatus("Live");
+		sub.setAddOnPCKG(adonList);
+		sub.setA_La_Carte(alList);
+		int i = userService.addSubscriber(sub);
+		map.addAttribute("user", user);
+		return new ModelAndView("redirect:newConnn.html", map);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/getTotalCostForMulti", method = RequestMethod.GET)
+	public String getTotalCost(@RequestParam("user") String user, @RequestParam("cost") String cost,
+			@RequestParam("name") String name) {
+		System.out.println("calling getTotalCostForMulti: " + name + "," + cost);
+		int tmpCost = 0;
+		if (cost.equalsIgnoreCase("NA")) {
+			tmpCost = 0;
+		} else {
+			tmpCost = Integer.parseInt(cost);
+		}
+		long i = pckgservice.getCostByName(name);
+		i = i + tmpCost;
+		Gson gson = new Gson();
+		String json = gson.toJson(i);
+
+		return json;
+		// return new ModelAndView(json);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/getTotalCostForBase", method = RequestMethod.GET)
+	public String getTotalCostForBase(@RequestParam("user") String user, @RequestParam("name") String name) {
+
+		long i = pckgservice.getCostByName(name);
+		Gson gson = new Gson();
+		String json = gson.toJson(i);
+
+		return json;
+		// return new ModelAndView(json);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/getReduceCostForMulti", method = RequestMethod.GET)
+	public String getReduceCostForMulti(@RequestParam("user") String user, @RequestParam("cost") String cost,
+			@RequestParam("name") String name) {
+		System.out.println("calling getTotalCostForMulti: " + name + "," + cost);
+		int tmpCost = 0;
+		if (cost.equalsIgnoreCase("NA")) {
+			tmpCost = 0;
+		} else {
+			tmpCost = Integer.parseInt(cost);
+		}
+		long i = pckgservice.getCostByName(name);
+		i = tmpCost - i;
+		Gson gson = new Gson();
+		String json = gson.toJson(i);
+
+		return json;
+		// return new ModelAndView(json);
 	}
 
 }

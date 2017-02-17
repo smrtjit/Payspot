@@ -66,6 +66,13 @@ public class SubscriberServiceImpl implements SubscriberService {
 		return subsriberdao.countForSearch(user, sdate, edate, stb_no, VC_no, mobile, status, pckg);
 	}
 
+
+	@Override
+	public int addSubscriber(Subscriber sub) {
+		// TODO Auto-generated method stub
+		return subsriberdao.addSubscriber(sub);
+	}
+
 	
 
 	

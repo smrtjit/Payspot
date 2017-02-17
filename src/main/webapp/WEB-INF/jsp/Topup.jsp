@@ -1,5 +1,11 @@
 <!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
 <title>Payspot</title>
@@ -12,74 +18,197 @@
 <link href="assets/css/bootstrap.css" rel="stylesheet" />
 
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+<style>
+/* ////////////////////////////////////////////////////////////////////////////////////// */
+.v-center {
+	height: 100vh;
+	width: 100%;
+	display: table;
+	position: relative;
+	text-align: center;
+}
+
+.v-center>div {
+	display: table-cell;
+	vertical-align: middle;
+	position: relative;
+	top: -10%;
+}
+
+
+.modal-box {
+	display: none;
+	position: absolute;
+	z-index: 1000;
+	width: 98%;
+	background: white;
+	border-bottom: 1px solid #aaa;
+	border-radius: 4px;
+	box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	background-clip: padding-box;
+}
+
+@media ( min-width : 32em) {
+	.modal-box {
+		width: 70%;
+	}
+}
+
+
+.v-center {
+	height: 100vh;
+	width: 100%;
+	display: table;
+	position: relative;
+	text-align: center;
+}
+
+.v-center>div {
+	display: table-cell;
+	vertical-align: middle;
+	position: relative;
+	top: -10%;
+}
+
+.modal-box {
+	display: none;
+	position: absolute;
+	z-index: 1000;
+	width: 98%;
+	background: white;
+	border-bottom: 1px solid #aaa;
+	border-radius: 4px;
+	box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	background-clip: padding-box;
+}
+
+@media ( min-width : 32em) {
+	.modal-box {
+		width: 70%;
+	}
+}
+
+.modal-box header, .modal-box .modal-header {
+	padding: 1.25em 1.5em;
+	border-bottom: 1px solid #ddd;
+}
+
+.modal-box header h3, .modal-box header h4, .modal-box .modal-header h3,
+	.modal-box .modal-header h4 {
+	margin: 0;
+}
+
+.modal-box .modal-body {
+	padding: 2em 1.5em;
+}
+
+.modal-box footer, .modal-box .modal-footer {
+	padding: 1em;
+	border-top: 1px solid #ddd;
+	background: rgba(0, 0, 0, 0.02);
+	text-align: right;
+}
+
+.modal-overlay {
+	opacity: 0;
+	filter: alpha(opacity = 0);
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 900;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3) !important;
+}
+
+a.close {
+	line-height: 1;
+	font-size: 1.5em;
+	position: absolute;
+	top: 5%;
+	right: 2%;
+	text-decoration: none;
+	color: #bbb;
+}
+
+a.close:hover {
+	color: #222;
+	-webkit-transition: color 1s ease;
+	-moz-transition: color 1s ease;
+	transition: color 1s ease;
+}
+</style>
 
 </head>
 <body id="top">
-	<div class="bgded overlay"
-		style="background-image: url('images/demo/backgrounds/01.png');">
-		<!-- ################################################################################################ -->
+	
 		<div class="wrapper row1">
-			<header id="header" class="hoc clear">
-				<!-- ################################################################################################ -->
-				<div id="logo" class="fl_left">
-					<h1>
-						<a href="LCOHome.html?user=${user }">PaySpot</a>
-					</h1>
-				</div>
-				<nav id="mainav" class="fl_right">
-					<ul class="clear">
-						<li><a href="allSubscriber.html?user=${user }">Connection</a></li>
-						<li><a href="allCollection.html?user=${user }">Collection</a></li>
-						<li><a href="allComplaint.html?user=${user }">Complaint</a></li>
-						<li><a class="drop" href="#">Services</a>
-							<ul>
-								<li><a href="newConnn.html?user=${user }">Add
-										Subscriber</a></li>
-								<li><a href="newLineman.html?user=${user}">Add LineMan</a></li>
-								<li><a href="addStock.html?user=${user}">Add Stock</a></li>
-								<li><a href="topUp.html?user=${user }">Topup</a></li>
-
-							</ul></li>
-						<li><a class="drop" href="#">Repository</a>
-							<ul>
-								<li><a href="allLM.html?user=${user }">Line Man</a></li>
-								<li><a href="stock.html?user=${user }">Stock</a></li>
-								<li><a href="newPackage.html?user=${user }">Packages</a></li>
-								<li><a href="newChannel.html?user=${user}">Channels</a></li>
-
-							</ul></li>
-						<li><a href="lcoDetail.html?user=${user }">Profile</a></li>
-						<li><a href="logOut.html?user=${user}"
-							style="margin-right: -90px;">Log out</a></li>
-					</ul>
-				</nav>
-			</header>
-		</div>
+    <header id="header" class="hoc clear"> 
+      <!-- ################################################################################################ -->
+      <div id="logo" class="fl_left">
+        <h1><a href="LCOHome.html?user=${user }">PaySpot</a></h1>
+      </div>
+      <nav id="mainav" class="fl_right">
+        <ul class="clear">
+            <li><a href="allSubscriber.html?user=${user }">Connection</a></li>
+              <li><a href="allCollection.html?user=${user }">Collection</a></li>
+               <li><a href="allComplaint.html?user=${user }">Complaint</a></li>
+          <li><a class="drop" href="#">Services</a>
+            <ul>
+         	  <li><a href="newConnn.html?user=${user }">Add Subscriber</a></li>
+              <li><a href="newLineman.html?user=${user}">Add LineMan</a></li>    
+               <li><a href="addStock.html?user=${user}">Add Stock</a></li>   
+               <li><a href="billDownload.html?user=${user}">Download Bill</a></li>      
+               <li><a href="topUp.html?user=${user }">Topup</a></li>           
+             
+            </ul>
+          </li>
+          <li><a class="drop" href="#">Repository</a>
+            <ul>
+             <li><a href="allLM.html?user=${user }">Line Man</a></li>
+               <li><a href="stock.html?user=${user }">Stock</a></li>
+              <li><a href="newPackage.html?user=${user }">Packages</a></li>                  
+              <li><a href="newChannel.html?user=${user}">Channels</a></li>
+              
+            </ul>
+          </li>
+          <li><a href="lcoDetail.html?user=${user }">Profile</a></li>
+          <li><a href="logOut.html?user=${user}" style="margin-right: -90px;">Log out</a></li>
+        </ul>
+      </nav>
+    </header>
+  </div>
 		<div class="wrapper row3">
 			<main class="hoc container clear"> <!-- Your Content -->
 			<div id="container" style="margin-top: -62px;">
 				<div class="row" style="margin-bottom: -20px;">
 					<div class=" col-md-4 col-md-offset-4">
-						<table id="ContentPlaceHolder1_rbselect" class="form-control" style="padding-top: 0px;">
+						<table id="ContentPlaceHolder1_rbselect" class="form-control"
+							style="padding-top: 0px;">
 							<tr>
 								<td><span class="radio-inline"><input
 										id="ContentPlaceHolder1_rbselect_0" type="radio"
-										checked="checked" name="ctl00$ContentPlaceHolder1$rbselect"
-										value="0" /><label
+										name="ctl00$ContentPlaceHolder1$rbselect" value="0" /><label
 										for="ContentPlaceHolder1_rbselect_0">Account
 											Management</label></span></td>
 								<td><span class="radio-inline"><input
 										id="ContentPlaceHolder1_rbselect_1" type="radio"
-										name="ctl00$ContentPlaceHolder1$rbselect" value="1" /><label
-										for="ContentPlaceHolder1_rbselect_1">Bulk Recharge</label></span></td>
+										checked="checked" name="ctl00$ContentPlaceHolder1$rbselect"
+										value="1" /><label for="ContentPlaceHolder1_rbselect_1">Bulk
+											Recharge</label></span></td>
 							</tr>
 						</table>
 					</div>
 				</div>
 				<hr />
 
-				<div id="oto">
+				<div id="oto" style="display: none;">
 					<form:form action="saveBulkByLCO.html" method="get"
 						name="savebulkInfo" commandName="bulkInfoForm">
 						<input type="hidden" name="user" value="${user }" />
@@ -101,7 +230,7 @@
 								   
 								     $.ajax({  
 							            type : 'GET', 
-							            url: 'printBill.html',
+							            url: 'accountDetail.html',
 							            data: {
 							            	'invoice': invoice,
 							            	'user':  ${user}
@@ -339,9 +468,7 @@
 								<div class=" col-sm-6" style="text-align: center; width: 90%;">
 									<input type="submit" name="ctl00$ContentPlaceHolder1$btn_sbmit"
 										value="Submit" id="ContentPlaceHolder1_btn_sbmit"
-										style="width: 20%;" class="btn btn-primary" /> <a
-										class="btn btn-primary" style="width: 20%;"
-										href="Custrecharge.jsp">Cancel</a>
+										style="width: 20%;" class="btn btn-primary" />
 								</div>
 							</div>
 					</form:form>
@@ -349,18 +476,56 @@
 			</div>
 		</div>
 
-		<div id="bulk" style="display: none; margin-top: -23px;">
+		<div id="bulk" style="margin-top: -23px;">
 			<main class="hoc container clear"> <!-- main body -->
 
 			<div class="row" style="margin-top: -65px;">
-				<form action="processExcel.html" method="post"
+				<form action="bulkSheet.html" method="post"
 					enctype="multipart/form-data">
 					<input type="hidden" name="user" value="${user }" />
 					<div class="col-sm-3"></div>
 					<div class="col-sm-3">
 						<input type="file" name="excelfile" class="form-control"
 							onchange="example()" id="filename" /><br>
-
+						<script>
+							
+							       function example(){
+							    	   var _validFileExtensions = [".xls"]; 
+							    	   var arrInputs = document.getElementsByTagName("input");
+							    	   
+							           		for (var i = 0; i < arrInputs.length; i++) {
+											    	var oInput = arrInputs[i];
+											    	if (oInput.type == "file") {
+											        	var sFileName = oInput.value;
+											        	
+											        	
+											            if (sFileName.length > 0) {
+											                var blnValid = false;
+											                for (var j = 0; j < _validFileExtensions.length; j++) {
+											                    var sCurExtension = _validFileExtensions[j];
+											                    if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+											                        blnValid = true;
+											                        break;
+											                    }
+											                }
+											                if (!blnValid) {
+											                    alert("Sorry, " + sFileName + " is invalid File , allowed extensions are: " + _validFileExtensions.join(", "));
+											                    return false;
+											                }
+											            }
+											      }
+										    }
+											  return true;
+								       }
+						
+							       
+							       function checkValue(data){
+							    	 if(data==null || data==""){
+							    		   alert('Please select the File First!!!');
+							    		   return false;
+							    	   }
+							       }
+								  </script>
 
 					</div>
 					<div class="col-sm-2">
@@ -368,6 +533,7 @@
 						<input type="submit" value="Upload"
 							class="btn-primary btn btn-block"
 							onclick="return checkValue(document.getElementById('filename').value);" />
+
 					</div>
 				</form>
 
@@ -375,35 +541,32 @@
 
 					<input type="button" value="Submit" id="myButton" tabindex="12"
 						class="btn-danger btn btn-block" />
-
-
-				</div>
-				<div class="col-sm-2">
-
-					<input type="button" value="Template"
-						class="btn-primary btn btn-block" id="myBtn" />
-					<div class="modal fade" id="myModal" role="dialog">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
-								</div>
-								<div class="modal-body" style="padding: 1px 1px;">
-									<img id="myImg" src="assets/img/bulktemplate.png"
-										alt="Trolltunga, Norway" width="1000" height="600">
-								</div>
-							</div>
-						</div>
-					</div>
-
+					<script type="text/javascript">
+								    $(document).ready(function() {
+								       $("#myButton").click(function() {
+								    	   alert("check");
+								    	   document.getElementById("dataForm").submit();
+								       });
+								    });
+								</script>
 
 				</div>
-
-
+				
+				
+				
+						<div  class="col-sm-2  pull-right" style="margin-top: 36px;">
+						<a href="#" value=""
+									data-modal-id="popup2">Image template</a>
+							
+							 
+																			
+											
+				
+				
 			</div>
 			<hr>
 
-			<div class="col-sm-12">
+			<div class="col-sm-12" style="width: 121%; margin-left: -10%;">
 				<div class="col-sm-12">
 					<div style="margin-bottom: 0px">
 						<p>
@@ -414,7 +577,7 @@
 							<div class="col-sm-2  pull-right" style="height: 1px;">
 								<div class="container"
 									style="margin-left: 64px; margin-top: -106px;">
-									<a href="lcoTopUp.html?user=${user}">Clear All</a>
+									<a href="topUp.html?user=${user}">Clear All</a>
 								</div>
 							</div>
 						</div>
@@ -430,19 +593,51 @@
 								<tr>
 									<th scope="col"
 										style="width: 5%; background-color: rgb(119, 127, 177);">SNo.</th>
+									<th scope="col" style="background-color: rgb(119, 127, 177);">Invoice
+										No</th>
 									<th scope="col" style="background-color: rgb(119, 127, 177);">Customer
 										ID</th>
-									<th scope="col" style="background-color: rgb(119, 127, 177);">VC
-										No</th>
+
 									<th scope="col" style="background-color: rgb(119, 127, 177);">Name</th>
+									<th scope="col" style="background-color: rgb(119, 127, 177);">Address</th>
+									<th scope="col" style="background-color: rgb(119, 127, 177);">Package
+										Name</th>
+									<th scope="col" style="background-color: rgb(119, 127, 177);">Mobile
+										No</th>
 									<th scope="col" style="background-color: rgb(119, 127, 177);">Email</th>
-									<th scope="col" style="background-color: rgb(119, 127, 177);">Connection
-										Status</th>
-									<th scope="col" style="background-color: rgb(119, 127, 177);">Create
-										Time</th>
+									<th scope="col" style="background-color: rgb(119, 127, 177);">Amount</th>
 
 								</tr>
-
+								<tr>
+									<c:forEach items="${bulkData.bulkInfo}" var="user"
+										varStatus="itr">
+										<tr>
+											<td>${itr.index}</td>
+											<td><form:input path="bulkInfo[${itr.index}].invoiceid"
+													style=" width: 135px;" /></td>
+											<td><form:input path="bulkInfo[${itr.index}].customerid"
+													style=" width: 135px;" /></td>
+											<td><form:input
+													path="bulkInfo[${itr.index}].customername"
+													style=" width: 135px;" /></td>
+											<td><form:input
+													path="bulkInfo[${itr.index}].customeraddress"
+													style=" width: 135px;" /></td>
+											<td><form:input
+													path="bulkInfo[${itr.index}].customerpackagename"
+													style=" width: 135px;" /></td>
+											<td><form:input
+													path="bulkInfo[${itr.index}].customermobileno"
+													style=" width: 135px;" /></td>
+											<td><form:input
+													path="bulkInfo[${itr.index}].customeremailid"
+													style=" width: 135px;" /></td>
+											<td><form:input
+													path="bulkInfo[${itr.index}].customeramountofrecharge"
+													style=" width: 135px;" /></td>
+										</tr>
+									</c:forEach>
+								</tr>
 							</table>
 
 
@@ -597,5 +792,68 @@
 	<script src="layout/scripts/jquery.min.js"></script>
 	<script src="layout/scripts/jquery.backtotop.js"></script>
 	<script src="layout/scripts/jquery.mobilemenu.js"></script>
+	<script>
+			$(function() {
+
+				var appendthis = ("<div class='modal-overlay js-modal-close'></div>");
+
+				$('a[data-modal-id]').click(function(e) {
+
+					var url = $(this).attr('value');
+					var fields = url.split('#');
+					var id = fields[0];
+					;
+
+					document.getElementById('id1').innerHTML = id;
+
+					e.preventDefault();
+					$("body").append(appendthis);
+					$(".modal-overlay").fadeTo(500, 0.7);
+					//$(".js-modalbox").fadeIn(500);
+					var modalBox = $(this).attr('data-modal-id');
+					$('#' + modalBox).fadeIn($(this).data());
+				});
+
+				$(".js-modal-close, .modal-overlay").click(function() {
+					$(".modal-box, .modal-overlay").fadeOut(500, function() {
+						$(".modal-overlay").remove();
+					});
+
+				});
+
+				$(window).resize(
+						function() {
+							$(".modal-box")
+									.css(
+											{
+												top : ($(window).height() - $(
+														".modal-box")
+														.outerHeight()) / 2,
+												left : ($(window).width() - $(
+														".modal-box")
+														.outerWidth()) / 2
+											});
+						});
+
+				$(window).resize();
+
+			});
+		</script>
+		<div id="popup2" class="modal-box">
+			<header
+				style="border-bottom-color: #0a7777; background-color: #3eb3b3; padding: 1px;">
+
+				<a href="#" class="js-modal-close close"
+					style="line-height: 0; font-size: 2.5em; position: absolute; top: 4%; right: 1%; text-decoration: none; color: #0b212f; opacity: 15.2;">×</a>
+				<h3 id="id1" style="width: 27%; color: #ffffff;"></h3>
+			</header>
+			<div class="container" style="padding: 10px 0;">
+			<div class="form-inline marginBottom">
+					<div class="md-form">
+					   <img id="myImg" src="assets/img/bulktemplate.png" alt="Trolltunga, Norway" width="900" height="550">
+					</div>
+				</div>
+			</div>
+		</div>
 </body>
 </html>

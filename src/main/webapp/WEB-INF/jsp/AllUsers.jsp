@@ -209,395 +209,581 @@ a.close:hover {
 
 </head>
 <body id="top">
-
-		<div class="wrapper row1">
-			<header id="header" class="hoc clear">
-				<!-- ################################################################################################ -->
-				<div id="logo" class="fl_left">
-					<h1>
-						<a href="LCOHome.html?user=${user }">PaySpot</a>
-					</h1>
-				</div>
-				<nav id="mainav" class="fl_right">
-					<ul class="clear">
-						<li><a href="allSubscriber.html?user=${user }">Connection</a></li>
-						<li><a href="allCollection.html?user=${user }">Collection</a></li>
-						<li><a href="allComplaint.html?user=${user }">Complaint</a></li>
-						<li><a class="drop" href="#">Services</a>
-							<ul>
-								<li><a href="newConnn.html?user=${user }">Add
-										Subscriber</a></li>
-								<li><a href="newLineman.html?user=${user}">Add LineMan</a></li>
-								<li><a href="addStock.html?user=${user}">Add Stock</a></li>
-								<li><a href="topUp.html?user=${user }">Topup</a></li>
-
-							</ul></li>
-						<li><a class="drop" href="#">Repository</a>
-							<ul>
-								<li><a href="allLM.html?user=${user }">Line Man</a></li>
-								<li><a href="stock.html?user=${user }">Stock</a></li>
-								<li><a href="newPackage.html?user=${user }">Packages</a></li>
-								<li><a href="newChannel.html?user=${user}">Channels</a></li>
-
-							</ul></li>
-						<li><a href="lcoDetail.html?user=${user }">Profile</a></li>
-						<li><a href="logOut.html?user=${user}"
-							style="margin-right: -90px;">Log out</a></li>
-					</ul>
-				</nav>
-			</header>
-		</div>
-		<div class="wrapper row3">
-			<main class="hoc container clear"> <!-- main body -->
-			<div class="row">
-				<form:form action="searchLCOConByLCO.html" method="get">
-					<input type="hidden" name="user" value="${user }" />
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
-
-							<input name="fdate" id="fdate" tabindex="1" class="form-control"
-								placeholder="From Date" />
-
-						</div>
-
-					</div>
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
-
-							<input name="edate" type="text" id="edate" tabindex="2"
-								class="form-control" placeholder="To Date" />
-
-						</div>
-					</div>
-
-
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
-							<input name="name" type="text" tabindex="3" class="form-control"
-								placeholder="Customer Name" />
-						</div>
-
-					</div>
-
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
-
-							<input name="stb_no" type="text" id="ContentPlaceHolder1_txtvcno"
-								tabindex="4" class="form-control" placeholder="STB No." />
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
-							<input name="mobile" type="text"
-								id="ContentPlaceHolder1_txtmobile" tabindex="5"
-								class="form-control" placeholder="Mobile No." />
-
-						</div>
-
-					</div>
-
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
-							<select name="status" id="ContentPlaceHolder1_ddlstatus"
-								tabindex="6" class="form-control">
-								<option value="0">Select</option>
-								<option value="Pending">Pending</option>
-								<option value="Live">Live</option>
-								<option value="Expire">Expire</option>
-
-							</select>
-
-						</div>
-
-					</div>
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
-							<input name="pckg" type="text"
-								id="ContentPlaceHolder1_txtpackage" tabindex="7"
-								class="form-control" placeholder="Package Name" />
-
-						</div>
-
-					</div>
-
-
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
-
-							<input type="submit"
-								name="ctl00$ContentPlaceHolder1$btn_submit_request"
-								style="border-radius: 8px; padding: 4px;" value="Search"
-								id="ContentPlaceHolder1_btn_submit_request" tabindex="30"
-								class="btn-primary btn-color btn-block pull-left" />
-
-
-						</div>
-
-					</div>
-					<div class="nofound">${error}</div>
-				</form:form>
-
+	<div class="wrapper row1">
+		<header id="header" class="hoc clear">
+			<!-- ################################################################################################ -->
+			<div id="logo" class="fl_left">
+				<h1>
+					<a href="LCOHome.html?user=${user }">PaySpot</a>
+				</h1>
 			</div>
+			<nav id="mainav" class="fl_right">
+				<ul class="clear">
+					<li><a href="allSubscriber.html?user=${user }">Connection</a></li>
+					<li><a href="allCollection.html?user=${user }">Collection</a></li>
+					<li><a href="allComplaint.html?user=${user }">Complaint</a></li>
+					<li><a class="drop" href="#">Services</a>
+						<ul>
+							<li><a href="newConnn.html?user=${user }">Add Subscriber</a></li>
+							<li><a href="newLineman.html?user=${user}">Add LineMan</a></li>
+							<li><a href="addStock.html?user=${user}">Add Stock</a></li>
+							<li><a href="billDownload.html?user=${user}">Download
+									Bill</a></li>
+							<li><a href="topUp.html?user=${user }">Topup</a></li>
 
+						</ul></li>
+					<li><a class="drop" href="#">Repository</a>
+						<ul>
+							<li><a href="allLM.html?user=${user }">Line Man</a></li>
+							<li><a href="stock.html?user=${user }">Stock</a></li>
+							<li><a href="newPackage.html?user=${user }">Packages</a></li>
+							<li><a href="newChannel.html?user=${user}">Channels</a></li>
 
+						</ul></li>
+					<li><a href="lcoDetail.html?user=${user }">Profile</a></li>
+					<li><a href="logOut.html?user=${user}"
+						style="margin-right: -90px;">Log out</a></li>
+				</ul>
+			</nav>
+		</header>
+	</div>
+	<div class="wrapper row3">
+		<main class="hoc container clear"> <!-- main body -->
+		<div class="row">
+			<form:form action="searchLCOConByLCO.html" method="get">
+				<input type="hidden" name="user" value="${user }" />
+				<div class="col-sm-3">
+					<div style="margin-bottom: 10px">
 
-			<div class="col-sm-12">
-				<hr />
-				<div class="titleTd"
-					style="width: 25%; margin-bottom: -35px; text-align: center; padding: 10px; font-size: x-large; color: #c4c1e8; background-color: dimgray; border-top-left-radius: 34px; border-top-right-radius: 54px;">All
-					Subscriber</div>
-				<div style="width: 40%; margin-left: 890px;" class="col-sm-12">
-					<div style="margin-bottom: 0px">
-						<p>
-							Total Count : <span id="ContentPlaceHolder1_lblcount"
-								style="font-weight: bold;">${count }</span>
-						</p>
+						<input name="fdate" id="fdate" tabindex="1" class="form-control"
+							placeholder="From Date" />
+
+					</div>
+
+				</div>
+				<div class="col-sm-3">
+					<div style="margin-bottom: 10px">
+
+						<input name="edate" type="text" id="edate" tabindex="2"
+							class="form-control" placeholder="To Date" />
+
 					</div>
 				</div>
-				<table
-					class="table table-striped table-bordered table-hover fontsize"
-					cellspacing="0" rules="all" border="1"
-					id="ContentPlaceHolder1_gvdash"
-					style="width: 100%; border-collapse: collapse;">
-					<tr>
-						<th scope="col"
-							style="width: 5%; color: #FFFFFF; background-color: #12a59c;">SNo.</th>
-						<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">CRF
-							No.</th>
-						<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">CustomerID</th>
-						<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Name</th>
-						<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">mobile</th>
-						<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Email</th>
-						<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Address</th>
 
-					</tr>
-					<tr>
-						<c:forEach items="${userList}" var="user" varStatus="itr">
-							<tr>
-								<td style="width: 5%;">${offset + itr.index +1 }</td>
 
-								<td><a href="#" value="${user.CRFNo}"
-									data-modal-id="popup2">${user.userName}</a></td>
+				<div class="col-sm-3">
+					<div style="margin-bottom: 10px">
+						<input name="name" type="text" tabindex="3" class="form-control"
+							placeholder="Customer Name" />
+					</div>
 
-								<td>${user.userName}</td>
-								<td>${user.firstName}</td>
-								<td>${user.mobile}</td>
-								<td>${user.emailId}</td>
-								<td>${user.address}</td>
+				</div>
 
-							</tr>
-						</c:forEach>
+				<div class="col-sm-3">
+					<div style="margin-bottom: 10px">
 
-					</tr>
-				</table>
+						<input name="stb_no" type="text" id="ContentPlaceHolder1_txtvcno"
+							tabindex="4" class="form-control" placeholder="STB No." />
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div style="margin-bottom: 10px">
+						<input name="mobile" type="text"
+							id="ContentPlaceHolder1_txtmobile" tabindex="5"
+							class="form-control" placeholder="Mobile No." />
 
-				<tag:paginate max="15" offset="${offset}" count="${count}"
-					uri="allSubscriber.html?user=${user}" next="&raquo;"
-					previous="&laquo;" />
+					</div>
+
+				</div>
+
+				<div class="col-sm-3">
+					<div style="margin-bottom: 10px">
+						<select name="status" id="ContentPlaceHolder1_ddlstatus"
+							tabindex="6" class="form-control">
+							<option value="0">Select</option>
+							<option value="Pending">Pending</option>
+							<option value="Live">Live</option>
+							<option value="Expire">Expire</option>
+
+						</select>
+
+					</div>
+
+				</div>
+				<div class="col-sm-3">
+					<div style="margin-bottom: 10px">
+						<input name="pckg" type="text" id="ContentPlaceHolder1_txtpackage"
+							tabindex="7" class="form-control" placeholder="Package Name" />
+
+					</div>
+
+				</div>
+
+
+				<div class="col-sm-3">
+					<div style="margin-bottom: 10px">
+
+						<input type="submit"
+							name="ctl00$ContentPlaceHolder1$btn_submit_request"
+							style="border-radius: 8px; padding: 4px;" value="Search"
+							id="ContentPlaceHolder1_btn_submit_request" tabindex="30"
+							class="btn-primary btn-color btn-block pull-left" />
+
+
+					</div>
+
+				</div>
+				<div class="nofound">${error}</div>
+			</form:form>
+
+		</div>
+
+
+
+		<div class="col-sm-12">
+			<hr />
+			<div class="titleTd"
+				style="width: 25%; margin-bottom: -35px; text-align: center; padding: 10px; font-size: x-large; color: #c4c1e8; background-color: dimgray; border-top-left-radius: 34px; border-top-right-radius: 54px;">All
+				Subscriber</div>
+			<div style="width: 40%; margin-left: 890px;" class="col-sm-12">
+				<div style="margin-bottom: 0px">
+					<p>
+						Total Count : <span id="ContentPlaceHolder1_lblcount"
+							style="font-weight: bold;">${count }</span>
+					</p>
+				</div>
 			</div>
+			<table
+				class="table table-striped table-bordered table-hover fontsize"
+				cellspacing="0" rules="all" border="1"
+				id="ContentPlaceHolder1_gvdash"
+				style="width: 100%; border-collapse: collapse;">
+				<tr>
+					<th scope="col"
+						style="width: 5%; color: #FFFFFF; background-color: #12a59c;">SNo.</th>
+					<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">CRF
+						No.</th>
+					<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">CustomerID</th>
+					<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Name</th>
+					<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">mobile</th>
+					<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Email</th>
+					<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Address</th>
 
+				</tr>
+				<tr>
+					<c:forEach items="${userList}" var="user" varStatus="itr">
+						<tr>
+							<td style="width: 5%;">${offset + itr.index +1 }</td>
 
+							<td><a href="#" value="${user.CRFNo}#${user.userName}" data-modal-id="popup2">${user.userName}</a></td>
 
-			<!-- / main body -->
-			<div class="clear"></div>
-			</main>
+							<td>${user.userName}</td>
+							<td>${user.firstName}</td>
+							<td>${user.mobile}</td>
+							<td>${user.emailId}</td>
+							<td>${user.address}</td>
+
+						</tr>
+					</c:forEach>
+
+				</tr>
+			</table>
+
+			<tag:paginate max="15" offset="${offset}" count="${count}"
+				uri="allSubscriber.html?user=${user}" next="&raquo;"
+				previous="&laquo;" />
 		</div>
-		<div class="wrapper row4">
-			<footer id="footer" class="hoc clear">
-				<!-- ################################################################################################ -->
-				<div class="one_third first">
-					<h6 class="title">Quam aliquam ac</h6>
-					<p>Molestie metus non pharetra felis donec volutpat molestie
-						ligula imperdiet laoreet dolor scelerisque eu nunc aliquet tortor
-						erat ut tempus justo tristique.</p>
-					<p>Condimentum vivamus tempus nisi et augue fringilla aliquet
-						mauris scelerisque sollicitudin justo non posuere nunc mollis
-						facilisis purus imperdiet aliquet nisi consectetur et phasellus.</p>
-				</div>
-				<div class="one_third">
-					<h6 class="title">Morbi ullamcorper</h6>
-					<ul class="nospace linklist contact">
-						<li><i class="fa fa-map-marker"></i>
-							<address>
-								E-6 &amp; Kailash Coloney, <br> 110042
-							</address></li>
-						<li><i class="fa fa-phone"></i> +91 (123) 456 7890</li>
-						<li><i class="fa fa-fax"></i> +00 (123) 456 7890</li>
-						<li><i class="fa fa-envelope-o"></i> Sahib@gmail.com</li>
-					</ul>
-				</div>
-				<div class="one_third">
-					<h6 class="title">Finibus mauris</h6>
-					<ul class="nospace linklist">
-						<li>
-							<article>
-								<h2 class="nospace font-x1">
-									<a href="#">Suscipit mauris nunc</a>
-								</h2>
-								<time class="font-xs block btmspace-10" datetime="2045-04-06">
-									Friday, 6<sup>th</sup> April 2045
-								</time>
-								<p class="nospace">Euismod leo pulvinar a aenean vehicula
-									varius eros convallis sagittis integer&hellip;</p>
-							</article>
-						</li>
-						<li>
-							<article>
-								<h2 class="nospace font-x1">
-									<a href="#">Eros magna sed</a>
-								</h2>
-								<time class="font-xs block btmspace-10" datetime="2045-04-05">
-									Thursday, 5<sup>th</sup> April 2045
-								</time>
-								<p class="nospace">Posuere donec posuere elit condimentum
-									aliquet eget eu elit sed eget massa&hellip;</p>
-							</article>
-						</li>
-					</ul>
-				</div>
-				<!-- ################################################################################################ -->
-			</footer>
-		</div>
-		<!-- ################################################################################################ -->
-		<!-- ################################################################################################ -->
-		<!-- ################################################################################################ -->
-		<div class="wrapper row5">
-			<div id="copyright" class="hoc clear">
-				<!-- ################################################################################################ -->
-				<p class="fl_left">
-					Copyright &copy; 2016 - All Rights Reserved - <a href="#">Payspot.in</a>
-				</p>
 
-				<!-- ################################################################################################ -->
+
+
+		<!-- / main body -->
+		<div class="clear"></div>
+		</main>
+	</div>
+	<div class="wrapper row4">
+		<footer id="footer" class="hoc clear">
+			<!-- ################################################################################################ -->
+			<div class="one_third first">
+				<h6 class="title">Quam aliquam ac</h6>
+				<p>Molestie metus non pharetra felis donec volutpat molestie
+					ligula imperdiet laoreet dolor scelerisque eu nunc aliquet tortor
+					erat ut tempus justo tristique.</p>
+				<p>Condimentum vivamus tempus nisi et augue fringilla aliquet
+					mauris scelerisque sollicitudin justo non posuere nunc mollis
+					facilisis purus imperdiet aliquet nisi consectetur et phasellus.</p>
 			</div>
+			<div class="one_third">
+				<h6 class="title">Morbi ullamcorper</h6>
+				<ul class="nospace linklist contact">
+					<li><i class="fa fa-map-marker"></i>
+						<address>
+							E-6 &amp; Kailash Coloney, <br> 110042
+						</address></li>
+					<li><i class="fa fa-phone"></i> +91 (123) 456 7890</li>
+					<li><i class="fa fa-fax"></i> +00 (123) 456 7890</li>
+					<li><i class="fa fa-envelope-o"></i> Sahib@gmail.com</li>
+				</ul>
+			</div>
+			<div class="one_third">
+				<h6 class="title">Finibus mauris</h6>
+				<ul class="nospace linklist">
+					<li>
+						<article>
+							<h2 class="nospace font-x1">
+								<a href="#">Suscipit mauris nunc</a>
+							</h2>
+							<time class="font-xs block btmspace-10" datetime="2045-04-06">
+								Friday, 6<sup>th</sup> April 2045
+							</time>
+							<p class="nospace">Euismod leo pulvinar a aenean vehicula
+								varius eros convallis sagittis integer&hellip;</p>
+						</article>
+					</li>
+					<li>
+						<article>
+							<h2 class="nospace font-x1">
+								<a href="#">Eros magna sed</a>
+							</h2>
+							<time class="font-xs block btmspace-10" datetime="2045-04-05">
+								Thursday, 5<sup>th</sup> April 2045
+							</time>
+							<p class="nospace">Posuere donec posuere elit condimentum
+								aliquet eget eu elit sed eget massa&hellip;</p>
+						</article>
+					</li>
+				</ul>
+			</div>
+			<!-- ################################################################################################ -->
+		</footer>
+	</div>
+	<!-- ################################################################################################ -->
+	<!-- ################################################################################################ -->
+	<!-- ################################################################################################ -->
+	<div class="wrapper row5">
+		<div id="copyright" class="hoc clear">
+			<!-- ################################################################################################ -->
+			<p class="fl_left">
+				Copyright &copy; 2016 - All Rights Reserved - <a href="#">Payspot.in</a>
+			</p>
+
+			<!-- ################################################################################################ -->
 		</div>
-		<!-- ################################################################################################ -->
-		<!-- ################################################################################################ -->
-		<!-- ################################################################################################ -->
-		<a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
-		<!-- JAVASCRIPTS -->
+	</div>
+	<!-- ################################################################################################ -->
+	<!-- ################################################################################################ -->
+	<!-- ################################################################################################ -->
+	<a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
+	<!-- JAVASCRIPTS -->
 
-		<script src="layout/scripts/jquery.backtotop.js"></script>
-		<script src="layout/scripts/jquery.mobilemenu.js"></script>
+	<script src="layout/scripts/jquery.backtotop.js"></script>
+	<script src="layout/scripts/jquery.mobilemenu.js"></script>
 
-		<script>
-			$(function() {
+	<script>
+		$(function() {
 
-				var appendthis = ("<div class='modal-overlay js-modal-close'></div>");
+			var appendthis = ("<div class='modal-overlay js-modal-close'></div>");
 
-				$('a[data-modal-id]').click(function(e) {
+			$('a[data-modal-id]').click(function(e) {
 
-					var url = $(this).attr('value');
+				var url = $(this).attr('value');
 
-					// 							document.getElementById("demo").innerHTML ="Complaint Number: "+url;
+				// 							document.getElementById("demo").innerHTML ="Complaint Number: "+url;
 
-					var fields = url.split('#');
+				var fields = url.split('#');
 
-					var id = fields[0];
-					;
+				var id = fields[0];
+				var userid = fields[1];
+				;
+				
+				document.getElementById('id1').innerHTML = userid;
+				
+				 $.ajax({  
+			            type : 'GET', 
+			            url: 'allUsersData.html',
+			            data: {
+			            	'userid': userid,
+			            	'user':  ${user}
+			            },
+			            dataType: 'json',
+			       		cache: false,
+						beforeSend: function(xhr) 
+			                        {
+							            xhr.setRequestHeader("Accept", "application/json");  
+			                            xhr.setRequestHeader("Content-Type", "application/json");  
+			                        },
+			         				success: function (data) {
+			         					 setBulkData(data);
+			         		},
+				            error: function(e){
+				            	alert(e);
+				            }
+			            
+			        });
+				
 
-					document.getElementById('id1').innerHTML = id;
+				e.preventDefault();
+				$("body").append(appendthis);
+				$(".modal-overlay").fadeTo(500, 0.7);
+				//$(".js-modalbox").fadeIn(500);
+				var modalBox = $(this).attr('data-modal-id');
+				$('#' + modalBox).fadeIn($(this).data());
+			});
 
-					e.preventDefault();
-					$("body").append(appendthis);
-					$(".modal-overlay").fadeTo(500, 0.7);
-					//$(".js-modalbox").fadeIn(500);
-					var modalBox = $(this).attr('data-modal-id');
-					$('#' + modalBox).fadeIn($(this).data());
+			$(".js-modal-close, .modal-overlay").click(function() {
+				$(".modal-box, .modal-overlay").fadeOut(500, function() {
+					$(".modal-overlay").remove();
 				});
-
-				$(".js-modal-close, .modal-overlay").click(function() {
-					$(".modal-box, .modal-overlay").fadeOut(500, function() {
-						$(".modal-overlay").remove();
-					});
-
-				});
-
-				$(window).resize(
-						function() {
-							$(".modal-box")
-									.css(
-											{
-												top : ($(window).height() - $(
-														".modal-box")
-														.outerHeight()) / 2,
-												left : ($(window).width() - $(
-														".modal-box")
-														.outerWidth()) / 2
-											});
-						});
-
-				$(window).resize();
 
 			});
-		</script>
-		<div id="popup2" class="modal-box">
-			<header
-				style="border-bottom-color: #0a7777; background-color: #3eb3b3; padding: 1px;">
 
-				<a href="#" class="js-modal-close close"
-					style="line-height: 0; font-size: 2.5em; position: absolute; top: 4%; right: 1%; text-decoration: none; color: #0b212f; opacity: 15.2;">×</a>
-				<table style="border-color: #3eb3b3;">
-					<tbody>
-						<tr>
-							<td style="width: 27%; color: #ffffff; border-color: #3eb3b3;">
-								<h3>Complaint ID:</h3>
-							</td>
-							<td style="border-color: #3eb3b3;">
-								<h3 id="id1" style="width: 27%; color: #ffffff;">123456789</h3>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+			$(window).resize(
+					function() {
+						$(".modal-box").css(
+								{
+									top : ($(window).height() - $(".modal-box")
+											.outerHeight()) / 2,
+									left : ($(window).width() - $(".modal-box")
+											.outerWidth()) / 2
+								});
+					});
+
+			$(window).resize();
+
+		});
+		
+		
+		function setBulkData( data){
+			var fname=data.FirstName;
+			var mname=data.MiddleName;
+			var lname=data.LastName;
+			var mob=data.Mobile;
+			var email=data.EmailId;
+			var adds=data.Address;
+			var land=data.LandMark;
+			var state=data.State;
+			var city=data.City;
+			var pincode=data.Pincode;
+			var stbno=data.STBNo;
+			var blance=data.AccountBalance;
+			var addonpak=data.AddOnPCKG;
+			var alacarte=data.A_La_Carte;
+			var listaddonpack=addonpak.substring(0,addonpak.length-1);
+			
+			document.getElementById("fname").value =fname;
+			document.getElementById("mname").value =mname;
+			document.getElementById("lname").value =lname;
+			document.getElementById("mob").value =mob;
+			document.getElementById("email").value =email;
+			document.getElementById("adds").value =adds;
+			document.getElementById("land").value =land;
+			document.getElementById("state").value =state;
+			document.getElementById("city").value =city;
+			document.getElementById("pincode").value =pincode;
+			document.getElementById("stbno").value =stbno;
+			document.getElementById("blance").value =blance;
+// 			document.getElementById("addonpak").value =addonpak;
+// 			document.getElementById("alacarte").value =alacarte;
+			
+			
+
+			
+			
+		}
+
+		
+		
+		
+		
+	</script>
+	<div id="popup2" class="modal-box">
+		<header
+			style="border-bottom-color: #0a7777; background-color: #3eb3b3; padding: 1px;">
+
+			<a href="#" class="js-modal-close close"
+				style="line-height: 0; font-size: 2.5em; position: absolute; top: 4%; right: 1%; text-decoration: none; color: #0b212f; opacity: 15.2;">×</a>
+			<table style="border-color: #3eb3b3;">
+				<tbody>
+					<tr>
+						<td style="width: 27%; color: #ffffff; border-color: #3eb3b3;">
+							<h3>Complaint ID:</h3>
+						</td>
+						<td style="border-color: #3eb3b3;">
+							<h3 id="id1" style="width: 27%; color: #ffffff;"></h3>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 
 
-			</header>
+		</header>
 
-			<div class="container" style="padding: 10px 0;">
-				<%-- 					<form id="contact" action="#"> --%>
+		<div class="container" style="padding: 10px 0;">
+			<%-- 					<form id="contact" action="#"> --%>
 
-				<div class="form-inline marginBottom">
-					<div class="md-form">
-						<div class='col-md-8' style="margin-bottom: 22px;">
-							<div class="form-group internal">
+			<div class="form-inline marginBottom">
+				<div class="md-form">
+					<div class='col-md-8' style="margin-bottom: 8px;">
+						<div class="form-group internal">
+							<label for="name"
+								style="width: 330%; margin-left: -306px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">First
+								Name</label> <input type="text" id="fname"
+								style="width: 140%; margin-left: -156.5%;" class="form-control"
+								readonly="">
+						</div>
+						<div class='col-md-3 indent-small'>
+							<div class='form-group internal'>
 								<label for="name"
-									style="width: 330%; margin-left: -306px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">VC
-									Number</label> <input type="text"
-									style="width: 140%; margin-left: -156.5%;" class="form-control"
-									readonly="">
+									style="width: 230%; margin-left: 240%; margin-bottom: 1px; font-size: 12px; font-weight: 400; color: black;">Middle
+									Name</label> <input type='text' id="mname" style="width: 230%; margin-left: 240%;"
+									class="form-control" readonly />
 							</div>
-							<div class='col-md-3 indent-small'>
-								<div class='form-group internal'>
-									<label for="name"
-										style="width: 230%; margin-left: 240%; margin-bottom: 1px; font-size: 12px; font-weight: 400; color: black;">Name</label>
-									<input type='text' style="width: 230%; margin-left: 240%;"
-										class="form-control" readonly />
-								</div>
+						</div>
+						<div class='col-md-3 indent-small'>
+							<div class='form-group internal'>
+								<label for="name"
+									style="width: 230%; margin-left: 378.5%; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Last
+									Name</label> <input type='text' id="lname"
+									style="width: 230%; margin-left: 378.5%;" class="form-control"
+									readonly />
 							</div>
-							<div class='col-md-3 indent-small'>
-								<div class='form-group internal'>
-									<label for="name"
-										style="width: 230%; margin-left: 378.5%; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Mobile</label>
-									<input type='text' style="width: 230%; margin-left: 378.5%;"
-										class="form-control" readonly />
-								</div>
-							</div>
-
 						</div>
 
-						<br>
-						<textarea type="text" name="remark" class="form-control" readonly
-							style="overflow: auto; margin-left: 23px; width: 95%; resize: none"></textarea>
 					</div>
-					<br>
-					
-					<br> <input value="Submit!" type="submit" id="submit"
-						class="btn-primary btn btn-block"
-						style="width: 29%; height: 26px; font-size: 12px; margin-left: 35%;">
 
+
+					<div class='col-md-8' style="margin-bottom: 8px;">
+						<div class="form-group internal">
+							<label for="name"
+								style="width: 330%; margin-left: -149px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Mobile
+								Number</label> <input type="text" id="mob"
+								style="width: 142%; margin-left: -76.5%;" class="form-control"
+								readonly="">
+						</div>
+						<div class='col-md-3 indent-small'>
+							<div class='form-group internal'>
+								<label for="name"
+									style="width: 330%; margin-left: 240%; margin-bottom: 1px; font-size: 12px; font-weight: 400; color: black;">Email
+									ID</label> <input type='text' id="email" style="width: 330%; margin-left: 240%;"
+									class="form-control" readonly />
+							</div>
+						</div>
+					</div>
+
+					<div class='col-md-8' style="margin-bottom: 8px;">
+						<div class="form-group internal">
+							<label for="name"
+								style="width: 330%; margin-left: 8px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Address</label>
+							<input type="text" id="adds" style="width: 226%; margin-left: 2.5%;"
+								class="form-control" readonly="">
+						</div>
+					</div>
+					<div class='col-md-8' style="margin-bottom: 8px;">
+						<div class="form-group internal">
+							<label for="name"
+								style="width: 330%; margin-left: 8px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Landmark</label>
+							<input type="text" id="land" style="width: 219%; margin-left: 2.5%;"
+								class="form-control" readonly="">
+						</div>
+					</div>
+
+					<div class='col-md-8' style="margin-bottom: 8px;">
+						<div class="form-group internal">
+							<label for="name"
+								style="width: 330%; margin-left: -306px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">State
+								Name</label> <input type="text" id="state"
+								style="width: 140%; margin-left: -156.5%;" class="form-control"
+								readonly="">
+						</div>
+						<div class='col-md-3 indent-small'>
+							<div class='form-group internal'>
+								<label for="name"
+									style="width: 230%; margin-left: 240%; margin-bottom: 1px; font-size: 12px; font-weight: 400; color: black;">City
+									Name</label> <input type='text' id="city" style="width: 230%; margin-left: 240%;"
+									class="form-control" readonly />
+							</div>
+						</div>
+						<div class='col-md-3 indent-small'>
+							<div class='form-group internal'>
+								<label for="name"
+									style="width: 230%; margin-left: 378.5%; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Pin
+									Code</label> <input type='text' id="pincode"
+									style="width: 230%; margin-left: 378.5%;" class="form-control"
+									readonly />
+							</div>
+						</div>
+
+					</div>
+					<div class='col-md-8' style="margin-bottom: 8px;">
+						<div class="form-group internal">
+							<label for="name"
+								style="width: 330%; margin-left: -149px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">STB
+								Number</label> <input type="text" id="stbno"
+								style="width: 142%; margin-left: -76.5%;" class="form-control"
+								readonly="">
+						</div>
+						<div class='col-md-3 indent-small'>
+							<div class='form-group internal'>
+								<br> <a href="#" style="width: 330%; margin-left: 310px;"
+									value="changeSTB" data-modal-id="popup2">Change</a>
+							</div>
+						</div>
+					</div>
+
+					<div class='col-md-8' style="margin-bottom: 8px;">
+						<div class="form-group internal"
+							style="width: 943px; margin-left: 8px; ">
+							<div style='overflow: scroll; height: 170px;'>
+							<table class ="table table-striped table-bordered table-hover
+								fontsize"
+								cellspacing="0" rules="all" border="1"
+								id="ContentPlaceHolder1_gvdash"
+								style="width: 100%; border-collapse: collapse;">
+							<tr>
+								<th scope="col"
+									style="color: #FFFFFF; background-color: #12a59c;">Add On Package</th>
+								<th scope="col"
+									style="color: #FFFFFF; background-color: #12a59c;">A La	Carte</th>
+
+							</tr>
+							<tr>
+								<c:forEach items="${userList}" var="user" varStatus="itr">
+									<tr>
+										<td style="color: black;">1</td>
+										<td style="color: black;">2</td>
+									</tr>
+								</c:forEach>
+							</tr>
+							</table>
+							</div>
+						</div>
+
+					</div>
+						<div class='col-md-8' style="margin-bottom: 8px;">
+						<div class="form-group internal">
+							<label for="name"
+								style="width: 330%; margin-left: -149px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Account Blance</label> 
+								<input type="text" id="blance"
+								style="width: 142%; margin-left: -76.5%;" class="form-control"
+								readonly="">
+						</div>
+						<div class='col-md-3 indent-small'>
+							<div class='form-group internal'>
+								<br> <a href="#" style="width: 330%; margin-left: 877px;"
+									value="changeSTB" data-modal-id="popup2">Change</a>
+							</div>
+						</div>
+					</div>
+
+
+					
 				</div>
+				<br> <br> <input value="Submit!" type="submit" id="submit"
+					class="btn-primary btn btn-block"
+					style="width: 29%; height: 26px; font-size: 12px; margin-left: 35%;">
 
 			</div>
+
 		</div>
+	</div>
 </body>
 </html>

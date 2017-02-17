@@ -6,6 +6,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class STBStockDaoImpl implements STBStockDao {
 		Criteria cr = sf.createCriteria(STBStock.class);
 
 		cr.add(Restrictions.eq("LcoId", user));
-		cr.add(Restrictions.eq("current_status", status));
+		cr.add(Restrictions.eq("StbStatus", status));
 		List product =cr.list();
 		// System.out.println("user: " + product);
 		sf.close();
@@ -67,6 +68,22 @@ public class STBStockDaoImpl implements STBStockDao {
 		Long l= (Long) cr.setProjection(Projections.rowCount()).uniqueResult();
 		sf.close();
 		return l;
+	}
+
+	@Override
+	public List<String> getAllAvlSTB(String user) {
+		Session sf = dao.openSession();
+		Criteria cr = sf.createCriteria(STBStock.class);
+
+		cr.add(Restrictions.eq("LcoId", user));
+		cr.add(Restrictions.eq("StbStatus", "OffLine"));
+		ProjectionList proList = Projections.projectionList(); 
+		proList.add(Projections.property("StbNo"));
+		cr.setProjection(proList); 
+		List product =cr.list();
+		// System.out.println("user: " + product);
+		sf.close();
+		return product;
 	}
 
 	

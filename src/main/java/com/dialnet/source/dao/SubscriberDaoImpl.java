@@ -9,6 +9,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -57,7 +58,7 @@ public class SubscriberDaoImpl implements SubscriberDao {
 		Criteria cr = sf.createCriteria(Subscriber.class);
 
 		// To get records having salary more than 2000
-		cr.add(Restrictions.eq("UserName", id));
+		cr.add(Restrictions.eq("UserName", Long.parseLong(id)));
 		Subscriber subscriber=(Subscriber)cr.uniqueResult();
 		sf.close();
 		return subscriber;
@@ -160,6 +161,16 @@ public class SubscriberDaoImpl implements SubscriberDao {
 				.uniqueResult();
 		sf.close();
 		return l;
+	}
+
+	@Override
+	public int addSubscriber(Subscriber sub) {
+		Session sf = dao.openSession();
+		Transaction tx= sf.beginTransaction();
+		sf.save(sub);
+		tx.commit();
+		sf.close();
+		return 1;
 	}
 
 }

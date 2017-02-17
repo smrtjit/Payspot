@@ -14,8 +14,7 @@
 
 </head>
 <body id="top">
-<div class="bgded overlay" style="background-image:url('images/demo/backgrounds/01.png');"> 
-  <!-- ################################################################################################ -->
+
   <div class="wrapper row1">
     <header id="header" class="hoc clear"> 
       <!-- ################################################################################################ -->
@@ -31,7 +30,8 @@
             <ul>
          	  <li><a href="newConnn.html?user=${user }">Add Subscriber</a></li>
               <li><a href="newLineman.html?user=${user}">Add LineMan</a></li>    
-               <li><a href="addStock.html?user=${user}">Add Stock</a></li>      
+               <li><a href="addStock.html?user=${user}">Add Stock</a></li>   
+               <li><a href="billDownload.html?user=${user}">Download Bill</a></li>      
                <li><a href="topUp.html?user=${user }">Topup</a></li>           
              
             </ul>

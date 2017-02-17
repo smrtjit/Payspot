@@ -24,9 +24,10 @@ public class PackageInfoDaoImpl implements PackageInfoDao {
 	private SessionFactory session;
 
 	public PackageInfo getByID(String code) {
-		System.out.println("PackageInfo\t"+code);
 		Session sf = session.openSession();
-		PackageInfo l= (PackageInfo)sf.get(PackageInfo.class, Long.parseLong(code));
+		Criteria criteria=sf.createCriteria(PackageInfo.class);
+		criteria.add(Restrictions.eq("PckgID",code));
+		PackageInfo l= (PackageInfo)criteria.uniqueResult();
 		sf.close();
 		 return l;
 	}
@@ -55,7 +56,7 @@ public class PackageInfoDaoImpl implements PackageInfoDao {
 		Session sf = session.openSession();
 		Criteria cr = sf.createCriteria(PackageInfo.class);
 		ProjectionList proList = Projections.projectionList(); 
-		proList.add(Projections.property("name"));
+		proList.add(Projections.property("PckgName"));
 		cr.setProjection(proList); 
 
 		List l= cr.list();
@@ -69,7 +70,7 @@ public class PackageInfoDaoImpl implements PackageInfoDao {
 		Criteria cr = sf.createCriteria(PackageInfo.class);
 
 		// To get records having salary more than 2000
-		cr.add(Restrictions.eq("name", name));
+		cr.add(Restrictions.eq("PckgName", name));
 		PackageInfo product = (PackageInfo) cr.uniqueResult();
 		// System.out.println("user: " + product);
 		sf.close();
@@ -98,6 +99,45 @@ public class PackageInfoDaoImpl implements PackageInfoDao {
 		sf.close();
 		//System.out.println("Save AgentBillDetails done");
 		return 1;
+	}
+
+	@Override
+	public int editPckg(PackageInfo pckg) {
+		Session sf = session.openSession();
+		Transaction tx= sf.beginTransaction();
+		sf.saveOrUpdate(pckg);
+		tx.commit();
+		sf.close();
+		return 1;
+	}
+
+	@Override
+	public List<String> getPckgByType(String user, String type) {
+		Session sf = session.openSession();
+		Criteria cr = sf.createCriteria(PackageInfo.class);
+		cr.add(Restrictions.eq("LcoID", user));
+		cr.add(Restrictions.eq("PckgType", type));
+		ProjectionList proList = Projections.projectionList(); 
+		proList.add(Projections.property("PckgName"));
+		cr.setProjection(proList); 
+
+		List l= cr.list();
+		sf.close();
+		return l;
+	}
+
+	@Override
+	public long getCostByName(String name) {
+		Session sf = session.openSession();
+		Criteria cr = sf.createCriteria(PackageInfo.class);
+		cr.add(Restrictions.eq("PckgName", name));
+		ProjectionList proList = Projections.projectionList(); 
+		proList.add(Projections.property("Price"));
+		cr.setProjection(proList); 
+
+		long l= (Long)cr.uniqueResult();
+		sf.close();
+		return l;
 	}
 	
 

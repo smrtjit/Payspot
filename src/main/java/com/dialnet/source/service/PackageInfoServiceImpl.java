@@ -61,5 +61,29 @@ public class PackageInfoServiceImpl implements PackageInfoService {
 
 
 
+	@Override
+	public int editPckg(PackageInfo pckg) {
+		
+		return packageinfodao.editPckg(pckg);
+	}
+
+
+
+	@Override
+	public List<String> getPckgByType(String user, String type) {
+		
+		return packageinfodao.getPckgByType(user, type);
+	}
+
+
+
+	@Override
+	public long getCostByName(String name) {
+		
+		return packageinfodao.getCostByName(name);
+	}
+
+
+
 
 }

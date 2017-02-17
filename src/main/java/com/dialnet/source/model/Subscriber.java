@@ -22,6 +22,11 @@ public class Subscriber {
 	private String State;
 	private String Mobile;
 	private String EmailId;
+	
+	private String PhotoIDType;
+	private String PhotoID;
+	private String PhotoIDURL;
+	
 	private String GSTNo;
 	private String STBNo;
 	private String CRFNo;
@@ -36,17 +41,24 @@ public class Subscriber {
 	private String StandBySTBIssued;
 	private String ReturnSTB;
 	private String CAF_Url;
+	
+	private String ActivationCharge;
+	private String STB_Rental_Type;
+	private String STB_Full_Rental;
+	private String STB_Monthly_Rental;
 	private String LcoId;
 	public Subscriber() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Subscriber(long userName, String password, String firstName, String middleName, String lastName,
+		public Subscriber(long userName, String password, String firstName, String middleName, String lastName,
 			String address, String landMark, String city, String pincode, String state, String mobile, String emailId,
-			String gSTNo, String sTBNo, String cRFNo, String basePCKG, String addOnPCKG, String a_La_Carte,
-			String pCKGPrice, String accountBalance, String subStatus, String trndate, String sTB_IssuedOn,
-			String standBySTBIssued, String returnSTB, String cAF_Url, String lcoId) {
+			String photoIDType, String photoID, String photoIDURL, String gSTNo, String sTBNo, String cRFNo,
+			String basePCKG, String addOnPCKG, String a_La_Carte, String pCKGPrice, String accountBalance,
+			String subStatus, String trndate, String sTB_IssuedOn, String standBySTBIssued, String returnSTB,
+			String cAF_Url, String activationCharge, String sTB_Rental_Type, String sTB_Full_Rental,
+			String sTB_Monthly_Rental, String lcoId) {
 		super();
 		UserName = userName;
 		Password = password;
@@ -60,6 +72,9 @@ public class Subscriber {
 		State = state;
 		Mobile = mobile;
 		EmailId = emailId;
+		PhotoIDType = photoIDType;
+		PhotoID = photoID;
+		PhotoIDURL = photoIDURL;
 		GSTNo = gSTNo;
 		STBNo = sTBNo;
 		CRFNo = cRFNo;
@@ -74,8 +89,84 @@ public class Subscriber {
 		StandBySTBIssued = standBySTBIssued;
 		ReturnSTB = returnSTB;
 		CAF_Url = cAF_Url;
+		ActivationCharge = activationCharge;
+		STB_Rental_Type = sTB_Rental_Type;
+		STB_Full_Rental = sTB_Full_Rental;
+		STB_Monthly_Rental = sTB_Monthly_Rental;
 		LcoId = lcoId;
 	}
+
+		public String getPhotoIDType() {
+			return PhotoIDType;
+		}
+
+		public void setPhotoIDType(String photoIDType) {
+			PhotoIDType = photoIDType;
+		}
+
+		public String getPhotoID() {
+			return PhotoID;
+		}
+
+		public void setPhotoID(String photoID) {
+			PhotoID = photoID;
+		}
+
+		public String getPhotoIDURL() {
+			return PhotoIDURL;
+		}
+
+		public void setPhotoIDURL(String photoIDURL) {
+			PhotoIDURL = photoIDURL;
+		}
+
+	public String getActivationCharge() {
+		return ActivationCharge;
+	}
+
+
+
+	public void setActivationCharge(String activationCharge) {
+		ActivationCharge = activationCharge;
+	}
+
+
+
+	public String getSTB_Rental_Type() {
+		return STB_Rental_Type;
+	}
+
+
+
+	public void setSTB_Rental_Type(String sTB_Rental_Type) {
+		STB_Rental_Type = sTB_Rental_Type;
+	}
+
+
+
+	public String getSTB_Full_Rental() {
+		return STB_Full_Rental;
+	}
+
+
+
+	public void setSTB_Full_Rental(String sTB_Full_Rental) {
+		STB_Full_Rental = sTB_Full_Rental;
+	}
+
+
+
+	public String getSTB_Monthly_Rental() {
+		return STB_Monthly_Rental;
+	}
+
+
+
+	public void setSTB_Monthly_Rental(String sTB_Monthly_Rental) {
+		STB_Monthly_Rental = sTB_Monthly_Rental;
+	}
+
+
 
 	public String getSubStatus() {
 		return SubStatus;

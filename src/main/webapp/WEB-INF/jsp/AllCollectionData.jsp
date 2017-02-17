@@ -364,55 +364,54 @@ function setBulkData( data){
 </script>
 </head>
 <body id="top">
+	<div class="wrapper row1">
+		<header id="header" class="hoc clear">
+			<!-- ################################################################################################ -->
+			<div id="logo" class="fl_left">
+				<h1>
+					<a href="LCOHome.html?user=${user }">PaySpot</a>
+				</h1>
+			</div>
+			<nav id="mainav" class="fl_right">
+				<ul class="clear">
+					<li><a href="allSubscriber.html?user=${user }">Connection</a></li>
+					<li><a href="allCollection.html?user=${user }">Collection</a></li>
+					<li><a href="allComplaint.html?user=${user }">Complaint</a></li>
+					<li><a class="drop" href="#">Services</a>
+						<ul>
+							<li><a href="newConnn.html?user=${user }">Add Subscriber</a></li>
+							<li><a href="newLineman.html?user=${user}">Add LineMan</a></li>
+							<li><a href="addStock.html?user=${user}">Add Stock</a></li>
+							<li><a href="billDownload.html?user=${user}">Download
+									Bill</a></li>
+							<li><a href="topUp.html?user=${user }">Topup</a></li>
 
-		<!-- ################################################################################################ -->
-		<div class="wrapper row1">
-			<header id="header" class="hoc clear">
-				<!-- ################################################################################################ -->
-				<div id="logo" class="fl_left">
-					<h1>
-						<a href="LCOHome.html?user=${user }">PaySpot</a>
-					</h1>
-				</div>
-				<nav id="mainav" class="fl_right">
-					<ul class="clear">
-						<li><a href="allSubscriber.html?user=${user }">Connection</a></li>
-						<li><a href="allCollection.html?user=${user }">Collection</a></li>
-						<li><a href="allComplaint.html?user=${user }">Complaint</a></li>
-						<li><a class="drop" href="#">Services</a>
-							<ul>
-								<li><a href="newConnn.html?user=${user }">Add
-										Subscriber</a></li>
-								<li><a href="newLineman.html?user=${user}">Add LineMan</a></li>
-								<li><a href="addStock.html?user=${user}">Add Stock</a></li>
-								<li><a href="topUp.html?user=${user }">Topup</a></li>
+						</ul></li>
+					<li><a class="drop" href="#">Repository</a>
+						<ul>
+							<li><a href="allLM.html?user=${user }">Line Man</a></li>
+							<li><a href="stock.html?user=${user }">Stock</a></li>
+							<li><a href="newPackage.html?user=${user }">Packages</a></li>
+							<li><a href="newChannel.html?user=${user}">Channels</a></li>
 
-							</ul></li>
-						<li><a class="drop" href="#">Repository</a>
-							<ul>
-								<li><a href="allLM.html?user=${user }">Line Man</a></li>
-								<li><a href="stock.html?user=${user }">Stock</a></li>
-								<li><a href="newPackage.html?user=${user }">Packages</a></li>
-								<li><a href="newChannel.html?user=${user}">Channels</a></li>
-
-							</ul></li>
-						<li><a href="lcoDetail.html?user=${user }">Profile</a></li>
-						<li><a href="logOut.html?user=${user}"
-							style="margin-right: -90px;">Log out</a></li>
-					</ul>
-				</nav>
-			</header>
-		</div>
-		<div class="wrapper row3">
-			<main class="hoc container clear"> <!-- main body -->
-			<div class="row">
-				<form action="searchCollectionLCO.html">
+						</ul></li>
+					<li><a href="lcoDetail.html?user=${user }">Profile</a></li>
+					<li><a href="logOut.html?user=${user}"
+						style="margin-right: -90px;">Log out</a></li>
+				</ul>
+			</nav>
+		</header>
+	</div>
+	<div class="wrapper row3">
+		<main class="hoc container clear"> <!-- main body -->
+		<div class="row">
+			<form action="searchCollectionLCO.html">
 				<input type="hidden" name="user" value="${user }" />
 
 				<div class="col-sm-2">
 					<div style="margin-bottom: 10px">
-						<input name="fdate" type="text" id="fdate"
-							tabindex="1" class="form-control" placeholder="From Date" />
+						<input name="fdate" type="text" id="fdate" tabindex="1"
+							class="form-control" placeholder="From Date" />
 					</div>
 
 				</div>
@@ -420,8 +419,7 @@ function setBulkData( data){
 				<div class="col-sm-2">
 					<div style="margin-bottom: 10px">
 
-						<input name="edate" type="text"
-							id="edate" tabindex="2"
+						<input name="edate" type="text" id="edate" tabindex="2"
 							class="form-control" placeholder="To Date" />
 
 					</div>
@@ -469,185 +467,208 @@ function setBulkData( data){
 				<div class="nofound">${error}</div>
 			</form>
 
-			</div>
+		</div>
 
 
 
-			<div class="col-sm-12">
-				<hr />
-				<div class="titleTd"
-					style="width: 25%; margin-bottom: -35px; text-align: center; padding: 10px; font-size: x-large; color: #c4c1e8; background-color: dimgray; border-top-left-radius: 34px; border-top-right-radius: 54px;">AllCollection</div>
-				<div style="width: 40%; margin-left: 890px;" class="col-sm-12">
-					<div style="margin-bottom: 0px">
-						<p>
-							Total Count : <span id="ContentPlaceHolder1_lblcount"
-								style="font-weight: bold;">${count }</span>
-						</p>
-					</div>
+		<div class="col-sm-12">
+			<hr />
+			<div class="titleTd"
+				style="width: 25%; margin-bottom: -35px; text-align: center; padding: 10px; font-size: x-large; color: #c4c1e8; background-color: dimgray; border-top-left-radius: 34px; border-top-right-radius: 54px;">AllCollection</div>
+			<div style="width: 40%; margin-left: 890px;" class="col-sm-12">
+				<div style="margin-bottom: 0px">
+					<p>
+						Total Count : <span id="ContentPlaceHolder1_lblcount"
+							style="font-weight: bold;">${count }</span>
+					</p>
 				</div>
-				<table
-					class="table table-striped table-bordered table-hover fontsize"
-					cellspacing="0" rules="all" border="1"
-					id="ContentPlaceHolder1_gvdash"
-					style="width: 100%; border-collapse: collapse;">
+			</div>
+			<table
+				class="table table-striped table-bordered table-hover fontsize"
+				cellspacing="0" rules="all" border="1"
+				id="ContentPlaceHolder1_gvdash"
+				style="width: 100%; border-collapse: collapse;">
+
+				<tr>
+					<th scope="col"
+						style="width: 5%; color: #FFFFFF; background-color: #12a59c;">SNo.</th>
+					<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Invoice
+						Number</th>
+					<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">CAF
+						No</th>
+					<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Customer
+						Name</th>
+					<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Mobile</th>
+					<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Agent
+						ID</th>
+					<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Recharge
+						Amount</th>
+					<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Payment
+						Mode</th>
+					<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Payment
+						Status</th>
+					<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Date_Time</th>
+					<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Approval</th>
+				</tr>
+				<c:forEach items="${userList}" var="user" varStatus="itr">
 					<tr>
-					<tr>
-						<th scope="col">SN</th>
-						<th scope="col" id="Invoice_Number">Invoice Number</th>
-						<th scope="col">CAF No</th>
-						<th scope="col">Customer Name</th>
-						<th scope="col">Mobile No</th>
-						<th scope="col">Agent ID</th>
-						<th scope="col">Recharge Amount</th>
-						<th scope="col">Payment Mode</th>
-						<th scope="col">Payment Status</th>
-						<th scope="col">Date_Time</th>
-						<th scope="col">Approval</th>
+						<td>${offset + itr.index +1 }</td>
+
+						<td><a href="#" value="${user.invoice}"
+							data-modal-link="popup3">${user.invoice}</a></td>
+						<td>${user.VC_No}</td>
+						<td>${user.cust_Name}</td>
+						<td>${user.cust_mobile}</td>
+						<td>${user.collecting_Agent}</td>
+						<td>${user.recharge_Amount}</td>
+						<td>${user.payment_Mode}</td>
+						<td>${user.payment_Status}</td>
+						<td>${user.trndate}</td>
+
+
+						<td>
+							<%-- 								<input type="button" name="${user.invoice}" value="Edit"class="btn-primary btn btn-block"  id="" onclick="myBtn();"/> --%>
+							<a class="js-open-modal btn" href="#" value="${user.invoice}"
+							data-modal-id="popup2"><img src="assets/img/edit.png"
+								onClick=" return false;" /></a>
+
+						</td>
+
 					</tr>
-					<c:forEach items="${userList}" var="user" varStatus="itr">
-						<tr>
-							<td>${offset + itr.index +1 }</td>
+				</c:forEach>
+			</table>
 
-							<td><a href="#" value="${user.invoice}"
-								data-modal-link="popup3">${user.invoice}</a></td>
-							<td>${user.VC_No}</td>
-							<td>${user.cust_Name}</td>
-							<td>${user.cust_mobile}</td>
-							<td>${user.collecting_Agent}</td>
-							<td>${user.recharge_Amount}</td>
-							<td>${user.payment_Mode}</td>
-							<td>${user.payment_Status}</td>
-							<td>${user.trndate}</td>
+			<tag:paginate max="15" offset="${offset}" count="${count}"
+				uri="allSubscriber.html?user=${user}" next="&raquo;"
+				previous="&laquo;" />
+		</div>
 
 
-							<td>
-								<%-- 								<input type="button" name="${user.invoice}" value="Edit"class="btn-primary btn btn-block"  id="" onclick="myBtn();"/> --%>
-								<a class="js-open-modal btn" href="#" value="${user.invoice}"
-								data-modal-id="popup2"><img src="assets/img/edit.png"
-									onClick=" return false;" /></a>
 
-							</td>
-
-						</tr>
-					</c:forEach>
-				</table>
-
-				<tag:paginate max="15" offset="${offset}" count="${count}"
-					uri="allSubscriber.html?user=${user}" next="&raquo;"
-					previous="&laquo;" />
+		<!-- / main body -->
+		<div class="clear"></div>
+		</main>
+	</div>
+	<div class="wrapper row4">
+		<footer id="footer" class="hoc clear">
+			<!-- ################################################################################################ -->
+			<div class="one_third first">
+				<h6 class="title" style="font-size: 11px;">Quam aliquam ac</h6>
+				<p>Molestie metus non pharetra felis donec volutpat molestie
+					ligula imperdiet laoreet dolor scelerisque eu nunc aliquet tortor
+					erat ut tempus justo tristique.</p>
+				<p>Condimentum vivamus tempus nisi et augue fringilla aliquet
+					mauris scelerisque sollicitudin justo non posuere nunc mollis
+					facilisis purus imperdiet aliquet nisi consectetur et phasellus.</p>
 			</div>
-
-
-
-			<!-- / main body -->
-			<div class="clear"></div>
-			</main>
-		</div>
-		<div class="wrapper row4">
-			<footer id="footer" class="hoc clear">
-				<!-- ################################################################################################ -->
-				<div class="one_third first">
-					<h6 class="title">Quam aliquam ac</h6>
-					<p>Molestie metus non pharetra felis donec volutpat molestie
-						ligula imperdiet laoreet dolor scelerisque eu nunc aliquet tortor
-						erat ut tempus justo tristique.</p>
-					<p>Condimentum vivamus tempus nisi et augue fringilla aliquet
-						mauris scelerisque sollicitudin justo non posuere nunc mollis
-						facilisis purus imperdiet aliquet nisi consectetur et phasellus.</p>
-				</div>
-				<div class="one_third">
-					<h6 class="title">Morbi ullamcorper</h6>
-					<ul class="nospace linklist contact">
-						<li><i class="fa fa-map-marker"></i>
-							<address>
-								E-6 &amp; Kailash Coloney, <br> 110042
-							</address></li>
-						<li><i class="fa fa-phone"></i> +91 (123) 456 7890</li>
-						<li><i class="fa fa-fax"></i> +00 (123) 456 7890</li>
-						<li><i class="fa fa-envelope-o"></i> Sahib@gmail.com</li>
-					</ul>
-				</div>
-				<div class="one_third">
-					<h6 class="title">Finibus mauris</h6>
-					<ul class="nospace linklist">
-						<li>
-							<article>
-								<h2 class="nospace font-x1">
-									<a href="#">Suscipit mauris nunc</a>
-								</h2>
-								<time class="font-xs block btmspace-10" datetime="2045-04-06">
-									Friday, 6<sup>th</sup> April 2045
-								</time>
-								<p class="nospace">Euismod leo pulvinar a aenean vehicula
-									varius eros convallis sagittis integer&hellip;</p>
-							</article>
-						</li>
-						<li>
-							<article>
-								<h2 class="nospace font-x1">
-									<a href="#">Eros magna sed</a>
-								</h2>
-								<time class="font-xs block btmspace-10" datetime="2045-04-05">
-									Thursday, 5<sup>th</sup> April 2045
-								</time>
-								<p class="nospace">Posuere donec posuere elit condimentum
-									aliquet eget eu elit sed eget massa&hellip;</p>
-							</article>
-						</li>
-					</ul>
-				</div>
-				<!-- ################################################################################################ -->
-			</footer>
-		</div>
-		<!-- ################################################################################################ -->
-		<!-- ################################################################################################ -->
-		<!-- ################################################################################################ -->
-		<div class="wrapper row5">
-			<div id="copyright" class="hoc clear">
-				<!-- ################################################################################################ -->
-				<p class="fl_left">
-					Copyright &copy; 2016 - All Rights Reserved - <a href="#">Payspot.in</a>
-				</p>
-
-				<!-- ################################################################################################ -->
+			<div class="one_third">
+				<h6 class="title"  style="font-size: 11px;">Morbi ullamcorper</h6>
+				<ul class="nospace linklist contact">
+					<li><i class="fa fa-map-marker"></i>
+						<address>
+							E-6 &amp; Kailash Coloney, <br> 110042
+						</address></li>
+					<li><i class="fa fa-phone"></i> +91 (123) 456 7890</li>
+					<li><i class="fa fa-fax"></i> +00 (123) 456 7890</li>
+					<li><i class="fa fa-envelope-o"></i> Sahib@gmail.com</li>
+				</ul>
 			</div>
+			<div class="one_third">
+				<h6 class="title"  style="font-size: 11px;">Finibus mauris</h6>
+				<ul class="nospace linklist">
+					<li>
+						<article>
+							<h2 class="nospace font-x1">
+								<a href="#"  style="font-size: 11px;">Suscipit mauris nunc</a>
+							</h2>
+							<time class="font-xs block btmspace-10" datetime="2045-04-06">
+								Friday, 6<sup>th</sup> April 2045
+							</time>
+							<p class="nospace">Euismod leo pulvinar a aenean vehicula
+								varius eros convallis sagittis integer&hellip;</p>
+						</article>
+					</li>
+					<li>
+						<article>
+							<h2 class="nospace font-x1">
+								<a href="#"  style="font-size: 11px;">Eros magna sed</a>
+							</h2>
+							<time class="font-xs block btmspace-10" datetime="2045-04-05">
+								Thursday, 5<sup>th</sup> April 2045
+							</time>
+							<p class="nospace">Posuere donec posuere elit condimentum
+								aliquet eget eu elit sed eget massa&hellip;</p>
+						</article>
+					</li>
+				</ul>
+			</div>
+			<!-- ################################################################################################ -->
+		</footer>
+	</div>
+	<!-- ################################################################################################ -->
+	<!-- ################################################################################################ -->
+	<!-- ################################################################################################ -->
+	<div class="wrapper row5">
+		<div id="copyright" class="hoc clear">
+			<!-- ################################################################################################ -->
+			<p class="fl_left">
+				Copyright &copy; 2016 - All Rights Reserved - <a href="#">Payspot.in</a>
+			</p>
+
+			<!-- ################################################################################################ -->
 		</div>
-		<!-- ################################################################################################ -->
-		<!-- ################################################################################################ -->
-		<!-- ################################################################################################ -->
-		<a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
-		
-		<div id="popup2" class="modal-box">
+	</div>
+	<!-- ################################################################################################ -->
+	<!-- ################################################################################################ -->
+	<!-- ################################################################################################ -->
+	<a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
+
+	<div id="popup2" class="modal-box">
 		<header style="background-color: #3eb3b3;">
 			<a href="#" class="js-modal-close close">×</a>
 			<h3 style="color: #ffffff;">
-				Invoice Number :<label for="form1" class="" style="color: #ffffff;" id="buklinid"> </label>
+				Invoice Number :<label for="form1" class="" style="color: #ffffff;"
+					id="buklinid"> </label>
 			</h3>
 		</header>
 		<div class="modal-body" style="padding-left: 20px">
 			<!--    paste here -->
-			<form action="ApprovedBulkLCO.html" >
-				<input type="hidden" name="user" value="${user }">
-				<input type="hidden" name="invoice"  id="invoice" >
+			<form action="ApprovedBulkLCO.html">
+				<input type="hidden" name="user" value="${user }"> <input
+					type="hidden" name="invoice" id="invoice">
 				<div>
 					<div class="form-inline marginBottom">
 						<div class="md-form">
-							<label for="form1" class="" style="color: black;">Customer Name:</label> <input type="text"
-								style="width: 30%; margin-left: 4%" id="fdate" readonly=""
-								class="form-control input1"> <label for="form1" class="" style="color: black;">Amount
-								:</label> <input type="text" style="width: 30%; margin-left: 11%;"
-								id="amt" readonly class="form-control input1">
+							<label for="form1" class="" style="color: black;">Customer
+								Name:</label> <input type="text" style="width: 30%; margin-left: 4%"
+								id="fdate" readonly="" class="form-control input1"> <label
+								for="form1" class="" style="color: black;">Amount :</label> <input
+								type="text" style="width: 30%; margin-left: 11%;" id="amt"
+								readonly class="form-control input1">
 
 						</div>
 					</div>
 					<br>
 					<div class="form-inline marginBottom">
 						<div class="md-form">
-							<label for="form1" class="" style="color: black;">Service TAX :</label> <input
-								type="text" style="width: 30%; margin-left: 6%" id="servicetax"
-								readonly class="form-control input1"> <label
-								for="form1" class="" style="color: black;">Amusement TAX:</label> <input type="text"
-								style="width: 30%; margin-left: 6%;" id="amtt" readonly
+							<label for="form1" class="" style="color: black;">Service
+								TAX :</label> <input type="text" style="width: 30%; margin-left: 6%"
+								id="servicetax" readonly class="form-control input1"> <label
+								for="form1" class="" style="color: black;">Amusement
+								TAX:</label> <input type="text" style="width: 30%; margin-left: 6%;"
+								id="amtt" readonly class="form-control input1">
+
+						</div>
+					</div>
+					<br>
+					<div class="form-inline marginBottom">
+						<div class="md-form">
+							<label for="form1" class="" style="color: black;">Other
+								TAX :</label> <input type="text" style="width: 30%; margin-left: 7%;"
+								id="ot" readonly class="form-control input1"> <label
+								for="form1" class="" style="color: black;">Receive
+								Amount :</label> <input type="text" style="width: 30%; margin-left: 6%;"
+								id="ramt" placeholder="Please Enter The Amount" name="RAmt"
 								class="form-control input1">
 
 						</div>
@@ -655,24 +676,12 @@ function setBulkData( data){
 					<br>
 					<div class="form-inline marginBottom">
 						<div class="md-form">
-							<label for="form1" class="" style="color: black;">Other TAX :</label> <input
-								type="text" style="width: 30%; margin-left: 7%;" id="ot"
-								readonly class="form-control input1"> <label
-								for="form1" class="" style="color: black;">Receive Amount :</label> <input type="text"
-								style="width: 30%; margin-left: 6%;" id="ramt"
-								placeholder="Please Enter The Amount" name="RAmt"
-								class="form-control input1">
-
-						</div>
-					</div>
-					<br>
-		<div class="form-inline marginBottom">
-						<div class="md-form">
-							<label for="form1" class="" style="color: black;">Received Via :</label> <input
-								type="text" placeholder="Please Enter The Agent ID" id="agent" readonly
-								style="width: 30%; margin-left: 5%;" class="form-control input1">
-							<label for="form1" class="" style="color: black;">Reference ID :</label> <input
-								type="text" style="width: 30%; margin-left: 8%;" id="rid"
+							<label for="form1" class="" style="color: black;">Received
+								Via :</label> <input type="text" placeholder="Please Enter The Agent ID"
+								id="agent" readonly style="width: 30%; margin-left: 5%;"
+								class="form-control input1"> <label for="form1" class=""
+								style="color: black;">Reference ID :</label> <input type="text"
+								style="width: 30%; margin-left: 8%;" id="rid"
 								placeholder="Please Enter The Reference ID" name="RId"
 								class="form-control input1">
 
@@ -681,27 +690,29 @@ function setBulkData( data){
 					<br>
 					<div class="form-inline marginBottom">
 						<div class="md-form">
-							<label for="form1" class="" style="color: black;" >Payment Status :</label> 
-							<select id="state" name="state" placeholder="select type" 
-							class="form-control" style="width: 48%;margin-left: 40px;">
-							<option value="0">Select Status</option>
-							<option value="Pending">Pending</option>
-							<option value="Approved">Approved</option>
+							<label for="form1" class="" style="color: black;">Payment
+								Status :</label> <select id="state" name="state"
+								placeholder="select type" class="form-control"
+								style="width: 48%; margin-left: 40px;">
+								<option value="0">Select Status</option>
+								<option value="Pending">Pending</option>
+								<option value="Approved">Approved</option>
 							</select>
-							
+
 
 						</div>
 					</div>
 					<br>
 					<div class="form-inline marginBottom">
 						<div class="md-form" style="width: 94%;">
-							<label for="form1" class="" style="color: black;">Remark :</label>
-							<textarea name="Remark" rows="3"
-								cols="100" id="rmark"
+							<label for="form1" class="" style="color: black;">Remark
+								:</label>
+							<textarea name="Remark" rows="3" cols="100" id="rmark"
 								class="form-control" placeholder="Add Remark"
 								style="overflow: auto; resize: none;">					</textarea>
-								<br>
-							<div class="col-sm-2  pull-right" style=" margin-top: 15px; margin-bottom: 10px;">
+							<br>
+							<div class="col-sm-2  pull-right"
+								style="margin-top: 15px; margin-bottom: 10px;">
 								<input type="submit" name="#" value="Submit" id="" tabindex="12"
 									class="btn-danger btn btn-block">
 							</div>
@@ -715,12 +726,12 @@ function setBulkData( data){
 
 		</div>
 	</div>
-<!-- 	##################################################BILL################################################################################# -->
-<div id="popup3" class="modal-box">
+	<!-- 	##################################################BILL################################################################################# -->
+	<div id="popup3" class="modal-box">
 
 		<a href="#" class="js-modal-close close">×</a>
 
-		<div class="modal-body"style="padding: 0px;">
+		<div class="modal-body" style="padding: 0px;">
 			<div class="modal-content">
 				<div class="modal-header" style="background-color: #288484">
 					<button type="button" class="close" data-dismiss="modal"></button>
@@ -919,7 +930,7 @@ function setBulkData( data){
 		</div>
 
 	</div>
-		<script type="text/javascript">
+	<script type="text/javascript">
 			var theForm = document.forms['form1'];
 			if (!theForm) {
 				theForm = document.form1;
@@ -932,7 +943,7 @@ function setBulkData( data){
 				}
 			}
 		</script>
-			<script type="text/javascript">
+	<script type="text/javascript">
 					Sys.WebForms.PageRequestManager._initialize(
 							'ctl00$ContentPlaceHolder1$ScriptManager1',
 							'form1', [ 'tctl00$ContentPlaceHolder1$upd',

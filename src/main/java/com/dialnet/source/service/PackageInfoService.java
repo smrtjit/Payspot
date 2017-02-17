@@ -14,4 +14,7 @@ public interface PackageInfoService {
 	public PackageInfo getByName(String name);
 	public int add(PackageInfo pckg); 
 	public int delete(String id);
+	public int editPckg(PackageInfo pckg);
+	public List<String> getPckgByType(String user,String type);
+	public long getCostByName(String name);
 }

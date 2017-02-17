@@ -17,12 +17,13 @@ public class PackageInfo {
 	
 	private String  PckgName;
 	private String  PckgType;
-	private String  Price;
+	private long  Price;
 	private String  NoOfChannels;
 	private String  NoOfUser;
 	private String  LcoID;
 	private String  trnadte;
-	public PackageInfo(String pckgID, String pckgName, String pckgType, String price, String noOfChannels,
+	
+	public PackageInfo(String pckgID, String pckgName, String pckgType, long price, String noOfChannels,
 			String noOfUser, String lcoID, String trnadte) {
 		super();
 		PckgID = pckgID;
@@ -56,10 +57,11 @@ public class PackageInfo {
 	public void setPckgType(String pckgType) {
 		PckgType = pckgType;
 	}
-	public String getPrice() {
+	
+	public long getPrice() {
 		return Price;
 	}
-	public void setPrice(String price) {
+	public void setPrice(long price) {
 		Price = price;
 	}
 	public String getNoOfChannels() {

@@ -10,4 +10,5 @@ public interface STBStockDao {
 	public List<STBStock> getByStatus(String user,String stutus);
 	public List<STBStock> list(String user,Integer offset, Integer maxResults);
 	public Long count(String user);
+	public List<String> getAllAvlSTB(String user);
 }

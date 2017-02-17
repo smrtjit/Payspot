@@ -3,12 +3,30 @@ package com.dialnet.source.model;
 
 public class BulkRechargeAmount {
 
-	private String invoiceid;
+	private int invoiceid;
+	public int getInvoiceid() {
+		return invoiceid;
+	}
+
+
+
+
+
+	public void setInvoiceid(int invoiceid) {
+		this.invoiceid = invoiceid;
+	}
+
+
+
 	private int customerid;
 
 	public int getCustomerid() {
 		return customerid;
 	}
+
+	
+
+	
 
 	public void setCustomerid(int customerid) {
 		this.customerid = customerid;
@@ -62,13 +80,7 @@ public class BulkRechargeAmount {
 		this.customeramountofrecharge = customeramountofrecharge;
 	}
 
-	public String getInvoiceid() {
-		return invoiceid;
-	}
 
-	public void setInvoiceid(String invoiceid) {
-		this.invoiceid = invoiceid;
-	}
 
 	private String customername;
 	private String customeraddress;

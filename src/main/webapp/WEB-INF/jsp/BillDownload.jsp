@@ -8,7 +8,7 @@
 <%@ taglib prefix="tag1" uri="/WEB-INF/taglibs/customTaglib2.tld"%>
 <html>
 <head>
-<title>Stock</title>
+<title>Subscriber</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -16,6 +16,13 @@
 	media="all">
 <link href="assets/css/circle.css" rel="stylesheet" />
 <link href="assets/css/bootstrap.css" rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
 <style>
 /* ////////////////////////////////////////////////////////////////////////////////////// */
 .v-center {
@@ -202,8 +209,7 @@ a.close:hover {
 
 </head>
 <body id="top">
-	
-		<div class="wrapper row1">
+<div class="wrapper row1">
     <header id="header" class="hoc clear"> 
       <!-- ################################################################################################ -->
       <div id="logo" class="fl_left">
@@ -241,101 +247,10 @@ a.close:hover {
   </div>
 		<div class="wrapper row3">
 			<main class="hoc container clear"> <!-- main body -->
-			<div class="row">
-				<form:form action="searchLCOConByLCO.html" method="get">
-					<input type="hidden" name="user" value="${user }" />
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
-							<input name="fdate" type="text" id="fdate" tabindex="1"
-								class="form-control" placeholder="From Date" />
-
-						</div>
-
-					</div>
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
-
-							<input name="edate" type="text" id="edate" tabindex="2"
-								class="form-control" placeholder="To Date" />
-
-						</div>
-					</div>
-
-
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
-							<input name="stb_no" type="text" id="fdate" tabindex="3"
-								class="form-control" placeholder="STB No." />
-						</div>
-
-					</div>
-
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
-
-							<input name="VC_No" type="text" id="ContentPlaceHolder1_txtvcno"
-								tabindex="4" class="form-control" placeholder="VC No." />
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
-							<input name="mobile" type="text"
-								id="ContentPlaceHolder1_txtmobile" tabindex="5"
-								class="form-control" placeholder="Mobile No." />
-
-						</div>
-
-					</div>
-
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
-							<select name="status" id="ContentPlaceHolder1_ddlstatus"
-								tabindex="6" class="form-control">
-								<option value="0">Select</option>
-								<option value="Pending">Offline</option>
-								<option value="Live">Live</option>
-								<option value="Expire">Expire</option>
-
-							</select>
-
-						</div>
-
-					</div>
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
-							<input name="pckg" type="text"
-								id="ContentPlaceHolder1_txtpackage" tabindex="7"
-								class="form-control" placeholder="Package Name" />
-
-						</div>
-
-					</div>
-
-
-					<div class="col-sm-3">
-						<div style="margin-bottom: 10px">
-
-							<input type="submit"
-								name="ctl00$ContentPlaceHolder1$btn_submit_request"
-								style="border-radius: 8px; padding: 4px;" value="Search"
-								id="ContentPlaceHolder1_btn_submit_request" tabindex="30"
-								class="btn-primary btn-color btn-block pull-left" />
-
-
-						</div>
-
-					</div>
-					<div class="nofound">${error}</div>
-				</form:form>
-
-			</div>
-
-
-
 			<div class="col-sm-12">
 				<hr />
 				<div class="titleTd"
-					style="width: 25%; margin-bottom: -35px; text-align: center; padding: 10px; font-size: x-large; color: #c4c1e8; background-color: dimgray; border-top-left-radius: 34px; border-top-right-radius: 54px;">Stock</div>
+					style="width: 25%; margin-bottom: -35px; text-align: center; padding: 10px; font-size: x-large; color: #c4c1e8; background-color: dimgray; border-top-left-radius: 34px; border-top-right-radius: 54px;">Download Bill</div>
 				<div style="width: 40%; margin-left: 890px;" class="col-sm-12">
 					<div style="margin-bottom: 0px">
 						<p>
@@ -352,30 +267,28 @@ a.close:hover {
 					<tr>
 						<th scope="col"
 							style="width: 5%; color: #FFFFFF; background-color: #12a59c;">SNo.</th>
-						<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">STB
-							Number</th>
-						<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Brand</th>
-						<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">MSO</th>
-						<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Status</th>
-						<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Expiry
-							Date</th>
-					</tr>
+						<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Invoice
+							No.</th>
+						<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">VC No.</th>
+						<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Name</th>
+						<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Mobile</th>
+						<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Email</th>
+						<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Address</th>
 
+					</tr>
 					<tr>
-						<c:forEach items="${StbList}" var="user" varStatus="itr">
+						<c:forEach items="${userList}" var="user" varStatus="itr">
 							<tr>
 								<td style="width: 5%;">${offset + itr.index +1 }</td>
-								<td><a href="#" value="${user.stbNo}"
-									data-modal-id="popup2">${user.stbNo}</a></td>
 
+								<td><a href="#" value="${user.invoice_No}"
+									data-modal-id="popup2">${user.invoice_No}</a></td>
 
-
-
-								<td>${user.brand}</td>
-								<td>${user.MSO}</td>
-								<td>${user.stbStatus}</td>
-								<td>${user.warranty}</td>
-
+								<td>${user.vc_No}</td>
+								<td>${user.user_Name}</td>
+								<td>${user.mobile_no}</td>
+								<td>${user.email}</td>
+								<td>${user.address}</td>
 
 							</tr>
 						</c:forEach>
@@ -384,7 +297,8 @@ a.close:hover {
 				</table>
 
 				<tag:paginate max="15" offset="${offset}" count="${count}"
-					uri="stock.html?user=${user}" next="&raquo;" previous="&laquo;" />
+					uri="allSubscriber.html?user=${user}" next="&raquo;"
+					previous="&laquo;" />
 			</div>
 
 
@@ -467,9 +381,10 @@ a.close:hover {
 		<!-- ################################################################################################ -->
 		<a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
 		<!-- JAVASCRIPTS -->
-		<script src="layout/scripts/jquery.min.js"></script>
+
 		<script src="layout/scripts/jquery.backtotop.js"></script>
 		<script src="layout/scripts/jquery.mobilemenu.js"></script>
+
 		<script>
 			$(function() {
 
@@ -579,8 +494,10 @@ a.close:hover {
 						<textarea type="text" name="remark" class="form-control" readonly
 							style="overflow: auto; margin-left: 23px; width: 95%; resize: none"></textarea>
 					</div>
-					<br> <br> <input value="Submit!" type="submit"
-						id="submit" class="btn-primary btn btn-block"
+					<br>
+					
+					<br> <input value="Submit!" type="submit" id="submit"
+						class="btn-primary btn btn-block"
 						style="width: 29%; height: 26px; font-size: 12px; margin-left: 35%;">
 
 				</div>

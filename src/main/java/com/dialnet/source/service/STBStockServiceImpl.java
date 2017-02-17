@@ -33,6 +33,12 @@ public class STBStockServiceImpl implements STBStockService {
 	public Long count(String user) {
 		return dao.count(user);
 	}
+
+	@Override
+	public List<String> getAllAvlSTB(String user) {
+		
+		return dao.getAllAvlSTB(user);
+	}
 	
 	
 }
