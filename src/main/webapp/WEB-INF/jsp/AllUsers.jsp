@@ -24,6 +24,44 @@
 	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
 <style>
+@media ( min-width : 32em) .modal-stb {
+	width
+	:
+	 
+	70%;
+}
+
+.modal-stb {
+    margin-left: -39%;
+	    margin-top: -18%;
+	
+	display: none;
+	position: absolute;
+	z-index: 1000;
+	width: 50%;
+	background: white;
+	border-bottom: 1px solid #aaa;
+	border-radius: 4px;
+	box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	background-clip: padding-box;
+}
+/* .modal-stb { */
+/* 	margin-left: -204px; */
+/* 	top: 200px; */
+/* 	left: 450px; */
+/* 	display: block; */
+/* 	position: absolute; */
+/* 	z-index: 1000; */
+/* 	width: 50%; */
+/* 	background: white; */
+/* 	border-bottom: 1px solid #aaa; */
+/* 	border-radius: 4px; */
+/* 	box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5); */
+/* 	border: 1px solid rgba(0, 0, 0, 0.1); */
+/* 	background-clip: padding-box; */
+/* } */
+
 /* ////////////////////////////////////////////////////////////////////////////////////// */
 .v-center {
 	height: 100vh;
@@ -71,7 +109,7 @@
 	display: none;
 	position: absolute;
 	z-index: 1000;
-	width: 98%;
+	width: 55%;
 	background: white;
 	border-bottom: 1px solid #aaa;
 	border-radius: 4px;
@@ -375,7 +413,8 @@ a.close:hover {
 						<tr>
 							<td style="width: 5%;">${offset + itr.index +1 }</td>
 
-							<td><a href="#" value="${user.CRFNo}#${user.userName}" data-modal-id="popup2">${user.userName}</a></td>
+							<td><a href="#" value="${user.CRFNo}#${user.userName}"
+								data-modal-id="popup2">${user.userName}</a></td>
 
 							<td>${user.userName}</td>
 							<td>${user.firstName}</td>
@@ -532,6 +571,7 @@ a.close:hover {
 			$(".js-modal-close, .modal-overlay").click(function() {
 				$(".modal-box, .modal-overlay").fadeOut(500, function() {
 					$(".modal-overlay").remove();
+					document.location.reload(true)
 				});
 
 			});
@@ -565,10 +605,37 @@ a.close:hover {
 			var pincode=data.Pincode;
 			var stbno=data.STBNo;
 			var blance=data.AccountBalance;
-			var addonpak=data.AddOnPCKG;
-			var alacarte=data.A_La_Carte;
-			var listaddonpack=addonpak.substring(0,addonpak.length-1);
+			var addonpak="";
+			var alacarte="";
+			addonpak=data.AddOnPCKG;
+			alacarte=data.A_La_Carte;
+// 			split String
+			var str_array=null;
+			var str_array1=null;
+			var tr=null;
 			
+			str_array = alacarte.split(',');
+			
+			for(var i = 0; i < str_array.length; i++) {
+				
+			   str_array[i] = str_array[i].replace(/^\s*/, "").replace(/\s*$/, "");
+			   tr = $('<tr/>');
+	            tr.append("<td style='color: black;'>"+str_array[i]+"</td>");
+	            $('#a_cart').append(tr);
+	           
+			
+			}
+			str_array1 = addonpak.split(',');
+			
+			for(var i = 0; i < str_array1.length; i++) {
+			   str_array1[i] = str_array1[i].replace(/^\s*/, "").replace(/\s*$/, "");
+			   tr = $('<tr/>');
+			   tr.append("<td style='color: black;'>"+str_array1[i]+"</td>");
+	            $('#a_pack').append(tr);
+			 
+			}
+			
+// 			end String 
 			document.getElementById("fname").value =fname;
 			document.getElementById("mname").value =mname;
 			document.getElementById("lname").value =lname;
@@ -581,13 +648,6 @@ a.close:hover {
 			document.getElementById("pincode").value =pincode;
 			document.getElementById("stbno").value =stbno;
 			document.getElementById("blance").value =blance;
-// 			document.getElementById("addonpak").value =addonpak;
-// 			document.getElementById("alacarte").value =alacarte;
-			
-			
-
-			
-			
 		}
 
 		
@@ -634,8 +694,9 @@ a.close:hover {
 							<div class='form-group internal'>
 								<label for="name"
 									style="width: 230%; margin-left: 240%; margin-bottom: 1px; font-size: 12px; font-weight: 400; color: black;">Middle
-									Name</label> <input type='text' id="mname" style="width: 230%; margin-left: 240%;"
-									class="form-control" readonly />
+									Name</label> <input type='text' id="mname"
+									style="width: 230%; margin-left: 240%;" class="form-control"
+									readonly />
 							</div>
 						</div>
 						<div class='col-md-3 indent-small'>
@@ -663,8 +724,9 @@ a.close:hover {
 							<div class='form-group internal'>
 								<label for="name"
 									style="width: 330%; margin-left: 240%; margin-bottom: 1px; font-size: 12px; font-weight: 400; color: black;">Email
-									ID</label> <input type='text' id="email" style="width: 330%; margin-left: 240%;"
-									class="form-control" readonly />
+									ID</label> <input type='text' id="email"
+									style="width: 330%; margin-left: 240%;" class="form-control"
+									readonly />
 							</div>
 						</div>
 					</div>
@@ -673,16 +735,18 @@ a.close:hover {
 						<div class="form-group internal">
 							<label for="name"
 								style="width: 330%; margin-left: 8px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Address</label>
-							<input type="text" id="adds" style="width: 226%; margin-left: 2.5%;"
-								class="form-control" readonly="">
+							<input type="text" id="adds"
+								style="width: 226%; margin-left: 2.5%;" class="form-control"
+								readonly="">
 						</div>
 					</div>
 					<div class='col-md-8' style="margin-bottom: 8px;">
 						<div class="form-group internal">
 							<label for="name"
 								style="width: 330%; margin-left: 8px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Landmark</label>
-							<input type="text" id="land" style="width: 219%; margin-left: 2.5%;"
-								class="form-control" readonly="">
+							<input type="text" id="land"
+								style="width: 219%; margin-left: 2.5%;" class="form-control"
+								readonly="">
 						</div>
 					</div>
 
@@ -698,8 +762,9 @@ a.close:hover {
 							<div class='form-group internal'>
 								<label for="name"
 									style="width: 230%; margin-left: 240%; margin-bottom: 1px; font-size: 12px; font-weight: 400; color: black;">City
-									Name</label> <input type='text' id="city" style="width: 230%; margin-left: 240%;"
-									class="form-control" readonly />
+									Name</label> <input type='text' id="city"
+									style="width: 230%; margin-left: 240%;" class="form-control"
+									readonly />
 							</div>
 						</div>
 						<div class='col-md-3 indent-small'>
@@ -724,66 +789,297 @@ a.close:hover {
 						<div class='col-md-3 indent-small'>
 							<div class='form-group internal'>
 								<br> <a href="#" style="width: 330%; margin-left: 310px;"
-									value="changeSTB" data-modal-id="popup2">Change</a>
+									value="changeSTB" data-modal-stb="stbNumberChange">Change</a>
 							</div>
 						</div>
 					</div>
 
 					<div class='col-md-8' style="margin-bottom: 8px;">
-						<div class="form-group internal"
-							style="width: 943px; margin-left: 8px; ">
-							<div style='overflow: scroll; height: 170px;'>
-							<table class ="table table-striped table-bordered table-hover
-								fontsize"
-								cellspacing="0" rules="all" border="1"
-								id="ContentPlaceHolder1_gvdash"
-								style="width: 100%; border-collapse: collapse;">
-							<tr>
-								<th scope="col"
-									style="color: #FFFFFF; background-color: #12a59c;">Add On Package</th>
-								<th scope="col"
-									style="color: #FFFFFF; background-color: #12a59c;">A La	Carte</th>
+						<div style='overflow: scroll; width: 151%; height: 170px;'>
+							<div class='col-md-6 indent-small'>
+								<div class="form-group internal" style="width: 208%;">
 
-							</tr>
-							<tr>
-								<c:forEach items="${userList}" var="user" varStatus="itr">
-									<tr>
-										<td style="color: black;">1</td>
-										<td style="color: black;">2</td>
-									</tr>
-								</c:forEach>
-							</tr>
-							</table>
+
+									<table
+										class="table table-striped table-bordered table-hover fontsize"
+										cellspacing="0" rules="all" border="1" id="a_pack"
+										style="width: 52%; border-collapse: collapse;">
+										<tr>
+											<th scope="col"
+												style="color: #FFFFFF; background-color: #12a59c;">Add
+												On Package</th>
+
+
+										</tr>
+
+									</table>
+								</div>
+							</div>
+							<div class='col-md-6 indent-small'>
+
+								<div class='form-group internal' style="width: 104%;">
+
+									<table
+										class="table table-striped table-bordered table-hover fontsize"
+										cellspacing="0" rules="all" border="1" id="a_cart"
+										style="width: 100%; border-collapse: collapse;">
+										<tr>
+											<th scope="col"
+												style="color: #FFFFFF; background-color: #12a59c;">A La
+												Carte</th>
+
+										</tr>
+
+									</table>
+
+								</div>
 							</div>
 						</div>
 
-					</div>
 						<div class='col-md-8' style="margin-bottom: 8px;">
-						<div class="form-group internal">
-							<label for="name"
-								style="width: 330%; margin-left: -149px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Account Blance</label> 
-								<input type="text" id="blance"
-								style="width: 142%; margin-left: -76.5%;" class="form-control"
-								readonly="">
-						</div>
-						<div class='col-md-3 indent-small'>
-							<div class='form-group internal'>
-								<br> <a href="#" style="width: 330%; margin-left: 877px;"
-									value="changeSTB" data-modal-id="popup2">Change</a>
+							<div class="form-group internal">
+								<label for="name"
+									style="width: 330%; margin-left: -109px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Account
+									Blance</label> <input type="text" id="blance"
+									style="width: 142%; margin-left: -56.5%;" class="form-control"
+									readonly="">
+							</div>
+							<div class='col-md-3 indent-small'>
+								<div class='form-group internal'>
+									<br> 
+										<a href="#" style="width: 330%; margin-left: 877px;"
+									value="changeSTB" data-modal-table="tablemodel">Change</a>
+								</div>
 							</div>
 						</div>
+
+
+
 					</div>
+					<br> <br> <input value="Submit!" type="submit"
+						id="submit" class="btn-primary btn btn-block"
+						style="width: 29%; height: 26px; font-size: 12px; margin-left: 35%;">
 
-
-					
 				</div>
-				<br> <br> <input value="Submit!" type="submit" id="submit"
-					class="btn-primary btn btn-block"
-					style="width: 29%; height: 26px; font-size: 12px; margin-left: 35%;">
 
 			</div>
-
 		</div>
-	</div>
+
+		<!-- 		Stb number Change Model  -->
+
+		<script>
+			$(function() {
+
+				var appendthis = ("<div class='modal-overlay js-modal-close'></div>");
+
+				$('a[data-modal-stb]').click(function(e) {
+
+					var url = $(this).attr('value');
+
+					// 							document.getElementById("demo").innerHTML ="Complaint Number: "+url;
+
+					var fields = url.split('#');
+
+					var id = fields[0];
+					;
+
+				
+					e.preventDefault();
+					$("body").append(appendthis);
+					$(".modal-overlay").fadeTo(500, 0.7);
+					//$(".js-modalbox").fadeIn(500);
+					var modalBox = $(this).attr('data-modal-stb');
+					$('#' + modalBox).fadeIn($(this).data());
+				});
+
+// 				$(".js-modal-close, .modal-overlay").click(function() {
+// 					$(".modal-stb, .modal-overlay").fadeOut(500, function() {
+// 						$(".modal-overlay").remove();
+					
+					
+
+// 					});
+
+// 				});
+
+				$(window).resize(
+						function() {
+							$(".modal-stb")
+									.css(
+											{
+												top : ($(window).height() - $(
+														".modal-stb")
+														.outerHeight()) / 2,
+												left : ($(window).width() - $(
+														".modal-stb")
+														.outerWidth()) / 2
+											});
+						});
+
+				$(window).resize();
+
+			});
+		</script>
+		<div id="stbNumberChange" class="modal-stb">
+			<header style="padding: -1px;">
+
+				<a href="#" class="js-modal-close close" 
+					style="line-height: 0;font-size: 1.5em;position: absolute;top: 13%;right: 1%;text-decoration: none;color: #0b212f;opacity: 15.2;">×</a>
+			
+
+
+			</header>
+
+			<div class="container" style="padding: 10px 0;">
+				<%-- 					<form id="contact" action="#"> --%>
+
+				<div class="form-inline marginBottom">
+					<div class="md-form"></div>
+					<div class="md-form">
+						<div class='col-md-8' style="margin-bottom: 22px;">
+							<div class="form-group internal">
+								<div class="col-sm-1">
+									<div style="margin-bottom: 10px; width: 200px;">
+
+										<label style="color: black;">STB Number</label>
+
+									</div>
+
+								</div>
+
+								<div class="col-sm-3">
+									<div
+										style="margin-bottom: 10px; margin-left: 131px; width: 285px;">
+										<select name="status" id="ContentPlaceHolder1_ddlstatus"
+											tabindex="6" class="form-control">
+											<option value="0">Select</option>
+											<option value="Pending">Pending</option>
+											<option value="Live">Live</option>
+											<option value="Expire">Expire</option>
+
+										</select>
+
+									</div>
+
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+					 <input value="Submit!" type="submit"
+						id="submit" class="btn-primary btn btn-block"
+						style="width: 29%; height: 26px; font-size: 12px; margin-left: 35%;">
+				
+			</div>
+			
+<!-- 			Table Model -->
+
+	<script>
+			$(function() {
+
+				var appendthis = ("<div class='modal-overlay js-modal-close'></div>");
+
+				$('a[data-modal-table]').click(function(e) {
+
+					var url = $(this).attr('value');
+
+					// 							document.getElementById("demo").innerHTML ="Complaint Number: "+url;
+
+					var fields = url.split('#');
+
+					var id = fields[0];
+					;
+
+				
+					e.preventDefault();
+					$("body").append(appendthis);
+					$(".modal-overlay").fadeTo(500, 0.7);
+					//$(".js-modalbox").fadeIn(500);
+					var modalBox = $(this).attr('data-modal-table');
+					$('#' + modalBox).fadeIn($(this).data());
+				});
+
+// 				$(".js-modal-close, .modal-overlay").click(function() {
+// 					$(".modal-stb, .modal-overlay").fadeOut(500, function() {
+// 						$(".modal-overlay").remove();
+					
+					
+
+// 					});
+
+// 				});
+
+				$(window).resize(
+						function() {
+							$(".modal-stb")
+									.css(
+											{
+												top : ($(window).height() - $(
+														".modal-stb")
+														.outerHeight()) / 2,
+												left : ($(window).width() - $(
+														".modal-stb")
+														.outerWidth()) / 2
+											});
+						});
+
+				$(window).resize();
+
+			});
+		</script>
+		<div id="tablemodel" class="modal-stb">
+			<header style="padding: -1px;">
+
+				<a href="#" class="js-modal-close close" 
+					style="line-height: 0;font-size: 1.5em;position: absolute;top: 13%;right: 1%;text-decoration: none;color: #0b212f;opacity: 15.2;">×</a>
+			
+
+
+			</header>
+
+			<div class="container" style="padding: 10px 0;">
+				<%-- 					<form id="contact" action="#"> --%>
+
+				<div class="form-inline marginBottom">
+					<div class="md-form"></div>
+					<div class="md-form">
+						<div class='col-md-8' style="margin-bottom: 22px;">
+							<div class="form-group internal">
+								<div class="col-sm-1">
+									<div style="margin-bottom: 10px; width: 200px;">
+
+										<label style="color: black;">STB Number</label>
+
+									</div>
+
+								</div>
+
+								<div class="col-sm-3">
+									<div
+										style="margin-bottom: 10px; margin-left: 131px; width: 285px;">
+										<select name="status" id="ContentPlaceHolder1_ddlstatus"
+											tabindex="6" class="form-control">
+											<option value="0">Select</option>
+											<option value="Pending">Pending</option>
+											<option value="Live">Live</option>
+											<option value="Expire">Expire</option>
+
+										</select>
+
+									</div>
+
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+					 <input value="Submit!" type="submit"
+						id="submit" class="btn-primary btn btn-block"
+						style="width: 29%; height: 26px; font-size: 12px; margin-left: 35%;">
+				
+			</div>
+			
 </body>
 </html>

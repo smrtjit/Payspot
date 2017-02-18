@@ -258,7 +258,6 @@ label.control-label {
 										    var x1 = document.getElementById("myFile").value;
 										    var tmp=x1.split("\\");
 										    var filename=tmp[tmp.length-1];
-										    alert(filename);
 										    document.getElementById('id_image').value=filename;
 										    var formData = new FormData();
 										    formData.append('uploadimage', $('input[type=file]')[0].files[0]);

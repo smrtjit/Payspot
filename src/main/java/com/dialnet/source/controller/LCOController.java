@@ -1118,6 +1118,7 @@ public class LCOController {
 	public ModelAndView addSubscriber(ModelMap map, @RequestParam("user") String user,
 			@ModelAttribute("NewSubscriber") Subscriber sub, @RequestParam("addpckg") String adonList,
 			@RequestParam("allpckg") String alList) {
+		System.out.println("adonList List Of Package---------\t"+adonList);
 		sub.setUserName(System.currentTimeMillis());
 		sub.setPassword(getSaltString());
 		sub.setLcoId(user);

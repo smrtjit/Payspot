@@ -320,9 +320,9 @@ function setvalue(){
 	//alert(addonlist);
 	addonlist=addonlist.substring(0,addonlist.length-1);
 	allist=allist.substring(0,allist.length-1);
-	alert(addonlist+":::::"+allist);
 	document.getElementById("addlist").value = addonlist;
 	document.getElementById("alll").value = allist;
+	uploadImageLocation();
 }
 
 </script>
@@ -379,13 +379,32 @@ function setvalue(){
 				</div>
 				<div class='panel-body'>
 					<form:form action="addSubscriber.html" method="post"
-						modelAttribute="NewSubscriber" class='form-horizontal' role='form'>
+						modelAttribute="NewSubscriber" class='form-horizontal' role='form' onsubmit="setvalue()">
 						
-						<input type="hidden" name="addpckg" id="addlist" required/>
-						<input type="hidden" name="allpckg" id="alll" required />
+						<input type="hidden" name="addpckg" id="addlist" />
+						<input type="hidden" name="allpckg" id="alll"  />
 						
 						<input type="hidden" name="user" value="${user }" />
-						
+						<script type="text/javascript">
+								function onlyAlphabets(e, t) {
+						            try {
+						                if (window.event) {
+						                    var charCode = window.event.keyCode;
+						                }
+						                else if (e) {
+						                    var charCode = e.which;
+						                }
+						                else { return true; }
+						                if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+						                	 return true;
+						                else
+						                    return false;
+						            }
+						            catch (err) {
+						                alert(err.Description);
+						            }
+						        }
+								</script>
 						
 
 						<div class='form-group' style="margin-left: -200px;">
@@ -395,7 +414,8 @@ function setvalue(){
 								<div class='col-md-3'>
 									<div class='form-group internal'>
 										<form:input path="FirstName" placeholder='First Name'
-											required="required" class='form-control' />
+											required="required"  pattern=".{4,}" maxlength="25" onkeypress="return onlyAlphabets(event,this)"  
+											 class='form-control' />
 										<!-- 										<input requried class='form-control' id='id_first_name' -->
 										<!-- 											placeholder='First Name' type='text'> -->
 									</div>
@@ -403,7 +423,8 @@ function setvalue(){
 								<div class='col-md-3 indent-small'>
 									<div class='form-group internal'>
 										<form:input path="MiddleName" placeholder='Middle Name'
-											class='form-control' />
+											class='form-control'
+											  pattern=".{4,}" maxlength="25" onkeypress="return onlyAlphabets(event,this)"   />
 										<!-- 										<input class='form-control' id='id_middle_name' -->
 										<!-- 											placeholder='Middle Name' type='text'> -->
 									</div>
@@ -411,7 +432,8 @@ function setvalue(){
 								<div class='col-md-3 indent-small'>
 									<div class='form-group internal'>
 										<form:input path="LastName" placeholder='Last Name'
-											required="required" class='form-control' />
+											required="required" class='form-control'
+											 pattern=".{4,}" maxlength="25" onkeypress="return onlyAlphabets(event,this)"   />
 										<!-- 										<input requried class='form-control' id='id_last_name' -->
 										<!-- 											placeholder='Last Name' type='text'> -->
 									</div>
@@ -426,7 +448,9 @@ function setvalue(){
 								<div class='col-md-3'>
 									<div class='form-group internal'>
 										<form:input path="Mobile" placeholder='Mobile Number'
-											required="required" class='form-control' />
+											required="required" class='form-control' 
+												title="MINIMUM SIZE" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+											 pattern=".{10,}" maxlength="12"/>
 										<!-- 										<input requried="requried " class='form-control' -->
 										<!-- 											id='mobile_no' placeholder='Mobile Number' type='text'> -->
 									</div>
@@ -434,7 +458,8 @@ function setvalue(){
 								<div class='col-md-6 indent-small' style="width: 50.5%;">
 									<div class='form-group internal'>
 										<form:input path="EmailId" placeholder='Email ID'
-											required="required" class='form-control' />
+											required="required" class='form-control'
+											pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" />
 										<!-- 										<input requried="requried " class='form-control' id='email_id' -->
 										<!-- 											placeholder='Email ID' type='text'> -->
 									</div>
@@ -450,8 +475,8 @@ function setvalue(){
 							<div class='col-md-8'>
 								<div class='col-md-3'>
 									<div class='form-group internal'>
-										<form:select path="PhotoIDType" class="form-control">
-											<form:option value="NONE" label="Select Type" />
+										<form:select path="PhotoIDType" class="form-control" required="true">
+											<form:option value="" label="Select Type" />
 											<form:option value="PAN Card" label="PAN Card" />
 											<form:option value="Adhaar Card" label="Adhaar Card" />
 											<form:option value="Passport" label="Passport" />
@@ -465,7 +490,9 @@ function setvalue(){
 								<div class='col-md-3 indent-small'>
 									<div class='form-group internal'>
 										<form:input path="PhotoID" placeholder=' ID Number'
-											required="required" class='form-control' />
+											required="required" class='form-control' 
+											title="MINIMUM SIZE" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+											 pattern=".{6,}" maxlength="16" />
 										<!-- 										<input requried="requried " class='form-control' id='crf_no' -->
 										<!-- 											placeholder=' ID Number' type='text'> -->
 									</div>
@@ -485,8 +512,6 @@ function setvalue(){
 										    var tmp=x1.split("\\");
 										    var filename=tmp[tmp.length-1];
 										    document.getElementById('add_image').value=filename;
-										    var formData = new FormData();
-										    formData.append('uploadimage', $('input[type=file]')[0].files[0]);
 										    var txt = "";
 										    if ('files' in x) {
 										        if (x.files.length == 0) {
@@ -510,27 +535,7 @@ function setvalue(){
 										    document.getElementById("demo").innerHTML = txt;
 										}
 											
-										function uploadImage(){
-											 var formData1 = new FormData();
-											 var fileInputElement = document.getElementById("myFile1");
-											  formData1.append("uploadimage", fileInputElement.files[0]);
-											   // formData1.append('uploadimage', document.getElementById('uploadimage1')[0].files[0]);
-											 $.ajax({
-								                    url : 'imageupload.html?user=1111',
-								                    data : formData1,
-								                    enctype: 'multipart/form-data',
-							
-								                    processData : false,
-								                    contentType : false,
-								                    type : 'POST',
-								                    success : function(data) {
-								                    },
-								                    error : function(err) {
-								                        alert(err);
-								                    }
-								                });
 											
-										}	
 										</script>
 
 
@@ -671,7 +676,9 @@ function setvalue(){
 								<div class='col-md-3 indent-small'>
 									<div class='form-group internal'>
 										<form:input path="Pincode" placeholder='Pin Code'
-											required="required" class='form-control' />
+											required="required" class='form-control' 
+											title="MINIMUM SIZE" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+											 pattern=".{6,}" maxlength="6"  />
 										<!-- 										<input requried="requried " class='form-control' -->
 										<!-- 											id='id_middle_name' placeholder='Pin Code' type='text'> -->
 									</div>
@@ -687,7 +694,9 @@ function setvalue(){
 								<div class='col-md-3'>
 									<div class='form-group internal'>
 										<form:input path="CRFNo" placeholder='CRF Number'
-											required="required" class='form-control' />
+											required="required" class='form-control'
+											title="MINIMUM SIZE" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+											 pattern=".{3,}" maxlength="16"  />
 										<!-- 										<input requried="requried " class='form-control' id='gst_no' -->
 										<!-- 											placeholder='CRF Number' type='text'> -->
 									</div>
@@ -708,8 +717,6 @@ function setvalue(){
 										    var tmp=x1.split("\\");
 										    var filename=tmp[tmp.length-1];
 										    document.getElementById('caf').value=filename;
-										    var formData = new FormData();
-										    formData.append('uploadimage', $('input[type=file]')[0].files[0]);
 										    var txt = "";
 										    if ('files' in x) {
 										        if (x.files.length == 0) {
@@ -717,9 +724,9 @@ function setvalue(){
 										        	 var file;
 										        	  for (var i = 0; i < x.files.length; i++) {
 										               file = x.files[i];
-										    			
+								    			
 										            }
-										        	  
+					      
 										        }
 										    } 
 										    else {
@@ -733,11 +740,11 @@ function setvalue(){
 										    
 										}
 											
-										function uploadCaf(){
+										function uploadImageLocation(){
+											
 											 var formData1 = new FormData();
-											 var fileInputElement = document.getElementById("cafData");
-											  formData1.append("uploadimage", fileInputElement.files[0]);
-											   // formData1.append('uploadimage', document.getElementById('uploadimage1')[0].files[0]);
+											 var fileInputElement = document.getElementById("myFile1");
+											 formData1.append("uploadimage", fileInputElement.files[0]);
 											 $.ajax({
 								                    url : 'imageupload.html?user=1111',
 								                    data : formData1,
@@ -752,8 +759,27 @@ function setvalue(){
 								                        alert(err);
 								                    }
 								                });
-											
-										}	
+											 
+											 var formData = new FormData();
+											 var fileInputElement = document.getElementById("cafData");
+											  formData.append("uploadimage", fileInputElement.files[0]);
+											   // formData1.append('uploadimage', document.getElementById('uploadimage1')[0].files[0]);
+											 $.ajax({
+								                    url : 'imageupload.html?user=1111',
+								                    data : formData,
+								                    enctype: 'multipart/form-data',
+							
+								                    processData : false,
+								                    contentType : false,
+								                    type : 'POST',
+								                    success : function(data) {
+								                    },
+								                    error : function(err) {
+								                        alert(err);
+								                    }
+								                });
+											}
+										
 										</script>
 									</div>
 								</div>
@@ -780,7 +806,9 @@ function setvalue(){
 								<div class='col-md-4 indent-small' style="width: 38%;">
 									<div class='form-group internal'>
 										<form:input path="GSTNo" placeholder='GST No.' id="pckgCost"
-											required="required" class='form-control' />
+											required="required" class='form-control' 
+											title="MINIMUM SIZE" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+											 pattern=".{4,}" maxlength="16" />
 									</div>
 								</div>
 
@@ -804,7 +832,9 @@ function setvalue(){
 								<div class='col-md-3 indent-small'>
 									<div class='form-group internal'>
 										<form:input path="PCKGPrice" placeholder='Package Cost'
-											id='pckgprice' required="required" class='form-control' />
+											id='pckgprice' required="required" class='form-control'
+											title="MINIMUM SIZE" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+											 pattern=".{2,}" maxlength="4"  />
 										<!-- 										<input requried="requried " class='form-control' id='gst_no' -->
 										<!-- 											placeholder='Package Cost' type="text "> -->
 									</div>
@@ -848,7 +878,9 @@ function setvalue(){
 									<div class='col-md-9' style="width: 72%;">
 										<form:input path="ActivationCharge"
 											placeholder='Activation Charges' required="required"
-											class='form-control' />
+											class='form-control' 
+											title="MINIMUM SIZE" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+											 pattern=".{2,}" maxlength="4" />
 										<!-- 										<input requried="requried " class='form-control' id='address' -->
 										<!-- 											placeholder='Activation Charges' type='text'> -->
 									</div>
@@ -862,8 +894,8 @@ function setvalue(){
 							<div class='col-md-8'>
 								<div class='col-md-3'>
 									<div class='form-group internal'>
-										<form:select path="STB_Rental_Type" class="form-control">
-											<form:option value="NONE" label="Select Type" />
+										<form:select path="STB_Rental_Type" class="form-control"  required="true">
+											<form:option value="" label="Select Type" />
 											<form:option value="RF" label="Refundable" />
 											<form:option value="NRF" label="Non Refundable" />
 										</form:select>
@@ -873,7 +905,9 @@ function setvalue(){
 									<div class='form-group internal'>
 										<form:input path="STB_Full_Rental"
 											placeholder='STB Rental Amount' required="required"
-											class='form-control' />
+											class='form-control'
+											title="MINIMUM SIZE" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+											 pattern=".{2,}" maxlength="4"  />
 										<!-- 										<input requried="requried " class='form-control' id='crf_no' -->
 										<!-- 											placeholder='STB Rental Amount' type='text'> -->
 									</div>
@@ -882,10 +916,10 @@ function setvalue(){
 									<div class='form-group internal'>
 										<form:input path="STB_Monthly_Rental"
 											placeholder='STB Monthly Rental Charges' required="required"
-											class='form-control' />
-										<!-- 										<input requried="requried " class='form-control' id='gst_no' -->
-										<!-- 											placeholder='STB Monthly Rental Charges' type="file "> -->
-									</div>
+											class='form-control' 
+											title="MINIMUM SIZE" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+											 pattern=".{2,}" maxlength="4" />
+										</div>
 								</div>
 							</div>
 							<div class='form-group' style="margin-left: -200px;">
