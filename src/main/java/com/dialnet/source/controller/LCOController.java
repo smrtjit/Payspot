@@ -303,7 +303,9 @@ public class LCOController {
 	public ModelAndView allSubscriber(ModelMap map, @RequestParam("user") String user, Integer offset,
 			Integer maxResults) {
 		List<Subscriber> subs = userService.getByLCOId(user, offset, maxResults);
+		Subscriber updatealluser = new Subscriber();
 		map.addAttribute("userList", subs);
+		map.addAttribute("updatealluser", updatealluser);
 		map.addAttribute("count", userService.count(user));
 		map.addAttribute("user", user);
 		return new ModelAndView("AllUsers", map);
@@ -617,6 +619,22 @@ public class LCOController {
 		int i = lmuserservice.edit(sub);
 		model.addAttribute("user", user);
 		return new ModelAndView("redirect:allLM.html", model);
+		//
+	}
+
+	@RequestMapping(value = "/updateConnection", method = RequestMethod.GET)
+	public ModelAndView updateConnection(@ModelAttribute("updatealluser") Subscriber subscriber, ModelMap model,
+			@RequestParam("user") String user, @RequestParam("blance") String blance,
+			@RequestParam("username") String username, @RequestParam("fname") String fname,
+			@RequestParam("mname") String mname, @RequestParam("lname") String lname, @RequestParam("mob") String mob,
+			@RequestParam("email") String email, @RequestParam("adds") String adds, @RequestParam("land") String land,
+			@RequestParam("state") String state, @RequestParam("city") String city,
+			@RequestParam("pincode") String pincode, @RequestParam("stbno") String stbno) {
+
+		System.out.println("Data Secuessfully Update\t" + user + "\tusername\t" + username + "\name\t" + fname);
+			
+		model.addAttribute("user", user);
+		return new ModelAndView("redirect:allSubscriber.html", model);
 		//
 	}
 
@@ -1118,7 +1136,7 @@ public class LCOController {
 	public ModelAndView addSubscriber(ModelMap map, @RequestParam("user") String user,
 			@ModelAttribute("NewSubscriber") Subscriber sub, @RequestParam("addpckg") String adonList,
 			@RequestParam("allpckg") String alList) {
-		System.out.println("adonList List Of Package---------\t"+adonList);
+		System.out.println("adonList List Of Package---------\t" + adonList);
 		sub.setUserName(System.currentTimeMillis());
 		sub.setPassword(getSaltString());
 		sub.setLcoId(user);

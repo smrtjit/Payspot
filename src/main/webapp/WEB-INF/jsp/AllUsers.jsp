@@ -244,8 +244,148 @@ a.close:hover {
 }
 </style>
 
+	<script>
+		$(function() {
 
+			var appendthis = ("<div class='modal-overlay js-modal-close'></div>");
+
+			$('a[data-modal-id]').click(function(e) {
+
+				var url = $(this).attr('value');
+
+				// 							document.getElementById("demo").innerHTML ="Complaint Number: "+url;
+
+				var fields = url.split('#');
+
+				var id = fields[0];
+				var userid = fields[1];
+				;
+				
+				document.getElementById('id1').innerHTML = userid;
+				
+				 $.ajax({  
+			            type : 'GET', 
+			            url: 'allUsersData.html',
+			            data: {
+			            	'userid': userid,
+			            	'user':  ${user}
+			            },
+			            dataType: 'json',
+			       		cache: false,
+						beforeSend: function(xhr) 
+			                        {
+							            xhr.setRequestHeader("Accept", "application/json");  
+			                            xhr.setRequestHeader("Content-Type", "application/json");  
+			                        },
+			         				success: function (data) {
+			         					 setBulkData(data);
+			         		},
+				            error: function(e){
+				            	alert(e);
+				            }
+			            
+			        });
+				
+
+				e.preventDefault();
+				$("body").append(appendthis);
+				$(".modal-overlay").fadeTo(500, 0.7);
+				//$(".js-modalbox").fadeIn(500);
+				var modalBox = $(this).attr('data-modal-id');
+				$('#' + modalBox).fadeIn($(this).data());
+			});
+
+			$(".js-modal-close, .modal-overlay").click(function() {
+				$(".modal-box, .modal-overlay").fadeOut(500, function() {
+					$(".modal-overlay").remove();
+					document.location.reload(true)
+				});
+
+			});
+
+			$(window).resize(
+					function() {
+						$(".modal-box").css(
+								{
+									top : ($(window).height() - $(".modal-box")
+											.outerHeight()) / 2,
+									left : ($(window).width() - $(".modal-box")
+											.outerWidth()) / 2
+								});
+					});
+
+			$(window).resize();
+
+		});
+		
+		
+		function setBulkData( data){
+			var fname=data.FirstName;
+			var username=data.UserName;
+			var mname=data.MiddleName;
+			var lname=data.LastName;
+			var mob=data.Mobile;
+			var email=data.EmailId;
+			var adds=data.Address;
+			var land=data.LandMark;
+			var state=data.State;
+			var city=data.City;
+			var pincode=data.Pincode;
+			var stbno=data.STBNo;
+			var blance=data.AccountBalance;
+			var addonpak="";
+			var alacarte="";
+			addonpak=data.AddOnPCKG;
+			alacarte=data.A_La_Carte;
+// 			split String
+			var str_array=null;
+			var str_array1=null;
+			var tr=null;
+			
+			str_array = alacarte.split(',');
+			
+			for(var i = 0; i < str_array.length; i++) {
+				
+			   str_array[i] = str_array[i].replace(/^\s*/, "").replace(/\s*$/, "");
+			   tr = $('<tr/>');
+	            tr.append("<td style='color: black;'>"+str_array[i]+"</td>");
+	            $('#a_cart').append(tr);
+	           
+			
+			}
+			str_array1 = addonpak.split(',');
+			
+			for(var i = 0; i < str_array1.length; i++) {
+			   str_array1[i] = str_array1[i].replace(/^\s*/, "").replace(/\s*$/, "");
+			   tr = $('<tr/>');
+			   tr.append("<td style='color: black;'>"+str_array1[i]+"</td>");
+	            $('#a_pack').append(tr);
+			 
+			}
+			
+// 			end String 
+			document.getElementById("fname").value =fname;
+			document.getElementById("mname").value =mname;
+			document.getElementById("lname").value =lname;
+			document.getElementById("mob").value =mob;
+			document.getElementById("email").value =email;
+			document.getElementById("adds").value =adds;
+			document.getElementById("land").value =land;
+			document.getElementById("state").value =state;
+			document.getElementById("city").value =city;
+			document.getElementById("pincode").value =pincode;
+			document.getElementById("stbno").value =stbno;
+			document.getElementById("blance").value =blance;
+			document.getElementById("username").value =username;
+		}
+
+		
+		
+		
+		
+	</script>
 </head>
+
 <body id="top">
 	<div class="wrapper row1">
 		<header id="header" class="hoc clear">
@@ -517,144 +657,7 @@ a.close:hover {
 	<script src="layout/scripts/jquery.backtotop.js"></script>
 	<script src="layout/scripts/jquery.mobilemenu.js"></script>
 
-	<script>
-		$(function() {
 
-			var appendthis = ("<div class='modal-overlay js-modal-close'></div>");
-
-			$('a[data-modal-id]').click(function(e) {
-
-				var url = $(this).attr('value');
-
-				// 							document.getElementById("demo").innerHTML ="Complaint Number: "+url;
-
-				var fields = url.split('#');
-
-				var id = fields[0];
-				var userid = fields[1];
-				;
-				
-				document.getElementById('id1').innerHTML = userid;
-				
-				 $.ajax({  
-			            type : 'GET', 
-			            url: 'allUsersData.html',
-			            data: {
-			            	'userid': userid,
-			            	'user':  ${user}
-			            },
-			            dataType: 'json',
-			       		cache: false,
-						beforeSend: function(xhr) 
-			                        {
-							            xhr.setRequestHeader("Accept", "application/json");  
-			                            xhr.setRequestHeader("Content-Type", "application/json");  
-			                        },
-			         				success: function (data) {
-			         					 setBulkData(data);
-			         		},
-				            error: function(e){
-				            	alert(e);
-				            }
-			            
-			        });
-				
-
-				e.preventDefault();
-				$("body").append(appendthis);
-				$(".modal-overlay").fadeTo(500, 0.7);
-				//$(".js-modalbox").fadeIn(500);
-				var modalBox = $(this).attr('data-modal-id');
-				$('#' + modalBox).fadeIn($(this).data());
-			});
-
-			$(".js-modal-close, .modal-overlay").click(function() {
-				$(".modal-box, .modal-overlay").fadeOut(500, function() {
-					$(".modal-overlay").remove();
-					document.location.reload(true)
-				});
-
-			});
-
-			$(window).resize(
-					function() {
-						$(".modal-box").css(
-								{
-									top : ($(window).height() - $(".modal-box")
-											.outerHeight()) / 2,
-									left : ($(window).width() - $(".modal-box")
-											.outerWidth()) / 2
-								});
-					});
-
-			$(window).resize();
-
-		});
-		
-		
-		function setBulkData( data){
-			var fname=data.FirstName;
-			var mname=data.MiddleName;
-			var lname=data.LastName;
-			var mob=data.Mobile;
-			var email=data.EmailId;
-			var adds=data.Address;
-			var land=data.LandMark;
-			var state=data.State;
-			var city=data.City;
-			var pincode=data.Pincode;
-			var stbno=data.STBNo;
-			var blance=data.AccountBalance;
-			var addonpak="";
-			var alacarte="";
-			addonpak=data.AddOnPCKG;
-			alacarte=data.A_La_Carte;
-// 			split String
-			var str_array=null;
-			var str_array1=null;
-			var tr=null;
-			
-			str_array = alacarte.split(',');
-			
-			for(var i = 0; i < str_array.length; i++) {
-				
-			   str_array[i] = str_array[i].replace(/^\s*/, "").replace(/\s*$/, "");
-			   tr = $('<tr/>');
-	            tr.append("<td style='color: black;'>"+str_array[i]+"</td>");
-	            $('#a_cart').append(tr);
-	           
-			
-			}
-			str_array1 = addonpak.split(',');
-			
-			for(var i = 0; i < str_array1.length; i++) {
-			   str_array1[i] = str_array1[i].replace(/^\s*/, "").replace(/\s*$/, "");
-			   tr = $('<tr/>');
-			   tr.append("<td style='color: black;'>"+str_array1[i]+"</td>");
-	            $('#a_pack').append(tr);
-			 
-			}
-			
-// 			end String 
-			document.getElementById("fname").value =fname;
-			document.getElementById("mname").value =mname;
-			document.getElementById("lname").value =lname;
-			document.getElementById("mob").value =mob;
-			document.getElementById("email").value =email;
-			document.getElementById("adds").value =adds;
-			document.getElementById("land").value =land;
-			document.getElementById("state").value =state;
-			document.getElementById("city").value =city;
-			document.getElementById("pincode").value =pincode;
-			document.getElementById("stbno").value =stbno;
-			document.getElementById("blance").value =blance;
-		}
-
-		
-		
-		
-		
-	</script>
 	<div id="popup2" class="modal-box">
 		<header
 			style="border-bottom-color: #0a7777; background-color: #3eb3b3; padding: 1px;">
@@ -665,7 +668,7 @@ a.close:hover {
 				<tbody>
 					<tr>
 						<td style="width: 27%; color: #ffffff; border-color: #3eb3b3;">
-							<h3>Complaint ID:</h3>
+							<h3>Subscriber Update:</h3>
 						</td>
 						<td style="border-color: #3eb3b3;">
 							<h3 id="id1" style="width: 27%; color: #ffffff;"></h3>
@@ -682,30 +685,24 @@ a.close:hover {
 
 			<div class="form-inline marginBottom">
 				<div class="md-form">
-					<div class='col-md-8' style="margin-bottom: 8px;">
+							<input type="hidden" name="username" id="username"/>
+							<input type="hidden" name="user" value="${user}"/>
+					
+					<div class="col-md-8" style="margin-bottom: 8px;">
 						<div class="form-group internal">
-							<label for="name"
-								style="width: 330%; margin-left: -306px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">First
-								Name</label> <input type="text" id="fname"
-								style="width: 140%; margin-left: -156.5%;" class="form-control"
-								readonly="">
+							<label for="name" style="width: 330%; margin-left: -293px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">First
+								Name</label> <input type="text" id="fname" style="width: 140%; margin-left: -149.5%;" class="form-control">
 						</div>
-						<div class='col-md-3 indent-small'>
-							<div class='form-group internal'>
-								<label for="name"
-									style="width: 230%; margin-left: 240%; margin-bottom: 1px; font-size: 12px; font-weight: 400; color: black;">Middle
-									Name</label> <input type='text' id="mname"
-									style="width: 230%; margin-left: 240%;" class="form-control"
-									readonly />
+						<div class="col-md-3 indent-small">
+							<div class="form-group internal">
+								<label for="name" style="width: 142%;margin-left: 247%;margin-bottom: 1px;font-size: 12px;font-weight: 400;color: black;">Middle
+									Name</label><input type="text" id="mname" style="width: 221%;margin-left: 247%;" class="form-control">
 							</div>
 						</div>
-						<div class='col-md-3 indent-small'>
-							<div class='form-group internal'>
-								<label for="name"
-									style="width: 230%; margin-left: 378.5%; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Last
-									Name</label> <input type='text' id="lname"
-									style="width: 230%; margin-left: 378.5%;" class="form-control"
-									readonly />
+						<div class="col-md-3 indent-small">
+							<div class="form-group internal">
+								<label for="name" style="width: 50%;margin-left: 366.5%;margin-bottom: 0px;font-size: 12px;font-weight: 400;color: black;">Last
+									Name</label> <input type="text" id="lname" style="width: 226%;margin-left: 365.5%;" class="form-control">
 							</div>
 						</div>
 
@@ -715,18 +712,16 @@ a.close:hover {
 					<div class='col-md-8' style="margin-bottom: 8px;">
 						<div class="form-group internal">
 							<label for="name"
-								style="width: 330%; margin-left: -149px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Mobile
-								Number</label> <input type="text" id="mob"
-								style="width: 142%; margin-left: -76.5%;" class="form-control"
-								readonly="">
+								style="width: 330%; margin-left: -136px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Mobile
+								Number</label> <input  type="text" id="mob"
+								style="width: 140%; margin-left: -69.5%;" class="form-control"/>
 						</div>
 						<div class='col-md-3 indent-small'>
 							<div class='form-group internal'>
 								<label for="name"
-									style="width: 330%; margin-left: 240%; margin-bottom: 1px; font-size: 12px; font-weight: 400; color: black;">Email
-									ID</label> <input type='text' id="email"
-									style="width: 330%; margin-left: 240%;" class="form-control"
-									readonly />
+									style="width: 330%; margin-left: 204%; margin-bottom: 1px; font-size: 12px; font-weight: 400; color: black;">Email
+									ID</label><input  type='text' id="email"
+									style="width: 330%; margin-left: 198%;" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -734,46 +729,44 @@ a.close:hover {
 					<div class='col-md-8' style="margin-bottom: 8px;">
 						<div class="form-group internal">
 							<label for="name"
-								style="width: 330%; margin-left: 8px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Address</label>
-							<input type="text" id="adds"
-								style="width: 226%; margin-left: 2.5%;" class="form-control"
-								readonly="">
+								style="width: 330%; margin-left: 21px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Address</label>
+							<input  type="text" id="adds"
+								style="width: 226%; margin-left: 7.5%;" class="form-control"
+								/>
 						</div>
 					</div>
 					<div class='col-md-8' style="margin-bottom: 8px;">
 						<div class="form-group internal">
 							<label for="name"
-								style="width: 330%; margin-left: 8px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Landmark</label>
-							<input type="text" id="land"
-								style="width: 219%; margin-left: 2.5%;" class="form-control"
-								readonly="">
+								style="width: 330%; margin-left: 21px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Landmark</label>
+							<input  type="text" id="land"
+								style="width: 219%; margin-left: 7.5%;" class="form-control"
+								/>
 						</div>
 					</div>
-
-					<div class='col-md-8' style="margin-bottom: 8px;">
+						<div class='col-md-8' style="margin-bottom: 8px;">
 						<div class="form-group internal">
 							<label for="name"
-								style="width: 330%; margin-left: -306px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">State
+								style="width: 330%; margin-left: -293px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">State
 								Name</label> <input type="text" id="state"
-								style="width: 140%; margin-left: -156.5%;" class="form-control"
-								readonly="">
+								style="width: 140%; margin-left: -149.5%;" class="form-control"/>
 						</div>
 						<div class='col-md-3 indent-small'>
 							<div class='form-group internal'>
 								<label for="name"
-									style="width: 230%; margin-left: 240%; margin-bottom: 1px; font-size: 12px; font-weight: 400; color: black;">City
-									Name</label> <input type='text' id="city"
-									style="width: 230%; margin-left: 240%;" class="form-control"
-									readonly />
+									style="width: 142%;margin-left: 201%;margin-bottom: 1px;font-size: 12px;font-weight: 400;color: black;">City
+									Name</label><input type='text' id="city"
+									style="width: 196%;margin-left: 200%;" class="form-control"
+									 />
 							</div>
 						</div>
 						<div class='col-md-3 indent-small'>
 							<div class='form-group internal'>
 								<label for="name"
-									style="width: 230%; margin-left: 378.5%; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Pin
+									style="width: 50%; margin-left: 317.5%; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Pin
 									Code</label> <input type='text' id="pincode"
-									style="width: 230%; margin-left: 378.5%;" class="form-control"
-									readonly />
+									style="width: 183%; margin-left: 316.5%;" class="form-control"
+									 />
 							</div>
 						</div>
 
@@ -781,18 +774,18 @@ a.close:hover {
 					<div class='col-md-8' style="margin-bottom: 8px;">
 						<div class="form-group internal">
 							<label for="name"
-								style="width: 330%; margin-left: -149px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">STB
+								style="width: 330%; margin-left: -136px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">STB
 								Number</label> <input type="text" id="stbno"
-								style="width: 142%; margin-left: -76.5%;" class="form-control"
-								readonly="">
+								style="width: 140%; margin-left: -69.5%;" class="form-control"/>
 						</div>
 						<div class='col-md-3 indent-small'>
 							<div class='form-group internal'>
-								<br> <a href="#" style="width: 330%; margin-left: 310px;"
+								 <a href="#" style="width: 272%; margin-left: 350.5px;"
 									value="changeSTB" data-modal-stb="stbNumberChange">Change</a>
 							</div>
 						</div>
 					</div>
+					
 
 					<div class='col-md-8' style="margin-bottom: 8px;">
 						<div style='overflow: scroll; width: 151%; height: 170px;'>
@@ -839,16 +832,15 @@ a.close:hover {
 						<div class='col-md-8' style="margin-bottom: 8px;">
 							<div class="form-group internal">
 								<label for="name"
-									style="width: 330%; margin-left: -109px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Account
+									style="width: 330%; margin-left: -98px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Account
 									Blance</label> <input type="text" id="blance"
-									style="width: 142%; margin-left: -56.5%;" class="form-control"
-									readonly="">
+									style="width: 142%; margin-left: -49.5%;" class="form-control"/>
 							</div>
 							<div class='col-md-3 indent-small'>
 								<div class='form-group internal'>
 									<br> 
 										<a href="#" style="width: 330%; margin-left: 877px;"
-									value="changeSTB" data-modal-table="tablemodel">Change</a>
+									value="changeSTB" >Change</a>
 								</div>
 							</div>
 						</div>
@@ -859,8 +851,69 @@ a.close:hover {
 					<br> <br> <input value="Submit!" type="submit"
 						id="submit" class="btn-primary btn btn-block"
 						style="width: 29%; height: 26px; font-size: 12px; margin-left: 35%;">
-
-				</div>
+							<script>
+								$("#submit").click( function() {
+									var fname = $("#f_name").text();
+								    var mname = $("#mname").val();
+								    var lname = $("#lname").val();
+								    var mob = $("#mob").val();
+								    var email = $("#email").text();
+								    var adds = $("#adds").val();
+								    var land = $("#land").val();
+								    var state = $("#state").val();
+								    var city = $("#city").text();
+								    var pincode = $("#pincode").val();
+								    var stbno = $("#stbno").val();
+								    var blance = $("#blance").val();
+								    var username = $("#username").val();
+								   alert("fname"+fname);
+								   alert("mname"+mname);
+								   alert("lname"+lname);
+								    $.ajax({  
+							            type : 'GET', 
+							            url: 'updateConnection.html',
+							            data: {
+							            	'fname': fname,
+							            	'mname': mname,
+							            	'lname': lname,
+							            	'mob': mob,
+							            	'email': email,
+							            	'adds': adds,
+							            	'land': land,
+							            	'state': state,
+							            	'city': city,
+							            	'pincode': pincode,
+							            	'stbno': stbno,
+							            	'blance': blance,
+							            	'username': username,
+							            	'user':  ${ user}
+							            },
+							            dataType: 'json',
+							       		cache: false,
+										beforeSend: function(xhr) 
+							                        {
+							                            xhr.setRequestHeader("Accept", "application/json");  
+							                            xhr.setRequestHeader("Content-Type", "application/json");  
+							                        },
+							         				success: function (data) {
+							         					 alert(data);
+							         					location.reload();
+						           						
+								          		    },
+										            error: function(e){
+										            	console.warn(e);
+										            	 alert(e);
+										            }
+							            
+							      		  });
+								   
+								});
+								
+								 	 
+						  </script>
+						
+				
+			</div>
 
 			</div>
 		</div>
@@ -973,113 +1026,6 @@ a.close:hover {
 				
 			</div>
 			
-<!-- 			Table Model -->
 
-	<script>
-			$(function() {
-
-				var appendthis = ("<div class='modal-overlay js-modal-close'></div>");
-
-				$('a[data-modal-table]').click(function(e) {
-
-					var url = $(this).attr('value');
-
-					// 							document.getElementById("demo").innerHTML ="Complaint Number: "+url;
-
-					var fields = url.split('#');
-
-					var id = fields[0];
-					;
-
-				
-					e.preventDefault();
-					$("body").append(appendthis);
-					$(".modal-overlay").fadeTo(500, 0.7);
-					//$(".js-modalbox").fadeIn(500);
-					var modalBox = $(this).attr('data-modal-table');
-					$('#' + modalBox).fadeIn($(this).data());
-				});
-
-// 				$(".js-modal-close, .modal-overlay").click(function() {
-// 					$(".modal-stb, .modal-overlay").fadeOut(500, function() {
-// 						$(".modal-overlay").remove();
-					
-					
-
-// 					});
-
-// 				});
-
-				$(window).resize(
-						function() {
-							$(".modal-stb")
-									.css(
-											{
-												top : ($(window).height() - $(
-														".modal-stb")
-														.outerHeight()) / 2,
-												left : ($(window).width() - $(
-														".modal-stb")
-														.outerWidth()) / 2
-											});
-						});
-
-				$(window).resize();
-
-			});
-		</script>
-		<div id="tablemodel" class="modal-stb">
-			<header style="padding: -1px;">
-
-				<a href="#" class="js-modal-close close" 
-					style="line-height: 0;font-size: 1.5em;position: absolute;top: 13%;right: 1%;text-decoration: none;color: #0b212f;opacity: 15.2;">×</a>
-			
-
-
-			</header>
-
-			<div class="container" style="padding: 10px 0;">
-				<%-- 					<form id="contact" action="#"> --%>
-
-				<div class="form-inline marginBottom">
-					<div class="md-form"></div>
-					<div class="md-form">
-						<div class='col-md-8' style="margin-bottom: 22px;">
-							<div class="form-group internal">
-								<div class="col-sm-1">
-									<div style="margin-bottom: 10px; width: 200px;">
-
-										<label style="color: black;">STB Number</label>
-
-									</div>
-
-								</div>
-
-								<div class="col-sm-3">
-									<div
-										style="margin-bottom: 10px; margin-left: 131px; width: 285px;">
-										<select name="status" id="ContentPlaceHolder1_ddlstatus"
-											tabindex="6" class="form-control">
-											<option value="0">Select</option>
-											<option value="Pending">Pending</option>
-											<option value="Live">Live</option>
-											<option value="Expire">Expire</option>
-
-										</select>
-
-									</div>
-
-								</div>
-							</div>
-
-
-						</div>
-					</div>
-					 <input value="Submit!" type="submit"
-						id="submit" class="btn-primary btn btn-block"
-						style="width: 29%; height: 26px; font-size: 12px; margin-left: 35%;">
-				
-			</div>
-			
 </body>
 </html>

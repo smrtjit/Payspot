@@ -2,6 +2,7 @@ package com.dialnet.source.dao;
 
 import java.util.List;
 
+
 import com.dialnet.source.model.Subscriber;
 
 public interface SubscriberDao {
@@ -16,4 +17,8 @@ public interface SubscriberDao {
 	
 	
 	public int addSubscriber(Subscriber sub);
+	
+	public int connectionUpdate(Subscriber sub);
+	
+	public int updateConnection(String username,String firstname,String middlename,String lastname,String mobile,String email,String address,String landmark,String state,String city,String pincode,String stbno ,String accountblance );
 }
