@@ -247,7 +247,8 @@ function setBulkData( data){
 	var keysbyindex = Object.keys(data);
 		
 	document.getElementById("buklinid").innerHTML =data[keysbyindex[1]].Invoice_No;
-	document.getElementById("fdate").value =data[keysbyindex[1]].User_Name;
+	document.getElementById("username").value =data[keysbyindex[1]].User_Name;
+	
 	document.getElementById("amt").value =data[keysbyindex[1]].Total_Amount;
 	document.getElementById("servicetax").value =data[keysbyindex[1]].Service_Tax;
 	document.getElementById("amtt").value =data[keysbyindex[1]].Entertain_Tax;
@@ -633,18 +634,14 @@ function setBulkData( data){
 		</header>
 		<div class="modal-body" style="padding-left: 20px">
 			<!--    paste here -->
-			<form action="ApprovedBulkLCO.html">
-				<input type="hidden" name="user" value="${user }"> <input
-					type="hidden" name="invoice" id="invoice">
+			<form action="updateConnection.html">
+				<input type="hidden" name="user" value="1111"> <input type="hidden" name="invoice" id="invoice">
 				<div>
 					<div class="form-inline marginBottom">
 						<div class="md-form">
 							<label for="form1" class="" style="color: black;">Customer
-								Name:</label> <input type="text" style="width: 30%; margin-left: 4%"
-								id="fdate" readonly="" class="form-control input1"> <label
-								for="form1" class="" style="color: black;">Amount :</label> <input
-								type="text" style="width: 30%; margin-left: 11%;" id="amt"
-								readonly class="form-control input1">
+								Name:</label> <input type="text" style="width: 30%; margin-left: 4%" id="username" readonly="" class="form-control input1"> <label for="form1" class="" style="color: black;">Amount :</label> 
+								<input type="text" style="width: 30%;margin-left: 112px;" id="amt" readonly="" class="form-control input1">
 
 						</div>
 					</div>
@@ -652,11 +649,11 @@ function setBulkData( data){
 					<div class="form-inline marginBottom">
 						<div class="md-form">
 							<label for="form1" class="" style="color: black;">Service
-								TAX :</label> <input type="text" style="width: 30%; margin-left: 6%"
-								id="servicetax" readonly class="form-control input1"> <label
-								for="form1" class="" style="color: black;">Amusement
-								TAX:</label> <input type="text" style="width: 30%; margin-left: 6%;"
-								id="amtt" readonly class="form-control input1">
+								TAX :</label> 
+								<input type="text" style="width: 30%;margin-left: 62px;" id="servicetax" readonly="" class="form-control input1"> 
+								<label for="form1" class="" style="color: black;">Amusement
+								TAX:</label> 
+								<input type="text" style="width: 30%; margin-left: 6%;" id="amtt" readonly="" class="form-control input1">
 
 						</div>
 					</div>
@@ -664,12 +661,8 @@ function setBulkData( data){
 					<div class="form-inline marginBottom">
 						<div class="md-form">
 							<label for="form1" class="" style="color: black;">Other
-								TAX :</label> <input type="text" style="width: 30%; margin-left: 7%;"
-								id="ot" readonly class="form-control input1"> <label
-								for="form1" class="" style="color: black;">Receive
-								Amount :</label> <input type="text" style="width: 30%; margin-left: 6%;"
-								id="ramt" placeholder="Please Enter The Amount" name="RAmt"
-								class="form-control input1">
+								TAX :</label> <input type="text" style="width: 30%;margin-left: 74px;" id="ot" readonly="" class="form-control input1"> <label for="form1" class="" style="color: black;">Receive
+								Amount :</label> <input type="text" style="width: 30%; margin-left: 6%;" id="ramt" placeholder="Please Enter The Amount" name="RAmt" class="form-control input1">
 
 						</div>
 					</div>
@@ -677,13 +670,10 @@ function setBulkData( data){
 					<div class="form-inline marginBottom">
 						<div class="md-form">
 							<label for="form1" class="" style="color: black;">Received
-								Via :</label> <input type="text" placeholder="Please Enter The Agent ID"
-								id="agent" readonly style="width: 30%; margin-left: 5%;"
-								class="form-control input1"> <label for="form1" class=""
-								style="color: black;">Reference ID :</label> <input type="text"
-								style="width: 30%; margin-left: 8%;" id="rid"
-								placeholder="Please Enter The Reference ID" name="RId"
-								class="form-control input1">
+								Via :</label>
+								 <input requried="requried" type="text" placeholder="Please Enter The Agent ID" id="agent" readonly="" style="width: 30%;margin-left: 6%;" class="form-control input1"> 
+								<label  for="form1" class="" style="color: black;">Reference ID :</label>
+								 <input requried="requried" type="text" style="width: 30%; margin-left: 8%;" id="rid" placeholder="Please Enter The Reference ID" name="RId" class="form-control input1">
 
 						</div>
 					</div>
@@ -691,8 +681,8 @@ function setBulkData( data){
 					<div class="form-inline marginBottom">
 						<div class="md-form">
 							<label for="form1" class="" style="color: black;">Payment
-								Status :</label> <select id="state" name="state"
-								placeholder="select type" class="form-control"
+								Status :</label> <select requried="true" id="state"
+								name="state" placeholder="select type" class="form-control"
 								style="width: 48%; margin-left: 40px;">
 								<option value="0">Select Status</option>
 								<option value="Pending">Pending</option>
@@ -707,14 +697,10 @@ function setBulkData( data){
 						<div class="md-form" style="width: 94%;">
 							<label for="form1" class="" style="color: black;">Remark
 								:</label>
-							<textarea name="Remark" rows="3" cols="100" id="rmark"
-								class="form-control" placeholder="Add Remark"
-								style="overflow: auto; resize: none;">					</textarea>
+							<textarea name="Remark" rows="3" cols="100" id="rmark" class="form-control" placeholder="Add Remark" style="overflow: auto; resize: none;">					</textarea>
 							<br>
-							<div class="col-sm-2  pull-right"
-								style="margin-top: 15px; margin-bottom: 10px;">
-								<input type="submit" name="#" value="Submit" id="" tabindex="12"
-									class="btn-danger btn btn-block">
+							<div class="col-sm-2  pull-right" style="margin-top: 15px; margin-bottom: 10px;">
+								<input type="submit" name="#" value="Submit" id="" tabindex="12" class="btn-danger btn btn-block">
 							</div>
 						</div>
 					</div>

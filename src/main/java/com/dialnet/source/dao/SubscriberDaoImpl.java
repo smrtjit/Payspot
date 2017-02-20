@@ -188,7 +188,7 @@ public class SubscriberDaoImpl implements SubscriberDao {
 				+ "mobile= :mobile,emailId= :email,address = :address,landMark = :landmark,"
 				+ "state = :state,city = :city,pincode = :pincode,sTBNo = :stbno,accountBalance = :accountblance where userName = :id";
 		Query query = sf.createSQLQuery(qry);
-		query.setParameter("userName",username);
+		query.setParameter("UserName",username);
 		query.setParameter("firstName",firstname);
 		query.setParameter("middleName", middlename);
 		query.setParameter("lastName", lastname);

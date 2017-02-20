@@ -24,17 +24,10 @@
 	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
 <style>
-@media ( min-width : 32em) .modal-stb {
-	width
-	:
-	 
-	70%;
-}
 
 .modal-stb {
-    margin-left: -39%;
-	    margin-top: -18%;
-	
+	margin-left: -39%;
+	margin-top: -18%;
 	display: none;
 	position: absolute;
 	z-index: 1000;
@@ -243,147 +236,28 @@ a.close:hover {
 	transition: color 1s ease;
 }
 </style>
+<script type="text/javascript">
+								function onlyAlphabets(e, t) {
+						            try {
+						                if (window.event) {
+						                    var charCode = window.event.keyCode;
+						                }
+						                else if (e) {
+						                    var charCode = e.which;
+						                }
+						                else { return true; }
+						                if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+						                	 return true;
+						                else
+						                    return false;
+						            }
+						            catch (err) {
+						                alert(err.Description);
+						            }
+						        }
+								</script>
 
-	<script>
-		$(function() {
 
-			var appendthis = ("<div class='modal-overlay js-modal-close'></div>");
-
-			$('a[data-modal-id]').click(function(e) {
-
-				var url = $(this).attr('value');
-
-				// 							document.getElementById("demo").innerHTML ="Complaint Number: "+url;
-
-				var fields = url.split('#');
-
-				var id = fields[0];
-				var userid = fields[1];
-				;
-				
-				document.getElementById('id1').innerHTML = userid;
-				
-				 $.ajax({  
-			            type : 'GET', 
-			            url: 'allUsersData.html',
-			            data: {
-			            	'userid': userid,
-			            	'user':  ${user}
-			            },
-			            dataType: 'json',
-			       		cache: false,
-						beforeSend: function(xhr) 
-			                        {
-							            xhr.setRequestHeader("Accept", "application/json");  
-			                            xhr.setRequestHeader("Content-Type", "application/json");  
-			                        },
-			         				success: function (data) {
-			         					 setBulkData(data);
-			         		},
-				            error: function(e){
-				            	alert(e);
-				            }
-			            
-			        });
-				
-
-				e.preventDefault();
-				$("body").append(appendthis);
-				$(".modal-overlay").fadeTo(500, 0.7);
-				//$(".js-modalbox").fadeIn(500);
-				var modalBox = $(this).attr('data-modal-id');
-				$('#' + modalBox).fadeIn($(this).data());
-			});
-
-			$(".js-modal-close, .modal-overlay").click(function() {
-				$(".modal-box, .modal-overlay").fadeOut(500, function() {
-					$(".modal-overlay").remove();
-					document.location.reload(true)
-				});
-
-			});
-
-			$(window).resize(
-					function() {
-						$(".modal-box").css(
-								{
-									top : ($(window).height() - $(".modal-box")
-											.outerHeight()) / 2,
-									left : ($(window).width() - $(".modal-box")
-											.outerWidth()) / 2
-								});
-					});
-
-			$(window).resize();
-
-		});
-		
-		
-		function setBulkData( data){
-			var fname=data.FirstName;
-			var username=data.UserName;
-			var mname=data.MiddleName;
-			var lname=data.LastName;
-			var mob=data.Mobile;
-			var email=data.EmailId;
-			var adds=data.Address;
-			var land=data.LandMark;
-			var state=data.State;
-			var city=data.City;
-			var pincode=data.Pincode;
-			var stbno=data.STBNo;
-			var blance=data.AccountBalance;
-			var addonpak="";
-			var alacarte="";
-			addonpak=data.AddOnPCKG;
-			alacarte=data.A_La_Carte;
-// 			split String
-			var str_array=null;
-			var str_array1=null;
-			var tr=null;
-			
-			str_array = alacarte.split(',');
-			
-			for(var i = 0; i < str_array.length; i++) {
-				
-			   str_array[i] = str_array[i].replace(/^\s*/, "").replace(/\s*$/, "");
-			   tr = $('<tr/>');
-	            tr.append("<td style='color: black;'>"+str_array[i]+"</td>");
-	            $('#a_cart').append(tr);
-	           
-			
-			}
-			str_array1 = addonpak.split(',');
-			
-			for(var i = 0; i < str_array1.length; i++) {
-			   str_array1[i] = str_array1[i].replace(/^\s*/, "").replace(/\s*$/, "");
-			   tr = $('<tr/>');
-			   tr.append("<td style='color: black;'>"+str_array1[i]+"</td>");
-	            $('#a_pack').append(tr);
-			 
-			}
-			
-// 			end String 
-			document.getElementById("fname").value =fname;
-			document.getElementById("mname").value =mname;
-			document.getElementById("lname").value =lname;
-			document.getElementById("mob").value =mob;
-			document.getElementById("email").value =email;
-			document.getElementById("adds").value =adds;
-			document.getElementById("land").value =land;
-			document.getElementById("state").value =state;
-			document.getElementById("city").value =city;
-			document.getElementById("pincode").value =pincode;
-			document.getElementById("stbno").value =stbno;
-			document.getElementById("blance").value =blance;
-			document.getElementById("username").value =username;
-		}
-
-		
-		
-		
-		
-	</script>
 </head>
 
 <body id="top">
@@ -657,7 +531,154 @@ a.close:hover {
 	<script src="layout/scripts/jquery.backtotop.js"></script>
 	<script src="layout/scripts/jquery.mobilemenu.js"></script>
 
+<script>
+		$(function() {
 
+			var appendthis = ("<div class='modal-overlay js-modal-close'></div>");
+
+			$('a[data-modal-id]').click(function(e) {
+
+				var url = $(this).attr('value');
+
+				// 							document.getElementById("demo").innerHTML ="Complaint Number: "+url;
+
+				var fields = url.split('#');
+
+				var id = fields[0];
+				var userid = fields[1];
+				;
+				
+				document.getElementById('id1').innerHTML = userid;
+				
+				 $.ajax({  
+			            type : 'GET', 
+			            url: 'allUsersData.html',
+			            data: {
+			            	'userid': userid,
+			            	'user':  ${user}
+			            },
+			            dataType: 'json',
+			       		cache: false,
+						beforeSend: function(xhr) 
+			                        {
+							            xhr.setRequestHeader("Accept", "application/json");  
+			                            xhr.setRequestHeader("Content-Type", "application/json");  
+			                        },
+			         				success: function (data) {
+			         					 setBulkData(data);
+			         		},
+				            error: function(e){
+				            	alert(e);
+				            }
+			            
+			        });
+				
+
+				e.preventDefault();
+				$("body").append(appendthis);
+				$(".modal-overlay").fadeTo(500, 0.7);
+				//$(".js-modalbox").fadeIn(500);
+				var modalBox = $(this).attr('data-modal-id');
+				$('#' + modalBox).fadeIn($(this).data());
+			});
+
+			$(".js-modal-close, .modal-overlay").click(function() {
+				$(".modal-box, .modal-overlay").fadeOut(500, function() {
+					$(".modal-overlay").remove();
+					document.location.reload(true)
+				});
+
+			});
+
+			$(window).resize(
+					function() {
+						$(".modal-box").css(
+								{
+									top : ($(window).height() - $(".modal-box")
+											.outerHeight()) / 2,
+									left : ($(window).width() - $(".modal-box")
+											.outerWidth()) / 2
+								});
+					});
+
+			$(window).resize();
+
+		});
+		
+		
+		function setBulkData( data){
+			var myname=data.FirstName;
+			var username=data.UserName;
+			var mname=data.MiddleName;
+			var lname=data.LastName;
+			var mob=data.Mobile;
+			var email=data.EmailId;
+			var adds=data.Address;
+			var land=data.LandMark;
+			var state=data.State;
+			var city_name=data.City;
+			var pincode=data.Pincode;
+			var stbno=data.STBNo;
+			var blance=data.AccountBalance;
+			var addonpak="";
+			var alacarte="";
+			addonpak=data.AddOnPCKG;
+			alacarte=data.A_La_Carte;
+			
+			var str_array=null;
+			var str_array1=null;
+			var tr=null;
+			
+			str_array = alacarte.split(',');
+			
+			for(var i = 0; i < str_array.length; i++) {
+				
+			   str_array[i] = str_array[i].replace(/^\s*/, "").replace(/\s*$/, "");
+			   tr = $('<tr/>');
+	            tr.append("<td style='color: black;'>"+str_array[i]+"</td>");
+	            $('#a_cart').append(tr);
+	           
+			
+			}
+			str_array1 = addonpak.split(',');
+			
+			for(var i = 0; i < str_array1.length; i++) {
+			   str_array1[i] = str_array1[i].replace(/^\s*/, "").replace(/\s*$/, "");
+			   tr = $('<tr/>');
+			   tr.append("<td style='color: black;'>"+str_array1[i]+"</td>");
+	            $('#a_pack').append(tr);
+			 
+			}
+			
+// 			end String 
+			document.getElementById("myname").value =myname;
+			
+			document.getElementById("mname").value =mname;
+			
+			document.getElementById("lname").value =lname;
+			
+			document.getElementById("mob").value =mob;
+		
+			document.getElementById("email").value =email;
+			
+			document.getElementById("adds").value =adds;
+			
+			document.getElementById("land").value =land;
+			document.getElementById("state").value =state;
+			document.getElementById("city_name").value =city_name;
+			document.getElementById("pincode").value =pincode;
+			document.getElementById("stbno").value =stbno;
+		
+			document.getElementById("blance").value =blance;
+			document.getElementById("username").value =username;
+			
+		}
+
+		
+		
+		
+		
+	</script>
 	<div id="popup2" class="modal-box">
 		<header
 			style="border-bottom-color: #0a7777; background-color: #3eb3b3; padding: 1px;">
@@ -685,89 +706,105 @@ a.close:hover {
 
 			<div class="form-inline marginBottom">
 				<div class="md-form">
-							<input type="hidden" name="username" id="username"/>
-							<input type="hidden" name="user" value="${user}"/>
-					
+					<input type="hidden" name="username" id="username" /> <input
+						type="hidden" name="user" value="${user}" />
+
 					<div class="col-md-8" style="margin-bottom: 8px;">
-						<div class="form-group internal">
-							<label for="name" style="width: 330%; margin-left: -293px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">First
-								Name</label> <input type="text" id="fname" style="width: 140%; margin-left: -149.5%;" class="form-control">
+
+						<label for="name"
+							style="width: 50%; margin-left: 20px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">First
+							Name</label> <input type="text" id="myname" required="required"
+							pattern=".{4,}" maxlength="25"
+							onkeypress="return onlyAlphabets(event,this)"
+							style="width: 44%; margin-left: 3%;" class="form-control">
+
+						<div style="margin-top: -54px;">
+
+							<label for="name"
+								style="width: 50; margin-left: 53%; margin-bottom: 1px; font-size: 12px; font-weight: 400; color: black;">Middle
+								Name</label><input type="text" id="mname" required="required"
+								pattern=".{4,}" maxlength="25"
+								onkeypress="return onlyAlphabets(event,this)"
+								style="width: 44%; margin-left: 53%;" class="form-control">
+
 						</div>
-						<div class="col-md-3 indent-small">
-							<div class="form-group internal">
-								<label for="name" style="width: 142%;margin-left: 247%;margin-bottom: 1px;font-size: 12px;font-weight: 400;color: black;">Middle
-									Name</label><input type="text" id="mname" style="width: 221%;margin-left: 247%;" class="form-control">
-							</div>
-						</div>
-						<div class="col-md-3 indent-small">
-							<div class="form-group internal">
-								<label for="name" style="width: 50%;margin-left: 366.5%;margin-bottom: 0px;font-size: 12px;font-weight: 400;color: black;">Last
-									Name</label> <input type="text" id="lname" style="width: 226%;margin-left: 365.5%;" class="form-control">
-							</div>
+						<div style="margin-top: -54px;">
+
+							<label for="name"
+								style="width: 50%; margin-left: 103%; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Last
+								Name</label> <input type="text" id="lname" required="required"
+								pattern=".{4,}" maxlength="25"
+								onkeypress="return onlyAlphabets(event,this)"
+								style="width: 44%; margin-left: 103%;" class="form-control">
+
 						</div>
 
 					</div>
 
-
-					<div class='col-md-8' style="margin-bottom: 8px;">
-						<div class="form-group internal">
+					<div class="col-md-8" style="margin-bottom: 8px;">
+						<div>
 							<label for="name"
-								style="width: 330%; margin-left: -136px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Mobile
-								Number</label> <input  type="text" id="mob"
-								style="width: 140%; margin-left: -69.5%;" class="form-control"/>
+								style="width: 50%; margin-left: 20px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Mobile
+								Number</label> <input type="text" id="mob" title="MINIMUM SIZE"
+								onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57"
+								pattern=".{10,}" maxlength="12"
+								style="width: 44%; margin-left: 3%;" class="form-control">
 						</div>
-						<div class='col-md-3 indent-small'>
-							<div class='form-group internal'>
+						<div style="margin-top: -54px;">
+						
 								<label for="name"
-									style="width: 330%; margin-left: 204%; margin-bottom: 1px; font-size: 12px; font-weight: 400; color: black;">Email
-									ID</label><input  type='text' id="email"
-									style="width: 330%; margin-left: 198%;" class="form-control" />
+									style="width: 50%; margin-left: 53%; margin-bottom: 1px; font-size: 12px; font-weight: 400; color: black;">Email
+									ID</label><input type="text" id="email"
+									pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+									style="width: 65.5%; margin-left: 53%;" class="form-control">
 							</div>
-						</div>
+						
 					</div>
 
 					<div class='col-md-8' style="margin-bottom: 8px;">
 						<div class="form-group internal">
 							<label for="name"
 								style="width: 330%; margin-left: 21px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Address</label>
-							<input  type="text" id="adds"
-								style="width: 226%; margin-left: 7.5%;" class="form-control"
-								/>
+							<input type="text" id="adds"
+								style="width: 226%; margin-left: 7.5%;" class="form-control" />
 						</div>
 					</div>
 					<div class='col-md-8' style="margin-bottom: 8px;">
 						<div class="form-group internal">
 							<label for="name"
 								style="width: 330%; margin-left: 21px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Landmark</label>
-							<input  type="text" id="land"
-								style="width: 219%; margin-left: 7.5%;" class="form-control"
-								/>
+							<input type="text" id="land"
+								style="width: 219%; margin-left: 7.5%;" class="form-control" />
 						</div>
 					</div>
-						<div class='col-md-8' style="margin-bottom: 8px;">
-						<div class="form-group internal">
+					<div class="col-md-8" style="margin-bottom: 8px;">
+
+						<label for="name"
+							style="width: 50%; margin-left: 20px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">State
+							Name</label> <input type="text" id="state" required="required"
+							pattern=".{4,}" maxlength="25"
+							onkeypress="return onlyAlphabets(event,this)"
+							style="width: 44%; margin-left: 3%;" class="form-control">
+
+						<div style="margin-top: -54px;">
+
 							<label for="name"
-								style="width: 330%; margin-left: -293px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">State
-								Name</label> <input type="text" id="state"
-								style="width: 140%; margin-left: -149.5%;" class="form-control"/>
+								style="width: 50; margin-left: 53%; margin-bottom: 1px; font-size: 12px; font-weight: 400; color: black;">City
+								Name</label><input type="text" id="city_name" required="required"
+								pattern=".{4,}" maxlength="25"
+								onkeypress="return onlyAlphabets(event,this)"
+								style="width: 44%; margin-left: 53%;" class="form-control">
+
 						</div>
-						<div class='col-md-3 indent-small'>
-							<div class='form-group internal'>
-								<label for="name"
-									style="width: 142%;margin-left: 201%;margin-bottom: 1px;font-size: 12px;font-weight: 400;color: black;">City
-									Name</label><input type='text' id="city"
-									style="width: 196%;margin-left: 200%;" class="form-control"
-									 />
-							</div>
-						</div>
-						<div class='col-md-3 indent-small'>
-							<div class='form-group internal'>
-								<label for="name"
-									style="width: 50%; margin-left: 317.5%; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Pin
-									Code</label> <input type='text' id="pincode"
-									style="width: 183%; margin-left: 316.5%;" class="form-control"
-									 />
-							</div>
+						<div style="margin-top: -54px;">
+
+							<label for="name"
+								style="width: 50%; margin-left: 103%; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Pin
+								Code</label> <input type="text" id="pincode" required="required"
+								onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57"
+								pattern=".{6,}" maxlength="6"
+								style="width: 44%; margin-left: 103%;" class="form-control">
+
 						</div>
 
 					</div>
@@ -775,17 +812,19 @@ a.close:hover {
 						<div class="form-group internal">
 							<label for="name"
 								style="width: 330%; margin-left: -136px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">STB
-								Number</label> <input type="text" id="stbno"
-								style="width: 140%; margin-left: -69.5%;" class="form-control"/>
+								Number</label> <input type="text" id="stbno" title="MINIMUM SIZE"
+								onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+								pattern=".{4,}" maxlength="12"
+								style="width: 140%; margin-left: -69.5%;" class="form-control" />
 						</div>
 						<div class='col-md-3 indent-small'>
 							<div class='form-group internal'>
-								 <a href="#" style="width: 272%; margin-left: 350.5px;"
+								<a href="#" style="width: 272%; margin-left: 350.5px;"
 									value="changeSTB" data-modal-stb="stbNumberChange">Change</a>
 							</div>
 						</div>
 					</div>
-					
+
 
 					<div class='col-md-8' style="margin-bottom: 8px;">
 						<div style='overflow: scroll; width: 151%; height: 170px;'>
@@ -833,14 +872,15 @@ a.close:hover {
 							<div class="form-group internal">
 								<label for="name"
 									style="width: 330%; margin-left: -98px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Account
-									Blance</label> <input type="text" id="blance"
-									style="width: 142%; margin-left: -49.5%;" class="form-control"/>
+									Blance</label> <input type="text" id="blance" title="MINIMUM SIZE"
+									onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+									pattern=".{2,}" maxlength="4"
+									style="width: 142%; margin-left: -49.5%;" class="form-control" />
 							</div>
 							<div class='col-md-3 indent-small'>
 								<div class='form-group internal'>
-									<br> 
-										<a href="#" style="width: 330%; margin-left: 877px;"
-									value="changeSTB" >Change</a>
+									<br> <a href="#" style="width: 330%; margin-left: 877px;"
+										value="changeSTB">Change</a>
 								</div>
 							</div>
 						</div>
@@ -851,37 +891,37 @@ a.close:hover {
 					<br> <br> <input value="Submit!" type="submit"
 						id="submit" class="btn-primary btn btn-block"
 						style="width: 29%; height: 26px; font-size: 12px; margin-left: 35%;">
-							<script>
+					<script>
 								$("#submit").click( function() {
-									var fname = $("#f_name").text();
+									var idi = $("#id1").text();
+									var cname = $("#myname").val();
+								
 								    var mname = $("#mname").val();
 								    var lname = $("#lname").val();
 								    var mob = $("#mob").val();
-								    var email = $("#email").text();
+								    var email = $("#email").val();
 								    var adds = $("#adds").val();
 								    var land = $("#land").val();
 								    var state = $("#state").val();
-								    var city = $("#city").text();
+								    var city_name = $("#city_name").val();
 								    var pincode = $("#pincode").val();
 								    var stbno = $("#stbno").val();
 								    var blance = $("#blance").val();
 								    var username = $("#username").val();
-								   alert("fname"+fname);
-								   alert("mname"+mname);
-								   alert("lname"+lname);
+									alert(land);
 								    $.ajax({  
 							            type : 'GET', 
 							            url: 'updateConnection.html',
 							            data: {
-							            	'fname': fname,
+							            	'fname':cname,
 							            	'mname': mname,
 							            	'lname': lname,
 							            	'mob': mob,
-							            	'email': email,
+							            	'email':email,
 							            	'adds': adds,
 							            	'land': land,
 							            	'state': state,
-							            	'city': city,
+							            	'city':city_name,
 							            	'pincode': pincode,
 							            	'stbno': stbno,
 							            	'blance': blance,
@@ -892,16 +932,19 @@ a.close:hover {
 							       		cache: false,
 										beforeSend: function(xhr) 
 							                        {
+														alert("1");
 							                            xhr.setRequestHeader("Accept", "application/json");  
 							                            xhr.setRequestHeader("Content-Type", "application/json");  
 							                        },
 							         				success: function (data) {
+							         					alert("2");
 							         					 alert(data);
 							         					location.reload();
 						           						
 								          		    },
 										            error: function(e){
 										            	console.warn(e);
+										            	alert("3");
 										            	 alert(e);
 										            }
 							            
@@ -911,9 +954,9 @@ a.close:hover {
 								
 								 	 
 						  </script>
-						
-				
-			</div>
+
+
+				</div>
 
 			</div>
 		</div>
@@ -976,9 +1019,9 @@ a.close:hover {
 		<div id="stbNumberChange" class="modal-stb">
 			<header style="padding: -1px;">
 
-				<a href="#" class="js-modal-close close" 
-					style="line-height: 0;font-size: 1.5em;position: absolute;top: 13%;right: 1%;text-decoration: none;color: #0b212f;opacity: 15.2;">×</a>
-			
+				<a href="#" class="js-modal-close close"
+					style="line-height: 0; font-size: 1.5em; position: absolute; top: 13%; right: 1%; text-decoration: none; color: #0b212f; opacity: 15.2;">×</a>
+
 
 
 			</header>
@@ -1020,12 +1063,10 @@ a.close:hover {
 
 						</div>
 					</div>
-					 <input value="Submit!" type="submit"
-						id="submit" class="btn-primary btn btn-block"
+					<input value="Submit!" type="submit" id="submit"
+						class="btn-primary btn btn-block"
 						style="width: 29%; height: 26px; font-size: 12px; margin-left: 35%;">
-				
-			</div>
-			
 
+				</div>
 </body>
 </html>

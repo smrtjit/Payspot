@@ -623,21 +623,64 @@ public class LCOController {
 	}
 
 	@RequestMapping(value = "/updateConnection", method = RequestMethod.GET)
-	public ModelAndView updateConnection(@ModelAttribute("updatealluser") Subscriber subscriber, ModelMap model,
-			@RequestParam("user") String user, @RequestParam("blance") String blance,
-			@RequestParam("username") String username, @RequestParam("fname") String fname,
-			@RequestParam("mname") String mname, @RequestParam("lname") String lname, @RequestParam("mob") String mob,
-			@RequestParam("email") String email, @RequestParam("adds") String adds, @RequestParam("land") String land,
-			@RequestParam("state") String state, @RequestParam("city") String city,
-			@RequestParam("pincode") String pincode, @RequestParam("stbno") String stbno) {
+	public ModelAndView updateConnection(Integer offset,Integer maxResults, ModelMap model,
+			@RequestParam("user") String user,@RequestParam("username") String username,
+			@RequestParam("fname") String fname,@RequestParam("mname") String mname, 
+			@RequestParam("lname") String lname,@RequestParam("mob") String mob,
+			@RequestParam("email") String email,@RequestParam("adds") String adds,
+			@RequestParam("land") String land,@RequestParam("state") String state,
+			@RequestParam("city") String city,@RequestParam("pincode") String pincode,
+			@RequestParam("stbno") String stbno, @RequestParam("blance") String blance) {
 
-		System.out.println("Data Secuessfully Update\t" + user + "\tusername\t" + username + "\name\t" + fname);
-			
+		System.out.println("Data Secuessfully Update\t" + user + "\tusername\t" + blance);
+		userService.updateConnection(username,fname, mname, lname, mob, email, adds, land, state,city, pincode, stbno, blance);
+//		System.out.println("Data Update");
+		List<Subscriber> subs = userService.getByLCOId(user, offset, maxResults);
+		Subscriber updatealluser = new Subscriber();
+		model.addAttribute("userList", subs);
+		model.addAttribute("updatealluser", updatealluser);
+		model.addAttribute("count", userService.count(user));
 		model.addAttribute("user", user);
 		return new ModelAndView("redirect:allSubscriber.html", model);
 		//
 	}
 
+	@RequestMapping(value = "/ApprovedBulkLCO", method = RequestMethod.GET)
+	public ModelAndView ApprovedBulkLCO(@RequestParam("user") String user, @RequestParam("invoice") String id,
+			@RequestParam("RAmt") String RAmt,@RequestParam("state") String status,
+			@RequestParam("RId") String RId,@RequestParam("Remark") String Remark,ModelMap model) {
+		System.out.println("ApprovedBulkLCO1: "+user+","+RAmt+","+status+","+RId+","+Remark);
+		Customer_Invoice1 ctr= invoice1.getByInvoiceId(id);
+		AllCollections col= LCOCollectionRepository.getByInvoice(id);
+		int i=LCOCollectionRepository.updateCollection(id, RAmt, user, RId,status, Remark, getDate());
+		int i2=invoice1.updateInvoiceDetail(id, RAmt, col.getCollecting_Agent(), getDate(), status);
+		int i3=agentbillservice.updateAgentBill(id, RAmt, RId, Remark, status, user, getDate());
+		model.addAttribute("user", user);
+		 return new ModelAndView("redirect:allCollection.html",model);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/bulkDetails", method = RequestMethod.GET)
+	public String bulkDetails(@RequestParam("user") String user, @RequestParam("invoice") String invoiceid,
+			ModelMap model) {
+		System.out.println("bulkDetails Invoice Details check data: " + invoiceid + "," + user);
+		
+		Customer_Invoice1 result = invoice1.getByInvoiceId(invoiceid);
+		AllCollections col=LCOCollectionRepository.getByInvoice(invoiceid);
+		
+		System.out.println("Result: " + result.getUser_Name());
+		List ls= new ArrayList();
+		ls.add(col);
+		ls.add(result);
+		Gson gson = new Gson();
+		String json = gson.toJson(ls);
+		model.addAttribute("user", user);
+		
+		
+		return json;
+		// return new ModelAndView(json);
+	}
+	
 	@ResponseBody
 	@RequestMapping(value = "/updateCompLCO", method = RequestMethod.GET)
 	public String updateCompLCO(@RequestParam("user") String user, @RequestParam("id") String cId,
