@@ -168,15 +168,7 @@ public class SubscriberDaoImpl implements SubscriberDao {
 		return 1;
 	}
 
-	@Override
-	public int connectionUpdate(Subscriber sub) {
-		Session sf = dao.openSession();
-		Transaction tx= sf.beginTransaction();
-		sf.saveOrUpdate(sub);
-		tx.commit();
-		sf.close();
-		return 1;
-	}
+
 
 	@Override
 	public int updateConnection(String username, String firstname, String middlename, String lastname, String mobile,
@@ -184,23 +176,24 @@ public class SubscriberDaoImpl implements SubscriberDao {
 			String accountblance) {
 		
 		Session sf = dao.openSession();
-		String qry="update Subscriber set firstName = :firstname,middleName= :middlename,lastName= :lastname,"
-				+ "mobile= :mobile,emailId= :email,address = :address,landMark = :landmark,"
-				+ "state = :state,city = :city,pincode = :pincode,sTBNo = :stbno,accountBalance = :accountblance where userName = :id";
+		String qry="update Subscriber set firstName = :fname,middleName= :mname,lastName= :lname,"
+				+ "mobile= :mob,emailId= :email,address = :add,landMark = :land,"
+				+ "state = :stat,city = :cty,pincode = :pcde,sTBNo = :sno,accountBalance = :ablnce where userName = :id";
+		
 		Query query = sf.createSQLQuery(qry);
-		query.setParameter("UserName",username);
-		query.setParameter("firstName",firstname);
-		query.setParameter("middleName", middlename);
-		query.setParameter("lastName", lastname);
-		query.setParameter("mobile", mobile);
-		query.setParameter("emailId", email);
-		query.setParameter("address", address);
-		query.setParameter("landMark", landmark);
-		query.setParameter("state", state);
-		query.setParameter("city", city);
-		query.setParameter("pincode", pincode);
-		query.setParameter("sTBNo", stbno);
-		query.setParameter("accountBalance", accountblance);
+		query.setParameter("id", username);
+		query.setParameter("fname",firstname);
+		query.setParameter("mname", middlename);
+		query.setParameter("lname", lastname);
+		query.setParameter("mob", mobile);
+		query.setParameter("email", email);
+		query.setParameter("add", address);
+		query.setParameter("land", landmark);
+		query.setParameter("stat", state);
+		query.setParameter("cty", city);
+		query.setParameter("pcde", pincode);
+		query.setParameter("sno", stbno);
+		query.setParameter("ablnce", accountblance);
 		int result = query.executeUpdate();
 		sf.beginTransaction().commit();
 		sf.close();

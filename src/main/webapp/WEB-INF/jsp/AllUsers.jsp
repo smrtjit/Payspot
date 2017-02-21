@@ -24,7 +24,6 @@
 	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
 <style>
-
 .modal-stb {
 	margin-left: -39%;
 	margin-top: -18%;
@@ -531,7 +530,7 @@ a.close:hover {
 	<script src="layout/scripts/jquery.backtotop.js"></script>
 	<script src="layout/scripts/jquery.mobilemenu.js"></script>
 
-<script>
+	<script>
 		$(function() {
 
 			var appendthis = ("<div class='modal-overlay js-modal-close'></div>");
@@ -679,7 +678,7 @@ a.close:hover {
 		
 		
 	</script>
-	<div id="popup2" class="modal-box">
+	<div id="popup2" class="modal-box" style="margin-top:2%;">
 		<header
 			style="border-bottom-color: #0a7777; background-color: #3eb3b3; padding: 1px;">
 
@@ -704,7 +703,7 @@ a.close:hover {
 		<div class="container" style="padding: 10px 0;">
 			<%-- 					<form id="contact" action="#"> --%>
 
-			<div class="form-inline marginBottom">
+			<div class=" marginBottom">
 				<div class="md-form">
 					<input type="hidden" name="username" id="username" /> <input
 						type="hidden" name="user" value="${user}" />
@@ -751,31 +750,44 @@ a.close:hover {
 								style="width: 44%; margin-left: 3%;" class="form-control">
 						</div>
 						<div style="margin-top: -54px;">
-						
-								<label for="name"
-									style="width: 50%; margin-left: 53%; margin-bottom: 1px; font-size: 12px; font-weight: 400; color: black;">Email
-									ID</label><input type="text" id="email"
-									pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
-									style="width: 65.5%; margin-left: 53%;" class="form-control">
-							</div>
-						
+
+							<label for="name"
+								style="width: 50%; margin-left: 53%; margin-bottom: 1px; font-size: 12px; font-weight: 400; color: black;">Email
+								ID</label><input type="text" id="email" pattern=".{15,}" maxlength="60"
+								style="width: 65.5%; margin-left: 53%;" class="form-control">
+							<script type="text/javascript">
+								function validateForm() {
+									  var x = $("#email").val();
+								    var atpos = x.indexOf("@");
+								    var dotpos = x.lastIndexOf(".");
+								    if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
+								       
+								        return false;
+								    }
+								    else{
+								    	 return true;
+								    }
+								}
+								</script>
+						</div>
+
 					</div>
 
-					<div class='col-md-8' style="margin-bottom: 8px;">
-						<div class="form-group internal">
+					<div class="col-md-8" style="margin-bottom: 8px;">
+						
 							<label for="name"
-								style="width: 330%; margin-left: 21px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Address</label>
-							<input type="text" id="adds"
-								style="width: 226%; margin-left: 7.5%;" class="form-control" />
-						</div>
+								style="width: 50%; margin-left: 21px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Address</label>
+							<input type="text" id="adds" style="width: 80%; margin-left: 3%;"
+								class="form-control">
+						
 					</div>
-					<div class='col-md-8' style="margin-bottom: 8px;">
-						<div class="form-group internal">
+					<div class="col-md-8" style="margin-bottom: 8px;">
+						
 							<label for="name"
 								style="width: 330%; margin-left: 21px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Landmark</label>
-							<input type="text" id="land"
-								style="width: 219%; margin-left: 7.5%;" class="form-control" />
-						</div>
+							<input type="text" id="land" style="width: 80%; margin-left: 3%;"
+								class="form-control">
+						
 					</div>
 					<div class="col-md-8" style="margin-bottom: 8px;">
 
@@ -809,25 +821,25 @@ a.close:hover {
 
 					</div>
 					<div class='col-md-8' style="margin-bottom: 8px;">
-						<div class="form-group internal">
+						
 							<label for="name"
-								style="width: 330%; margin-left: -136px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">STB
-								Number</label> <input type="text" id="stbno" title="MINIMUM SIZE"
-								onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+								style="width: 50%; margin-left: 3%; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">STB
+								Number</label><input type="text" id="stbno" title="MINIMUM SIZE"
+								onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57"
 								pattern=".{4,}" maxlength="12"
-								style="width: 140%; margin-left: -69.5%;" class="form-control" />
-						</div>
-						<div class='col-md-3 indent-small'>
-							<div class='form-group internal'>
+								style="width: 44%; margin-left: 3%;" class="form-control">
+						
+						
+							
 								<a href="#" style="width: 272%; margin-left: 350.5px;"
 									value="changeSTB" data-modal-stb="stbNumberChange">Change</a>
-							</div>
-						</div>
+						
+						
 					</div>
 
 
 					<div class='col-md-8' style="margin-bottom: 8px;">
-						<div style='overflow: scroll; width: 151%; height: 170px;'>
+						<div style='overflow: scroll; width: 151%; height: 130px;'>
 							<div class='col-md-6 indent-small'>
 								<div class="form-group internal" style="width: 208%;">
 
@@ -869,30 +881,27 @@ a.close:hover {
 						</div>
 
 						<div class='col-md-8' style="margin-bottom: 8px;">
-							<div class="form-group internal">
+							
 								<label for="name"
-									style="width: 330%; margin-left: -98px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Account
-									Blance</label> <input type="text" id="blance" title="MINIMUM SIZE"
-									onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+									style="width: 50%; margin-left: 3%; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Account
+									Blance</label><input type="text" id="blance" title="MINIMUM SIZE"
+									onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57"
 									pattern=".{2,}" maxlength="4"
-									style="width: 142%; margin-left: -49.5%;" class="form-control" />
-							</div>
-							<div class='col-md-3 indent-small'>
-								<div class='form-group internal'>
-									<br> <a href="#" style="width: 330%; margin-left: 877px;"
+									style="width: 71%; margin-left: 3%;" class="form-control">
+							 <a href="#" style="width: 50%; margin-left: 343px;"
 										value="changeSTB">Change</a>
-								</div>
-							</div>
+							
 						</div>
 
 
 
 					</div>
-					<br> <br> <input value="Submit!" type="submit"
+				 <input value="Submit!" type="submit"
 						id="submit" class="btn-primary btn btn-block"
 						style="width: 29%; height: 26px; font-size: 12px; margin-left: 35%;">
 					<script>
 								$("#submit").click( function() {
+									if(validateForm()===true){
 									var idi = $("#id1").text();
 									var cname = $("#myname").val();
 								
@@ -908,7 +917,7 @@ a.close:hover {
 								    var stbno = $("#stbno").val();
 								    var blance = $("#blance").val();
 								    var username = $("#username").val();
-									alert(land);
+									
 								    $.ajax({  
 							            type : 'GET', 
 							            url: 'updateConnection.html',
@@ -932,27 +941,26 @@ a.close:hover {
 							       		cache: false,
 										beforeSend: function(xhr) 
 							                        {
-														alert("1");
 							                            xhr.setRequestHeader("Accept", "application/json");  
 							                            xhr.setRequestHeader("Content-Type", "application/json");  
 							                        },
 							         				success: function (data) {
-							         					alert("2");
 							         					 alert(data);
 							         					location.reload();
 						           						
-								          		    },
-										            error: function(e){
-										            	console.warn(e);
-										            	alert("3");
-										            	 alert(e);
-										            }
+								            },
+								            error: function(e){
+								            	alert(e);
+								            }
+
 							            
 							      		  });
-								   
+									}else{
+										alert("Email Not Valid");
+									}
 								});
 								
-								 	 
+									 
 						  </script>
 
 
@@ -1016,7 +1024,7 @@ a.close:hover {
 
 			});
 		</script>
-		<div id="stbNumberChange" class="modal-stb">
+		<div id="stbNumberChange" class="modal-stb" style="left: 64%;">
 			<header style="padding: -1px;">
 
 				<a href="#" class="js-modal-close close"

@@ -42,7 +42,7 @@ public class CustomerInvoiceDaoImpl implements CustomerInvoiceDao {
 		Criteria cr = sf.createCriteria(Customer_Invoice1.class);
 
 		// To get records having salary more than 2000
-		cr.add(Restrictions.eq("bill_status", status));
+		cr.add(Restrictions.eq("billStatus", status));
 		List l= cr.list();
 		sf.close();
 		return l;
@@ -65,8 +65,8 @@ public class CustomerInvoiceDaoImpl implements CustomerInvoiceDao {
 		Session sf = dao.openSession();
 		Double sum=0.0;
 		List<Double> sumData =  sf.createCriteria(Customer_Invoice1.class)
-		        .setProjection(Projections.property("Paid_Amt"))
-		        .add(Restrictions.eq("User_Id", custId))
+		        .setProjection(Projections.property("lastPaid"))
+		        .add(Restrictions.eq("custId", custId))
 		        .list();
 		for(Object d: sumData){
 			sum=sum+Double.parseDouble(d.toString());
@@ -83,8 +83,8 @@ public class CustomerInvoiceDaoImpl implements CustomerInvoiceDao {
 		Session sf = dao.openSession();
 		Double sum=0.0;
 		List sumData =  sf.createCriteria(Customer_Invoice1.class)
-		        .setProjection(Projections.property("Total_Amount"))
-		        .add(Restrictions.eq("User_Id", custId))
+		        .setProjection(Projections.property("totalAmt"))
+		        .add(Restrictions.eq("custId", custId))
 		        .list();
 		for(Object d: sumData){
 			sum=sum+Double.parseDouble(d.toString());
@@ -99,8 +99,8 @@ public class CustomerInvoiceDaoImpl implements CustomerInvoiceDao {
 	public Customer_Invoice1 getLastPaymentDetail(String custId) {
 		Session sf = dao.openSession();
 		Criteria c = sf.createCriteria(Customer_Invoice1.class);
-		c.add(Restrictions.eq("User_Id", custId));
-		c.addOrder(Order.asc("Billing_Date"));
+		c.add(Restrictions.eq("custId", custId));
+		c.addOrder(Order.asc("openingBal"));
 		Customer_Invoice1 l= (Customer_Invoice1)c.uniqueResult();
 		sf.close();
 		return l;
@@ -110,7 +110,7 @@ public class CustomerInvoiceDaoImpl implements CustomerInvoiceDao {
 	public List<Customer_Invoice1> list(String user,Integer offset, Integer maxResults) {
 		Session sf = dao.openSession();
 		Criteria c = sf.createCriteria(Customer_Invoice1.class);
-		c.add(Restrictions.eq("lco_id", user));
+		c.add(Restrictions.eq("lcoId", user));
 		List l= c.setFirstResult(offset != null ? offset : 0)
 				.setMaxResults(maxResults != null ? maxResults : 10).list();
 		sf.close();
@@ -120,7 +120,7 @@ public class CustomerInvoiceDaoImpl implements CustomerInvoiceDao {
 	public Long count(String user) {
 		Session sf = dao.openSession();
 		Criteria c = sf.createCriteria(Customer_Invoice1.class);
-		c.add(Restrictions.eq("lco_id", user));
+		c.add(Restrictions.eq("lcoId", user));
 		Long l= (Long) c.setProjection(Projections.rowCount()).uniqueResult();
 		sf.close();
 		return l;
@@ -129,8 +129,8 @@ public class CustomerInvoiceDaoImpl implements CustomerInvoiceDao {
 	@Override
 	public int updateInvoiceDetail(String id, String paidAmt, String agentId, String paidDate, String status) {
 		Session sf = dao.openSession();
-		String qry="update Cust_Invoice1 set Paid_Amt = :ramt,Agent_Id= :agent,date_of_paid= :Pdate,"
-				+ "bill_status= :status where Invoice_No = :id";
+		String qry="update Cust_Invoice1 set lastPaid = :ramt,custId= :agent,dateOfPaid= :Pdate,"
+				+ "billStatus= :status where Invoice_No = :id";
 		Query query = sf.createSQLQuery(qry);
 		query.setParameter("id",id);
 		query.setParameter("ramt",paidAmt);

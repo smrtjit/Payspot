@@ -58,11 +58,6 @@ public class SubscriberServiceImpl implements SubscriberService {
 		return subsriberdao.addSubscriber(sub);
 	}
 
-	@Override
-	public int connectionUpdate(Subscriber sub) {
-		
-		return subsriberdao.connectionUpdate(sub);
-	}
 
 	@Override
 	public int updateConnection(String username, String firstname, String middlename, String lastname, String mobile,
