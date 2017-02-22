@@ -2,6 +2,8 @@
 
 
 <!DOCTYPE html>
+<%@ taglib prefix="tag" uri="/WEB-INF/taglibs/customTaglib.tld"%>
+<%@ taglib prefix="tag1" uri="/WEB-INF/taglibs/customTaglib2.tld"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -17,6 +19,7 @@
 <script src="assets/js/jquery-1.10.2.js"></script>
 <link href="assets/css/bootstrap.css" rel="stylesheet" />
 <link href="assets/css/circle.css" rel="stylesheet" />
+
 
 <style type="text/css">
 table#ContentPlaceHolder1_gvcompHistory {
@@ -68,20 +71,19 @@ table#ContentPlaceHolder1_gvcompHistory {
 			<div class="row">
 				<form:form id="myForm" method="get" action="addComplaint.html"
 					class="bs-example form-horizontal" commandName="addComplaint">
+					<input type="hidden" name="user" value="${id}" />
 					<div class="col-sm-5">
-						<div style="margin-bottom: 10px">
-							VC No.: <input name="vc_notext" type="text"
-								value="<%=request.getParameter("vc_no")%>"
+						<div style="margin-bottom: 10px; color: black;">
+							User ID: <input name="vc_notext" type="text"
+								value="<%=request.getParameter("id")%>"
 								id="ContentPlaceHolder1_txtvc" disabled="disabled" tabindex="1"
 								class="aspNetDisabled form-control" placeholder="VC No." />
 
 						</div>
-						<input type="hidden" name="vc_no"
-							value="<%=request.getParameter("vc_no")%>"> <input
-							type="hidden" name="id" value="<%=request.getParameter("id")%>">
+
 					</div>
 					<div class="col-sm-5">
-						<div style="margin-bottom: 10px">
+						<div style="margin-bottom: 10px; color: black;">
 							Complaint Type: <select name="lcomplaint"
 								id="ContentPlaceHolder1_ddlcomplaint" tabindex="2"
 								class="form-control" placeholder="Responsibility">
@@ -101,20 +103,20 @@ table#ContentPlaceHolder1_gvcompHistory {
 					</div>
 					<div class="col-sm-10">
 						<textarea name="remark" rows="5" required cols="20"
-							id="ContentPlaceHolder1_txtRemarks" tabindex="3"
+							id="ContentPlaceHolder1_txtRemarks" tabindex="3" style="width: 102.3%;"
 							class="form-control" placeholder="Complaint Remarks">
 </textarea>
 					</div>
-					<div class="col-sm-10" >
-						<div class="col-sm-3" style="float: right;">
-							<div style="margin-bottom: 10px">
-								<br /> <input type="submit"
-									name="ctl00$ContentPlaceHolder1$btn_search" value="Submit"
-									id="ContentPlaceHolder1_btn_search" tabindex="4"
-									class="btn-primary btn btn-block"/>
-							</div>
+
+					<div class="col-sm-2" style="float: right;">
+						<div class="col-sm-10" >
+							<br /> <input type="submit"
+								name="ctl00$ContentPlaceHolder1$btn_search" value="Submit"
+								id="ContentPlaceHolder1_btn_search" tabindex="4"
+								class="btn-primary btn btn-block" style="margin-top: 30%;">
 						</div>
 					</div>
+
 				</form:form>
 			</div>
 
@@ -123,8 +125,8 @@ table#ContentPlaceHolder1_gvcompHistory {
 
 			<div class="col-sm-12">
 				<div class="col-sm-12">
-					<div style="margin-bottom: 0px">
-						<p>Previous Complaints</p>
+					<div style="margin-bottom: 0px;">
+						<p style="color: black;">Previous Complaints</p>
 					</div>
 				</div>
 				<div class="table-responsive">
@@ -136,28 +138,42 @@ table#ContentPlaceHolder1_gvcompHistory {
 							id="ContentPlaceHolder1_gvcompHistory"
 							style="width: 100%; border-collapse: collapse;">
 							<tr>
-								<th scope="col">SN</th>
-								<th scope="col">Complain No.</th>
-								<th scope="col">Complaint Type</th>
-								<th scope="col">Date of Complaint</th>
-								<th scope="col">Status</th>
-								<th scope="col">Remarks</th>
-								<th scope="col">Closing Date</th>
-								<th scope="col">Closing Remarks</th>
+								<th scope="col"
+									style="color: #FFFFFF; background-color: #12a59c;">SN</th>
+								<th scope="col"
+									style="color: #FFFFFF; background-color: #12a59c;">Complain
+									No</th>
+								<th scope="col"
+									style="color: #FFFFFF; background-color: #12a59c;">Complaint
+									Type</th>
+								<th scope="col"
+									style="color: #FFFFFF; background-color: #12a59c;">Date of
+									Complaint</th>
+								<th scope="col"
+									style="color: #FFFFFF; background-color: #12a59c;">Status</th>
+								<th scope="col"
+									style="color: #FFFFFF; background-color: #12a59c;">Remarks</th>
+								<th scope="col"
+									style="color: #FFFFFF; background-color: #12a59c;">Closing
+									Date</th>
+								<th scope="col"
+									style="color: #FFFFFF; background-color: #12a59c;">Closing
+									Remarks</th>
+
 							</tr>
 							<%
 								int i = 0;
 							%>
 							<c:forEach items="${userList}" var="user">
 								<tr>
-									<td><%=i%></td>
-									<td>${user.complaint_no}</td>
-									<td>${user.complaint_type}</td>
-									<td>${user.open_date}</td>
-									<td>${user.complaint_status}</td>
-									<td>${user.cust_remark}</td>
-									<td>${user.closing_date}</td>
-									<td>${user.closing_remark}</td>
+									<td style="color: black;"><%=i%></td>
+									<td style="color: black;">${user.complaint_no}</td>
+									<td style="color: black;">${user.complaint_type}</td>
+									<td style="color: black;">${user.open_date}</td>
+									<td style="color: black;">${user.complaint_status}</td>
+									<td style="color: black;">${user.cust_remark}</td>
+									<td style="color: black;">${user.closing_date}</td>
+									<td style="color: black;">${user.closing_remark}</td>
 									<%
 										i++;
 									%>
@@ -165,6 +181,10 @@ table#ContentPlaceHolder1_gvcompHistory {
 							</c:forEach>
 
 						</table>
+							<tag:paginate max="15" offset="${offset}" count="${count}"
+				uri="CustComplaint.html?user=${id}" next="&raquo;"
+				previous="&laquo;" />
+						
 					</div>
 				</div>
 			</div>

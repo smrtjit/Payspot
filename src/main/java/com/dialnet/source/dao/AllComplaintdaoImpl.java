@@ -175,4 +175,17 @@ public class AllComplaintdaoImpl implements AllComplaintdao {
 		return tmp;
 	}
 
+	@Override
+	public List<AllComplaints> getComplaintByNo(String id) {
+		Session sf = session.openSession();
+		Criteria c2 = sf.createCriteria(AllComplaints.class);
+		c2.add(Restrictions.eq("creater_Id", id));
+		//AllComplaints product = (AllComplaints) sf.get(AllComplaints.class, Long.parseLong(complaints_No));
+		//System.out.println("customer_vcno: " + product);
+		List<AllComplaints> tmp=c2.list();
+		System.out.println("creater_Id: " + tmp);
+		sf.close();
+		return tmp;
+	}
+
 }

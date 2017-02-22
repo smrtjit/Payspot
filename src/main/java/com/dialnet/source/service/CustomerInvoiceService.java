@@ -8,6 +8,8 @@ public interface CustomerInvoiceService {
 public List<Customer_Invoice1> getByStatus(String status);
 	
 	public Customer_Invoice1 getByInvoiceId(String id);
+	public Customer_Invoice1 getByCustomerId(String id);
+
 	
 	public Double getSumOfPaidAmt(String custId);
 	

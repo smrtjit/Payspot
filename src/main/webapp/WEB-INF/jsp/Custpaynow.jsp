@@ -53,11 +53,12 @@
 				<hr />
 
 				<div class="row">
+			
 					<div class="col-sm-12">
-
+						
 						<div class="col-sm-6">
 							<div class="col-sm-12">
-								<div class="col-sm-4">VC NO</div>
+								<div class="col-sm-4">User ID</div>
 								<div class="col-sm-8" style="margin-bottom: 10px">
 									<input name="ctl00$ContentPlaceHolder1$txtvcno" type="text"
 										value="${vc_no }" readonly="readonly"

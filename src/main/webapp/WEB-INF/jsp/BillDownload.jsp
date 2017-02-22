@@ -20,8 +20,7 @@
 	href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
 
 <style>
 .modal-stb {
@@ -38,23 +37,7 @@
 	border: 1px solid rgba(0, 0, 0, 0.1);
 	background-clip: padding-box;
 }
-/* .modal-stb { */
-/* 	margin-left: -204px; */
-/* 	top: 200px; */
-/* 	left: 450px; */
-/* 	display: block; */
-/* 	position: absolute; */
-/* 	z-index: 1000; */
-/* 	width: 50%; */
-/* 	background: white; */
-/* 	border-bottom: 1px solid #aaa; */
-/* 	border-radius: 4px; */
-/* 	box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5); */
-/* 	border: 1px solid rgba(0, 0, 0, 0.1); */
-/* 	background-clip: padding-box; */
-/* } */
 
-/* ////////////////////////////////////////////////////////////////////////////////////// */
 .v-center {
 	height: 100vh;
 	width: 100%;
@@ -435,9 +418,11 @@ a.close:hover {
 							<td>${user.totalDues}</td>
 							<td>${user.currentBill}</td>
 							<td>${user.billAfterDueDate}</td>
-							<td><a class="btn-primary btn btn-block" href="#"
-								style="font-size: 1.5vmin;" value="${user.invoice_No}"
-								data-modal-id="popup2">Download/View Bill</a></td>
+							<td style="text-align: center;   padding-top: 1.3%;"><a
+								class="js-open-modal btn" href="#"
+								style="font-size: 1.5vmin; padding: 1.15em 0.75em;   "
+								value="${user.invoice_No}" data-modal-id="popup2">Download/View
+									Bill</a></td>
 
 						</tr>
 					</c:forEach>
@@ -657,7 +642,22 @@ a.close:hover {
 						<a href="#" class="btn btn-small js-modal-close"
 							onclick="return PrintPanel();">Print</a> <a href="#"
 							class="btn btn-small js-modal-close">Close</a>
-
+								<script type="text/javascript">
+		 function PrintPanel() {
+	            var panel = document.getElementById("popup2");
+	            var printWindow = window.open('', '', 'height=400,width=850');
+	            printWindow.document.write('<html><head><title>Generate Bill</title>');
+	            printWindow.document.write('</head><body >');
+	            printWindow.document.write(panel.innerHTML);
+	            printWindow.document.write('</body></html>');
+	            printWindow.document.close();
+	            setTimeout(function () {
+	                printWindow.print();
+	            }, 500);
+	            return false;
+	        }</script>
+		
+						
 					</div>
 
 				</div>

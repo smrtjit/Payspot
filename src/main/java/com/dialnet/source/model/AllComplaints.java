@@ -18,38 +18,32 @@ public class AllComplaints {
 	@Id
 	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long complaint_no;
-	@NotEmpty
-	@Size(min = 1, max = 25)
+
+	
 	private String complaint_type;
 	
-	@NotEmpty
-	@Size(min = 1, max = 25)
+	
 	private String complaint_status;
 	
-	@NotEmpty
-	@Size(min = 1, max = 25)
+
 	private String customer_caf;
 	
-	@NotEmpty
-	@Size(min = 1, max = 500)
+
 	private String cust_remark;
 	
-	@NotEmpty
-	@Size(min = 1, max = 75)
+	
 	private String open_date;
 	
-	@NotEmpty
-	@Size(min = 1, max = 500)
+
 	private String closing_remark;
 	
-	@NotEmpty
-	@Size(min = 1, max = 75)
+	
 	private String closing_date;
 	private String creater_Id;
 	private String customer_name;
 	private String customer_add;
 	private String customer_mobile;
-	String lco_id;
+	private String lco_id;
 	public AllComplaints() {
 		// TODO Auto-generated constructor stub
 	}

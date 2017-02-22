@@ -8,6 +8,7 @@ import com.dialnet.source.model.Subscriber;
 public interface SubscriberService {
 
 	public List<Subscriber> getByLCOId(String lco,Integer offset,Integer maxResults);
+	
 	public long count(String lco);
 	public Subscriber getByID(String id);
 	public boolean findByLogin(String id, String pwd);

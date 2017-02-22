@@ -557,12 +557,6 @@ a.close:hover {
 						<div  class="col-sm-2  pull-right" style="margin-top: 36px;">
 						<a href="#" value=""
 									data-modal-id="popup2">Image template</a>
-							
-							 
-																			
-											
-				
-				
 			</div>
 			<hr>
 

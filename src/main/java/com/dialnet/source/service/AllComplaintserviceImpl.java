@@ -57,4 +57,10 @@ public class AllComplaintserviceImpl implements AllComplaintService {
 		return allcomplaintdao.getComplaint(id);
 	}
 
+	@Override
+	public List<AllComplaints> getComplaintByNo(String id) {
+		// TODO Auto-generated method stub
+		return allcomplaintdao.getComplaintByNo(id);
+	}
+
 }

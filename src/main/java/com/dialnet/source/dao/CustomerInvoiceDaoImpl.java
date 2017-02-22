@@ -143,4 +143,16 @@ public class CustomerInvoiceDaoImpl implements CustomerInvoiceDao {
 		return result;
 	}
 
+	@Override
+	public Customer_Invoice1 getByCustomerId(String id) {
+		Session sf = dao.openSession();
+		Criteria cr = sf.createCriteria(Customer_Invoice1.class);
+
+		// To get records having salary more than 2000
+		cr.add(Restrictions.eq("custId", id));
+		Customer_Invoice1 l= (Customer_Invoice1)cr.uniqueResult();
+		sf.close();
+		return l;
+	}
+
 }

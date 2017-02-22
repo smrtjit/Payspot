@@ -131,7 +131,7 @@ select {
 
 @media ( min-width : 32em) {
 	.modal-box {
-		width: 30%;
+		width: 49%;
 	}
 }
 
@@ -238,42 +238,44 @@ a.close:hover {
 
 </head>
 <body id="top">
-<div class="wrapper row1">
-    <header id="header" class="hoc clear"> 
-      <!-- ################################################################################################ -->
-      <div id="logo" class="fl_left">
-        <h1><a href="LCOHome.html?user=${user }">PaySpot</a></h1>
-      </div>
-      <nav id="mainav" class="fl_right">
-        <ul class="clear">
-            <li><a href="allSubscriber.html?user=${user }">Connection</a></li>
-              <li><a href="allCollection.html?user=${user }">Collection</a></li>
-               <li><a href="allComplaint.html?user=${user }">Complaint</a></li>
-          <li><a class="drop" href="#">Services</a>
-            <ul>
-         	  <li><a href="newConnn.html?user=${user }">Add Subscriber</a></li>
-              <li><a href="newLineman.html?user=${user}">Add LineMan</a></li>    
-               <li><a href="addStock.html?user=${user}">Add Stock</a></li>   
-               <li><a href="billDownload.html?user=${user}">Download Bill</a></li>      
-               <li><a href="topUp.html?user=${user }">Topup</a></li>           
-             
-            </ul>
-          </li>
-          <li><a class="drop" href="#">Repository</a>
-            <ul>
-             <li><a href="allLM.html?user=${user }">Line Man</a></li>
-               <li><a href="stock.html?user=${user }">Stock</a></li>
-              <li><a href="newPackage.html?user=${user }">Packages</a></li>                  
-              <li><a href="newChannel.html?user=${user}">Channels</a></li>
-              
-            </ul>
-          </li>
-          <li><a href="lcoDetail.html?user=${user }">Profile</a></li>
-          <li><a href="logOut.html?user=${user}" style="margin-right: -90px;">Log out</a></li>
-        </ul>
-      </nav>
-    </header>
-  </div>
+	<div class="wrapper row1">
+		<header id="header" class="hoc clear">
+			<!-- ################################################################################################ -->
+			<div id="logo" class="fl_left">
+				<h1>
+					<a href="LCOHome.html?user=${user }">PaySpot</a>
+				</h1>
+			</div>
+			<nav id="mainav" class="fl_right">
+				<ul class="clear">
+					<li><a href="allSubscriber.html?user=${user }">Connection</a></li>
+					<li><a href="allCollection.html?user=${user }">Collection</a></li>
+					<li><a href="allComplaint.html?user=${user }">Complaint</a></li>
+					<li><a class="drop" href="#">Services</a>
+						<ul>
+							<li><a href="newConnn.html?user=${user }">Add Subscriber</a></li>
+							<li><a href="newLineman.html?user=${user}">Add LineMan</a></li>
+							<li><a href="addStock.html?user=${user}">Add Stock</a></li>
+							<li><a href="billDownload.html?user=${user}">Download
+									Bill</a></li>
+							<li><a href="topUp.html?user=${user }">Topup</a></li>
+
+						</ul></li>
+					<li><a class="drop" href="#">Repository</a>
+						<ul>
+							<li><a href="allLM.html?user=${user }">Line Man</a></li>
+							<li><a href="stock.html?user=${user }">Stock</a></li>
+							<li><a href="newPackage.html?user=${user }">Packages</a></li>
+							<li><a href="newChannel.html?user=${user}">Channels</a></li>
+
+						</ul></li>
+					<li><a href="lcoDetail.html?user=${user }">Profile</a></li>
+					<li><a href="logOut.html?user=${user}"
+						style="margin-right: -90px;">Log out</a></li>
+				</ul>
+			</nav>
+		</header>
+	</div>
 	<div class="wrapper row3">
 		<main class="hoc container clear"> <!-- main body --> <!-- ################################################################################################ -->
 
@@ -341,6 +343,10 @@ a.close:hover {
 					class="btn-primary btn btn-block"
 					onclick="return checkValue(document.getElementById('filename').value);" />
 			</div>
+			<div class="col-sm-2  pull-right" style="margin-top: 12px;">
+				<a href="#" value="" data-modal-id="popupimage">Image template</a>
+			</div>
+			
 		</form>
 		<hr>
 		<table>
@@ -740,5 +746,69 @@ a.close:hover {
 	<script src="layout/scripts/jquery.min.js"></script>
 	<script src="layout/scripts/jquery.backtotop.js"></script>
 	<script src="layout/scripts/jquery.mobilemenu.js"></script>
+	<script>
+			$(function() {
+
+				var appendthis = ("<div class='modal-overlay js-modal-close'></div>");
+
+				$('a[data-modal-image]').click(function(e) {
+
+					var url = $(this).attr('value');
+					var fields = url.split('#');
+					var id = fields[0];
+					;
+
+					document.getElementById('id1').innerHTML = id;
+
+					e.preventDefault();
+					$("body").append(appendthis);
+					$(".modal-overlay").fadeTo(500, 0.7);
+					//$(".js-modalbox").fadeIn(500);
+					var modalBox = $(this).attr('data-modal-image');
+					$('#' + modalBox).fadeIn($(this).data());
+				});
+
+				$(".js-modal-close, .modal-overlay").click(function() {
+					$(".modal-box, .modal-overlay").fadeOut(500, function() {
+						$(".modal-overlay").remove();
+					});
+
+				});
+
+				$(window).resize(
+						function() {
+							$(".modal-box")
+									.css(
+											{
+												top : ($(window).height() - $(
+														".modal-box")
+														.outerHeight()) / 2,
+												left : ($(window).width() - $(
+														".modal-box")
+														.outerWidth()) / 2
+											});
+						});
+
+				$(window).resize();
+
+			});
+		</script>
+	<div id="popupimage" class="modal-box" >
+			<header
+				style="border-bottom-color: #0a7777; background-color: #3eb3b3; padding: 1px;">
+
+				<a href="#" class="js-modal-close close"
+					style="line-height: 0; font-size: 2.5em; position: absolute; top: 4%; right: 1%; text-decoration: none; color: #0b212f; opacity: 15.2;">×</a>
+				<h3 id="id1" style="width: 27%; color: #ffffff;"></h3>
+			</header>
+			<div class="container" style="padding: 10px 0;">
+			<div class="form-inline marginBottom">
+					<div class="md-form">
+					   <img id="myImg" src="assets/img/channel_list.png" alt="Trolltunga, Norway" width="900" height="550">
+					</div>
+				</div>
+			</div>
+		</div>
+	
 </body>
 </html>
