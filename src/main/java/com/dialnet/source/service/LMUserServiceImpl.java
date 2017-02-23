@@ -85,4 +85,9 @@ public class LMUserServiceImpl implements LMUserService {
 		return dao.getAllAgentNames( lco);
 	}
 
+	@Override
+	public String getLCOID(String username) {
+		return dao.getLCOID(username);
+	}
+
 }

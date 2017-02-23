@@ -74,6 +74,18 @@ public class CustomerInvoiceServiceImpl implements CustomerInvoiceService {
 		return dao.getByCustomerId(id);
 	}
 
+	@Override
+	public List<Customer_Invoice1> listForSingleUser(String user, Integer offset, Integer maxResults) {
+		
+		return dao.listForSingleUser(user, offset, maxResults);
+	}
+
+	@Override
+	public Long countForSingleUser(String user) {
+		// TODO Auto-generated method stub
+		return dao.countForSingleUser(user);
+	}
+
 	
 
 }

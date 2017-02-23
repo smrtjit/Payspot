@@ -61,7 +61,7 @@
 								<div class="col-sm-4">User ID</div>
 								<div class="col-sm-8" style="margin-bottom: 10px">
 									<input name="ctl00$ContentPlaceHolder1$txtvcno" type="text"
-										value="${vc_no }" readonly="readonly"
+										value="${id }" readonly="readonly"
 										id="ContentPlaceHolder1_txtvcno" class="form-control"
 										placeholder="" />
 								</div>

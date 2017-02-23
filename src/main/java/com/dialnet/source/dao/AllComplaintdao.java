@@ -14,6 +14,7 @@ public interface AllComplaintdao {
 	public Long countForSearch(String user,String sdate, String edate, String VC_no, String mobile, String status);
 	public List<AllComplaints> listForSearch(String user,String sdate, String edate, String VC_no, String mobile, String status,Integer offset, Integer maxResults);
 	public AllComplaints getComplaint(String id);
-	public  List<AllComplaints> getComplaintByNo(String id);
+	public  List<AllComplaints> getComplaintByNo(String custid,Integer offset, Integer maxResults);
 	
+	public Long countForAll(String custid);
 }

@@ -57,10 +57,17 @@ public class AllComplaintserviceImpl implements AllComplaintService {
 		return allcomplaintdao.getComplaint(id);
 	}
 
+	
 	@Override
-	public List<AllComplaints> getComplaintByNo(String id) {
+	public List<AllComplaints> getComplaintByNo(String custid, Integer offset, Integer maxResults) {
 		// TODO Auto-generated method stub
-		return allcomplaintdao.getComplaintByNo(id);
+		return allcomplaintdao.getComplaintByNo(custid, offset, maxResults);
+	}
+
+	@Override
+	public Long countForAll(String custid) {
+		// TODO Auto-generated method stub
+		return allcomplaintdao.countForAll(custid);
 	}
 
 }

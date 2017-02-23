@@ -1,6 +1,6 @@
-
 package com.dialnet.source.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -93,8 +93,8 @@ public class UserController {
 			model.addObject("UserName", found.getFirstName());
 			model.addObject("vc_no", found.getCRFNo());
 			model.addObject("stb_no", found.getSTBNo());
-			PackageInfo lco = packageinfoservice.getByID(found.getBasePCKG());
-			model.addObject("Package_name", lco.getPckgName());
+			//PackageInfo lco = packageinfoservice.getByID(found.getBasePCKG());
+			model.addObject("Package_name", found.getBasePCKG());
 			model.addObject("Account_balance", found.getAccountBalance());
 			model.addObject("Last_payment", found.getPCKGPrice());
 			// model.addObject("Account_balance", found.get);
@@ -123,11 +123,69 @@ public class UserController {
 			model.addObject("vc_no", id);
 			
 			PackageInfo lco = packageinfoservice.getByID(found.getBasePCKG());
-			model.addObject("basepackage", lco.getPckgName());
-			model.addObject("alacarte", found.getA_La_Carte());
-			model.addObject("addonpack", found.getAddOnPCKG());
 			
-			model.addObject("Package_cost", lco.getPrice());
+			long baseprice=0;
+			model.addObject("basepackage",found.getBasePCKG());
+			
+			
+			PackageInfo ala_carte=null;
+			String text = found.getA_La_Carte();
+			String a11="";
+			String a22="";
+			for(String mapadd : text.split(",")) {
+				a11=a11+mapadd+",";
+				ala_carte=packageinfoservice.getByName(mapadd);
+				a22=a22+ala_carte.getPrice()+",";
+				baseprice=baseprice+ala_carte.getPrice();
+			} 
+			
+			
+			model.addObject("ala_pack", a11);
+			model.addObject("ala_price", a22);
+			
+			PackageInfo add_on=null;;
+			String text1 = found.getAddOnPCKG();
+			String a1="";
+			String a2="";
+			for(String mapadd1 : text1.split(",")) {
+				a1=a1+mapadd1+",";
+				add_on=packageinfoservice.getByName(mapadd1);
+				a2=a2+add_on.getPrice()+",";
+				System.out.println("a2\t"+a2);
+				baseprice=baseprice+add_on.getPrice();
+			}
+			
+			model.addObject("add_pck",a1 );
+			model.addObject("add_prce",a2 );
+
+			long tmp=Long.parseLong(found.getPCKGPrice());
+			baseprice=tmp-baseprice;
+			model.addObject("basepackageprice", baseprice);
+			
+			model.addObject("Package_cost", tmp);
+			model.addObject("Account_balance", found.getAccountBalance());
+			model.addObject("Last_payment", found.getPCKGPrice());
+			// model.addObject("Account_balance", found.get);
+			model.addObject("Last_recharge_date", found.getSTB_IssuedOn());
+			// model.addObject("mobile", found.getCustomer_mobile());
+			// model.addObject("email", found.getCustomer_email());
+			// model.addObject("add", found.getCustomer_add());
+
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			//PackageInfo lco = packageinfoservice.getByID(found.getBasePCKG());
+//			model.addObject("basepackage", found.getBasePCKG());
+//			model.addObject("alacarte", found.getA_La_Carte());
+//			model.addObject("addonpack", found.getAddOnPCKG());
+			
+			model.addObject("Package_cost",found.getPCKGPrice());
 			model.addObject("Account_balance", found.getAccountBalance());
 			model.addObject("Last_payment", found.getPCKGPrice());
 			// model.addObject("Account_balance", found.get);
@@ -200,12 +258,13 @@ public class UserController {
 
 		} else {
 			System.out.println("test Part id\t" + id);
-			List<AllComplaints> found = userComplaintService.getComplaintByNo(id);
+			List<AllComplaints> found = userComplaintService.getComplaintByNo(id, offset, maxResults);
 			// for(AllComplaints tmp: found){
 			// System.out.println("test Part 11: "+tmp.getComplaint_no());
 			// }
-			model.addObject("count",userComplaintService.count(id) );
+			model.addObject("count",userComplaintService.countForAll(id) );
 			model.addObject("id", id);
+			model.addObject("offset", offset);
 			model.addObject("userList", found);
 			return model;
 		}
@@ -213,7 +272,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/addComplaint", method = RequestMethod.GET)
-	public ModelAndView addComplaint(ModelMap map, @RequestParam("user") String id,
+	public ModelAndView addComplaint(ModelMap map, @RequestParam("user") String id,Integer offset, Integer maxResults,
 			@RequestParam("lcomplaint") String camptype, @RequestParam("remark") String remark) {
 		Subscriber found = subservice.getByID(id);
 		String user = found.getFirstName() + "";
@@ -227,7 +286,7 @@ public class UserController {
 
 		tmp.setComplaint_no(compleateid);
 		tmp.setCust_remark(remark);
-		tmp.setOpen_date(new Date().toString());
+		tmp.setOpen_date(getDate());
 		tmp.setClosing_remark("NA");
 		tmp.setClosing_date("NA");
 		tmp.setCustomer_caf("NA");
@@ -240,20 +299,45 @@ public class UserController {
 		System.out.println("Test parts 1");
 		userComplaintService.add(tmp);
 		System.out.println("Test parts 2");
-		List<AllComplaints> userList = userComplaintService.getComplaintByNo(id);
+		List<AllComplaints> userList =userComplaintService.getComplaintByNo(id, offset, maxResults);
 		map.addAttribute("userList", userList);
 		map.addAttribute("id", id);
+		map.addAttribute("offset", offset);
 
 		return new ModelAndView("redirect:CustComplaint.html", map);
 	}
 
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	@RequestMapping(value = "/logOut", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
 
 		session.invalidate();
 		session = null;
 		// System.out.println("Session Ends: "+session);
 		return "logout";
+	}
+	
+	@RequestMapping(value = "/custbill", method = RequestMethod.GET)
+	public ModelAndView billDownload(ModelMap map, @RequestParam("id") String user, Integer offset,
+			Integer maxResults) {
+		List<Customer_Invoice1> subs = invoice1.listForSingleUser(user,offset,maxResults);
+		map.addAttribute("userList", subs);
+		map.addAttribute("count", invoice1.countForSingleUser(user));
+		map.addAttribute("id", user);
+		return new ModelAndView("CustBillDownload", map);
+	}
+	
+	public String getDate() {
+		String trnstamp = null;
+		try {
+			SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date now = new Date();
+			String strDate = sdfDate.format(now);
+			// System.out.println(strDate.toString());
+			trnstamp = strDate.toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return trnstamp;
 	}
 
 }

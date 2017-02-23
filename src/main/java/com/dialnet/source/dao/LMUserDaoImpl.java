@@ -177,5 +177,18 @@ public class LMUserDaoImpl implements LMUserDao {
 		sf.close();
 		return l;
 	}
+	
+	@Override
+	public String getLCOID(String username) {
+		Session sf = dao.openSession();
+		Criteria c2 = sf.createCriteria(LMUser.class);
+		c2.add(Restrictions.eq("username", Long.parseLong(username)));
+		ProjectionList proList = Projections.projectionList(); 
+		proList.add(Projections.property("lco_id"));
+		c2.setProjection(proList); 
+		String product=c2.uniqueResult()+"";
+		sf.close();
+		return product;
+	}
 
 }

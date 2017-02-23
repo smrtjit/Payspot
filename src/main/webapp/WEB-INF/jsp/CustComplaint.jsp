@@ -103,7 +103,7 @@ table#ContentPlaceHolder1_gvcompHistory {
 					</div>
 					<div class="col-sm-10">
 						<textarea name="remark" rows="5" required cols="20"
-							id="ContentPlaceHolder1_txtRemarks" tabindex="3" style="width: 102.3%;"
+							id="ContentPlaceHolder1_txtRemarks" tabindex="3" style="resize: none;width: 102.3%;"
 							class="form-control" placeholder="Complaint Remarks">
 </textarea>
 					</div>
@@ -182,7 +182,7 @@ table#ContentPlaceHolder1_gvcompHistory {
 
 						</table>
 							<tag:paginate max="15" offset="${offset}" count="${count}"
-				uri="CustComplaint.html?user=${id}" next="&raquo;"
+				uri="CustComplaint.html?id=${id}" next="&raquo;"
 				previous="&laquo;" />
 						
 					</div>
