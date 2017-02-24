@@ -279,48 +279,44 @@ a.close:hover {
 	function setData( data){
 		var accNumber=data.custId;
 		var billNo=data.Invoice_No;
-		var billDate=data.currentBill;
-		var dueDate=data.dueDate;
-		var previous=data.totalDues;
-		var lastPay=data.lastPaid;
-		var advance=data.openingBal;
-		var billAmt=data.totalAmt;
-		var serviceTax=data.serviceTax;
-		var entTax=data.cess;
-		var PreviousBal=data.totalDues;
-		var Disount=data.totalDues;
-		var lateCharge=data.totalDues;
-		var lateAmt=data.totalDues;
-		var pckcost=data.custPckgCost;
-		var addon=data.custAddPckg;
-		var alacarte=data.custALPckg;
-		var basepkg=data.custBasePckg;
-
+		var current_b=data.currentBill;
+		var billDate=data.sDate;
+		var dueDate=data.eDate;
+		var pending_due=data.totalDues;
+		var opening_bal=data.openingBal;
+		var last_pay=data.lastPaid;
+		var custbasepckg=data.custBasePckg;
+		var custaddpckg=data.custAddPckg;
+		var custalpckg=data.custALPckg;
+		var servicetax=data.serviceTax;
+		var cesstax=data.cess;
+		var amusementtax=data.amusementTax;
+		var bilafterduedate=data.billAfterDueDate;
+		var latepecharge=bilafterduedate-pending_due;
+		
+		var privious_blance=opening_bal-last_pay;
+		
+		
 		document.getElementById("accno").innerHTML =accNumber;
-		document.getElementById("bill").innerHTML =billNo;
+		document.getElementById("pending_dues").innerHTML =pending_due;
+		document.getElementById("pending_bal").innerHTML =pending_due;
+		document.getElementById("bill_no").innerHTML =billNo;
 		document.getElementById("bill_d").innerHTML =billDate;
-		document.getElementById("due").innerHTML =dueDate;
-		document.getElementById("pre").innerHTML =previous;
-		document.getElementById("last").innerHTML =lastPay;
-		document.getElementById("ad").innerHTML =advance;
-		document.getElementById("bill_a").innerHTML =pckcost;
-		document.getElementById("st").innerHTML =serviceTax;
-		document.getElementById("et").innerHTML =entTax;
-		document.getElementById("pb").innerHTML =PreviousBal;
-		document.getElementById("dis").innerHTML =Disount;
-		document.getElementById("lpc").innerHTML =lateCharge;
-		document.getElementById("lpa").innerHTML =lateAmt;
-		document.getElementById("tot").innerHTML =billAmt;
-		document.getElementById("stt").innerHTML =billAmt;
-		document.getElementById("ala").innerHTML =alacarte;
-		document.getElementById("addon").innerHTML =addon;
-		document.getElementById("basepkg").innerHTML =basepkg;
+		document.getElementById("opening_blance").innerHTML =opening_bal;
+		document.getElementById("current_bill").innerHTML =current_b;
+		document.getElementById("sub_total").innerHTML =current_b;
+		document.getElementById("dueDate").innerHTML =dueDate;
+		document.getElementById("last_pay").innerHTML =last_pay;
+		document.getElementById("privious_blance").innerHTML =privious_blance;
+		document.getElementById("custbasepckg").innerHTML =custbasepckg;
+		document.getElementById("custaddpckg").innerHTML =custaddpckg;
+		document.getElementById("custalpckg").innerHTML =custalpckg;
+		document.getElementById("servicetax").innerHTML =servicetax;
+		document.getElementById("cesstax").innerHTML =cesstax;
+		document.getElementById("amusementtax").innerHTML =amusementtax;
 		
-// 		document.getElementById("accno").innerHTML =Disount;
-// 		document.getElementById("accno").innerHTML =lateCharge;
-// 		document.getElementById("accno").innerHTML =lateAmt;
-// 		document.getElementById("accno").innerHTML =accNumber;
-		
+		document.getElementById("latepecharge").innerHTML =latepecharge;
+		document.getElementById("bilafterduedate").innerHTML =bilafterduedate;
 		
 	}
 </script>
@@ -418,9 +414,9 @@ a.close:hover {
 							<td>${user.totalDues}</td>
 							<td>${user.currentBill}</td>
 							<td>${user.billAfterDueDate}</td>
-							<td style="text-align: center;   padding-top: 1.3%;"><a
+							<td style="text-align: center;"><a
 								class="js-open-modal btn" href="#"
-								style="font-size: 1.5vmin; padding: 1.15em 0.75em;   "
+								style="font-size: 1.5vmin; padding: 0.5em 0.75em;   "
 								value="${user.invoice_No}" data-modal-id="popup2">Download/View
 									Bill</a></td>
 
@@ -435,199 +431,195 @@ a.close:hover {
 				previous="&laquo;" />
 		</div>
 
-		<div id="popup2" class="modal-box" style="margin-top: 2%">
+	<div id="popup2" class="modal-box" style="margin-top: 2%">
 
-			<a href="#" class="js-modal-close close">×</a>
+		<a href="#" class="js-modal-close close">×</a>
 
-			<div class="modal-body" style="padding: 0px;">
-				<div class="modal-content">
-					<div class="modal-header" style="background-color: #288484">
-						<button type="button" class="close" data-dismiss="modal"></button>
-						<h4 align="center" class="modal-title">
-							<b style="color: white" id="inid"></b>
-						</h4>
-					</div>
-
-
-					<div id="ContentPlaceHolder1_msgbox">
-
-						<div id="ContentPlaceHolder1_pnlPrint">
+		<div class="modal-body" style="padding: 0px;">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color: #288484">
+					<button type="button" class="close" data-dismiss="modal"></button>
+					<h4 align="center" class="modal-title">
+						<b style="color: white" id="inid"></b>
+					</h4>
+				</div>
 
 
+				<div id="ContentPlaceHolder1_msgbox">
 
-							<div id="print_ticket">
-								<div class="detail">
-
-									<table style="width: 100%;">
-										<tr>
-											<td>
-												<p>
-													<b> <span id="ContentPlaceHolder1_lblname"></span></b>
-												</p>
-												<p>
-													<span id="ContentPlaceHolder1_lbladd1"></span>
-												</p>
-												<p>
-													<span id="ContentPlaceHolder1_lbladd2"></span>
-												</p>
-
-											</td>
-											<td>
-												<table style="width: 100%;">
-													<tr>
-														<td style="border: ridge; padding: 1px 8px;">Account
-															No</td>
-														<td style="border: ridge; padding: 1px 8px;"><span
-															id="accno"></span></td>
-													</tr>
-													<tr>
-														<td style="border: ridge; padding: 1px 8px;">Bill
-															Number</td>
-														<td style="border: ridge; padding: 1px 8px;"><span
-															id="bill"></span></td>
-													</tr>
-
-													<tr>
-														<td style="border: ridge; padding: 1px 8px;">Billing
-															Date</td>
-														<td style="border: ridge; padding: 1px 8px;"><span
-															id="bill_d"></span></td>
-													</tr>
-													<tr>
-														<td style="border: ridge; padding: 1px 8px;">Due Date</td>
-														<td style="border: ridge; padding: 1px 8px;"><span
-															id="due"></span></td>
-													</tr>
-												</table>
-
-											</td>
-										</tr>
-									</table>
-								</div>
+					<div id="ContentPlaceHolder1_pnlPrint">
 
 
-								<div class="col-md-12" style="background-color: #288484">
-									<p style="color: white" align="center">Make Online Payment
-										and manage your account</p>
-								</div>
+
+						<div id="print_ticket">
+							<div class="detail">
+
+								<table style="width: 100%;">
+									<tr>
+										<td>
+											<p>
+												<b> <span id="ContentPlaceHolder1_lblname"></span></b>
+											</p>
+											<p>
+												<span id="ContentPlaceHolder1_lbladd1"></span>
+											</p>
+											<p>
+												<span id="ContentPlaceHolder1_lbladd2"></span>
+											</p>
+
+										</td>
+										<td>
+											<table style="width: 100%;">
+												<tr>
+													<td style="border: ridge; padding: 1px 8px;">Account
+														No</td>
+													<td style="border: ridge; padding: 1px 8px;"><span
+														id="accno"></span></td>
+												</tr>
+												<tr>
+													<td style="border: ridge; padding: 1px 8px;">Bill
+														Number</td>
+													<td style="border: ridge; padding: 1px 8px;"><span
+														id="bill_no"></span></td>
+												</tr>
+
+												<tr>
+													<td style="border: ridge; padding: 1px 8px;">Billing
+														Date</td>
+													<td style="border: ridge; padding: 1px 8px;"><span
+														id="bill_d"></span></td>
+												</tr>
+												<tr>
+													<td style="border: ridge; padding: 1px 8px;">Due Date</td>
+													<td style="border: ridge; padding: 1px 8px;"><span
+														id="dueDate"></span></td>
+												</tr>
+											</table>
+
+										</td>
+									</tr>
+								</table>
+							</div>
+
+
+							<div class="col-md-12" style="background-color: #288484">
+								<p style="color: white" align="center">Make Online Payment
+									and manage your account</p>
+							</div>
+							<div class="col-md-12">
+								<table style="border: ridge">
+									<tr>
+										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Opening Balance</b></td>
+										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Last
+												Payment</b></td>
+										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Current Bill</b></td>
+										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Total Dues </b></td>
+										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Internet
+												User Id</b></td>
+
+									</tr>
+									<tr>
+										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b
+											id="opening_blance">RS 0</b></td>
+										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b
+											id="last_pay">RS 0</b></td>
+										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b
+											id="current_bill"></b></td>
+										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b
+											id="pending_dues">RS 520</b></td>
+										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b
+											id="in">NA</b></td>
+									</tr>
+								</table>
+							</div>
+							<br />
+							<div class="col-md-12">
 								<div class="col-md-12">
 									<table style="border: ridge">
-										<tr>
-											<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Previous</b></td>
-											<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Last
-													Payment</b></td>
-											<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Advance</b></td>
-											<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Bill
-													Amount </b></td>
-											<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Internet
-													User Id</b></td>
 
+										<tr>
+											<td style="border: ridge; width: 850px; padding: 1px 8px;"><b>Account
+													details</b></td>
+											<td style="border: ridge; width: 200px; padding: 1px 8px;"><b>Amount</b></td>
+										</tr>
+
+
+										<tr>
+											<td align="left" style="border: ridge; padding: 1px 8px;">Base
+												Package</td>
+											<td style="border: ridge; padding: 1px 8px;" id="custbasepckg">NA</td>
 										</tr>
 										<tr>
-											<td style="border: ridge; width: 210px; padding: 1px 8px;"><b
-												id="pre">RS 0</b></td>
-											<td style="border: ridge; width: 210px; padding: 1px 8px;"><b
-												id="last">RS 0</b></td>
-											<td style="border: ridge; width: 210px; padding: 1px 8px;"><b
-												id="ad"></b></td>
-											<td style="border: ridge; width: 210px; padding: 1px 8px;"><b
-												id="bill_a">RS 520</b></td>
-											<td style="border: ridge; width: 210px; padding: 1px 8px;"><b
-												id="in">NA</b></td>
+											<td align="left" style="border: ridge; padding: 1px 8px;">Add
+												On Package</td>
+											<td style="border: ridge; padding: 1px 8px;" id="custaddpckg">NA</td>
 										</tr>
+										<tr>
+											<td align="left" style="border: ridge; padding: 1px 8px;">A
+												La Carte</td>
+											<td style="border: ridge; padding: 1px 8px;" id="custalpckg">NA</td>
+										</tr>
+										<tr>
+											<td align="left" style="border: ridge; padding: 1px 8px;">Service
+												Tax</td>
+											<td style="border: ridge; padding: 1px 8px; width: 200px;"
+												id="servicetax">Rs 0.00</td>
+										</tr>
+										<tr>
+											<td align="left" style="border: ridge; padding: 1px 8px;">Entertainment
+												Tax</td>
+											<td style="border: ridge; padding: 1px 8px; width: 200px;"
+												id="amusementtax">Rs 0</td>
+										</tr>
+										<tr>
+											<td align="left" style="border: ridge; padding: 1px 8px;">Cess
+												Tax</td>
+											<td style="border: ridge; padding: 1px 8px; width: 200px;"
+												id="cesstax">Rs 0</td>
+										</tr>
+
+										<tr>
+											<td align="right"
+												style="border: ridge; padding: 1px 8px; width: 850px;"><b>Sub
+													Total</b></td>
+											<td style="border: ridge; padding: 1px 8px; width: 200px;"
+												id="sub_total"><b>RS 520</b></td>
+										</tr>
+
+										<tr>
+											<td align="right"
+												style="border: ridge; padding: 1px 8px; width: 850px;"><b>Previous
+													Balance</b></td>
+											<td style="border: ridge; padding: 1px 8px; width: 200px;"
+												id="privious_blance"><b>Rs 0</b></td>
+										</tr>
+
+
+										<tr>
+											<td align="right"
+												style="border: ridge; padding: 1px 8px; width: 850px;"><b>Total</b></td>
+											<td style="border: ridge; padding: 1px 8px; width: 200px;"><b
+												id="pending_bal">Rs 520</b></td>
+										</tr>
+										<tr>
+											<td align="right"
+												style="border: ridge; padding: 1px 8px; width: 850px;"><b>Late
+													Payment Charges</b></td>
+											<td style="border: ridge; padding: 1px 8px; width: 200px;"><b
+												id="latepecharge">Rs 50</b></td>
+										</tr>
+
+										<tr>
+											<td align="right"
+												style="border: ridge; padding: 1px 8px; width: 850px;"><b>Payable
+													after due date</b></td>
+											<td style="border: ridge; padding: 1px 8px; width: 200px;"><b
+												id="bilafterduedate">Rs 570</b></td>
+										</tr>
+
 									</table>
-								</div>
-								<br />
-								<div class="col-md-12">
-									<div class="col-md-12">
-										<table style="border: ridge">
-
-											<tr>
-												<td style="border: ridge; width: 850px; padding: 1px 8px;"><b>Account
-														details</b></td>
-												<td style="border: ridge; width: 200px; padding: 1px 8px;"><b>Amount</b></td>
-											</tr>
 
 
-											<tr>
-												<td align="left" style="border: ridge; padding: 1px 8px;">Base
-													Package</td>
-												<td style="border: ridge; padding: 1px 8px;" id="basepkg">NA</td>
-											</tr>
-											<tr>
-												<td align="left" style="border: ridge; padding: 1px 8px;">Add
-													On Package</td>
-												<td style="border: ridge; padding: 1px 8px;" id="addon">NA</td>
-											</tr>
-											<tr>
-												<td align="left" style="border: ridge; padding: 1px 8px;">A
-													La Carte</td>
-												<td style="border: ridge; padding: 1px 8px;" id="ala">NA</td>
-											</tr>
-											<tr>
-												<td align="left" style="border: ridge; padding: 1px 8px;">Service
-													Tax</td>
-												<td style="border: ridge; padding: 1px 8px; width: 200px;"
-													id="st">Rs 0.00</td>
-											</tr>
-											<tr>
-												<td align="left" style="border: ridge; padding: 1px 8px;">Entertainment
-													Tax</td>
-												<td style="border: ridge; padding: 1px 8px; width: 200px;"
-													id="et">Rs 0</td>
-											</tr>
-
-											<tr>
-												<td align="right"
-													style="border: ridge; padding: 1px 8px; width: 850px;"><b>Sub
-														Total</b></td>
-												<td style="border: ridge; padding: 1px 8px; width: 200px;"
-													id="stt"><b>RS 520</b></td>
-											</tr>
-
-											<tr>
-												<td align="right"
-													style="border: ridge; padding: 1px 8px; width: 850px;"><b>Previous
-														Balance</b></td>
-												<td style="border: ridge; padding: 1px 8px; width: 200px;"
-													id="pb"><b>Rs 0</b></td>
-											</tr>
-
-											<tr>
-												<td align="right"
-													style="border: ridge; padding: 1px 8px; width: 850px;"><b>Discount</b></td>
-												<td style="border: ridge; padding: 1px 8px; width: 200px;"><b
-													id="dis">Rs</b></td>
-											</tr>
-
-
-											<tr>
-												<td align="right"
-													style="border: ridge; padding: 1px 8px; width: 850px;"><b>Total</b></td>
-												<td style="border: ridge; padding: 1px 8px; width: 200px;"><b
-													id="tot">Rs 520</b></td>
-											</tr>
-											<tr>
-												<td align="right"
-													style="border: ridge; padding: 1px 8px; width: 850px;"><b>Late
-														Payment Charges</b></td>
-												<td style="border: ridge; padding: 1px 8px; width: 200px;"><b
-													id="lpc">Rs 50</b></td>
-											</tr>
-
-											<tr>
-												<td align="right"
-													style="border: ridge; padding: 1px 8px; width: 850px;"><b>Payable
-														after due date</b></td>
-												<td style="border: ridge; padding: 1px 8px; width: 200px;"><b
-													id="lpa">Rs 570</b></td>
-											</tr>
-
-										</table>
-
-
-
-									</div>
 
 								</div>
 
@@ -635,14 +627,16 @@ a.close:hover {
 
 						</div>
 
-
-
 					</div>
-					<div class="modal-footer">
-						<a href="#" class="btn btn-small js-modal-close"
-							onclick="return PrintPanel();">Print</a> <a href="#"
-							class="btn btn-small js-modal-close">Close</a>
-								<script type="text/javascript">
+
+
+
+				</div>
+				<div class="modal-footer">
+					<a href="#" class="btn btn-small js-modal-close"
+						onclick="return PrintPanel();">Print</a> <a href="#"
+						class="btn btn-small js-modal-close">Close</a>
+					<script type="text/javascript">
 		 function PrintPanel() {
 	            var panel = document.getElementById("popup2");
 	            var printWindow = window.open('', '', 'height=400,width=850');
@@ -656,14 +650,14 @@ a.close:hover {
 	            }, 500);
 	            return false;
 	        }</script>
-		
-						
-					</div>
+
 
 				</div>
-			</div>
 
+			</div>
 		</div>
+
+	</div>
 		<script type="text/javascript">
 			var theForm = document.forms['form1'];
 			if (!theForm) {

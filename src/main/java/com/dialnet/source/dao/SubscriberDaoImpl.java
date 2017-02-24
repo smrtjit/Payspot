@@ -58,6 +58,7 @@ public class SubscriberDaoImpl implements SubscriberDao {
 		cr.add(Restrictions.eq("UserName", Long.parseLong(id)));
 		Subscriber subscriber = (Subscriber) cr.uniqueResult();
 		sf.close();
+		System.out.println("Test By ID: "+subscriber);
 		return subscriber;
 	}
 
@@ -198,6 +199,18 @@ public class SubscriberDaoImpl implements SubscriberDao {
 		sf.beginTransaction().commit();
 		sf.close();
 		return result;
+	}
+
+	@Override
+	public Subscriber getByMobile(String id) {
+		Session sf = dao.openSession();
+		Criteria cr = sf.createCriteria(Subscriber.class);
+
+		// To get records having salary more than 2000
+		cr.add(Restrictions.eq("Mobile", id));
+		Subscriber subscriber = (Subscriber) cr.uniqueResult();
+		sf.close();
+		return subscriber;
 	}
 
 	

@@ -18,14 +18,10 @@
 <link href="assets/css/bootstrap.css" rel="stylesheet" />
 
 
-<link rel="stylesheet"
-	href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-
-<script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script type="text/javascript">
 	$(document).ready(function() {
 		$('#fdate').datepicker({
 			dateFormat : 'yy-mm-dd'
@@ -189,7 +185,7 @@ a.close:hover {
 	transition: color 1s ease;
 }
 </style>
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
 <script>
 var value;
 $(function(){
@@ -245,14 +241,14 @@ var appendthis =  ("<div class='modal-overlay js-modal-close'></div>");
 
 function setBulkData( data){
 	var keysbyindex = Object.keys(data);
-		
+	//alert("hello: "+data[keysbyindex[1]].custName);
 	document.getElementById("buklinid").innerHTML =data[keysbyindex[1]].Invoice_No;
-	document.getElementById("username").value =data[keysbyindex[1]].User_Name;
+	document.getElementById("username").value =data[keysbyindex[1]].custName;
 	
-	document.getElementById("amt").value =data[keysbyindex[1]].Total_Amount;
-	document.getElementById("servicetax").value =data[keysbyindex[1]].Service_Tax;
-	document.getElementById("amtt").value =data[keysbyindex[1]].Entertain_Tax;
-	document.getElementById("ot").value =data[keysbyindex[1]].Other_Tax;
+	document.getElementById("amt").value =data[keysbyindex[1]].totalDues;
+	document.getElementById("servicetax").value =data[keysbyindex[1]].serviceTax;
+	document.getElementById("amtt").value =data[keysbyindex[1]].amusementTax;
+	document.getElementById("ot").value =data[keysbyindex[1]].cess;
 	
 	document.getElementById("ramt").value =data[keysbyindex[0]].Paid_Amount;
 	document.getElementById("agent").value =data[keysbyindex[0]].Collecting_Agent;
@@ -323,43 +319,46 @@ function setBulkData( data){
 	});
 	
 	function setData( data){
-		var accNumber=data.User_Id;
+		var accNumber=data.custId;
 		var billNo=data.Invoice_No;
-		var billDate=data.Billing_Date;
-		var dueDate=data.DueDate;
-		var previous=data.Prevoius_Bal;
-		var lastPay=data.LastPaid_Amt;
-		var advance=data.Advance_Amt;
-		var billAmt=data.Total_Amount;
-		var serviceTax=data.Service_Tax;
-		var entTax=data.Entertain_Tax;
-		var PreviousBal=data.Prevoius_Bal;
-		var Disount=data.Discount;
-		var lateCharge=data.LatePay_Charges;
-		var lateAmt=data.TotalAmt_AftDueDate;
-		var pckcost=data.Package_Cost;
-
-		document.getElementById("accno").innerHTML =accNumber;
-		document.getElementById("bill").innerHTML =billNo;
-		document.getElementById("bill_d").innerHTML =billDate;
-		document.getElementById("due").innerHTML =dueDate;
-		document.getElementById("pre").innerHTML =previous;
-		document.getElementById("last").innerHTML =lastPay;
-		document.getElementById("ad").innerHTML =advance;
-		document.getElementById("bill_a").innerHTML =pckcost;
-		document.getElementById("st").innerHTML =serviceTax;
-		document.getElementById("et").innerHTML =entTax;
-		document.getElementById("pb").innerHTML =PreviousBal;
-		document.getElementById("dis").innerHTML =Disount;
-		document.getElementById("lpc").innerHTML =lateCharge;
-		document.getElementById("lpa").innerHTML =lateAmt;
-		document.getElementById("tot").innerHTML =billAmt;
-		document.getElementById("stt").innerHTML =billAmt;
-// 		document.getElementById("accno").innerHTML =Disount;
-// 		document.getElementById("accno").innerHTML =lateCharge;
-// 		document.getElementById("accno").innerHTML =lateAmt;
-// 		document.getElementById("accno").innerHTML =accNumber;
+		var current_b=data.currentBill;
+		var billDate=data.sDate;
+		var dueDate=data.eDate;
+		var pending_due=data.totalDues;
+		var opening_bal=data.openingBal;
+		var last_pay=data.lastPaid;
+		var custbasepckg=data.custBasePckg;
+		var custaddpckg=data.custAddPckg;
+		var custalpckg=data.custALPckg;
+		var servicetax=data.serviceTax;
+		var cesstax=data.cess;
+		var amusementtax=data.amusementTax;
+		var bilafterduedate=data.billAfterDueDate;
+		var latepecharge=bilafterduedate-pending_due;
 		
+		var privious_blance=opening_bal-last_pay;
+		
+		
+		document.getElementById("accno").innerHTML =accNumber;
+		document.getElementById("pending_dues").innerHTML =pending_due;
+		document.getElementById("pending_bal").innerHTML =pending_due;
+		document.getElementById("bill_no").innerHTML =billNo;
+		document.getElementById("bill_d").innerHTML =billDate;
+		document.getElementById("opening_blance").innerHTML =opening_bal;
+		document.getElementById("current_bill").innerHTML =current_b;
+		document.getElementById("sub_total").innerHTML =current_b;
+		document.getElementById("dueDate").innerHTML =dueDate;
+		document.getElementById("last_pay").innerHTML =last_pay;
+		document.getElementById("privious_blance").innerHTML =privious_blance;
+		document.getElementById("custbasepckg").innerHTML =custbasepckg;
+		document.getElementById("custaddpckg").innerHTML =custaddpckg;
+		document.getElementById("custalpckg").innerHTML =custalpckg;
+		document.getElementById("servicetax").innerHTML =servicetax;
+		document.getElementById("cesstax").innerHTML =cesstax;
+		document.getElementById("amusementtax").innerHTML =amusementtax;
+		
+		document.getElementById("latepecharge").innerHTML =latepecharge;
+		document.getElementById("bilafterduedate").innerHTML =bilafterduedate;
 		
 	}
 </script>
@@ -430,7 +429,7 @@ function setBulkData( data){
 					<div style="margin-bottom: 10px">
 
 						<input name="VC_No" type="text" id="ContentPlaceHolder1_txtvcno"
-							tabindex="2" class="form-control" placeholder="VC No." />
+							tabindex="2" class="form-control" placeholder="Customer Id" />
 					</div>
 				</div>
 				<div class="col-sm-2">
@@ -451,8 +450,11 @@ function setBulkData( data){
 				</div>
 				<div class="col-sm-2  ">
 					<div style="margin-bottom: 10px">
-						<input name=status type="text" id="ContentPlaceHolder1_txtpkg"
-							tabindex="2" class="form-control" placeholder="Status" />
+						 <select name="status" placeholder="select type" class="form-control">
+								<option value="">Select Status</option>
+								<option value="Pending">Pending</option>
+								<option value="Approved">Approved</option>
+							</select>
 					</div>
 
 				</div>
@@ -495,13 +497,10 @@ function setBulkData( data){
 						style="width: 5%; color: #FFFFFF; background-color: #12a59c;">SNo.</th>
 					<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Invoice
 						Number</th>
-					<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">CAF
-						No</th>
-					<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Customer
-						Name</th>
+					<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Customer Id</th>
+					<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Name</th>
 					<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Mobile</th>
-					<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Agent
-						ID</th>
+					<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Agent ID</th>
 					<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Recharge
 						Amount</th>
 					<th scope="col" style="color: #FFFFFF; background-color: #12a59c;">Payment
@@ -517,7 +516,7 @@ function setBulkData( data){
 
 						<td><a href="#" value="${user.invoice}"
 							data-modal-link="popup3">${user.invoice}</a></td>
-						<td>${user.VC_No}</td>
+						<td>${user.cust_Id}</td>
 						<td>${user.cust_Name}</td>
 						<td>${user.cust_mobile}</td>
 						<td>${user.collecting_Agent}</td>
@@ -634,8 +633,10 @@ function setBulkData( data){
 		</header>
 		<div class="modal-body" style="padding-left: 20px">
 			<!--    paste here -->
-			<form action="updateConnection.html">
-				<input type="hidden" name="user" value="1111"> <input type="hidden" name="invoice" id="invoice">
+			<form action="ApprovedBulkLCO.html" >
+
+				<input type="hidden" name="user" value="${user }"> 
+				<input type="hidden" name="invoice" id="invoice">
 				<div>
 					<div class="form-inline marginBottom">
 						<div class="md-form">
@@ -737,7 +738,7 @@ function setBulkData( data){
 						<div id="print_ticket">
 							<div class="detail">
 
-								<table style="width: 95%;">
+								<table style="width: 100%;">
 									<tr>
 										<td>
 											<p>
@@ -754,21 +755,28 @@ function setBulkData( data){
 										<td>
 											<table style="width: 100%;">
 												<tr>
-													<td style="border: ridge">Account No</td>
-													<td style="border: ridge"><span id="accno"></span></td>
+													<td style="border: ridge; padding: 1px 8px;">Account
+														No</td>
+													<td style="border: ridge; padding: 1px 8px;"><span
+														id="accno"></span></td>
 												</tr>
 												<tr>
-													<td style="border: ridge">Bill Number</td>
-													<td style="border: ridge"><span id="bill"></span></td>
+													<td style="border: ridge; padding: 1px 8px;">Bill
+														Number</td>
+													<td style="border: ridge; padding: 1px 8px;"><span
+														id="bill_no"></span></td>
 												</tr>
 
 												<tr>
-													<td style="border: ridge">Billing Date</td>
-													<td style="border: ridge"><span id="bill_d"></span></td>
+													<td style="border: ridge; padding: 1px 8px;">Billing
+														Date</td>
+													<td style="border: ridge; padding: 1px 8px;"><span
+														id="bill_d"></span></td>
 												</tr>
 												<tr>
-													<td style="border: ridge">Due Date</td>
-													<td style="border: ridge"><span id="due"></span></td>
+													<td style="border: ridge; padding: 1px 8px;">Due Date</td>
+													<td style="border: ridge; padding: 1px 8px;"><span
+														id="dueDate"></span></td>
 												</tr>
 											</table>
 
@@ -777,7 +785,7 @@ function setBulkData( data){
 								</table>
 							</div>
 
-							<br />
+
 							<div class="col-md-12" style="background-color: #288484">
 								<p style="color: white" align="center">Make Online Payment
 									and manage your account</p>
@@ -785,25 +793,26 @@ function setBulkData( data){
 							<div class="col-md-12">
 								<table style="border: ridge">
 									<tr>
-										<td style="border: ridge; width: 210px"><b>Previous</b></td>
-										<td style="border: ridge; width: 210px"><b>Last
+										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Opening Balance</b></td>
+										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Last
 												Payment</b></td>
-										<td style="border: ridge; width: 210px">Advance<b></b></td>
-										<td style="border: ridge; width: 210px"><b>Bill
-												Amount </b></td>
-										<td style="border: ridge; width: 210px"><b>Internet
+										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Current Bill</b></td>
+										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Total Dues </b></td>
+										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Internet
 												User Id</b></td>
 
 									</tr>
 									<tr>
-										<td style="border: ridge; width: 210px"><b id="pre">RS
-												0</b></td>
-										<td style="border: ridge; width: 210px"><b id="last">RS
-												0</b></td>
-										<td style="border: ridge; width: 210px"><b id="ad"></b></td>
-										<td style="border: ridge; width: 210px"><b id="bill_a">RS
-												520</b></td>
-										<td style="border: ridge; width: 210px"><b id="in">NA</b></td>
+										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b
+											id="opening_blance">RS 0</b></td>
+										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b
+											id="last_pay">RS 0</b></td>
+										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b
+											id="current_bill"></b></td>
+										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b
+											id="pending_dues">RS 520</b></td>
+										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b
+											id="in">NA</b></td>
 									</tr>
 								</table>
 							</div>
@@ -811,83 +820,85 @@ function setBulkData( data){
 							<div class="col-md-12">
 								<div class="col-md-12">
 									<table style="border: ridge">
+
 										<tr>
-											<td
-												style="border: ridge; width: 850px; padding: 5px 5px 5px 5px;"><b>Account
+											<td style="border: ridge; width: 850px; padding: 1px 8px;"><b>Account
 													details</b></td>
-											<td
-												style="border: ridge; width: 200px; padding: 5px 5px 5px 5px;"><b>Amount</b></td>
+											<td style="border: ridge; width: 200px; padding: 1px 8px;"><b>Amount</b></td>
 										</tr>
 
 
-
 										<tr>
-											<td align="right"
-												style="border: ridge; width: 850px; padding: 5px 5px 5px 5px;">(1)Service
+											<td align="left" style="border: ridge; padding: 1px 8px;">Base
+												Package</td>
+											<td style="border: ridge; padding: 1px 8px;" id="custbasepckg">NA</td>
+										</tr>
+										<tr>
+											<td align="left" style="border: ridge; padding: 1px 8px;">Add
+												On Package</td>
+											<td style="border: ridge; padding: 1px 8px;" id="custaddpckg">NA</td>
+										</tr>
+										<tr>
+											<td align="left" style="border: ridge; padding: 1px 8px;">A
+												La Carte</td>
+											<td style="border: ridge; padding: 1px 8px;" id="custalpckg">NA</td>
+										</tr>
+										<tr>
+											<td align="left" style="border: ridge; padding: 1px 8px;">Service
 												Tax</td>
-											<td
-												style="border: ridge; width: 200px; padding: 5px 5px 5px 5px;"
-												id="st">Rs 0.00</td>
+											<td style="border: ridge; padding: 1px 8px; width: 200px;"
+												id="servicetax">Rs 0.00</td>
 										</tr>
 										<tr>
-											<td align="right"
-												style="border: ridge; width: 850px; padding: 5px 5px 5px 5px;">(2)Entertainment
+											<td align="left" style="border: ridge; padding: 1px 8px;">Entertainment
 												Tax</td>
-											<td
-												style="border: ridge; width: 200px; padding: 5px 5px 5px 5px;"
-												id="et">Rs 0</td>
+											<td style="border: ridge; padding: 1px 8px; width: 200px;"
+												id="amusementtax">Rs 0</td>
+										</tr>
+										<tr>
+											<td align="left" style="border: ridge; padding: 1px 8px;">Cess
+												Tax</td>
+											<td style="border: ridge; padding: 1px 8px; width: 200px;"
+												id="cesstax">Rs 0</td>
 										</tr>
 
 										<tr>
 											<td align="right"
-												style="border: ridge; width: 850px; padding: 5px 5px 5px 5px;"><b>Sub
+												style="border: ridge; padding: 1px 8px; width: 850px;"><b>Sub
 													Total</b></td>
-											<td
-												style="border: ridge; width: 200px; padding: 5px 5px 5px 5px;"
-												id="stt"><b>RS 520</b></td>
+											<td style="border: ridge; padding: 1px 8px; width: 200px;"
+												id="sub_total"><b>RS 520</b></td>
 										</tr>
 
 										<tr>
 											<td align="right"
-												style="border: ridge; width: 850px; padding: 5px 5px 5px 5px;">Previous
-												Balance</td>
-											<td
-												style="border: ridge; width: 200px; padding: 5px 5px 5px 5px;"
-												id="pb">Rs 0</td>
-										</tr>
-
-										<tr>
-											<td align="right"
-												style="border: ridge; width: 850px; padding: 5px 5px 5px 5px;"><b>Discount</b></td>
-											<td
-												style="border: ridge; width: 200px; padding: 5px 5px 5px 5px;"><b
-												id="dis">Rs</b></td>
+												style="border: ridge; padding: 1px 8px; width: 850px;"><b>Previous
+													Balance</b></td>
+											<td style="border: ridge; padding: 1px 8px; width: 200px;"
+												id="privious_blance"><b>Rs 0</b></td>
 										</tr>
 
 
 										<tr>
 											<td align="right"
-												style="border: ridge; width: 850px; padding: 5px 5px 5px 5px;"><b>Total</b></td>
-											<td
-												style="border: ridge; width: 200px; padding: 5px 5px 5px 5px;"><b
-												id="tot">Rs 520</b></td>
+												style="border: ridge; padding: 1px 8px; width: 850px;"><b>Total</b></td>
+											<td style="border: ridge; padding: 1px 8px; width: 200px;"><b
+												id="pending_bal">Rs 520</b></td>
 										</tr>
 										<tr>
 											<td align="right"
-												style="border: ridge; width: 850px; padding: 5px 5px 5px 5px;"><b>Late
+												style="border: ridge; padding: 1px 8px; width: 850px;"><b>Late
 													Payment Charges</b></td>
-											<td
-												style="border: ridge; width: 200px; padding: 5px 5px 5px 5px;"><b
-												id="lpc">Rs 50</b></td>
+											<td style="border: ridge; padding: 1px 8px; width: 200px;"><b
+												id="latepecharge">Rs 50</b></td>
 										</tr>
 
 										<tr>
 											<td align="right"
-												style="border: ridge; width: 850px; padding: 5px 5px 5px 5px;"><b>Payable
+												style="border: ridge; padding: 1px 8px; width: 850px;"><b>Payable
 													after due date</b></td>
-											<td
-												style="border: ridge; width: 200px; padding: 5px 5px 5px 5px;"><b
-												id="lpa">Rs 570</b></td>
+											<td style="border: ridge; padding: 1px 8px; width: 200px;"><b
+												id="bilafterduedate">Rs 570</b></td>
 										</tr>
 
 									</table>

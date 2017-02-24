@@ -93,7 +93,7 @@ label.control-label {
 <script src="layout/scripts/jquery.mobilemenu.js"></script>
 </head>
 <body id="top ">
-	<div class="wrapper row1">
+	  <div class="wrapper row1">
     <header id="header" class="hoc clear"> 
       <!-- ################################################################################################ -->
       <div id="logo" class="fl_left">
@@ -104,8 +104,8 @@ label.control-label {
             <li><a href="LMnewConnn.html?user=${user }">Connection</a></li>
             
           <li><a class="drop" href="#">complaint</a>
-           <ul>
-         	    <li><a href="addComplaintLm.html?user=${user }">Add Complaint</a></li>
+            <ul>
+         	  <li><a href="addComplaintLm.html?user=${user }">Add Complaint</a></li>
               <li><a href="LMallComp.html?user=${user }">All Complaint</a></li>    
              </ul>
           </li>

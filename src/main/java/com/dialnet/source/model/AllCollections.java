@@ -1,7 +1,6 @@
 package com.dialnet.source.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -14,9 +13,10 @@ public class AllCollections {
 	
 	@Id
 	private String Invoice;
+	
 	@NotEmpty
 	@Size(min = 1, max = 35)
-	private String VC_No;
+	private String Cust_Id;
 	
 	@NotEmpty
 	private String cust_mobile;
@@ -57,13 +57,14 @@ public class AllCollections {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public AllCollections(String invoice, String vC_No, String cust_mobile, String cust_Name, String current_Pckg,
+	
+	public AllCollections(String invoice, String cust_Id, String cust_mobile, String cust_Name, String current_Pckg,
 			String paid_Amount, String recharge_Amount, String discount, String payment_Mode, String approval_ID,
 			String payment_Status, String refernceId, String trndate, String collecting_Agent, String approval_Date,
 			String remark, String payment_Type, String lco_Id) {
 		super();
 		Invoice = invoice;
-		VC_No = vC_No;
+		Cust_Id = cust_Id;
 		this.cust_mobile = cust_mobile;
 		Cust_Name = cust_Name;
 		Current_Pckg = current_Pckg;
@@ -81,7 +82,7 @@ public class AllCollections {
 		Payment_Type = payment_Type;
 		Lco_Id = lco_Id;
 	}
-	
+
 
 	public String getRemark() {
 		return Remark;
@@ -117,12 +118,15 @@ public class AllCollections {
 	public void setInvoice(String invoice) {
 		Invoice = invoice;
 	}
-	public String getVC_No() {
-		return VC_No;
+	
+	public String getCust_Id() {
+		return Cust_Id;
 	}
-	public void setVC_No(String vC_No) {
-		VC_No = vC_No;
+
+	public void setCust_Id(String cust_Id) {
+		Cust_Id = cust_Id;
 	}
+
 	public String getCust_Name() {
 		return Cust_Name;
 	}

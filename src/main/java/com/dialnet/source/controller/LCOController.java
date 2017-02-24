@@ -60,7 +60,6 @@ import com.dialnet.source.service.AllCollectionService;
 import com.dialnet.source.service.AllComplaintService;
 import com.dialnet.source.service.CityService;
 import com.dialnet.source.service.CustSettingService;
-import com.dialnet.source.service.Cust_InvoiceService;
 import com.dialnet.source.service.CustomerInvoiceServiceImpl;
 import com.dialnet.source.service.LCOUserService;
 import com.dialnet.source.service.LMUserService;
@@ -99,9 +98,6 @@ public class LCOController {
 
 	@Autowired
 	TaxInfoService taxService;
-
-	@Autowired
-	Cust_InvoiceService invoice;
 
 	@Autowired
 	CustSettingService settingService;
@@ -179,7 +175,7 @@ public class LCOController {
 	@RequestMapping(value = "/billDownload", method = RequestMethod.GET)
 	public ModelAndView billDownload(ModelMap map, @RequestParam("user") String user, Integer offset,
 			Integer maxResults) {
-		List<Customer_Invoice1> subs = invoice1.getByStatus("Pending");
+		List<Customer_Invoice1> subs = invoice1.list(user, offset, maxResults);
 		map.addAttribute("userList", subs);
 		map.addAttribute("count", invoice1.count(user));
 		map.addAttribute("user", user);
@@ -204,7 +200,7 @@ public class LCOController {
 		return json;
 		// return new ModelAndView(json);
 	}
-	
+
 	@RequestMapping(value = "/newLineman", method = RequestMethod.GET)
 	public String newLineman(ModelMap map, @RequestParam("user") String user) {
 		LMUser lm = new LMUser();
@@ -413,7 +409,6 @@ public class LCOController {
 		return new ModelAndView("AddNewStock", map);
 	}
 
-	
 	@RequestMapping(value = "/searchLCOConByLCO", method = RequestMethod.GET)
 	public ModelAndView searchOlConByLCO(ModelMap map, @RequestParam("user") String user,
 			@ModelAttribute("subForm") Subscriber sub, @RequestParam("name") String name,
@@ -579,7 +574,7 @@ public class LCOController {
 			map.addAttribute("offset", offset);
 		}
 
-		return new ModelAndView("AllCollectionData ", map);
+		return new ModelAndView("AllCollectionData", map);
 	}
 
 	@ResponseBody
@@ -644,16 +639,16 @@ public class LCOController {
 
 	@ResponseBody
 	@RequestMapping(value = "/updateConnection", method = RequestMethod.GET)
-	public String updateConnection(Integer offset,Integer maxResults, ModelMap model,
-			@RequestParam("user") String user,@RequestParam("username") String username,
-			@RequestParam("fname") String fname,@RequestParam("mname") String mname, 
-			@RequestParam("lname") String lname,@RequestParam("mob") String mob,
-			@RequestParam("email") String email,@RequestParam("adds") String adds,
-			@RequestParam("land") String land,@RequestParam("state") String state,
-			@RequestParam("city") String city,@RequestParam("pincode") String pincode,
+	public String updateConnection(Integer offset, Integer maxResults, ModelMap model,
+			@RequestParam("user") String user, @RequestParam("username") String username,
+			@RequestParam("fname") String fname, @RequestParam("mname") String mname,
+			@RequestParam("lname") String lname, @RequestParam("mob") String mob, @RequestParam("email") String email,
+			@RequestParam("adds") String adds, @RequestParam("land") String land, @RequestParam("state") String state,
+			@RequestParam("city") String city, @RequestParam("pincode") String pincode,
 			@RequestParam("stbno") String stbno, @RequestParam("blance") String blance) {
-		int val =userService.updateConnection(username,fname, mname, lname, mob, email, adds, land, state,city, pincode, stbno, blance);
-		String result; 
+		int val = userService.updateConnection(username, fname, mname, lname, mob, email, adds, land, state, city,
+				pincode, stbno, blance);
+		String result;
 		System.out.println("value: " + val);
 		if (val == 1) {
 			result = "Connection Update Successfully!!!";
@@ -664,45 +659,44 @@ public class LCOController {
 		String json = gson.toJson(result);
 		model.addAttribute("user", user);
 		return json;
-	
+
 	}
 
 	@RequestMapping(value = "/ApprovedBulkLCO", method = RequestMethod.GET)
 	public ModelAndView ApprovedBulkLCO(@RequestParam("user") String user, @RequestParam("invoice") String id,
-			@RequestParam("RAmt") String RAmt,@RequestParam("state") String status,
-			@RequestParam("RId") String RId,@RequestParam("Remark") String Remark,ModelMap model) {
-		System.out.println("ApprovedBulkLCO1: "+user+","+RAmt+","+status+","+RId+","+Remark);
-		Customer_Invoice1 ctr= invoice1.getByInvoiceId(id);
-		AllCollections col= LCOCollectionRepository.getByInvoice(id);
-		int i=LCOCollectionRepository.updateCollection(id, RAmt, user, RId,status, Remark, getDate());
-		int i2=invoice1.updateInvoiceDetail(id, RAmt, col.getCollecting_Agent(), getDate(), status);
-		int i3=agentbillservice.updateAgentBill(id, RAmt, RId, Remark, status, user, getDate());
+			@RequestParam("RAmt") String RAmt, @RequestParam("state") String status, @RequestParam("RId") String RId,
+			@RequestParam("Remark") String Remark, ModelMap model) {
+		System.out.println("ApprovedBulkLCO1: " + user + "," + RAmt + "," + status + "," + RId + "," + Remark);
+		Customer_Invoice1 ctr = invoice1.getByInvoiceId(id);
+		AllCollections col = LCOCollectionRepository.getByInvoice(id);
+		int i = LCOCollectionRepository.updateCollection(id, RAmt, user, RId, status, Remark, getDate());
+		int i2 = invoice1.updateInvoiceDetail(id, RAmt, col.getCollecting_Agent(), getDate(), status);
+		int i3 = agentbillservice.updateAgentBill(id, RAmt, RId, Remark, status, user, getDate());
 		model.addAttribute("user", user);
-		 return new ModelAndView("redirect:allCollection.html",model);
+		return new ModelAndView("redirect:allCollection.html", model);
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/bulkDetails", method = RequestMethod.GET)
 	public String bulkDetails(@RequestParam("user") String user, @RequestParam("invoice") String invoiceid,
 			ModelMap model) {
 		System.out.println("bulkDetails Invoice Details check data: " + invoiceid + "," + user);
-		
+
 		Customer_Invoice1 result = invoice1.getByInvoiceId(invoiceid);
-		AllCollections col=LCOCollectionRepository.getByInvoice(invoiceid);
-		
+		AllCollections col = LCOCollectionRepository.getByInvoice(invoiceid);
+
 		System.out.println("Result: " + result.getCustName());
-		List ls= new ArrayList();
+		List ls = new ArrayList();
 		ls.add(col);
 		ls.add(result);
 		Gson gson = new Gson();
 		String json = gson.toJson(ls);
 		model.addAttribute("user", user);
-		
-		
+
 		return json;
 		// return new ModelAndView(json);
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/updateCompLCO", method = RequestMethod.GET)
 	public String updateCompLCO(@RequestParam("user") String user, @RequestParam("id") String cId,
@@ -891,7 +885,7 @@ public class LCOController {
 				while (i <= worksheet.getLastRowNum()) {
 					BulkRechargeAmount user = new BulkRechargeAmount();
 					HSSFRow row = worksheet.getRow(i++);
-					user.setInvoiceid((int) row.getCell(0).getNumericCellValue());
+					user.setInvoiceid(row.getCell(0).getStringCellValue());
 					System.out.println("I am here 0\t " + row.getCell(0));
 
 					user.setCustomerid((int) row.getCell(1).getNumericCellValue());
@@ -976,6 +970,7 @@ public class LCOController {
 		// System.out.println("AgentBillDetails Detail: "+sub.getCustId());
 		// System.out.println("calling saveBulkByLCO: "+sub.getInvoice_id());
 		Customer_Invoice1 tmpdata = invoice1.getByInvoiceId(sub.getInvoice_id());
+
 		sub.setFromDate(tmpdata.getDueDate());
 		sub.setToDate(tmpdata.getDueDate());
 		sub.setCustId(tmpdata.getCustId());
@@ -988,8 +983,8 @@ public class LCOController {
 		Subscriber u = userService.getByID(tmpdata.getCustId());
 		AllCollections col = new AllCollections();
 		col.setInvoice(sub.getInvoice_id());
-		col.setVC_No(tmpdata.getInvoice_No());
-//		Doubt
+		col.setCust_Id(tmpdata.getCustId());
+		// Doubt
 		col.setCust_mobile(u.getMobile());
 		col.setCust_Name(tmpdata.getCustName());
 		col.setCurrent_Pckg(tmpdata.getCustBasePckg());
@@ -1021,57 +1016,62 @@ public class LCOController {
 		System.out.println("Object List: " + contacts);
 		if (null != contacts && contacts.size() > 0) {
 			for (BulkRechargeAmount contact : contacts) {
-				int i2 = invoice1.updateInvoiceDetail(contact.getInvoiceid() + "",
-						contact.getCustomeramountofrecharge() + "", user, getDate(), "Approved");
-
 				Customer_Invoice1 tmpdata = invoice1.getByInvoiceId(contact.getInvoiceid() + "");
+				if (tmpdata != null) {
+					int i2 = invoice1.updateInvoiceDetail(contact.getInvoiceid() + "",
+							contact.getCustomeramountofrecharge() + "", user, getDate(), "Approved");
+					AgentBillDetails sub = new AgentBillDetails();
+					sub.setInvoice_id(contact.getInvoiceid() + "");
+					sub.setReceivedAmt(contact.getCustomeramountofrecharge() + "");
+					sub.setAgentId(user);
+					sub.setReferenceId("NA");
+					sub.setRemark("NA");
+					sub.setPayment_Type("NA");
+					sub.setFromDate(tmpdata.getDueDate());
+					sub.setToDate(tmpdata.getDueDate());
+					sub.setCustId(tmpdata.getCustId());
+					sub.setTotalAmt(tmpdata.getTotalAmt());
+					sub.setInstatus("Aprroved");
+					sub.setApprovedBy(user);
+					sub.setApprovalDate(getDate());
+					int i = agentbillservice.saveDetail(sub);
 
-				AgentBillDetails sub = new AgentBillDetails();
-				sub.setInvoice_id(contact.getInvoiceid() + "");
-				sub.setReceivedAmt(contact.getCustomeramountofrecharge() + "");
-				sub.setAgentId(user);
-				sub.setReferenceId("NA");
-				sub.setRemark("NA");
-				sub.setPayment_Type("NA");
-				sub.setFromDate(tmpdata.getDueDate());
-				sub.setToDate(tmpdata.getDueDate());
-				sub.setCustId(tmpdata.getCustId());
-				sub.setTotalAmt(tmpdata.getTotalAmt());
-				sub.setInstatus("Aprroved");
-				sub.setApprovedBy(user);
-				sub.setApprovalDate(getDate());
-				int i = agentbillservice.saveDetail(sub);
+					Subscriber u = userService.getByID(tmpdata.getCustId());
+					AllCollections col = new AllCollections();
+					col.setInvoice(contact.getInvoiceid() + "");
+					col.setCust_Id(tmpdata.getCustId());
+					// Doubt Vcno
+					col.setCust_mobile(u.getMobile());
+					col.setCust_Name(tmpdata.getCustName());
+					col.setCurrent_Pckg(tmpdata.getCustBasePckg());
+					col.setRecharge_Amount(tmpdata.getTotalAmt());
+					col.setPaid_Amount(contact.getCustomeramountofrecharge() + "");
+					col.setDiscount(tmpdata.getTotalDues());
+					col.setPayment_Mode("OffLine");
+					col.setPayment_Status("Approved");
+					col.setCollecting_Agent(user);
+					col.setLco_Id(user);
+					col.setPayment_Type("OffLine");
+					col.setApproval_ID(user);
+					col.setRefernceId("NA");
+					col.setApproval_Date(getDate());
+					col.setTrndate(getDate());
+					col.setRemark("NA");
+					LCOCollectionRepository.saveDetail(col);
 
-				Subscriber u = userService.getByID(tmpdata.getCustId());
-				AllCollections col = new AllCollections();
-				col.setInvoice(contact.getInvoiceid() + "");
-				col.setVC_No(tmpdata.getInvoice_No());
-//				Doubt Vcno
-				col.setCust_mobile(u.getMobile());
-				col.setCust_Name(tmpdata.getCustName());
-				col.setCurrent_Pckg(tmpdata.getCustBasePckg());
-				col.setRecharge_Amount(tmpdata.getTotalAmt());
-				col.setPaid_Amount(contact.getCustomeramountofrecharge() + "");
-				col.setDiscount(tmpdata.getTotalDues());
-				col.setPayment_Mode("OffLine");
-				col.setPayment_Status("Approved");
-				col.setCollecting_Agent(user);
-				col.setLco_Id(user);
-				col.setPayment_Type("OffLine");
-				col.setApproval_ID(user);
-				col.setRefernceId("NA");
-				col.setApproval_Date(getDate());
-				col.setTrndate(getDate());
-				col.setRemark("NA");
-				LCOCollectionRepository.saveDetail(col);
+					System.out.printf("Data in Loop%s \t ", contact.getCustomeremailid());
+				} else {
+					model.addAttribute("err", "error");
+					break;
 
-				System.out.printf("Data in Loop%s \t ", contact.getCustomeremailid());
+				}
+
 			}
 		} else {
 			System.out.println("Data is NULL");
 		}
 		model.addAttribute("user", user);
-		return "redirect:lcoTopup.html";
+		return "redirect:topUp.html";
 	}
 
 	// #######################################################################################

@@ -167,32 +167,13 @@ public class UserController {
 			model.addObject("Last_payment", found.getPCKGPrice());
 			// model.addObject("Account_balance", found.get);
 			model.addObject("Last_recharge_date", found.getSTB_IssuedOn());
-			// model.addObject("mobile", found.getCustomer_mobile());
-			// model.addObject("email", found.getCustomer_email());
-			// model.addObject("add", found.getCustomer_add());
-
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			//PackageInfo lco = packageinfoservice.getByID(found.getBasePCKG());
-//			model.addObject("basepackage", found.getBasePCKG());
-//			model.addObject("alacarte", found.getA_La_Carte());
-//			model.addObject("addonpack", found.getAddOnPCKG());
-			
+	
 			model.addObject("Package_cost",found.getPCKGPrice());
 			model.addObject("Account_balance", found.getAccountBalance());
 			model.addObject("Last_payment", found.getPCKGPrice());
 			// model.addObject("Account_balance", found.get);
 			model.addObject("Last_recharge_date", found.getSTB_IssuedOn());
-			// model.addObject("mobile", found.getCustomer_mobile());
-			// model.addObject("email", found.getCustomer_email());
-			// model.addObject("add", found.getCustomer_add());
+		
 
 			return model;
 		}

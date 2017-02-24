@@ -148,30 +148,32 @@ a.close:hover {
 </head>
 <body id="top">
 	
-		<div class="wrapper row1">
-    <header id="header" class="hoc clear"> 
-      <!-- ################################################################################################ -->
-      <div id="logo" class="fl_left">
-        <h1><a href="LMDashboard.html?user=${user }">PaySpot</a></h1>
-      </div>
-      <nav id="mainav" class="fl_right">
-        <ul class="clear">
-            <li><a href="LMnewConnn.html?user=${user }">Connection</a></li>
-            
-          <li><a class="drop" href="#">complaint</a>
-            <ul>
-              <li><a href="addComplaintLm.html?user=${user }">Add Complaint</a></li>
-         	  <li><a href="newConnn.html?user=${user }">Add Complaint</a></li>
-              
-             </ul>
-          </li>
-          <li><a href="lmtopUp.html?user=${user }">Topup</a></li>
-          <li><a href="lmDetail.html?user=${user }">Profile</a></li>
-          <li><a href="logOut.html?user=${user}" style="margin-right: -90px;">Log out</a></li>
-        </ul>
-      </nav>
-    </header>
-  </div>
+	<div class="wrapper row1">
+		<header id="header" class="hoc clear">
+			<!-- ################################################################################################ -->
+			<div id="logo" class="fl_left">
+				<h1>
+					<a href="LMDashboard.html?user=${user }">PaySpot</a>
+				</h1>
+			</div>
+			<nav id="mainav" class="fl_right">
+				<ul class="clear">
+					<li><a href="LMnewConnn.html?user=${user }">Connection</a></li>
+
+					<li><a class="drop" href="#">complaint</a>
+						<ul>
+							<li><a href="addComplaintLm.html?user=${user }">Add
+									Complaint</a></li>
+							<li><a href="LMallComp.html?user=${user }">All Complaint</a></li>
+						</ul></li>
+					<li><a href="lmtopUp.html?user=${user }">Topup</a></li>
+					<li><a href="lmDetail.html?user=${user }">Profile</a></li>
+					<li><a href="logOut.html?user=${user}"
+						style="margin-right: -90px;">Log out</a></li>
+				</ul>
+			</nav>
+		</header>
+	</div>
 		<div class="wrapper row3">
 			<main class="hoc container clear"> <!-- Your Content -->
 			<div id="container" style="margin-top: -62px;">
@@ -197,7 +199,7 @@ a.close:hover {
 				<hr />
 
 				<div id="oto" style="display: none;">
-					<form:form action="saveBulkByLCO.html" method="get"
+					<form:form action="saveBulkByLM.html" method="get"
 						name="savebulkInfo" commandName="bulkInfoForm">
 						<input type="hidden" name="user" value="${user }" />
 						<div>
@@ -218,7 +220,7 @@ a.close:hover {
 								   
 								     $.ajax({  
 							            type : 'GET', 
-							            url: 'accountDetail.html',
+							            url: 'invoiceDetail.html',
 							            data: {
 							            	'invoice': invoice,
 							            	'user':  ${user}
@@ -248,15 +250,15 @@ a.close:hover {
 								   
 								});
 								function setData( data){
-									var todate= data.Billing_Date;
-									var amt=data.Total_Amount;
-									var st=data.Service_Tax;
-									var at=data.Entertain_Tax;
+									var todate= data.sDate;
+									var amt=data.totalDues;
+									var st=data.serviceTax;
+									var at=data.amusementTax;
 									
-									var cid=data.User_Id;
-									var cname=data.User_Name;
-									var ot=data.Other_Tax;
-									var pkg=data.Package_Name;
+									var cid=data.custId;
+									var cname=data.custName;
+									var ot=data.cess;
+									var pkg=data.custBasePckg;
 									//alert(todate+","+amt+","+st+","+at);
 									
 									document.getElementById("dte").value =todate;
@@ -373,7 +375,7 @@ a.close:hover {
 								<div class="col-sm-0"></div>
 								<div class=" col-sm-6">
 									<div class="col-sm-4" style="margin-bottom: 18px">
-										<p class="p1">Other Tax</p>
+										<p class="p1">Cess</p>
 									</div>
 									<div class="col-sm-8">
 

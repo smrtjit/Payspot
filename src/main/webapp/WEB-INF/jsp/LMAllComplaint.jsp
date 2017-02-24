@@ -204,21 +204,18 @@ a.close:hover {
 </head>
 <body id="top">
 
-	<!-- ################################################################################################ -->
-	<div class="wrapper row1">
-		<header id="header" class="hoc clear">
-			<!-- ################################################################################################ -->
-			<div id="logo" class="fl_left">
-				<h1>
-					<a href="LMDashboard.html?user=${user }">PaySpot</a>
-				</h1>
-			</div>
-			<nav id="mainav" class="fl_right">
-				 <ul class="clear">
+	  <div class="wrapper row1">
+    <header id="header" class="hoc clear"> 
+      <!-- ################################################################################################ -->
+      <div id="logo" class="fl_left">
+        <h1><a href="LMDashboard.html?user=${user }">PaySpot</a></h1>
+      </div>
+      <nav id="mainav" class="fl_right">
+        <ul class="clear">
             <li><a href="LMnewConnn.html?user=${user }">Connection</a></li>
             
           <li><a class="drop" href="#">complaint</a>
-           <ul>
+            <ul>
          	  <li><a href="addComplaintLm.html?user=${user }">Add Complaint</a></li>
               <li><a href="LMallComp.html?user=${user }">All Complaint</a></li>    
              </ul>
@@ -227,9 +224,9 @@ a.close:hover {
           <li><a href="lmDetail.html?user=${user }">Profile</a></li>
           <li><a href="logOut.html?user=${user}" style="margin-right: -90px;">Log out</a></li>
         </ul>
-			</nav>
-		</header>
-	</div>
+      </nav>
+    </header>
+  </div>
 	<div class="wrapper row3">
 		<main class="hoc container clear"> <!-- main body -->
 		<div class="row">

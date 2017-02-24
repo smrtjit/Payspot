@@ -25,6 +25,11 @@
 table#ContentPlaceHolder1_gvcompHistory {
 	background-color: #d5f7ce;
 }
+.subs{
+width: 100%;
+text-align: right;
+color: black;
+}
 </style>
 </head>
 <body style="background-color: #eeeeee;">
@@ -39,7 +44,7 @@ table#ContentPlaceHolder1_gvcompHistory {
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">My Cable TV </a>
+				<a class="navbar-brand" href="#">Payspot </a>
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="active"><a
@@ -49,6 +54,7 @@ table#ContentPlaceHolder1_gvcompHistory {
 					href="CustComplaint.html?vc_no=<%=request.getParameter("vc_no")%>&id=<%=request.getParameter("id")%>"">Complaint</a></li>
 				<li><a
 					href="CustRecharge.html?id=<%=request.getParameter("id")%>">Recharge</a></li>
+						<li><a href="custbill.html?id=${id }" >Download Bill</a></li>
 
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
@@ -62,12 +68,11 @@ table#ContentPlaceHolder1_gvcompHistory {
 	<div>
 
 		<div class="container">
-			<div class="col-sm-12">
-				<p style="font-size: 20px">
-					<b><span class="label label-danger">Complaint</span></b>
-				</p>
+			<div class="subs">
+			Subscriber ID: ${id }
 			</div>
-			<hr />
+			<hr style="width: 100%; border-top: 1px solid #dc3434;margin-top: 0px;  margin-bottom: 1%;">
+
 			<div class="row">
 				<form:form id="myForm" method="get" action="addComplaint.html"
 					class="bs-example form-horizontal" commandName="addComplaint">
@@ -161,12 +166,9 @@ table#ContentPlaceHolder1_gvcompHistory {
 									Remarks</th>
 
 							</tr>
-							<%
-								int i = 0;
-							%>
-							<c:forEach items="${userList}" var="user">
+							<c:forEach items="${userList}" var="user" varStatus="itr">
 								<tr>
-									<td style="color: black;"><%=i%></td>
+									<td>${offset + itr.index +1 }</td>
 									<td style="color: black;">${user.complaint_no}</td>
 									<td style="color: black;">${user.complaint_type}</td>
 									<td style="color: black;">${user.open_date}</td>
@@ -174,9 +176,7 @@ table#ContentPlaceHolder1_gvcompHistory {
 									<td style="color: black;">${user.cust_remark}</td>
 									<td style="color: black;">${user.closing_date}</td>
 									<td style="color: black;">${user.closing_remark}</td>
-									<%
-										i++;
-									%>
+									
 								</tr>
 							</c:forEach>
 

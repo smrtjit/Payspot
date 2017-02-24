@@ -11,6 +11,8 @@ public interface SubscriberService {
 	
 	public long count(String lco);
 	public Subscriber getByID(String id);
+	public Subscriber getByMobile(String id);
+
 	public boolean findByLogin(String id, String pwd);
 	public List<Subscriber> findByAnyone(String user,String sdate, String edate, String stb_no, String VC_no, String mobile,
 			String status, String pckg,Integer offset,Integer maxResults);

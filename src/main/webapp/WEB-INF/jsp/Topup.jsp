@@ -143,6 +143,12 @@ a.close:hover {
 	-moz-transition: color 1s ease;
 	transition: color 1s ease;
 }
+.err{
+
+	width:100%;
+	color:black;
+	
+}
 </style>
 
 </head>
@@ -559,7 +565,8 @@ a.close:hover {
 									data-modal-id="popup2">Image template</a>
 			</div>
 			<hr>
-
+			<div class="err">
+								hello  ${err}</div>
 			<div class="col-sm-12" style="width: 121%; margin-left: -10%;">
 				<div class="col-sm-12">
 					<div style="margin-bottom: 0px">
@@ -575,7 +582,7 @@ a.close:hover {
 								</div>
 							</div>
 						</div>
-
+								
 						<form:form method="POST" action="uploadBulkTopup.html"
 							modelAttribute="bulkData" id="dataForm">
 							<input type="hidden" name="user" value="${user }" />

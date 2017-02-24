@@ -23,7 +23,7 @@ public class AgentBillDetailsDaoImpl implements AgentBillDetailsDao {
 		//System.out.println("hello call dta: "+obj.getCustId());
 		Session sf = session.openSession();
 		Transaction tx= sf.beginTransaction();
-		sf.save(obj);
+		sf.saveOrUpdate(obj);
 		tx.commit();
 		sf.close();
 		//System.out.println("Save AgentBillDetails done");

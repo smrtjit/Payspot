@@ -19,7 +19,13 @@
 <script src="assets/js/bootstrap.js"></script>
 <script src="assets/js/jquery-1.10.2.js"></script>
 <link href="assets/css/bootstrap.css" rel="stylesheet" />
-
+<style type="text/css">
+.subs{
+width: 100%;
+text-align: right;
+color: black;
+}
+</style>
 </head>
 <body style="background-color: #eeeeee;" onload="tabledata()">
 	<script type="text/javascript">
@@ -86,7 +92,7 @@
 		<nav class="navbar navbar-inverse">
 			<div class="container-fluid">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="#">My Cable TV </a>
+					<a class="navbar-brand" href="#">Payspot</a>
 				</div>
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="UserDetail.html?id=${id }">My
@@ -94,6 +100,7 @@
 					<li><a href="CustComplaint.html?vc_no=${vc_no }&id=${id}">Complaint
 					</a></li>
 					<li><a href="CustRecharge.html?id=${id }">Recharge</a></li>
+						<li><a href="custbill.html?id=${id }" >Download Bill</a></li>
 
 
 				</ul>
@@ -108,12 +115,11 @@
 		<div>
 
 			<div class="container">
-				<div class="col-sm-12">
-					<p style="font-size: 20px">
-						<b><span class="label label-success">Recharge</span></b>
-					</p>
-				</div>
-				<hr />
+			<div class="subs">
+			Subscriber ID: ${id }
+			</div>
+			<hr style="width: 100%; border-top: 1px solid #dc3434;margin-top: 0px;  margin-bottom: 1%;">
+
 				<div class="row">
 
 					<div class="col-sm-30">
@@ -156,7 +162,7 @@
 
 
 				</div>
-				<hr />
+				<hr style="    border-top: 1px solid #dc3434;"/>
 			</div>
 
 			<div class="row">
@@ -224,20 +230,23 @@
 
 
 
-						<input name="" readonly="readonly" type="text" value="${Package_cost }"
-							class="form-control" placeholder="" style="width: 50%;">
+						<input name="" readonly="readonly" type="text"
+							value="${Package_cost }" class="form-control" placeholder=""
+							style="width: 50%;">
 					</div>
 				</div>
 
 
 				<div style="margin-left: 54%; margin-top: 2%;">
 					<div>
-						<p class="p1" style="WIDTH: 30%;">Recharge Ammount</p>
+						<p class="p1" style="WIDTH: 30%;">Recharge Amount</p>
 					</div>
 					<div c="">
 
 						<input name="amount" type="text" class="form-control"
-							placeholder="" required="" style="WIDTH: 50%;">
+							placeholder="Enter Amount Here" required="" style="WIDTH: 50%;
+							title="MINIMUM SIZE" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+											 pattern=".{2,}" maxlength="4"">
 					</div>
 				</div>
 				<div>

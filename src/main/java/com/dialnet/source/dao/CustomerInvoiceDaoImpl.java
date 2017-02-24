@@ -103,6 +103,7 @@ public class CustomerInvoiceDaoImpl implements CustomerInvoiceDao {
 		Session sf = dao.openSession();
 		Criteria c = sf.createCriteria(Customer_Invoice1.class);
 		c.add(Restrictions.eq("lcoId", user));
+		c.add(Restrictions.ne("billStatus", "Approved"));
 		List l = c.setFirstResult(offset != null ? offset : 0).setMaxResults(maxResults != null ? maxResults : 10)
 				.list();
 		sf.close();
@@ -113,6 +114,7 @@ public class CustomerInvoiceDaoImpl implements CustomerInvoiceDao {
 		Session sf = dao.openSession();
 		Criteria c = sf.createCriteria(Customer_Invoice1.class);
 		c.add(Restrictions.eq("lcoId", user));
+		c.add(Restrictions.ne("billStatus", "Approved"));
 		Long l = (Long) c.setProjection(Projections.rowCount()).uniqueResult();
 		sf.close();
 		return l;
@@ -121,7 +123,7 @@ public class CustomerInvoiceDaoImpl implements CustomerInvoiceDao {
 	@Override
 	public int updateInvoiceDetail(String id, String paidAmt, String agentId, String paidDate, String status) {
 		Session sf = dao.openSession();
-		String qry = "update Cust_Invoice1 set lastPaid = :ramt,custId= :agent,dateOfPaid= :Pdate,"
+		String qry = "update Invoice_Detail set billAmtPaid = :ramt,AgentId= :agent,dateOfPaid= :Pdate,"
 				+ "billStatus= :status where Invoice_No = :id";
 		Query query = sf.createSQLQuery(qry);
 		query.setParameter("id", id);

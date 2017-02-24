@@ -21,13 +21,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dialnet.source.model.AgentBillDetails;
+import com.dialnet.source.model.AllCollections;
 import com.dialnet.source.model.AllComplaints;
 import com.dialnet.source.model.BulkRechargeAmount;
+import com.dialnet.source.model.Customer_Invoice1;
 import com.dialnet.source.model.LCOUser;
 import com.dialnet.source.model.LMUser;
 import com.dialnet.source.model.Subscriber;
@@ -46,6 +49,7 @@ import com.dialnet.source.service.PackageInfoService;
 import com.dialnet.source.service.STBStockService;
 import com.dialnet.source.service.SubscriberService;
 import com.dialnet.source.service.TaxInfoService;
+import com.google.gson.Gson;
 
 @Controller
 @SessionAttributes("lmlogin")
@@ -175,6 +179,136 @@ public class LMController {
 		int i = userService.addSubscriber(sub);
 		map.addAttribute("user", user);
 		return new ModelAndView("redirect:LMCreateNewCon.html", map);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/findbycusId", method = RequestMethod.GET)
+	public String findbycusId(@RequestParam("user") String user, Model model, @RequestParam("cust_id") String cust_id) {
+		System.out.println("\n**************** Find Value **********************\t" + cust_id);
+		Subscriber tmp1 = userService.getByID(cust_id);
+
+		Gson gson = new Gson();
+		String json = gson.toJson(tmp1);
+		model.addAttribute("user", user);
+		return json;
+		// return new ModelAndView(json);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/findByMobile", method = RequestMethod.GET)
+	public String findByMobile(@RequestParam("user") String user, Model model, @RequestParam("mobile") String mobile) {
+		System.out.println("\n**************** Find Value **********************\t" + mobile);
+		Subscriber tmp1 = userService.getByMobile(mobile);
+
+		Gson gson = new Gson();
+		String json = gson.toJson(tmp1);
+		model.addAttribute("user", user);
+		return json;
+		// return new ModelAndView(json);
+	}
+
+	@RequestMapping(value = "/addnewcomplaintbylm", method = RequestMethod.GET)
+	public ModelAndView addNewComplaintLCO(ModelMap map, @RequestParam("user") String user,
+			@RequestParam("mobile") String mobile, @RequestParam("cust_id") String cust_id,
+			@RequestParam("type") String type, @RequestParam("report") String report) {
+		System.out.println("user: " + user + "," + "mobile: " + mobile + "," + "vc: " + cust_id + "," + "type: " + type
+				+ "," + "report: " + report);
+		String main = null;
+		Subscriber sub = null;
+
+		if (mobile.equals("") || mobile == null) {
+			main = cust_id;
+			sub = userService.getByID(cust_id);
+		} else {
+			main = mobile;
+			sub = userService.getByMobile(mobile);
+		}
+		AllComplaints mainObj = new AllComplaints();
+		System.out.println("Sub Object: " + sub);
+		if (sub == null) {
+			map.addAttribute("error", "Mobile Number or VC Number is not Valid");
+		} else {
+			mainObj.setComplaint_type(type);
+			mainObj.setComplaint_status("Open");
+			mainObj.setCustomer_caf(sub.getCRFNo());
+			mainObj.setCustomer_name(sub.getFirstName());
+			mainObj.setCustomer_add(sub.getAddress());
+			mainObj.setCustomer_mobile(sub.getMobile());
+			mainObj.setCust_remark(report);
+			mainObj.setOpen_date(getDate());
+			mainObj.setClosing_remark("NA");
+			mainObj.setClosing_date("NA");
+			mainObj.setCreater_Id(user);
+			mainObj.setLco_id(user);
+			mainObj.setComplaint_no(System.currentTimeMillis());
+			comservice.add(mainObj);
+		}
+		map.addAttribute("user", user);
+		return new ModelAndView("redirect:addComplaintLm.html", map);
+
+	}
+
+	@RequestMapping(value = "/saveBulkByLM", method = RequestMethod.GET)
+	public ModelAndView saveBulkByLCO(@ModelAttribute("bulkInfoForm") AgentBillDetails sub, ModelMap map,
+			@RequestParam("user") String user) {
+		// System.out.println("AgentBillDetails Detail: "+sub.getCustId());
+		// System.out.println("calling saveBulkByLCO: "+sub.getInvoice_id());
+		Customer_Invoice1 tmpdata = invoice1.getByInvoiceId(sub.getInvoice_id());
+
+		sub.setFromDate(tmpdata.getDueDate());
+		sub.setToDate(tmpdata.getDueDate());
+		sub.setCustId(tmpdata.getCustId());
+		sub.setTotalAmt(tmpdata.getTotalAmt());
+		sub.setInstatus("Aprroved");
+		sub.setApprovedBy(user);
+		sub.setApprovalDate(getDate());
+		int i = agentbillservice.saveDetail(sub);
+
+		Subscriber u = userService.getByID(tmpdata.getCustId());
+		AllCollections col = new AllCollections();
+		col.setInvoice(sub.getInvoice_id());
+		col.setCust_Id(tmpdata.getCustId());
+		// Doubt
+		col.setCust_mobile(u.getMobile());
+		col.setCust_Name(tmpdata.getCustName());
+		col.setCurrent_Pckg(tmpdata.getCustBasePckg());
+		col.setRecharge_Amount(tmpdata.getTotalAmt());
+		col.setPaid_Amount(sub.getReceivedAmt());
+		col.setDiscount(tmpdata.getTotalDues());
+		col.setPayment_Mode("OffLine");
+		col.setPayment_Status("Approved");
+		col.setCollecting_Agent(sub.getAgentId());
+		col.setLco_Id(user);
+		col.setPayment_Type(sub.getPayment_Type());
+		col.setApproval_ID(user);
+		col.setRefernceId(sub.getReferenceId());
+		col.setApproval_Date(getDate());
+		col.setTrndate(getDate());
+		col.setRemark(sub.getRemark());
+		LCOCollectionRepository.saveDetail(col);
+		int i2 = invoice1.updateInvoiceDetail(sub.getInvoice_id(), sub.getReceivedAmt(), sub.getAgentId(), getDate(),
+				"Pending");
+		map.addAttribute("user", user);
+		return new ModelAndView("redirect:topUp.html", map);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/invoiceDetail", method = RequestMethod.GET)
+	public String accountDetail(@RequestParam("user") String user, @RequestParam("invoice") String invoiceid,
+			ModelMap model) {
+		Gson gson = new Gson();
+		String json = null;
+		System.out.println("Invoice Details check data: " + invoiceid + "," + user);
+		Customer_Invoice1 result = invoice1.getByInvoiceId(invoiceid);
+		if (result != null) {
+			json = gson.toJson(result);
+			System.out.println("Result: " + result.getInvoice_No());
+		} else
+			json = gson.toJson("Data Not Found");
+
+		model.addAttribute("user", user);
+		return json;
+		// return new ModelAndView(json);
 	}
 
 	@RequestMapping(value = "/LMallComp", method = RequestMethod.GET)

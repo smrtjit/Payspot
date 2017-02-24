@@ -15,7 +15,15 @@
 
 <link href="assets/css/bootstrap_style.css" rel="stylesheet" />
 <link href="assets/css/main.css" rel="stylesheet" />
+<style type="text/css">
+.subs{
+width: 100%;
+text-align: right;
+color: black;
+}
+</style>
 </head>
+
 <body style="background-color: #eeeeee;">
 	<%
 		if (session.getAttribute("custLogin") == null) {
@@ -24,104 +32,89 @@
 		} else {
 			System.out.print("session found");
 	%>
-	
-		<nav class="navbar navbar-inverse">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#">My Cable TV </a>
-				</div>
-				<ul class="nav navbar-nav">
-					<li class="active"><a
-						href="UserDetail.html?id=${id }">My
-							Account</a></li>
-					<li><a href="Custrecharge.jsp">Complaint </a></li>
-					<li><a
-						href="CustRecharge.html?id=${id}">Recharge</a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="logout.html"><span></span><b>Log Out</b></a></li>
-				</ul>
+
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Payspot </a>
 			</div>
-		</nav>
-		<div>
-			<div class="container">
-				<div class="col-sm-12">
-					<p style="font-size: 20px">
-						<!-- 						<b><span class="label label-success">Recharge</span></b> -->
-					</p>
-				</div>
-				<hr />
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="UserDetail.html?id=${id }">My
+						Account</a></li>
+				<li><a href="Custrecharge.jsp">Complaint </a></li>
+				<li><a href="CustRecharge.html?id=${id}">Recharge</a></li>
+					<li><a href="custbill.html?id=${id }" >Download Bill</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="logout.html"><span></span><b>Log Out</b></a></li>
+			</ul>
+		</div>
+	</nav>
+	<div>
+		<div class="container">
+			<div class="subs">
+			Subscriber ID: ${id }
+			</div>
+			<hr style="width: 100%; border-top: 1px solid #dc3434;margin-top: 0px;  margin-bottom: 1%;">
 
-				<div class="row">
-			
-					<div class="col-sm-12">
-						
-						<div class="col-sm-6">
-							<div class="col-sm-12">
-								<div class="col-sm-4">User ID</div>
-								<div class="col-sm-8" style="margin-bottom: 10px">
-									<input name="ctl00$ContentPlaceHolder1$txtvcno" type="text"
-										value="${id }" readonly="readonly"
-										id="ContentPlaceHolder1_txtvcno" class="form-control"
-										placeholder="" />
-								</div>
-							</div>
-							<div class="col-sm-12">
-								<div class="col-sm-4">Customer Name</div>
-								<div class="col-sm-8" style="margin-bottom: 10px">
-									<input name="ctl00$ContentPlaceHolder1$txtBalance" type="text"
-										readonly="readonly" id="ContentPlaceHolder1_txtBalance"
-										value="${Customer_name }"
-										class="form-control" placeholder="" />
-								</div>
-							</div>
-							<div class="col-sm-12">
-								<div class="col-sm-4">Current Package</div>
-								<div class="col-sm-8" style="margin-bottom: 10px">
-									<input name="ctl00$ContentPlaceHolder1$txtDueDate" type="text"
-										value="${pckg }"
-										readonly="readonly" id="ContentPlaceHolder1_txtDueDate"
-										class="form-control" placeholder="" />
-								</div>
-							</div>
-							<div class="col-sm-12">
-								<div class="col-sm-4">Package Price</div>
-								<div class="col-sm-8" style="margin-bottom: 10px">
-									<input name="ctl00$ContentPlaceHolder1$txtamount" type="text"
-										value="${pckg_price }"
-										readonly="readonly" id="ContentPlaceHolder1_txtDueDate"
-										class="form-control" placeholder="" />
-								</div>
-							</div>
-							<div class="col-sm-12">
-								<div class="col-sm-4">Recharge Amount</div>
-								<div class="col-sm-8" style="margin-bottom: 10px">
-									<input name="ctl00$ContentPlaceHolder1$txtcoupon" type="text"
-										value="${amount }"
-										readonly="readonly" id="ContentPlaceHolder1_txtDueDate"
-										class="form-control" placeholder="" />
-								</div>
-							</div>
-							<div class="col-sm-12">
-								<div class="col-sm-4"></div>
-								<div class="col-sm-8" style="margin-bottom: 10px">
-									<input type="submit" name="ctl00$ContentPlaceHolder1$btn_sbmit"value="Submit" id="ContentPlaceHolder1_btn_sbmit"class="btn btn-primary" />
-									<!-- 									<input type="submit" name="ctl00$ContentPlaceHolder1$btn_sbmit"value="Cancel" id="Custrecharge.jsp"class="btn btn-primary" /> -->
-									<a class="btn btn-primary" href="CustRecharge.html?id=${id }">Cancel</a>
-									<div class="col-sm-8" style="margin-bottom: 10px"></div>
-								</div>
+			<div class="row">
+				<div class="table-responsive">
 
-							</div>
-							<div class="col-sm-6"></div>
-						</div>
+					<div>
+						<table
+							class="table table-striped table-bordered table-hover fontsize"
+							cellspacing="0" rules="all" border="1"
+							id="ContentPlaceHolder1_gvcompHistory"
+							style="width: 75%; border-collapse: collapse;">
+							<tr>
+								<th scope="col"
+									style="text-align: center; color: #FFFFFF; width: 50%; background-color: #12a59c;">User
+									ID</th>
+								<th scope="col"
+									style="text-align: center; color: #FFFFFF; background-color: #12a59c;">${id }</th>
+
+
+							</tr>
+
+							<tr>
+								<td style="text-align: center; color: black;">Customer Name</td>
+								<td style="text-align: center; color: black;">${Customer_name }</td>
+
+							</tr>
+							<tr>
+								<td style="text-align: center; color: black;">Package Price</td>
+								<td style="text-align: center; color: black;">${pckg_price }</td>
+
+							</tr>
+							<tr>
+								<td style="text-align: center; color: black;">Recharge
+									Amount</td>
+								<td style="text-align: center; color: black;">${amount }</td>
+
+							</tr>
+							<tr>
+								<td style="text-align: center; color: black;"><input
+									type="submit" name="ctl00$ContentPlaceHolder1$btn_sbmit"
+									value="Submit" id="ContentPlaceHolder1_btn_sbmit"
+									class="btn btn-primary" /></td>
+								<td style="text-align: center; color: black;"><a
+									class="btn btn-primary" href="CustRecharge.html?id=${id }">Cancel</a></td>
+
+							</tr>
+
+						</table>
+
+
 					</div>
-					<hr />
 				</div>
 
 			</div>
+
+		</div>
+
+		<%
+			}
+		%>
 	
-	<%
-		}
-	%>
 </body>
 </html>
