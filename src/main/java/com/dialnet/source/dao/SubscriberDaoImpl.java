@@ -213,5 +213,17 @@ public class SubscriberDaoImpl implements SubscriberDao {
 		return subscriber;
 	}
 
+	@Override
+	public List<Subscriber> getAll(String lco) {
+		Session sf = dao.openSession();
+		Criteria cr = sf.createCriteria(Subscriber.class);
+
+		// To get records having salary more than 2000
+		cr.add(Restrictions.eq("LcoId", lco));
+		List l = cr.list();
+		sf.close();
+		return l;
+	}
+
 	
 }

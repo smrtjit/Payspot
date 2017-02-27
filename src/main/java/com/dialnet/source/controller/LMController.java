@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -30,6 +34,7 @@ import com.dialnet.source.model.AgentBillDetails;
 import com.dialnet.source.model.AllCollections;
 import com.dialnet.source.model.AllComplaints;
 import com.dialnet.source.model.BulkRechargeAmount;
+import com.dialnet.source.model.BulkRechargeAmountList;
 import com.dialnet.source.model.Customer_Invoice1;
 import com.dialnet.source.model.LCOUser;
 import com.dialnet.source.model.LMUser;
@@ -193,7 +198,145 @@ public class LMController {
 		return json;
 		// return new ModelAndView(json);
 	}
+	
+	@RequestMapping(value = "/excelbulkSheet", method = RequestMethod.POST)
+	public ModelAndView processExcel(ModelMap model, @RequestParam("excelfile") MultipartFile excelfile,
+			@RequestParam("user") String id) {
+		try {
+			AgentBillDetails cust = new AgentBillDetails();
+			List pck = lmuserservice.getAllAgentNames(id);
+			List paymentType = new ArrayList();
+			paymentType.add("Cash");
+			paymentType.add("Cheque");
+			paymentType.add("Wallet");
+			paymentType.add("Others");
+			model.addAttribute("paymentType", paymentType);
+			model.addAttribute("agentName", pck);
+			model.addAttribute("bulkInfoForm", cust);
 
+			BulkRechargeAmountList bulk = new BulkRechargeAmountList();
+			List<BulkRechargeAmount> lstUser = new ArrayList<BulkRechargeAmount>();
+			int i = 0;
+			System.out.println("file not found name \t" + excelfile.getInputStream());
+			// File file= new File();
+			HSSFWorkbook workbook = new HSSFWorkbook(excelfile.getInputStream());
+			String ss = excelfile.getName();
+			HSSFSheet worksheet = workbook.getSheetAt(0);
+			int noOfColumns = worksheet.getRow(0).getLastCellNum();
+			System.out.println("Column count \t" + noOfColumns);
+			if (noOfColumns == 8) {
+				while (i <= worksheet.getLastRowNum()) {
+					BulkRechargeAmount user = new BulkRechargeAmount();
+					HSSFRow row = worksheet.getRow(i++);
+					user.setInvoiceid(row.getCell(0).getStringCellValue());
+					System.out.println("I am here 0\t " + row.getCell(0));
+
+					user.setCustomerid((int) row.getCell(1).getNumericCellValue());
+					System.out.println("I am here 0\t " + row.getCell(1));
+
+					user.setCustomername(row.getCell(2).getStringCellValue());
+					System.out.println("I am here 1 \t" + row.getCell(2));
+
+					user.setCustomeraddress(row.getCell(3).getStringCellValue());
+					System.out.println("I am here 2\t" + row.getCell(3));
+
+					user.setCustomerpackagename(row.getCell(4).getStringCellValue());
+					System.out.println("I am here 3 \t" + row.getCell(4));
+
+					user.setCustomermobileno(row.getCell(5).getStringCellValue());
+					System.out.println("I am here 4\t" + row.getCell(5));
+
+					user.setCustomeremailid(row.getCell(6).getStringCellValue());
+					System.out.println("I am here 5\t" + row.getCell(6));
+
+					user.setCustomeramountofrecharge((float) row.getCell(7).getNumericCellValue());
+					System.out.println("I am here 6\t" + row.getCell(7));
+					lstUser.add(user);
+				}
+				model.addAttribute("persons", lstUser);
+				bulk.setBulkInfo(lstUser);
+
+				System.out.println("List Size: " + bulk.getBulkInfo().size());
+				model.addAttribute("bulkData", bulk);
+			} else {
+				model.addAttribute("error", "File is Not Valid");
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		model.addAttribute("user", id);
+		return new ModelAndView("LMTopup", model);
+	}
+
+	
+
+	@RequestMapping(value = "/saveBulkTopup", method = RequestMethod.POST)
+	public String uploadBulkTopup(@RequestParam("user") String user,
+			@ModelAttribute("bulkData") BulkRechargeAmountList bulk, ModelMap model) {
+		System.out.println("save ulkTopup: " + user + ",sub: " + bulk);
+		List<BulkRechargeAmount> contacts = bulk.getBulkInfo();
+		System.out.println("Object List: " + contacts);
+		if (null != contacts && contacts.size() > 0) {
+			for (BulkRechargeAmount contact : contacts) {
+				Customer_Invoice1 tmpdata = invoice1.getByInvoiceId(contact.getInvoiceid() + "");
+				if (tmpdata != null) {
+					int i2 = invoice1.updateInvoiceDetail(contact.getInvoiceid() + "",
+							contact.getCustomeramountofrecharge() + "", user, getDate(), "Pending");
+					AgentBillDetails sub = new AgentBillDetails();
+					sub.setInvoice_id(contact.getInvoiceid() + "");
+					sub.setReceivedAmt(contact.getCustomeramountofrecharge() + "");
+					sub.setAgentId(user);
+					sub.setReferenceId("NA");
+					sub.setRemark("NA");
+					sub.setPayment_Type("NA");
+					sub.setFromDate(tmpdata.getDueDate());
+					sub.setToDate(tmpdata.getDueDate());
+					sub.setCustId(tmpdata.getCustId());
+					sub.setTotalAmt(tmpdata.getTotalAmt());
+					sub.setInstatus("Pending");
+					sub.setApprovedBy(user);
+					sub.setApprovalDate(getDate());
+					int i = agentbillservice.saveDetail(sub);
+
+					Subscriber u = userService.getByID(tmpdata.getCustId());
+					AllCollections col = new AllCollections();
+					col.setInvoice(contact.getInvoiceid() + "");
+					col.setCust_Id(tmpdata.getCustId());
+					// Doubt Vcno
+					col.setCust_mobile(u.getMobile());
+					col.setCust_Name(tmpdata.getCustName());
+					col.setCurrent_Pckg(tmpdata.getCustBasePckg());
+					col.setRecharge_Amount(tmpdata.getTotalAmt());
+					col.setPaid_Amount(contact.getCustomeramountofrecharge() + "");
+					col.setDiscount(tmpdata.getTotalDues());
+					col.setPayment_Mode("OffLine");
+					col.setPayment_Status("Pending");
+					col.setCollecting_Agent(user);
+					col.setLco_Id(lmuserservice.getLCOID(user));
+					col.setPayment_Type("OffLine");
+					col.setApproval_ID(user);
+					col.setRefernceId("NA");
+					col.setApproval_Date(getDate());
+					col.setTrndate(getDate());
+					col.setRemark("NA");
+					LCOCollectionRepository.saveDetail(col);
+
+					System.out.printf("Data Sucessfully Update------------%s \t ", contact.getCustomeremailid());
+				} else {
+					model.addAttribute("err", "error");
+					break;
+
+				}
+
+			}
+		} else {
+			System.out.println("Data is NULL");
+		}
+		model.addAttribute("user", user);
+		return "redirect:lmtopUp.html";
+	}
+	
 	@ResponseBody
 	@RequestMapping(value = "/findByMobile", method = RequestMethod.GET)
 	public String findByMobile(@RequestParam("user") String user, Model model, @RequestParam("mobile") String mobile) {

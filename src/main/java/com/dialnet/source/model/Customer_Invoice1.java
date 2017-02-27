@@ -33,10 +33,18 @@ public class Customer_Invoice1 {
 	String dueDate;
 	String billAfterDueDate;
 	String trndate;
+	String billAmtPaid;
 	String billStatus;
 	String dateOfPaid;
 	String AgentId;
 	String lcoId;
+	
+	public String getBillAmtPaid() {
+		return billAmtPaid;
+	}
+	public void setBillAmtPaid(String billAmtPaid) {
+		this.billAmtPaid = billAmtPaid;
+	}
 	public String getInvoice_No() {
 		return Invoice_No;
 	}
@@ -193,11 +201,12 @@ public class Customer_Invoice1 {
 	public void setLcoId(String lcoId) {
 		this.lcoId = lcoId;
 	}
+	
 	public Customer_Invoice1(String invoice_No, String custId, String custName, String custMobile, String custAdd,
 			String custBasePckg, String custAddPckg, String custALPckg, String custPckgCost, String sDate, String eDate,
 			String serviceTax, String cess, String amusementTax, String totalAmt, String openingBal, String lastPaid,
 			String currentBill, String totalDues, String dueDate, String billAfterDueDate, String trndate,
-			String billStatus, String dateOfPaid, String agentId, String lcoId) {
+			String billAmtPaid, String billStatus, String dateOfPaid, String agentId, String lcoId) {
 		super();
 		Invoice_No = invoice_No;
 		this.custId = custId;
@@ -221,6 +230,7 @@ public class Customer_Invoice1 {
 		this.dueDate = dueDate;
 		this.billAfterDueDate = billAfterDueDate;
 		this.trndate = trndate;
+		this.billAmtPaid = billAmtPaid;
 		this.billStatus = billStatus;
 		this.dateOfPaid = dateOfPaid;
 		AgentId = agentId;

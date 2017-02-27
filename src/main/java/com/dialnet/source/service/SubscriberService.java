@@ -19,6 +19,9 @@ public interface SubscriberService {
 	public Long countForSearch(String user,String sdate, String edate, String stb_no, String VC_no, String mobile,
 			String status, String pckg);
 	public int addSubscriber(Subscriber sub);
-	public int updateConnection(String username,String firstname,String middlename,String lastname,String mobile,String email,String address,String landmark,String state,String city,String pincode,String stbno ,String accountblance );
+	public int updateConnection(String username,String firstname,String middlename,
+			String lastname,String mobile,String email,String address,String landmark,
+			String state,String city,String pincode,String stbno ,String accountblance );
 
+	public List<Subscriber> getAll(String lco);
 }

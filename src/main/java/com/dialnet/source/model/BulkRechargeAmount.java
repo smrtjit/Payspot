@@ -9,27 +9,13 @@ public class BulkRechargeAmount {
 	public String getInvoiceid() {
 		return invoiceid;
 	}
-
-
-
-
-
 	public void setInvoiceid(String invoiceid) {
 		this.invoiceid = invoiceid;
 	}
 
-
-
-
-
 	public int getCustomerid() {
 		return customerid;
 	}
-
-	
-
-	
-
 	public void setCustomerid(int customerid) {
 		this.customerid = customerid;
 	}

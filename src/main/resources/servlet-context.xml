@@ -58,7 +58,7 @@
 				<value>com.dialnet.source.model.AllCollections</value>
 				<value>com.dialnet.source.model.STBStock</value>
 				<value>com.dialnet.source.model.Citys</value>
-				<value>com.dialnet.source.model.Cust_Invoice</value>
+			
 				<value>com.dialnet.source.model.TaxInformation</value>
 				<value>com.dialnet.source.model.Customer_Invoice1</value>
 				<value>com.dialnet.source.model.LCO_Setting</value>

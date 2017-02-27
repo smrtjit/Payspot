@@ -6,6 +6,8 @@ public class BulkRechargeAmountList {
 
 	private List<BulkRechargeAmount> bulkInfo;
 	
+	private List<BulkStock> bulkstock;
+	
 
 	public List<STBStock> getStbstock() {
 		return stbstock;
@@ -16,13 +18,26 @@ public class BulkRechargeAmountList {
 	}
 
 
-	public BulkRechargeAmountList(List<BulkRechargeAmount> bulkInfo, List<STBStock> stbstock,
+
+
+	public BulkRechargeAmountList(List<BulkRechargeAmount> bulkInfo, List<BulkStock> bulkstock, List<STBStock> stbstock,
 			List<AllChannels> channel) {
 		super();
 		this.bulkInfo = bulkInfo;
+		this.bulkstock = bulkstock;
 		this.stbstock = stbstock;
 		this.channel = channel;
 	}
+
+	public List<BulkStock> getBulkstock() {
+		return bulkstock;
+	}
+
+	public void setBulkstock(List<BulkStock> bulkstock) {
+		this.bulkstock = bulkstock;
+	}
+
+
 
 
 	private List<STBStock> stbstock;

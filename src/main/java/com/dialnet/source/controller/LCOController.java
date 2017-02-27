@@ -5,11 +5,12 @@ import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import java.util.Calendar;
 import java.util.Date;
 
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -41,10 +42,11 @@ import com.dialnet.source.model.AllCollections;
 import com.dialnet.source.model.AllComplaints;
 import com.dialnet.source.model.BulkRechargeAmount;
 import com.dialnet.source.model.BulkRechargeAmountList;
+import com.dialnet.source.model.BulkStock;
 import com.dialnet.source.model.Citys;
 import com.dialnet.source.model.Customer_Invoice1;
 import com.dialnet.source.model.LCOUser;
-
+import com.dialnet.source.model.LCO_Setting;
 import com.dialnet.source.model.LMUser;
 import com.dialnet.source.model.PackageDetail;
 import com.dialnet.source.model.PackageInfo;
@@ -856,6 +858,73 @@ public class LCOController {
 		// return new ModelAndView(json);
 	}
 
+	@RequestMapping(value = "/searchStock", method = RequestMethod.GET)
+	public ModelAndView searchStock(ModelMap map, @RequestParam("user") String user, @RequestParam("stbId") String stb,
+			@RequestParam("mso") String mso, @RequestParam("brand") String brand, @RequestParam("status") String status,
+			@RequestParam("type") String type, Integer offset, Integer maxResults) {
+		System.out.println(
+				"Data for check Stock: " + stb + "," + mso + "," + type + "," + brand + "," + status + "," + user);
+		List<STBStock> list = stbService.getBySearch(user, stb, mso, brand, type, status, offset, maxResults);
+
+		if (list.size() > 0) {
+			map.addAttribute("StbList", list);
+			map.addAttribute("count", stbService.countSearch(user, stb, mso, brand, type, status));
+		} else {
+			System.out.println("NO DATA FOUND...");
+			map.addAttribute("error", "There is No Suitable Matched Data Found");
+			map.addAttribute("count", "0");
+		}
+		map.addAttribute("StbList", list);
+		map.addAttribute("count", stbService.countSearch(user, stb, mso, brand, type, status));
+		map.addAttribute("user", user);
+		map.addAttribute("offset", offset);
+		return new ModelAndView("TotalStock", map);
+
+	}
+
+	
+
+	@ResponseBody
+	@RequestMapping(value = "/deleteSTB", method = RequestMethod.GET)
+	public String deleteSTB(ModelMap map, @RequestParam("user") String user, @RequestParam("stb_id") String stb_id,
+			Integer offset, Integer maxResults) {
+
+		String result = null;
+		int i = stbService.delete(stb_id);
+		if (i == 1) {
+			result = "Setup Box Detail Remove Successfully";
+		} else {
+			result = "There may be some ERROR Please Try Again";
+		}
+
+		Gson gson = new Gson();
+		String json = gson.toJson(result);
+
+		return json;
+		// return new ModelAndView(json);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/warrantySTB", method = RequestMethod.GET)
+	public String warrantySTB(ModelMap map, @RequestParam("user") String user, @RequestParam("stb_id") String stb_id,
+			@RequestParam("warranty") String warranty, Integer offset, Integer maxResults) {
+		System.out.println("user\t" + user + "\tstb_id\t" + stb_id + "\twarranty\t" + warranty);
+		String result = null;
+
+		int i = stbService.update(stb_id, warranty);
+		if (i == 1) {
+			result = "Setup Box Detail Remove Successfully";
+		} else {
+			result = "There may be some ERROR Please Try Again";
+		}
+
+		Gson gson = new Gson();
+		String json = gson.toJson(result);
+
+		return json;
+		// return new ModelAndView(json);
+	}
+
 	@RequestMapping(value = "/bulkSheet", method = RequestMethod.POST)
 	public ModelAndView processExcel(ModelMap model, @RequestParam("excelfile") MultipartFile excelfile,
 			@RequestParam("user") String id) {
@@ -924,6 +993,83 @@ public class LCOController {
 		}
 		model.addAttribute("user", id);
 		return new ModelAndView("Topup", model);
+	}
+
+	@RequestMapping(value = "/stockfile", method = RequestMethod.POST)
+	public ModelAndView stockfile(ModelMap model, @RequestParam("excelfile") MultipartFile excelfile,
+			@RequestParam("user") String id) {
+		try {
+
+			BulkRechargeAmountList bulk = new BulkRechargeAmountList();
+			List<BulkStock> lstUser = new ArrayList<BulkStock>();
+			int i = 0;
+			System.out.println("file not found name \t" + excelfile.getInputStream());
+			// File file= new File();
+			HSSFWorkbook workbook = new HSSFWorkbook(excelfile.getInputStream());
+			String ss = excelfile.getName();
+			HSSFSheet worksheet = workbook.getSheetAt(0);
+			int noOfColumns = worksheet.getRow(0).getLastCellNum();
+			System.out.println("Column count \t" + noOfColumns);
+			if (noOfColumns == 3) {
+				while (i <= worksheet.getLastRowNum()) {
+					BulkStock userstock = new BulkStock();
+					HSSFRow row = worksheet.getRow(i++);
+					userstock.setBrand(row.getCell(0).getStringCellValue());
+					System.out.println("I am here 0\t " + row.getCell(0));
+
+					userstock.setMso(row.getCell(1).getStringCellValue());
+					System.out.println("I am here 1\t " + row.getCell(1));
+					userstock.setWarranty(row.getCell(2) + "");
+					System.out.println("I am here 2 \t" + row.getCell(2));
+
+					lstUser.add(userstock);
+				}
+				model.addAttribute("persons", lstUser);
+				bulk.setBulkstock(lstUser);
+
+				System.out.println("List Size: " + bulk.getBulkstock().size() + "\t userid=\t" + id);
+				model.addAttribute("StockData", bulk);
+			} else {
+				model.addAttribute("error", "File is Not Valid");
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		model.addAttribute("user", id);
+		return new ModelAndView("AddNewStock", model);
+	}
+
+	@RequestMapping(value = "/uploadstockdata", method = RequestMethod.POST)
+	public String uploadstockdata(@RequestParam("user") String user,
+			@ModelAttribute("StockData") BulkRechargeAmountList bulk, ModelMap model) {
+		System.out.println("uploadBulkTopup: " + user + ",sub: " + bulk);
+		List<BulkStock> contacts = bulk.getBulkstock();
+		System.out.println("Object List: " + contacts);
+		if (null != contacts && contacts.size() > 0) {
+			for (BulkStock contact : contacts) {
+				STBStock sub = new STBStock();
+				sub.setStb_Id(System.currentTimeMillis());
+				sub.setBrand(contact.getBrand());
+				sub.setLCO_Id(user);
+				sub.setMSO(contact.getMso());
+				sub.setTrndate_Of_MSO(getDate());
+				sub.setSTB_Type("New");
+				sub.setWarranty(contact.getWarranty() + "");
+				sub.setSTB_Status("Off Line");
+				sub.setSubscriberId("NA");
+				sub.setSTB_Returned_trndate_Sub("NA");
+				sub.setTrndate_Of_Subs("NA");
+				int i = stbService.add(sub);
+
+			}
+			System.out.printf("Data Sucessfully Update \t ");
+		} else {
+			System.out.println("Data is NULL");
+		}
+
+		model.addAttribute("user", user);
+		return "redirect:addStock.html";
 	}
 
 	@ResponseBody
@@ -1270,6 +1416,157 @@ public class LCOController {
 
 		return json;
 		// return new ModelAndView(json);
+	}
+	
+//	################################################################### Bill Generate #####################################################
+	
+	@RequestMapping(value = "/billCreate", method = RequestMethod.GET)
+	public ModelAndView billCreate(@RequestParam("user") String user,  ModelMap model) {
+		
+		String result=null;
+		int i=createBill(user);
+		if(i>0){
+			result="Bill Generate Successfully";
+		}else{
+			result="There is some ERROR Please Try Again";
+		}
+		Gson gson = new Gson();
+		String json = gson.toJson(result);
+		model.addAttribute("user", user);
+		 return new ModelAndView("redirect:LCOHome.html");
+	}
+
+	public int createBill(String user){
+		int data=0;
+		List<Subscriber> l=userService.getAll(user);
+		for(int i=0;i<l.size();i++){
+			Subscriber sub=l.get(i);
+			
+			double primaryAmt=0l;
+			String totalAmt=null;
+			String openingBal=null;
+			String lastPaid=null;
+			String totalDues=null;
+			String billAfterDueDate=null;
+			String sDate=null;
+			Customer_Invoice1 lastData = invoice1.getLastPaymentDetail(sub.getUserName()+"");
+			if (lastData != null) {
+					sDate = lastData.geteDate();
+			} else {
+				sDate=sub.getTrndate();
+
+			}
+			//Interval & Primary Price
+			System.out.println("FDate: "+sDate+",EDate: "+getDate());
+			long interval = dayCalculate(sDate, getDate());
+			System.out.println("Interval: "+interval);
+			if(interval==0){
+				interval=1;
+			}
+			double pckgPrice=Long.parseLong(sub.getPCKGPrice())/interval;
+			primaryAmt=interval*pckgPrice;
+			
+			
+			
+			// set taxs & LateDate
+			Customer_Invoice1 cst= new Customer_Invoice1();
+			String id="IN"+sub.getMobile()+"_"+System.currentTimeMillis();
+			LCO_Setting ls=settingService.getByID(user);
+			String dueDate=ls.getLateDate();
+			
+			double st_tmp=(primaryAmt * Float.parseFloat(ls.getService_tax())) / 100;
+			double cess_tmp=(primaryAmt * Float.parseFloat(ls.getCess())) / 100;
+			double amst_tmp=(primaryAmt * Float.parseFloat(ls.getEnt_tax())) / 100;
+			String st = String.format("%.2f", st_tmp);
+			String cess = String.format("%.2f", cess_tmp);
+			String amst = String.format("%.2f", amst_tmp);
+
+			//set Paid amounts
+			
+			double tot=primaryAmt+st_tmp+cess_tmp+amst_tmp;
+			totalAmt=String.format("%.2f", tot);
+			
+			double paidAmt=0l;
+			totalDues=String.format("%.2f", paidAmt);
+			
+			double payAfter=0l;
+			billAfterDueDate=String.format("%.2f", payAfter);
+			
+			//Set Invoice Details//
+			cst.setInvoice_No(id);
+			cst.setCustId(sub.getUserName()+"");
+			cst.setCustName(sub.getFirstName()+" "+sub.getLastName());
+			cst.setCustMobile(sub.getMobile());
+			cst.setCustAdd(sub.getAddress());
+			cst.setCustBasePckg(sub.getBasePCKG());
+			cst.setCustAddPckg(sub.getAddOnPCKG());
+			cst.setCustALPckg(sub.getA_La_Carte());
+			cst.setCustPckgCost(sub.getPCKGPrice());
+			cst.setsDate(sDate);
+			cst.seteDate(getDate());
+			cst.setDueDate(getDate());
+			cst.setServiceTax(st);
+			cst.setCess(cess);
+			cst.setAmusementTax(amst);
+			cst.setTotalAmt(totalAmt);
+			
+			
+			cst.setOpeningBal(openingBal);
+			cst.setLastPaid(lastPaid);
+			
+			
+			cst.setCurrentBill(totalAmt);
+			cst.setTotalDues(totalDues);
+			cst.setDueDate(getDueDate(dueDate));
+			cst.setBillAfterDueDate(billAfterDueDate);
+			cst.setTrndate(getDate());
+			cst.setBillAmtPaid("NA");
+			cst.setBillStatus("Not Paid");
+			cst.setDateOfPaid("NA");
+			cst.setAgentId("NA");
+			cst.setLcoId(user);
+			
+			invoice1.save(cst);
+			
+		}
+		return data;
+	}
+	
+	//######################################################### Interval of Days ########################################
+	public long dayCalculate(String fdate, String edate) {
+		long diff = 0;
+		// System.out.println("Dates: "+fdate+","+edate);
+		try {
+			SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date date1 = myFormat.parse(fdate);
+			Date date2 = myFormat.parse(edate);
+			diff = date2.getTime() - date1.getTime();
+			diff = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+			// System.out.println("interval: "+diff);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		return diff;
+
+	}
+	
+	
+	public String getDueDate(String due){
+		String data=null;
+		try{
+			Calendar cal = Calendar.getInstance();
+			cal.set(Calendar.DATE, 16);
+			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+			String formatted = format1.format(cal.getTime());
+			data=formatted;
+			// Output "2012-09-26"
+
+			
+		} catch (Exception e1) {
+		    e1.printStackTrace();
+		}
+		return data;
 	}
 
 }

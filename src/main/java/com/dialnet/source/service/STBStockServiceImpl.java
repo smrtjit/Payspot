@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dialnet.source.dao.STBStockDao;
+import com.dialnet.source.model.PackageInfo;
 import com.dialnet.source.model.STBStock;
 
 @Service
@@ -39,6 +40,35 @@ public class STBStockServiceImpl implements STBStockService {
 		
 		return dao.getAllAvlSTB(user);
 	}
-	
+
+	@Override
+	public List<STBStock> getBySearch(String user, String id, String mso, String brand, String type, String status,
+			Integer offset, Integer maxResults) {
+		return dao.getBySearch(user, id, mso, brand, type, status, offset, maxResults);
+	}
+
+	@Override
+	public long countSearch(String user, String id, String mso, String brand, String type, String status) {
+		return dao.countSearch(user, id, mso, brand, type, status);
+	}
+
+	@Override
+	public int add(STBStock pckg) {
+		return dao.add(pckg);
+	}
+
+	@Override
+	public int delete(String id) {
+		
+		return dao.delete(id);
+	}
+
+	@Override
+	public int update(String stbno, String warranty) {
+		// TODO Auto-generated method stub
+		return dao.update(stbno, warranty);
+	}
+
+		
 	
 }

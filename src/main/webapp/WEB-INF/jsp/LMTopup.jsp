@@ -470,7 +470,7 @@ a.close:hover {
 			<main class="hoc container clear"> <!-- main body -->
 
 			<div class="row" style="margin-top: -65px;">
-				<form action="bulkSheet.html" method="post"
+				<form action="excelbulkSheet.html" method="post"
 					enctype="multipart/form-data">
 					<input type="hidden" name="user" value="${user }" />
 					<div class="col-sm-3"></div>
@@ -566,7 +566,7 @@ a.close:hover {
 							</div>
 						</div>
 
-						<form:form method="POST" action="uploadBulkTopup.html"
+						<form:form method="POST" action="saveBulkTopup.html"
 							modelAttribute="bulkData" id="dataForm">
 							<input type="hidden" name="user" value="${user }" />
 							<table
@@ -590,7 +590,6 @@ a.close:hover {
 										No</th>
 									<th scope="col" style="background-color: rgb(119, 127, 177);">Email</th>
 									<th scope="col" style="background-color: rgb(119, 127, 177);">Amount</th>
-
 								</tr>
 								<tr>
 									<c:forEach items="${bulkData.bulkInfo}" var="user"

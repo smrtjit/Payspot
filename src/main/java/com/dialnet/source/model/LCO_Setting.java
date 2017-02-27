@@ -13,26 +13,32 @@ public class LCO_Setting {
 	String billing_cycle;
 	String service_tax;
 	String ent_tax;
-	String other_tax;
+	String cess;
 	String lateFeeCharges;
+	String lateDate;
 	String discount;
 	public LCO_Setting() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public LCO_Setting(String lco_id, String billing_cycle, String service_tax, String ent_tax, String other_tax,
-			String lateFeeCharges, String discount) {
+
+	
+	public LCO_Setting(String lco_id, String billing_cycle, String service_tax, String ent_tax, String cess,
+			String lateFeeCharges, String lateDate, String discount) {
 		super();
 		this.lco_id = lco_id;
 		this.billing_cycle = billing_cycle;
 		this.service_tax = service_tax;
 		this.ent_tax = ent_tax;
-		this.other_tax = other_tax;
+		this.cess = cess;
 		this.lateFeeCharges = lateFeeCharges;
+		this.lateDate = lateDate;
 		this.discount = discount;
 	}
-	
+
+
+
 	public String getLateFeeCharges() {
 		return lateFeeCharges;
 	}
@@ -65,12 +71,23 @@ public class LCO_Setting {
 	public void setEnt_tax(String ent_tax) {
 		this.ent_tax = ent_tax;
 	}
-	public String getOther_tax() {
-		return other_tax;
+	
+	public String getCess() {
+		return cess;
 	}
-	public void setOther_tax(String other_tax) {
-		this.other_tax = other_tax;
+
+	public void setCess(String cess) {
+		this.cess = cess;
 	}
+
+	public String getLateDate() {
+		return lateDate;
+	}
+
+	public void setLateDate(String lateDate) {
+		this.lateDate = lateDate;
+	}
+
 	public String getDiscount() {
 		return discount;
 	}

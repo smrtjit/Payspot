@@ -18,7 +18,9 @@ public interface SubscriberDao {
 	
 	
 	public int addSubscriber(Subscriber sub);
+	public int updateConnection(String username,String firstname,String middlename,
+			String lastname,String mobile,String email,String address,String landmark,
+			String state,String city,String pincode,String stbno ,String accountblance );
 	
-	
-	public int updateConnection(String username,String firstname,String middlename,String lastname,String mobile,String email,String address,String landmark,String state,String city,String pincode,String stbno ,String accountblance );
+	public List<Subscriber> getAll(String lco);
 }

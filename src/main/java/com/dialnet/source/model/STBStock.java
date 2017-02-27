@@ -9,140 +9,107 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "STBOutDetail")
+@Table(name = "STB_Stock")
 public class STBStock {
 
 	@Id
-	private long StbNo;
-
-	private String RecievedOn;
-	private String StbFrom;
+	private long Stb_Id;
 	private String Brand;
 	private String MSO;
-	private String SubscriberId;
-	private String IssuedDate;
-	private String StbType;
-	private String StbStatus;
+	private String trndate_Of_MSO;
+	private String STB_Type;
 	private String Warranty;
-	private String LcoId;
-	private String trndate;
-
+	private String SubscriberId;
+	private String trndate_Of_Subs;
+	private String STB_Status;
+	private String STB_Returned_trndate_Sub;
+	private String LCO_Id;
 	public STBStock() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	public STBStock(long stbNo, String recievedOn, String stbFrom, String brand, String mSO, String subscriberId,
-			String issuedDate, String stbType, String stbStatus, String warranty, String lcoId, String trndate) {
+	public STBStock(long stb_Id, String brand, String mSO, String trndate_Of_MSO, String sTB_Type, String warranty,
+			String subscriberId, String trndate_Of_Subs, String sTB_Status, String sTB_Returned_trndate_Sub,
+			String lCO_Id) {
 		super();
-		StbNo = stbNo;
-		RecievedOn = recievedOn;
-		StbFrom = stbFrom;
+		Stb_Id = stb_Id;
 		Brand = brand;
 		MSO = mSO;
-		SubscriberId = subscriberId;
-		IssuedDate = issuedDate;
-		StbType = stbType;
-		StbStatus = stbStatus;
+		this.trndate_Of_MSO = trndate_Of_MSO;
+		STB_Type = sTB_Type;
 		Warranty = warranty;
-		LcoId = lcoId;
-		this.trndate = trndate;
+		SubscriberId = subscriberId;
+		this.trndate_Of_Subs = trndate_Of_Subs;
+		STB_Status = sTB_Status;
+		STB_Returned_trndate_Sub = sTB_Returned_trndate_Sub;
+		LCO_Id = lCO_Id;
 	}
-
+	public long getStb_Id() {
+		return Stb_Id;
+	}
+	public void setStb_Id(long stb_Id) {
+		Stb_Id = stb_Id;
+	}
 	public String getBrand() {
 		return Brand;
 	}
-
 	public void setBrand(String brand) {
 		Brand = brand;
 	}
-
 	public String getMSO() {
 		return MSO;
 	}
-
 	public void setMSO(String mSO) {
 		MSO = mSO;
 	}
-
-	public long getStbNo() {
-		return StbNo;
+	public String getTrndate_Of_MSO() {
+		return trndate_Of_MSO;
 	}
-
-	public void setStbNo(long stbNo) {
-		StbNo = stbNo;
+	public void setTrndate_Of_MSO(String trndate_Of_MSO) {
+		this.trndate_Of_MSO = trndate_Of_MSO;
 	}
-
-	public String getRecievedOn() {
-		return RecievedOn;
+	public String getSTB_Type() {
+		return STB_Type;
 	}
-
-	public void setRecievedOn(String recievedOn) {
-		RecievedOn = recievedOn;
+	public void setSTB_Type(String sTB_Type) {
+		STB_Type = sTB_Type;
 	}
-
-	public String getStbFrom() {
-		return StbFrom;
-	}
-
-	public void setStbFrom(String stbFrom) {
-		StbFrom = stbFrom;
-	}
-
-	public String getSubscriberId() {
-		return SubscriberId;
-	}
-
-	public void setSubscriberId(String subscriberId) {
-		SubscriberId = subscriberId;
-	}
-
-	public String getIssuedDate() {
-		return IssuedDate;
-	}
-
-	public void setIssuedDate(String issuedDate) {
-		IssuedDate = issuedDate;
-	}
-
-	public String getStbType() {
-		return StbType;
-	}
-
-	public void setStbType(String stbType) {
-		StbType = stbType;
-	}
-
-	public String getStbStatus() {
-		return StbStatus;
-	}
-
-	public void setStbStatus(String stbStatus) {
-		StbStatus = stbStatus;
-	}
-
 	public String getWarranty() {
 		return Warranty;
 	}
-
 	public void setWarranty(String warranty) {
 		Warranty = warranty;
 	}
-
-	public String getLcoId() {
-		return LcoId;
+	public String getSubscriberId() {
+		return SubscriberId;
 	}
-
-	public void setLcoId(String lcoId) {
-		LcoId = lcoId;
+	public void setSubscriberId(String subscriberId) {
+		SubscriberId = subscriberId;
 	}
-
-	public String getTrndate() {
-		return trndate;
+	public String getTrndate_Of_Subs() {
+		return trndate_Of_Subs;
 	}
-
-	public void setTrndate(String trndate) {
-		this.trndate = trndate;
+	public void setTrndate_Of_Subs(String trndate_Of_Subs) {
+		this.trndate_Of_Subs = trndate_Of_Subs;
 	}
+	public String getSTB_Status() {
+		return STB_Status;
+	}
+	public void setSTB_Status(String sTB_Status) {
+		STB_Status = sTB_Status;
+	}
+	public String getSTB_Returned_trndate_Sub() {
+		return STB_Returned_trndate_Sub;
+	}
+	public void setSTB_Returned_trndate_Sub(String sTB_Returned_trndate_Sub) {
+		STB_Returned_trndate_Sub = sTB_Returned_trndate_Sub;
+	}
+	public String getLCO_Id() {
+		return LCO_Id;
+	}
+	public void setLCO_Id(String lCO_Id) {
+		LCO_Id = lCO_Id;
+	}
+	
 
 }

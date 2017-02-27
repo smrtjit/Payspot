@@ -73,6 +73,11 @@ public class SubscriberServiceImpl implements SubscriberService {
 		return subsriberdao.getByMobile(id);
 	}
 
+	@Override
+	public List<Subscriber> getAll(String lco) {
+		return subsriberdao.getAll(lco);
+	}
+
 
 	
 }
