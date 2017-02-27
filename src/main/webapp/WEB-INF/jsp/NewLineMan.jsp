@@ -580,39 +580,7 @@ label.control-label {
 		</main>
 	</div>
 
-	<!-- <div class= "wrapper coloured "> -->
-	<!--   <div id= "social " class= "hoc clear ">  -->
-	<!--     ################################################################################################ -->
-	<!--     <div class= "one_half first "> -->
-	<!--       <h6 class= "title ">Social Media</h6> -->
-	<!--       <ul class= "faico clear "> -->
-	<!--         <li><a class= "faicon-facebook " href= "# "><i class= "fa fa-facebook "></i></a></li> -->
-	<!--         <li><a class= "faicon-pinterest " href= "# "><i class= "fa fa-pinterest "></i></a></li> -->
-	<!--         <li><a class= "faicon-twitter " href= "# "><i class= "fa fa-twitter "></i></a></li> -->
-	<!--         <li><a class= "faicon-dribble " href= "# "><i class= "fa fa-dribbble "></i></a></li> -->
-	<!--         <li><a class= "faicon-linkedin " href= "# "><i class= "fa fa-linkedin "></i></a></li> -->
-	<!--         <li><a class= "faicon-google-plus " href= "# "><i class= "fa fa-google-plus "></i></a></li> -->
-	<!--         <li><a class= "faicon-vk " href= "# "><i class= "fa fa-vk "></i></a></li> -->
-	<!--         <li><a class= "faicon-youtube " href= "# "><i class= "fa fa-youtube "></i></a></li> -->
-	<!--         <li><a class= "faicon-rss " href= "# "><i class= "fa fa-rss "></i></a></li> -->
-	<!--       </ul> -->
-	<!--     </div> -->
-	<!--     <div class= "one_half "> -->
-	<!--       <h6 class= "title ">Newsletter sign-up</h6> -->
-	<!--       <form class= "clear " method= "post " action= "# "> -->
-	<!--         <fieldset> -->
-	<!--           <legend>Newsletter:</legend> -->
-	<!--           <input type= "text " value= " " placeholder= "Type Email Here&hellip; "> -->
-	<!--           <button class= "fa fa-share " type= "submit " title= "Submit "><em>Submit</em></button> -->
-	<!--         </fieldset> -->
-	<!--       </form> -->
-	<!--     </div> -->
-	<!-- ################################################################################################ -->
-	<!--   </div> -->
-	<!-- </div> -->
-	<!-- ################################################################################################ -->
-	<!-- ################################################################################################ -->
-	<!-- ################################################################################################ -->
+	
 	<div class="wrapper row4">
 		<footer id="footer" class="hoc clear">
 			<!-- ################################################################################################ -->

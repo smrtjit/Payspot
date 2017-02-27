@@ -293,8 +293,12 @@ a.close:hover {
 		var amusementtax=data.amusementTax;
 		var bilafterduedate=data.billAfterDueDate;
 		var latepecharge=bilafterduedate-pending_due;
+		var privious_blance=data.lastPaid;
 		
-		var privious_blance=opening_bal-last_pay;
+		var ftac=data.fta;
+		var activationcharges=data.activationCharges;
+		var stbMonthlyrental=data.stbMonthlyRental;
+		var digitalcapacityrental=data.digitalCapacityRental;
 		
 		
 		document.getElementById("accno").innerHTML =accNumber;
@@ -314,9 +318,13 @@ a.close:hover {
 		document.getElementById("servicetax").innerHTML =servicetax;
 		document.getElementById("cesstax").innerHTML =cesstax;
 		document.getElementById("amusementtax").innerHTML =amusementtax;
-		
 		document.getElementById("latepecharge").innerHTML =latepecharge;
 		document.getElementById("bilafterduedate").innerHTML =bilafterduedate;
+		
+		document.getElementById("ftac").innerHTML =ftac;
+		document.getElementById("activationcharges").innerHTML =activationcharges;
+		document.getElementById("stbMonthlyrental").innerHTML =stbMonthlyrental;
+		document.getElementById("digitalcapacityrental").innerHTML =digitalcapacityrental;
 		
 	}
 </script>
@@ -514,8 +522,8 @@ a.close:hover {
 												Payment</b></td>
 										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Current Bill</b></td>
 										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Total Dues </b></td>
-										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Internet
-												User Id</b></td>
+										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Free To Air Channel</b>
+										</td>
 
 									</tr>
 									<tr>
@@ -528,7 +536,7 @@ a.close:hover {
 										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b
 											id="pending_dues">RS 520</b></td>
 										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b
-											id="in">NA</b></td>
+											id="ftac">NA</b></td>
 									</tr>
 								</table>
 							</div>
@@ -541,6 +549,20 @@ a.close:hover {
 											<td style="border: ridge; width: 850px; padding: 1px 8px;"><b>Account
 													details</b></td>
 											<td style="border: ridge; width: 200px; padding: 1px 8px;"><b>Amount</b></td>
+										</tr>
+										<tr>
+											<td align="left" style="border: ridge; padding: 1px 8px;">Activation Charges</td>
+											<td style="border: ridge; padding: 1px 8px;" id="activationcharges">NA</td>
+										</tr>
+										<tr>
+											<td align="left" style="border: ridge; padding: 1px 8px;">STB Monthly
+												Rental</td>
+											<td style="border: ridge; padding: 1px 8px;" id="stbMonthlyrental">NA</td>
+										</tr>
+										<tr>
+											<td align="left" style="border: ridge; padding: 1px 8px;">Digital Capacity
+												Rental</td>
+											<td style="border: ridge; padding: 1px 8px;" id="digitalcapacityrental">NA</td>
 										</tr>
 
 

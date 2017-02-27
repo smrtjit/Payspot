@@ -22,6 +22,10 @@ public class Customer_Invoice1 {
 	String custPckgCost;
 	String sDate;
 	String eDate;
+	String activationCharges;
+	String stbMonthlyRental;
+	String digitalCapacityRental;
+	String fta;
 	String serviceTax;
 	String cess;
 	String amusementTax;
@@ -39,6 +43,30 @@ public class Customer_Invoice1 {
 	String AgentId;
 	String lcoId;
 	
+	public String getActivationCharges() {
+		return activationCharges;
+	}
+	public void setActivationCharges(String activationCharges) {
+		this.activationCharges = activationCharges;
+	}
+	public String getStbMonthlyRental() {
+		return stbMonthlyRental;
+	}
+	public void setStbMonthlyRental(String stbMonthlyRental) {
+		this.stbMonthlyRental = stbMonthlyRental;
+	}
+	public String getDigitalCapacityRental() {
+		return digitalCapacityRental;
+	}
+	public void setDigitalCapacityRental(String digitalCapacityRental) {
+		this.digitalCapacityRental = digitalCapacityRental;
+	}
+	public String getFta() {
+		return fta;
+	}
+	public void setFta(String fta) {
+		this.fta = fta;
+	}
 	public String getBillAmtPaid() {
 		return billAmtPaid;
 	}
@@ -202,8 +230,10 @@ public class Customer_Invoice1 {
 		this.lcoId = lcoId;
 	}
 	
+	
 	public Customer_Invoice1(String invoice_No, String custId, String custName, String custMobile, String custAdd,
 			String custBasePckg, String custAddPckg, String custALPckg, String custPckgCost, String sDate, String eDate,
+			String activationCharges, String stbMonthlyRental, String digitalCapacityRental, String fta,
 			String serviceTax, String cess, String amusementTax, String totalAmt, String openingBal, String lastPaid,
 			String currentBill, String totalDues, String dueDate, String billAfterDueDate, String trndate,
 			String billAmtPaid, String billStatus, String dateOfPaid, String agentId, String lcoId) {
@@ -219,6 +249,10 @@ public class Customer_Invoice1 {
 		this.custPckgCost = custPckgCost;
 		this.sDate = sDate;
 		this.eDate = eDate;
+		this.activationCharges = activationCharges;
+		this.stbMonthlyRental = stbMonthlyRental;
+		this.digitalCapacityRental = digitalCapacityRental;
+		this.fta = fta;
 		this.serviceTax = serviceTax;
 		this.cess = cess;
 		this.amusementTax = amusementTax;

@@ -266,15 +266,15 @@ a.close:hover {
 								   
 								});
 								function setData( data){
-									var todate= data.Billing_Date;
-									var amt=data.Total_Amount;
-									var st=data.Service_Tax;
-									var at=data.Entertain_Tax;
+									var todate= data.eDate;
+									var amt=data.totalDues;
+									var st=data.serviceTax;
+									var at=data.amusementTax;
 									
-									var cid=data.User_Id;
-									var cname=data.User_Name;
-									var ot=data.Other_Tax;
-									var pkg=data.Package_Name;
+									var cid=data.custId;
+									var cname=data.custName;
+									var ot=data.cess;
+									var pkg=data.custAdd;
 									//alert(todate+","+amt+","+st+","+at);
 									
 									document.getElementById("dte").value =todate;
@@ -340,7 +340,7 @@ a.close:hover {
 								<div class="col-sm-0"></div>
 								<div class=" col-sm-6">
 									<div class="col-sm-4" style="margin-bottom: 18px">
-										<p class="p1">Package</p>
+										<p class="p1">Address</p>
 									</div>
 									<div class="col-sm-8">
 
@@ -391,7 +391,7 @@ a.close:hover {
 								<div class="col-sm-0"></div>
 								<div class=" col-sm-6">
 									<div class="col-sm-4" style="margin-bottom: 18px">
-										<p class="p1">Other Tax</p>
+										<p class="p1">Cess</p>
 									</div>
 									<div class="col-sm-8">
 

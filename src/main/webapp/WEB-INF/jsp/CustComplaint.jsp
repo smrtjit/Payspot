@@ -59,7 +59,7 @@ color: black;
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 
-				<li><a href="logout.html"><span></span><b>Log Out</b></a></li>
+				<li><a href="logOut.html"><span></span><b>Log Out</b></a></li>
 
 			</ul>
 		</div>

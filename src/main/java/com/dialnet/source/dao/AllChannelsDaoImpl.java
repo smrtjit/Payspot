@@ -93,4 +93,16 @@ public class AllChannelsDaoImpl implements AllChannelsDao {
 		return result;
 	}
 
+	@Override
+	public Long countFTA(String user) {
+		Session sf = session.openSession();
+		Criteria c2 = sf.createCriteria(AllChannels.class);
+		c2.add(Restrictions.eq("lco_id", user));
+		c2.add(Restrictions.eq("lco_price", "Free"));
+		Long l = (Long) c2.setProjection(Projections.rowCount()).uniqueResult();
+		sf.close();
+		
+		return l;
+	}
+
 }

@@ -14,35 +14,28 @@ public class AllCollections {
 	@Id
 	private String Invoice;
 	
-	@NotEmpty
-	@Size(min = 1, max = 35)
+	
 	private String Cust_Id;
 	
-	@NotEmpty
+	
 	private String cust_mobile;
 	
-	@NotEmpty
-	@Size(min = 1, max = 150)
+	
 	private String Cust_Name;
 	
-	@NotEmpty
-	@Size(min = 1, max = 95)
+	
 	private String Current_Pckg;
 	
-	@NotEmpty
-	@Size(min = 1, max = 30)
+	
 	private String Paid_Amount;
 	
-	@NotEmpty
-	@Size(min = 1, max = 35)
+	
 	private String Recharge_Amount;
 	
-	@NotEmpty
-	@Size(min = 1, max = 5)
+	
 	private String Discount;
 	
-	@NotEmpty
-	@Size(min = 1, max = 25)
+	
 	private String Payment_Mode;
 	private String Approval_ID;
 	private String Payment_Status;

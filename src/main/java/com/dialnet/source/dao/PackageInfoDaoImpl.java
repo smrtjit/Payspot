@@ -139,6 +139,20 @@ public class PackageInfoDaoImpl implements PackageInfoDao {
 		sf.close();
 		return l;
 	}
+
+	@Override
+	public String getNoOfChn(String name) {
+		Session sf = session.openSession();
+		Criteria cr = sf.createCriteria(PackageInfo.class);
+		cr.add(Restrictions.eq("PckgName", name));
+		ProjectionList proList = Projections.projectionList(); 
+		proList.add(Projections.property("NoOfChannels"));
+		cr.setProjection(proList); 
+
+		String l= cr.uniqueResult()+"";
+		sf.close();
+		return l;
+	}
 	
 
 }

@@ -317,7 +317,6 @@ function setBulkData( data){
 		$(window).resize();
 
 	});
-	
 	function setData( data){
 		var accNumber=data.custId;
 		var billNo=data.Invoice_No;
@@ -335,8 +334,12 @@ function setBulkData( data){
 		var amusementtax=data.amusementTax;
 		var bilafterduedate=data.billAfterDueDate;
 		var latepecharge=bilafterduedate-pending_due;
+		var privious_blance=data.lastPaid;
 		
-		var privious_blance=opening_bal-last_pay;
+		var ftac=data.fta;
+		var activationcharges=data.activationCharges;
+		var stbMonthlyrental=data.stbMonthlyRental;
+		var digitalcapacityrental=data.digitalCapacityRental;
 		
 		
 		document.getElementById("accno").innerHTML =accNumber;
@@ -356,9 +359,13 @@ function setBulkData( data){
 		document.getElementById("servicetax").innerHTML =servicetax;
 		document.getElementById("cesstax").innerHTML =cesstax;
 		document.getElementById("amusementtax").innerHTML =amusementtax;
-		
 		document.getElementById("latepecharge").innerHTML =latepecharge;
 		document.getElementById("bilafterduedate").innerHTML =bilafterduedate;
+		
+		document.getElementById("ftac").innerHTML =ftac;
+		document.getElementById("activationcharges").innerHTML =activationcharges;
+		document.getElementById("stbMonthlyrental").innerHTML =stbMonthlyrental;
+		document.getElementById("digitalcapacityrental").innerHTML =digitalcapacityrental;
 		
 	}
 </script>
@@ -714,7 +721,7 @@ function setBulkData( data){
 		</div>
 	</div>
 	<!-- 	##################################################BILL################################################################################# -->
-	<div id="popup3" class="modal-box">
+	<div id="popup3" class="modal-box" style="margin-top: 2%">
 
 		<a href="#" class="js-modal-close close">×</a>
 
@@ -734,7 +741,6 @@ function setBulkData( data){
 
 
 
-						<br />
 						<div id="print_ticket">
 							<div class="detail">
 
@@ -798,8 +804,8 @@ function setBulkData( data){
 												Payment</b></td>
 										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Current Bill</b></td>
 										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Total Dues </b></td>
-										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Internet
-												User Id</b></td>
+										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Free To Air Channel
+												</b></td>
 
 									</tr>
 									<tr>
@@ -812,7 +818,7 @@ function setBulkData( data){
 										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b
 											id="pending_dues">RS 520</b></td>
 										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b
-											id="in">NA</b></td>
+											id="ftac">NA</b></td>
 									</tr>
 								</table>
 							</div>
@@ -826,9 +832,20 @@ function setBulkData( data){
 													details</b></td>
 											<td style="border: ridge; width: 200px; padding: 1px 8px;"><b>Amount</b></td>
 										</tr>
-
-
 										<tr>
+											<td align="left" style="border: ridge; padding: 1px 8px;">Activation Charges</td>
+											<td style="border: ridge; padding: 1px 8px;" id="activationcharges">NA</td>
+										</tr>
+										<tr>
+											<td align="left" style="border: ridge; padding: 1px 8px;">STB Monthly
+												Rental</td>
+											<td style="border: ridge; padding: 1px 8px;" id="stbMonthlyrental">NA</td>
+										</tr>
+										<tr>
+											<td align="left" style="border: ridge; padding: 1px 8px;">Digital Capacity
+												Rental</td>
+											<td style="border: ridge; padding: 1px 8px;" id="digitalcapacityrental">NA</td>
+										</tr>
 											<td align="left" style="border: ridge; padding: 1px 8px;">Base
 												Package</td>
 											<td style="border: ridge; padding: 1px 8px;" id="custbasepckg">NA</td>
@@ -920,6 +937,21 @@ function setBulkData( data){
 					<a href="#" class="btn btn-small js-modal-close"
 						onclick="return PrintPanel();">Print</a> <a href="#"
 						class="btn btn-small js-modal-close">Close</a>
+					<script type="text/javascript">
+		 function PrintPanel() {
+	            var panel = document.getElementById("popup2");
+	            var printWindow = window.open('', '', 'height=400,width=850');
+	            printWindow.document.write('<html><head><title>Generate Bill</title>');
+	            printWindow.document.write('</head><body >');
+	            printWindow.document.write(panel.innerHTML);
+	            printWindow.document.write('</body></html>');
+	            printWindow.document.close();
+	            setTimeout(function () {
+	                printWindow.print();
+	            }, 500);
+	            return false;
+	        }</script>
+
 
 				</div>
 
@@ -927,27 +959,5 @@ function setBulkData( data){
 		</div>
 
 	</div>
-	<script type="text/javascript">
-			var theForm = document.forms['form1'];
-			if (!theForm) {
-				theForm = document.form1;
-			}
-			function __doPostBack(eventTarget, eventArgument) {
-				if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
-					theForm.__EVENTTARGET.value = eventTarget;
-					theForm.__EVENTARGUMENT.value = eventArgument;
-					theForm.submit();
-				}
-			}
-		</script>
-	<script type="text/javascript">
-					Sys.WebForms.PageRequestManager._initialize(
-							'ctl00$ContentPlaceHolder1$ScriptManager1',
-							'form1', [ 'tctl00$ContentPlaceHolder1$upd',
-									'ContentPlaceHolder1_upd',
-									'tctl00$ContentPlaceHolder1$msgbox',
-									'ContentPlaceHolder1_msgbox' ], [], [], 90,
-							'ctl00');
-				</script>
-</body>
+	</body>
 </html>

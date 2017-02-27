@@ -192,6 +192,8 @@ public class LCOController {
 		String json = null;
 		System.out.println("Invoice Details check data: " + invoiceid + "," + user);
 		Customer_Invoice1 result = invoice1.getByInvoiceId(invoiceid);
+		System.out.println("result\t" + invoiceid);
+
 		if (result != null) {
 			json = gson.toJson(result);
 			System.out.println("Result: " + result.getInvoice_No());
@@ -882,8 +884,6 @@ public class LCOController {
 
 	}
 
-	
-
 	@ResponseBody
 	@RequestMapping(value = "/deleteSTB", method = RequestMethod.GET)
 	public String deleteSTB(ModelMap map, @RequestParam("user") String user, @RequestParam("stb_id") String stb_id,
@@ -1417,104 +1417,163 @@ public class LCOController {
 		return json;
 		// return new ModelAndView(json);
 	}
-	
-//	################################################################### Bill Generate #####################################################
-	
+
+	// ################################################################### Bill
+	// Generate #####################################################
+
 	@RequestMapping(value = "/billCreate", method = RequestMethod.GET)
-	public ModelAndView billCreate(@RequestParam("user") String user,  ModelMap model) {
-		
-		String result=null;
-		int i=createBill(user);
-		if(i>0){
-			result="Bill Generate Successfully";
-		}else{
-			result="There is some ERROR Please Try Again";
+	public ModelAndView billCreate(@RequestParam("user") String user, ModelMap model) {
+
+		String result = null;
+		int i = createBill(user);
+		if (i > 0) {
+			result = "Bill Generate Successfully";
+		} else {
+			result = "There is some ERROR Please Try Again";
 		}
 		Gson gson = new Gson();
 		String json = gson.toJson(result);
 		model.addAttribute("user", user);
-		 return new ModelAndView("redirect:LCOHome.html");
+		return new ModelAndView("redirect:LCOHome.html");
 	}
 
-	public int createBill(String user){
-		int data=0;
-		List<Subscriber> l=userService.getAll(user);
-		for(int i=0;i<l.size();i++){
-			Subscriber sub=l.get(i);
-			
-			double primaryAmt=0l;
-			String totalAmt=null;
-			String openingBal=null;
-			String lastPaid=null;
-			String totalDues=null;
-			String billAfterDueDate=null;
-			String sDate=null;
-			Customer_Invoice1 lastData = invoice1.getLastPaymentDetail(sub.getUserName()+"");
+	public int createBill(String user) {
+		int data = 0;
+		List<Subscriber> l = userService.getAll(user);
+		for (int i = 0; i < l.size(); i++) {
+			Subscriber sub = l.get(i);
+
+			double primaryAmt = 0l;
+			String totalAmt = null;
+			String openingBal = null;
+			String lastPaid = null;
+			String totalDues = null;
+			String billAfterDueDate = null;
+			String sDate = null;
+			String actCharges = null;
+			String stbRental = null;
+			String digiCharges = null;
+			String fta = null;
+			int totChn = 0;
+			Customer_Invoice1 lastData = invoice1.getLastPaymentDetail(sub.getUserName() + "");
 			if (lastData != null) {
-					sDate = lastData.geteDate();
+				sDate = lastData.geteDate();
+				actCharges = "0";
+				lastPaid = lastData.getBillAmtPaid();
+				openingBal = lastData.getBillAfterDueDate();
 			} else {
-				sDate=sub.getTrndate();
+				sDate = sub.getTrndate();
+				actCharges = sub.getActivationCharge();
+				lastPaid = "0";
+				openingBal = "0";
 
 			}
-			//Interval & Primary Price
-			System.out.println("FDate: "+sDate+",EDate: "+getDate());
+			// Interval & Primary Price
+			System.out.println("FDate: " + sDate + ",EDate: " + getDate());
 			long interval = dayCalculate(sDate, getDate());
-			System.out.println("Interval: "+interval);
-			if(interval==0){
-				interval=1;
+			System.out.println("Interval: " + interval);
+			if (interval == 0) {
+				interval = 1;
 			}
-			double pckgPrice=Long.parseLong(sub.getPCKGPrice())/interval;
-			primaryAmt=interval*pckgPrice;
-			
-			
-			
+			double pckgPrice = Long.parseLong(sub.getPCKGPrice()) / interval;
+			primaryAmt = interval * pckgPrice;
+
+			// set Activation charges & Rentals & FTA
+			stbRental = sub.getSTB_Monthly_Rental();
+			String BaseChn = sub.getBasePCKG();
+			int tmpBase = Integer.parseInt(pckgservice.getNoOfChn(BaseChn));
+
+			String addChn = sub.getAddOnPCKG();
+			String tmpaddChn[] = addChn.split(",");
+			int tmpadd = 0;
+			for (int j = 0; j < tmpaddChn.length; j++) {
+				tmpadd = tmpadd + Integer.parseInt(pckgservice.getNoOfChn(tmpaddChn[j]));
+			}
+
+			String allChn = sub.getA_La_Carte();
+			String tmpallChn[] = addChn.split(",");
+			int tmpall = 0;
+			for (int j = 0; j < tmpaddChn.length; j++) {
+				tmpall = tmpall + Integer.parseInt(pckgservice.getNoOfChn(tmpallChn[j]));
+			}
+			totChn = tmpBase + tmpadd + tmpall;
+			fta = channelService.countFTA(user) + "";
+
+			// set Packages Price
+			long baseCost = pckgservice.getCostByName(sub.getBasePCKG());
+			String addpckg = sub.getAddOnPCKG();
+			String tmpaddpckg[] = addpckg.split(",");
+			long addCost = 0l;
+			for (int pc = 0; pc < tmpaddpckg.length; pc++) {
+				addCost = addCost + pckgservice.getCostByName(tmpaddpckg[pc]);
+			}
+			String allpckg = sub.getAddOnPCKG();
+			String tmpallpckg[] = allpckg.split(",");
+			long allCost = 0l;
+			for (int al = 0; al < tmpallpckg.length; al++) {
+				allCost = allCost + pckgservice.getCostByName(tmpallpckg[al]);
+			}
+
+			System.out.println("All Pckg Cost: " + baseCost + "," + addCost + "," + allCost);
+
 			// set taxs & LateDate
-			Customer_Invoice1 cst= new Customer_Invoice1();
-			String id="IN"+sub.getMobile()+"_"+System.currentTimeMillis();
-			LCO_Setting ls=settingService.getByID(user);
-			String dueDate=ls.getLateDate();
-			
-			double st_tmp=(primaryAmt * Float.parseFloat(ls.getService_tax())) / 100;
-			double cess_tmp=(primaryAmt * Float.parseFloat(ls.getCess())) / 100;
-			double amst_tmp=(primaryAmt * Float.parseFloat(ls.getEnt_tax())) / 100;
+			Customer_Invoice1 cst = new Customer_Invoice1();
+			String id = "IN" + sub.getMobile() + "_" + System.currentTimeMillis();
+			LCO_Setting ls = settingService.getByID(user);
+			String dueDate = ls.getLateDate();
+
+			double st_tmp = (primaryAmt * Float.parseFloat(ls.getService_tax())) / 100;
+			double cess_tmp = (primaryAmt * Float.parseFloat(ls.getCess())) / 100;
+			double amst_tmp = (primaryAmt * Float.parseFloat(ls.getEnt_tax())) / 100;
 			String st = String.format("%.2f", st_tmp);
 			String cess = String.format("%.2f", cess_tmp);
 			String amst = String.format("%.2f", amst_tmp);
 
-			//set Paid amounts
-			
-			double tot=primaryAmt+st_tmp+cess_tmp+amst_tmp;
-			totalAmt=String.format("%.2f", tot);
-			
-			double paidAmt=0l;
-			totalDues=String.format("%.2f", paidAmt);
-			
-			double payAfter=0l;
-			billAfterDueDate=String.format("%.2f", payAfter);
-			
-			//Set Invoice Details//
+			// set Paid amounts
+			System.out.println("Total Channels: " + totChn + ",Amount: " + calculateDigitalCharges(totChn));
+			double digi = Double.parseDouble(calculateDigitalCharges(totChn));
+			long stbRen = Long.parseLong(stbRental);
+			long activation = Long.parseLong(actCharges);
+			System.out.println("all Values: "+primaryAmt+","+st_tmp+","+cess_tmp+","+amst_tmp+","+baseCost+
+					","+addCost+","+allCost+","+digi+","+stbRen+","+activation);
+			double tot = primaryAmt + st_tmp + cess_tmp + amst_tmp + baseCost + addCost + allCost + digi + stbRen
+					+ activation;
+			System.out.println("tot===== Bill included tax: " + tot);
+
+			totalAmt = String.format("%.2f", tot);
+			System.out.println("Total Bill included tax: " + totalAmt);
+
+			double paidAmt = getPaidAmt(tot, Double.parseDouble(openingBal), Double.parseDouble(lastPaid));
+			totalDues = String.format("%.2f", paidAmt);
+
+			double payAfter = paidAmt + Long.parseLong(ls.getLateFeeCharges());
+			billAfterDueDate = String.format("%.2f", payAfter);
+
+			// Set Invoice Details//
 			cst.setInvoice_No(id);
-			cst.setCustId(sub.getUserName()+"");
-			cst.setCustName(sub.getFirstName()+" "+sub.getLastName());
+			cst.setCustId(sub.getUserName() + "");
+			cst.setCustName(sub.getFirstName() + " " + sub.getLastName());
 			cst.setCustMobile(sub.getMobile());
 			cst.setCustAdd(sub.getAddress());
-			cst.setCustBasePckg(sub.getBasePCKG());
-			cst.setCustAddPckg(sub.getAddOnPCKG());
-			cst.setCustALPckg(sub.getA_La_Carte());
+			cst.setCustBasePckg(baseCost + "");
+			cst.setCustAddPckg(addCost + "");
+			cst.setCustALPckg(allCost + "");
 			cst.setCustPckgCost(sub.getPCKGPrice());
 			cst.setsDate(sDate);
 			cst.seteDate(getDate());
+			cst.setActivationCharges(actCharges);
+			cst.setStbMonthlyRental(stbRental);
+			cst.setDigitalCapacityRental(calculateDigitalCharges(totChn));
+			cst.setFta(fta);
 			cst.setDueDate(getDate());
 			cst.setServiceTax(st);
 			cst.setCess(cess);
 			cst.setAmusementTax(amst);
 			cst.setTotalAmt(totalAmt);
-			
-			
+
 			cst.setOpeningBal(openingBal);
 			cst.setLastPaid(lastPaid);
-			
-			
+
 			cst.setCurrentBill(totalAmt);
 			cst.setTotalDues(totalDues);
 			cst.setDueDate(getDueDate(dueDate));
@@ -1525,14 +1584,15 @@ public class LCOController {
 			cst.setDateOfPaid("NA");
 			cst.setAgentId("NA");
 			cst.setLcoId(user);
-			
+
 			invoice1.save(cst);
-			
+
 		}
 		return data;
 	}
-	
-	//######################################################### Interval of Days ########################################
+
+	// ######################################################### Interval of
+	// Days ########################################
 	public long dayCalculate(String fdate, String edate) {
 		long diff = 0;
 		// System.out.println("Dates: "+fdate+","+edate);
@@ -1550,21 +1610,50 @@ public class LCOController {
 		return diff;
 
 	}
-	
-	
-	public String getDueDate(String due){
-		String data=null;
-		try{
+
+	public String getDueDate(String due) {
+		String data = null;
+		try {
 			Calendar cal = Calendar.getInstance();
 			cal.set(Calendar.DATE, 16);
 			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 			String formatted = format1.format(cal.getTime());
-			data=formatted;
+			data = formatted;
 			// Output "2012-09-26"
 
-			
 		} catch (Exception e1) {
-		    e1.printStackTrace();
+			e1.printStackTrace();
+		}
+		return data;
+	}
+
+	public String calculateDigitalCharges(int noOfChn) {
+		String data = null;
+		double tmp = 0;
+		if (noOfChn <= 100) {
+			data = "130";
+		} else {
+			int med = noOfChn - 100;
+			double medAvg = med / 25;
+			double mod = med % 25;
+			if (mod != 0) {
+				tmp = ((medAvg + 1) * 20) + 130;
+			} else {
+				tmp = (medAvg * 20) + 130;
+			}
+			data = tmp + "";
+		}
+
+		return data;
+	}
+
+	public Double getPaidAmt(double primary, double openBal, double lastPaid) {
+		double data = 0l;
+		double advance = openBal - lastPaid;
+		if (advance < 0) {
+			data = primary + advance;
+		} else {
+			data = primary - advance;
 		}
 		return data;
 	}

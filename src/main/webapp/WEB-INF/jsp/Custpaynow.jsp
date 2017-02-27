@@ -46,7 +46,7 @@ color: black;
 					<li><a href="custbill.html?id=${id }" >Download Bill</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="logout.html"><span></span><b>Log Out</b></a></li>
+				<li><a href="logOut.html"><span></span><b>Log Out</b></a></li>
 			</ul>
 		</div>
 	</nav>

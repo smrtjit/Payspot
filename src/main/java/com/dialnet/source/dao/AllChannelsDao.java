@@ -12,4 +12,6 @@ public interface AllChannelsDao {
 	public List<String> getAllName(String lco);
 	public int delete(String channel_id);
 	public int channelupdate(String channelid,String channelname,String msoprice,String lcoprice);
+	
+	public Long countFTA(String user);
 }

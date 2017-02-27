@@ -250,7 +250,7 @@ a.close:hover {
 								   
 								});
 								function setData( data){
-									var todate= data.sDate;
+									var todate= data.eDate;
 									var amt=data.totalDues;
 									var st=data.serviceTax;
 									var at=data.amusementTax;
@@ -258,7 +258,7 @@ a.close:hover {
 									var cid=data.custId;
 									var cname=data.custName;
 									var ot=data.cess;
-									var pkg=data.custBasePckg;
+									var pkg=data.custAdd;
 									//alert(todate+","+amt+","+st+","+at);
 									
 									document.getElementById("dte").value =todate;
@@ -324,7 +324,7 @@ a.close:hover {
 								<div class="col-sm-0"></div>
 								<div class=" col-sm-6">
 									<div class="col-sm-4" style="margin-bottom: 18px">
-										<p class="p1">Package</p>
+										<p class="p1">Address</p>
 									</div>
 									<div class="col-sm-8">
 

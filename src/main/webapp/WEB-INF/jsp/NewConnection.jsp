@@ -379,11 +379,12 @@ function setvalue(){
 				</div>
 				<div class='panel-body'>
 					<form:form action="addSubscriber.html" method="post"
-						modelAttribute="NewSubscriber" class='form-horizontal' role='form' onsubmit="setvalue()">
-						
+						modelAttribute="NewSubscriber" class='form-horizontal' role='form'
+						onsubmit="setvalue()">
+
 						<input type="hidden" name="addpckg" id="addlist" />
-						<input type="hidden" name="allpckg" id="alll"  />
-						
+						<input type="hidden" name="allpckg" id="alll" />
+
 						<input type="hidden" name="user" value="${user }" />
 						<script type="text/javascript">
 								function onlyAlphabets(e, t) {
@@ -405,7 +406,7 @@ function setvalue(){
 						            }
 						        }
 								</script>
-						
+
 
 						<div class='form-group' style="margin-left: -200px;">
 							<label class='control-label col-md-2 col-md-offset-2'
@@ -414,8 +415,9 @@ function setvalue(){
 								<div class='col-md-3'>
 									<div class='form-group internal'>
 										<form:input path="FirstName" placeholder='First Name'
-											required="required"  pattern=".{4,}" maxlength="25" onkeypress="return onlyAlphabets(event,this)"  
-											 class='form-control' />
+											required="required" pattern=".{4,}" maxlength="25"
+											onkeypress="return onlyAlphabets(event,this)"
+											class='form-control' />
 										<!-- 										<input requried class='form-control' id='id_first_name' -->
 										<!-- 											placeholder='First Name' type='text'> -->
 									</div>
@@ -423,8 +425,8 @@ function setvalue(){
 								<div class='col-md-3 indent-small'>
 									<div class='form-group internal'>
 										<form:input path="MiddleName" placeholder='Middle Name'
-											class='form-control'
-											  pattern=".{4,}" maxlength="25" onkeypress="return onlyAlphabets(event,this)"   />
+											class='form-control' pattern=".{4,}" maxlength="25"
+											onkeypress="return onlyAlphabets(event,this)" />
 										<!-- 										<input class='form-control' id='id_middle_name' -->
 										<!-- 											placeholder='Middle Name' type='text'> -->
 									</div>
@@ -432,8 +434,8 @@ function setvalue(){
 								<div class='col-md-3 indent-small'>
 									<div class='form-group internal'>
 										<form:input path="LastName" placeholder='Last Name'
-											required="required" class='form-control'
-											 pattern=".{4,}" maxlength="25" onkeypress="return onlyAlphabets(event,this)"   />
+											required="required" class='form-control' pattern=".{4,}"
+											maxlength="25" onkeypress="return onlyAlphabets(event,this)" />
 										<!-- 										<input requried class='form-control' id='id_last_name' -->
 										<!-- 											placeholder='Last Name' type='text'> -->
 									</div>
@@ -448,9 +450,9 @@ function setvalue(){
 								<div class='col-md-3'>
 									<div class='form-group internal'>
 										<form:input path="Mobile" placeholder='Mobile Number'
-											required="required" class='form-control' 
-												title="MINIMUM SIZE" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
-											 pattern=".{10,}" maxlength="12"/>
+											required="required" class='form-control' title="MINIMUM SIZE"
+											onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+											pattern=".{10,}" maxlength="12" />
 										<!-- 										<input requried="requried " class='form-control' -->
 										<!-- 											id='mobile_no' placeholder='Mobile Number' type='text'> -->
 									</div>
@@ -475,7 +477,8 @@ function setvalue(){
 							<div class='col-md-8'>
 								<div class='col-md-3'>
 									<div class='form-group internal'>
-										<form:select path="PhotoIDType" class="form-control" required="true">
+										<form:select path="PhotoIDType" class="form-control"
+											required="true">
 											<form:option value="" label="Select Type" />
 											<form:option value="PAN Card" label="PAN Card" />
 											<form:option value="Adhaar Card" label="Adhaar Card" />
@@ -490,11 +493,9 @@ function setvalue(){
 								<div class='col-md-3 indent-small'>
 									<div class='form-group internal'>
 										<form:input path="PhotoID" placeholder=' ID Number'
-											required="required" class='form-control' 
-											title="MINIMUM SIZE" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
-											 pattern=".{6,}" maxlength="16" />
-										<!-- 										<input requried="requried " class='form-control' id='crf_no' -->
-										<!-- 											placeholder=' ID Number' type='text'> -->
+											required="required" class='form-control' title="MINIMUM SIZE"
+											onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+											pattern=".{6,}" maxlength="16" />
 									</div>
 								</div>
 								<div class='col-md-3 indent-small'>
@@ -506,6 +507,8 @@ function setvalue(){
 											onchange="myFunction1()" class="form-control"
 											placeholder="Upload file">
 										<script>
+										var _validFileExtensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];    
+
 											function myFunction1(){
 										    var x = document.getElementById("myFile1");
 										    var x1 = document.getElementById("myFile1").value;
@@ -515,12 +518,26 @@ function setvalue(){
 										    var txt = "";
 										    if ('files' in x) {
 										        if (x.files.length == 0) {
-										         } else {
+										         } 
+										        else {
+										        	alert("1");
+										        	var blnValid = false;
 										        	 var file;
-										        	  for (var i = 0; i < x.files.length; i++) {
-										               file = x.files[i];
+										        	 for (var j = 0; j < _validFileExtensions.length; j++) {
+										                    var sCurExtension = _validFileExtensions[j];
+										                    if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+										                        blnValid = true;
+										                        break;
+										                    }
+										                }
+										        	 if (!blnValid) {
+										                    alert("Sorry, " + sFileName + " is invalid, allowed extensions are: " + _validFileExtensions.join(", "));
+										                    return false;
+										                }
+// 										        	  for (var i = 0; i < x.files.length; i++) {
+// 										               file = x.files[i];
 										    			
-										            }
+// 										            }
 										        	  
 										        }
 										    } 
@@ -676,9 +693,9 @@ function setvalue(){
 								<div class='col-md-3 indent-small'>
 									<div class='form-group internal'>
 										<form:input path="Pincode" placeholder='Pin Code'
-											required="required" class='form-control' 
-											title="MINIMUM SIZE" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
-											 pattern=".{6,}" maxlength="6"  />
+											required="required" class='form-control' title="MINIMUM SIZE"
+											onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+											pattern=".{6,}" maxlength="6" />
 										<!-- 										<input requried="requried " class='form-control' -->
 										<!-- 											id='id_middle_name' placeholder='Pin Code' type='text'> -->
 									</div>
@@ -694,9 +711,9 @@ function setvalue(){
 								<div class='col-md-3'>
 									<div class='form-group internal'>
 										<form:input path="CRFNo" placeholder='CRF Number'
-											required="required" class='form-control'
-											title="MINIMUM SIZE" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
-											 pattern=".{3,}" maxlength="16"  />
+											required="required" class='form-control' title="MINIMUM SIZE"
+											onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+											pattern=".{3,}" maxlength="16" />
 										<!-- 										<input requried="requried " class='form-control' id='gst_no' -->
 										<!-- 											placeholder='CRF Number' type='text'> -->
 									</div>
@@ -806,9 +823,9 @@ function setvalue(){
 								<div class='col-md-4 indent-small' style="width: 38%;">
 									<div class='form-group internal'>
 										<form:input path="GSTNo" placeholder='GST No.' id="pckgCost"
-											required="required" class='form-control' 
-											title="MINIMUM SIZE" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
-											 pattern=".{4,}" maxlength="16" />
+											required="required" class='form-control' title="MINIMUM SIZE"
+											onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+											pattern=".{4,}" maxlength="16" />
 									</div>
 								</div>
 
@@ -833,8 +850,9 @@ function setvalue(){
 									<div class='form-group internal'>
 										<form:input path="PCKGPrice" placeholder='Package Cost'
 											id='pckgprice' required="required" class='form-control'
-											title="MINIMUM SIZE" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
-											 pattern=".{2,}" maxlength="4"  />
+											title="MINIMUM SIZE"
+											onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+											pattern=".{2,}" maxlength="4" />
 										<!-- 										<input requried="requried " class='form-control' id='gst_no' -->
 										<!-- 											placeholder='Package Cost' type="text "> -->
 									</div>
@@ -878,9 +896,9 @@ function setvalue(){
 									<div class='col-md-9' style="width: 72%;">
 										<form:input path="ActivationCharge"
 											placeholder='Activation Charges' required="required"
-											class='form-control' 
-											title="MINIMUM SIZE" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
-											 pattern=".{2,}" maxlength="4" />
+											class='form-control' title="MINIMUM SIZE"
+											onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+											pattern=".{2,}" maxlength="4" />
 										<!-- 										<input requried="requried " class='form-control' id='address' -->
 										<!-- 											placeholder='Activation Charges' type='text'> -->
 									</div>
@@ -894,7 +912,8 @@ function setvalue(){
 							<div class='col-md-8'>
 								<div class='col-md-3'>
 									<div class='form-group internal'>
-										<form:select path="STB_Rental_Type" class="form-control"  required="true">
+										<form:select path="STB_Rental_Type" class="form-control"
+											required="true">
 											<form:option value="" label="Select Type" />
 											<form:option value="RF" label="Refundable" />
 											<form:option value="NRF" label="Non Refundable" />
@@ -905,9 +924,9 @@ function setvalue(){
 									<div class='form-group internal'>
 										<form:input path="STB_Full_Rental"
 											placeholder='STB Rental Amount' required="required"
-											class='form-control'
-											title="MINIMUM SIZE" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
-											 pattern=".{2,}" maxlength="4"  />
+											class='form-control' title="MINIMUM SIZE"
+											onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+											pattern=".{2,}" maxlength="4" />
 										<!-- 										<input requried="requried " class='form-control' id='crf_no' -->
 										<!-- 											placeholder='STB Rental Amount' type='text'> -->
 									</div>
@@ -916,10 +935,10 @@ function setvalue(){
 									<div class='form-group internal'>
 										<form:input path="STB_Monthly_Rental"
 											placeholder='STB Monthly Rental Charges' required="required"
-											class='form-control' 
-											title="MINIMUM SIZE" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
-											 pattern=".{2,}" maxlength="4" />
-										</div>
+											class='form-control' title="MINIMUM SIZE"
+											onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+											pattern=".{2,}" maxlength="4" />
+									</div>
 								</div>
 							</div>
 							<div class='form-group' style="margin-left: -200px;">
@@ -930,7 +949,7 @@ function setvalue(){
 								<div class='col-md-3'>
 									<button class='btn-lg btn-danger'
 										style='float: right; font-size: 13px;' type='submit'>Cancel</button>
-<!-- 										<button onclick="setvalue()">Cancel</button> -->
+									<!-- 										<button onclick="setvalue()">Cancel</button> -->
 								</div>
 							</div>
 					</form:form>

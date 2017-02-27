@@ -19,4 +19,6 @@ public interface PackageInfoDao {
 	
 	public List<String> getPckgByType(String user,String type);
 	public long getCostByName(String name);
+	
+	public String getNoOfChn(String name);
 }

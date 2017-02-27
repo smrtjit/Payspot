@@ -17,4 +17,5 @@ public interface PackageInfoService {
 	public int editPckg(PackageInfo pckg);
 	public List<String> getPckgByType(String user,String type);
 	public long getCostByName(String name);
+	public String getNoOfChn(String name);
 }

@@ -32,11 +32,13 @@
 	/*font-weight: bold;*/
 	font-size: 15px;
 }
-.subs{
-width: 100%;
-text-align: right;
-color: black;
+
+.subs {
+	width: 100%;
+	text-align: right;
+	color: black;
 }
+
 .error {
 	padding: 8px;
 	margin: 16px;
@@ -321,8 +323,12 @@ function setData( data){
 	var amusementtax=data.amusementTax;
 	var bilafterduedate=data.billAfterDueDate;
 	var latepecharge=bilafterduedate-pending_due;
+	var privious_blance=data.lastPaid;
 	
-	var privious_blance=opening_bal-last_pay;
+	var ftac=data.fta;
+	var activationcharges=data.activationCharges;
+	var stbMonthlyrental=data.stbMonthlyRental;
+	var digitalcapacityrental=data.digitalCapacityRental;
 	
 	
 	document.getElementById("accno").innerHTML =accNumber;
@@ -342,9 +348,13 @@ function setData( data){
 	document.getElementById("servicetax").innerHTML =servicetax;
 	document.getElementById("cesstax").innerHTML =cesstax;
 	document.getElementById("amusementtax").innerHTML =amusementtax;
-	
 	document.getElementById("latepecharge").innerHTML =latepecharge;
 	document.getElementById("bilafterduedate").innerHTML =bilafterduedate;
+	
+	document.getElementById("ftac").innerHTML =ftac;
+	document.getElementById("activationcharges").innerHTML =activationcharges;
+	document.getElementById("stbMonthlyrental").innerHTML =stbMonthlyrental;
+	document.getElementById("digitalcapacityrental").innerHTML =digitalcapacityrental;
 	
 }
 </script>
@@ -393,7 +403,7 @@ function setData( data){
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 
-				<li><a href="logout.html"><span></span><b>Log Out</b></a></li>
+				<li><a href="logOut.html"><span></span><b>Log Out</b></a></li>
 			</ul>
 		</div>
 	</nav>
@@ -401,10 +411,8 @@ function setData( data){
 
 
 	<div class="container">
-		<div class="subs">
-			Subscriber ID: ${id }
-			</div>
-		<hr style="width: 100%;     margin-top: 0px;  margin-bottom: 1%;">
+		<div class="subs">Subscriber ID: ${id }</div>
+		<hr style="width: 100%; margin-top: 0px; margin-bottom: 1%;">
 		<div class="titleTd"
 			style="width: 25%; margin-bottom: -35px; text-align: center; padding: 10px; font-size: x-large; color: #c4c1e8; background-color: dimgray; border-top-left-radius: 34px; border-top-right-radius: 54px;">Download
 			Bill</div>
@@ -549,13 +557,16 @@ function setData( data){
 							<div class="col-md-12">
 								<table style="border: ridge">
 									<tr>
-										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Opening Balance</b></td>
+										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Opening
+												Balance</b></td>
 										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Last
 												Payment</b></td>
-										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Current Bill</b></td>
-										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Total Dues </b></td>
-										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Internet
-												User Id</b></td>
+										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Current
+												Bill</b></td>
+										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Total
+												Dues </b></td>
+										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b>Free
+												To Air Channel </b></td>
 
 									</tr>
 									<tr>
@@ -568,7 +579,7 @@ function setData( data){
 										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b
 											id="pending_dues">RS 520</b></td>
 										<td style="border: ridge; width: 210px; padding: 1px 8px;"><b
-											id="in">NA</b></td>
+											id="ftac">NA</b></td>
 									</tr>
 								</table>
 							</div>
@@ -582,12 +593,29 @@ function setData( data){
 													details</b></td>
 											<td style="border: ridge; width: 200px; padding: 1px 8px;"><b>Amount</b></td>
 										</tr>
-
-
+										<tr>
+											<td align="left" style="border: ridge; padding: 1px 8px;">Activation
+												Charges</td>
+											<td style="border: ridge; padding: 1px 8px;"
+												id="activationcharges">NA</td>
+										</tr>
+										<tr>
+											<td align="left" style="border: ridge; padding: 1px 8px;">STB
+												Monthly Rental</td>
+											<td style="border: ridge; padding: 1px 8px;"
+												id="stbMonthlyrental">NA</td>
+										</tr>
+										<tr>
+											<td align="left" style="border: ridge; padding: 1px 8px;">Digital
+												Capacity Rental</td>
+											<td style="border: ridge; padding: 1px 8px;"
+												id="digitalcapacityrental">NA</td>
+										</tr>
 										<tr>
 											<td align="left" style="border: ridge; padding: 1px 8px;">Base
 												Package</td>
-											<td style="border: ridge; padding: 1px 8px;" id="custbasepckg">NA</td>
+											<td style="border: ridge; padding: 1px 8px;"
+												id="custbasepckg">NA</td>
 										</tr>
 										<tr>
 											<td align="left" style="border: ridge; padding: 1px 8px;">Add

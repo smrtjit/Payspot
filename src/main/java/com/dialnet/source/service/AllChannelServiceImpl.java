@@ -48,4 +48,10 @@ public class AllChannelServiceImpl implements AllChannelService {
 		return dao.channelupdate(channelid, channelname, msoprice, lcoprice);
 	}
 
+	@Override
+	public Long countFTA(String user) {
+		// TODO Auto-generated method stub
+		return dao.countFTA(user);
+	}
+
 }

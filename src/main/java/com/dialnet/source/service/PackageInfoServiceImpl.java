@@ -85,5 +85,12 @@ public class PackageInfoServiceImpl implements PackageInfoService {
 
 
 
+	@Override
+	public String getNoOfChn(String name) {
+		return packageinfodao.getNoOfChn(name);
+	}
+
+
+
 
 }
