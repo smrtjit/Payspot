@@ -212,9 +212,9 @@ label.control-label {
 								</div>
 								<div class='col-md-6 indent-small' style="width: 50.5%;">
 									<div class='form-group internal'>
-										<form:input path="email_id" placeholder='Email ID' name="EMail"
+										<form:input type="<strong>email</strong>" path="email_id" placeholder='Email ID' name="EMail"
 											required="required" class='form-control'
-											pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" />
+										/>
 										<!-- 										<input required="required " class='form-control' id='email_id' -->
 										<!-- 											placeholder='Email ID' type='text'> -->
 									</div>

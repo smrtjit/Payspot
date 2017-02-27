@@ -459,11 +459,8 @@ function setvalue(){
 								</div>
 								<div class='col-md-6 indent-small' style="width: 50.5%;">
 									<div class='form-group internal'>
-										<form:input path="EmailId" placeholder='Email ID'
-											required="required" class='form-control'
-											pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" />
-										<!-- 										<input requried="requried " class='form-control' id='email_id' -->
-										<!-- 											placeholder='Email ID' type='text'> -->
+										<form:input type="<strong>email</strong>" path="EmailId" placeholder='Email ID'
+											required="required" class='form-control'/>
 									</div>
 								</div>
 
@@ -494,8 +491,7 @@ function setvalue(){
 									<div class='form-group internal'>
 										<form:input path="PhotoID" placeholder=' ID Number'
 											required="required" class='form-control' title="MINIMUM SIZE"
-											onkeypress='return event.charCode >= 48 && event.charCode <= 57'
-											pattern=".{6,}" maxlength="16" />
+											pattern=".{6,}" maxlength="20" />
 									</div>
 								</div>
 								<div class='col-md-3 indent-small'>

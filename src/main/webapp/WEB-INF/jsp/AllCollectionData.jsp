@@ -546,7 +546,7 @@ function setBulkData( data){
 			</table>
 
 			<tag:paginate max="15" offset="${offset}" count="${count}"
-				uri="allSubscriber.html?user=${user}" next="&raquo;"
+				uri="allCollection.html?user=${user}" next="&raquo;"
 				previous="&laquo;" />
 		</div>
 
