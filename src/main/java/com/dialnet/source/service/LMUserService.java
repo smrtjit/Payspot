@@ -6,17 +6,17 @@ import com.dialnet.source.model.LMUser;
 
 public interface LMUserService {
 
-	public void add(LMUser username);
-	public int edit(LMUser username);
-	public void delete(String username);
+	public void add(LMUser obj);
+	public int edit(LMUser obj);
+	public void delete(String obj);
 	public LMUser get(String username);
+	public boolean findByLogin(String id, String pwd);
 	public List<LMUser> getAll();
-	public boolean findByLogin(String id,String pwd);
-	public List<LMUser> list(Integer offset, Integer maxResults);
-	public Long count();
-	public List userListForSearch(String empid, String username, String desig,String mobile,
+	public List<LMUser> list(String user,Integer offset, Integer maxResults);
+	public Long count(String user);
+	public List userListForSearch(String user,String empid, String desig,String mobile,
 			Integer offset, Integer maxResults);
-	public Long countForSearch(String empid, String username, String desig,String mobile);
+	public Long countForSearch(String user,String empid, String desig,String mobile);
 	
 	public List<String> getAllAgentNames(String lco);
 	public String getLCOID(String username);

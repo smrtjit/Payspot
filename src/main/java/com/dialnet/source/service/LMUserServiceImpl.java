@@ -27,7 +27,6 @@ public class LMUserServiceImpl implements LMUserService {
 
 	@Override
 	public void delete(String username) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -54,40 +53,41 @@ public class LMUserServiceImpl implements LMUserService {
 			return false;	
 	}
 
-	@Override
-	public List<LMUser> list(Integer offset, Integer maxResults) {
-		// TODO Auto-generated method stub
-		return dao.list(offset, maxResults);
-	}
 
-	@Override
-	public Long count() {
-		// TODO Auto-generated method stub
-		return dao.count();
-	}
-
-	@Override
-	public List userListForSearch(String empid, String username, String desig, String mobile, Integer offset,
-			Integer maxResults) {
-		// TODO Auto-generated method stub
-		return dao.userListForSearch(empid, username, desig, mobile, offset, maxResults);
-	}
-
-	@Override
-	public Long countForSearch(String empid, String username, String desig, String mobile) {
-		// TODO Auto-generated method stub
-		return dao.countForSearch(empid, username, desig, mobile);
-	}
 
 	@Override
 	public List<String> getAllAgentNames(String lco) {
-		// TODO Auto-generated method stub
 		return dao.getAllAgentNames( lco);
 	}
 
 	@Override
 	public String getLCOID(String username) {
 		return dao.getLCOID(username);
+	}
+
+	@Override
+	public List<LMUser> list(String user, Integer offset, Integer maxResults) {
+		// TODO Auto-generated method stub
+		return dao.list(user, offset, maxResults);
+	}
+
+	@Override
+	public Long count(String user) {
+		// TODO Auto-generated method stub
+		return dao.count(user);
+	}
+
+	@Override
+	public List userListForSearch(String user, String username, String desig, String mobile,
+			Integer offset, Integer maxResults) {
+		// TODO Auto-generated method stub
+		return dao.userListForSearch(user, username, desig, mobile, offset, maxResults);
+	}
+
+	@Override
+	public Long countForSearch(String user,  String username, String desig, String mobile) {
+		// TODO Auto-generated method stub
+		return dao.countForSearch(user, username, desig, mobile);
 	}
 
 }

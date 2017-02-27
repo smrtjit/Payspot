@@ -11,11 +11,11 @@ public interface LMUserDao {
 	public void delete(String obj);
 	public LMUser get(String username);
 	public List<LMUser> getAll();
-	public List<LMUser> list(Integer offset, Integer maxResults);
-	public Long count();
-	public List userListForSearch(String empid, String username, String desig,String mobile,
+	public List<LMUser> list(String user,Integer offset, Integer maxResults);
+	public Long count(String user);
+	public List userListForSearch(String user,String empid, String desig,String mobile,
 			Integer offset, Integer maxResults);
-	public Long countForSearch(String empid, String username, String desig,String mobile);
+	public Long countForSearch(String user,String empid, String desig,String mobile);
 	
 	public List<String> getAllAgentNames(String lco);
 	public String getLCOID(String username);

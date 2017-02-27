@@ -678,7 +678,7 @@ a.close:hover {
 		
 		
 	</script>
-	<div id="popup2" class="modal-box" style="margin-top:2%;">
+	<div id="popup2" class="modal-box" style="margin-top: 2%;">
 		<header
 			style="border-bottom-color: #0a7777; background-color: #3eb3b3; padding: 1px;">
 
@@ -707,55 +707,51 @@ a.close:hover {
 				<div class="md-form">
 					<input type="hidden" name="username" id="username" /> <input
 						type="hidden" name="user" value="${user}" />
+					<div class="row">
+						<div class="col-md-8" style="margin-left: 1%; margin-bottom: 8px;">
+
+							<label for="name"
+								style="width: 50%; margin-left: 29px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">First
+								Name</label> <input type="text" id="myname" required="required"
+								pattern=".{4,}" maxlength="25"
+								onkeypress="return onlyAlphabets(event,this)"
+								style="width: 44%; margin-left: 4%;" class="form-control">
+
+
+							<label for="name"
+								style="width: 50; margin-top: -15%; margin-left: 53%; margin-bottom: 1px; font-size: 12px; font-weight: 400; color: black;">Middle
+								Name</label><input type="text" id="mname" required="required"
+								pattern=".{4,}" maxlength="25"
+								onkeypress="return onlyAlphabets(event,this)"
+								style="margin-top: -8%; width: 44%; margin-left: 53%;"
+								class="form-control"> <label for="name"
+								style="width: 50%; margin-top: -15%; margin-left: 103%; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Last
+								Name</label> <input type="text" id="lname" required="required"
+								pattern=".{4,}" maxlength="25"
+								onkeypress="return onlyAlphabets(event,this)"
+								style="width: 44%; margin-top: -8%; margin-left: 103%;"
+								class="form-control">
+
+
+
+						</div>
+					</div>
 
 					<div class="col-md-8" style="margin-bottom: 8px;">
 
 						<label for="name"
-							style="width: 50%; margin-left: 20px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">First
-							Name</label> <input type="text" id="myname" required="required"
-							pattern=".{4,}" maxlength="25"
-							onkeypress="return onlyAlphabets(event,this)"
+							style="width: 50%; margin-left: 20px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Mobile
+							Number</label> <input type="text" id="mob" title="MINIMUM SIZE"
+							onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57"
+							pattern=".{10,}" maxlength="12"
 							style="width: 44%; margin-left: 3%;" class="form-control">
 
-						<div style="margin-top: -54px;">
 
-							<label for="name"
-								style="width: 50; margin-left: 53%; margin-bottom: 1px; font-size: 12px; font-weight: 400; color: black;">Middle
-								Name</label><input type="text" id="mname" required="required"
-								pattern=".{4,}" maxlength="25"
-								onkeypress="return onlyAlphabets(event,this)"
-								style="width: 44%; margin-left: 53%;" class="form-control">
-
-						</div>
-						<div style="margin-top: -54px;">
-
-							<label for="name"
-								style="width: 50%; margin-left: 103%; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Last
-								Name</label> <input type="text" id="lname" required="required"
-								pattern=".{4,}" maxlength="25"
-								onkeypress="return onlyAlphabets(event,this)"
-								style="width: 44%; margin-left: 103%;" class="form-control">
-
-						</div>
-
-					</div>
-
-					<div class="col-md-8" style="margin-bottom: 8px;">
-						<div>
-							<label for="name"
-								style="width: 50%; margin-left: 20px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Mobile
-								Number</label> <input type="text" id="mob" title="MINIMUM SIZE"
-								onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57"
-								pattern=".{10,}" maxlength="12"
-								style="width: 44%; margin-left: 3%;" class="form-control">
-						</div>
-						<div style="margin-top: -54px;">
-
-							<label for="name"
-								style="width: 50%; margin-left: 53%; margin-bottom: 1px; font-size: 12px; font-weight: 400; color: black;">Email
-								ID</label><input type="text" id="email" pattern=".{15,}" maxlength="60"
-								style="width: 65.5%; margin-left: 53%;" class="form-control">
-							<script type="text/javascript">
+						<label for="name"
+							style="width: 50%; margin-left: 54%; margin-bottom: 10px; margin-top: -14%; font-size: 12px; font-weight: 400; color: black;">Email
+							ID</label><input type="text" id="email" pattern=".{15,}" maxlength="60"
+							style="width: 65.5%; margin-left: 54%;margin-top: -8%;" class="form-control">
+						<script type="text/javascript">
 								function validateForm() {
 									  var x = $("#email").val();
 								    var atpos = x.indexOf("@");
@@ -769,137 +765,138 @@ a.close:hover {
 								    }
 								}
 								</script>
-						</div>
+
 
 					</div>
 
 					<div class="col-md-8" style="margin-bottom: 8px;">
-						
-							<label for="name"
-								style="width: 50%; margin-left: 21px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Address</label>
-							<input type="text" id="adds" style="width: 80%; margin-left: 3%;"
-								class="form-control">
-						
-					</div>
-					<div class="col-md-8" style="margin-bottom: 8px;">
-						
-							<label for="name"
-								style="width: 330%; margin-left: 21px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Landmark</label>
-							<input type="text" id="land" style="width: 80%; margin-left: 3%;"
-								class="form-control">
-						
+
+						<label for="name"
+							style="width: 50%; margin-left: 21px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Address</label>
+						<input type="text" id="adds" style="width: 80%; margin-left: 3%;"
+							class="form-control">
+
 					</div>
 					<div class="col-md-8" style="margin-bottom: 8px;">
 
 						<label for="name"
-							style="width: 50%; margin-left: 20px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">State
-							Name</label> <input type="text" id="state" required="required"
-							pattern=".{4,}" maxlength="25"
-							onkeypress="return onlyAlphabets(event,this)"
-							style="width: 44%; margin-left: 3%;" class="form-control">
+							style="width: 330%; margin-left: 21px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Landmark</label>
+						<input type="text" id="land" style="width: 80%; margin-left: 3%;"
+							class="form-control">
 
-						<div style="margin-top: -54px;">
+					</div>
+
+					<div class="row">
+						<div class="col-md-8" style="margin-left: 1%; margin-bottom: 8px;">
 
 							<label for="name"
-								style="width: 50; margin-left: 53%; margin-bottom: 1px; font-size: 12px; font-weight: 400; color: black;">City
+								style="width: 50%; margin-left: 29px; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">State
+								Name</label> <input type="text" id="state" required="required"
+								pattern=".{4,}" maxlength="25"
+								onkeypress="return onlyAlphabets(event,this)"
+								style="width: 44%; margin-left: 4%;" class="form-control">
+
+
+							<label for="name"
+								style="width: 50; margin-top: -15%; margin-left: 53%; margin-bottom: 1px; font-size: 12px; font-weight: 400; color: black;">City
 								Name</label><input type="text" id="city_name" required="required"
 								pattern=".{4,}" maxlength="25"
 								onkeypress="return onlyAlphabets(event,this)"
-								style="width: 44%; margin-left: 53%;" class="form-control">
-
-						</div>
-						<div style="margin-top: -54px;">
-
-							<label for="name"
-								style="width: 50%; margin-left: 103%; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Pin
+								style="margin-top: -8%; width: 44%; margin-left: 53%;"
+								class="form-control"> <label for="name"
+								style="width: 50%; margin-top: -15%; margin-left: 103%; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Pin
 								Code</label> <input type="text" id="pincode" required="required"
 								onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57"
 								pattern=".{6,}" maxlength="6"
-								style="width: 44%; margin-left: 103%;" class="form-control">
+								style="width: 44%; margin-top: -8%; margin-left: 103%;"
+								class="form-control">
+
+
 
 						</div>
-
-					</div>
-					<div class='col-md-8' style="margin-bottom: 8px;">
-						
-							<label for="name"
-								style="width: 50%; margin-left: 3%; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">STB
-								Number</label><input type="text" id="stbno" title="MINIMUM SIZE"
-								onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57"
-								pattern=".{4,}" maxlength="12"
-								style="width: 44%; margin-left: 3%;" class="form-control">
-						
-						
-							
-								<a href="#" style="width: 272%; margin-left: 350.5px;"
-									value="changeSTB" data-modal-stb="stbNumberChange">Change</a>
-						
-						
 					</div>
 
 
 					<div class='col-md-8' style="margin-bottom: 8px;">
-						<div style='overflow: scroll; width: 151%; height: 130px;'>
-							<div class='col-md-6 indent-small'>
-								<div class="form-group internal" style="width: 208%;">
+
+						<label for="name"
+							style="width: 50%; margin-left: 3%; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">STB
+							Number</label><input type="text" id="stbno" title="MINIMUM SIZE"
+							onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57"
+							pattern=".{4,}" maxlength="12"
+							style="width: 46%; margin-left: 3%;" class="form-control">
 
 
-									<table
-										class="table table-striped table-bordered table-hover fontsize"
-										cellspacing="0" rules="all" border="1" id="a_pack"
-										style="width: 52%; border-collapse: collapse;">
-										<tr>
-											<th scope="col"
-												style="color: #FFFFFF; background-color: #12a59c;">Add
-												On Package</th>
 
-
-										</tr>
-
-									</table>
-								</div>
-							</div>
-							<div class='col-md-6 indent-small'>
-
-								<div class='form-group internal' style="width: 104%;">
-
-									<table
-										class="table table-striped table-bordered table-hover fontsize"
-										cellspacing="0" rules="all" border="1" id="a_cart"
-										style="width: 100%; border-collapse: collapse;">
-										<tr>
-											<th scope="col"
-												style="color: #FFFFFF; background-color: #12a59c;">A La
-												Carte</th>
-
-										</tr>
-
-									</table>
-
-								</div>
-							</div>
-						</div>
-
-						<div class='col-md-8' style="margin-bottom: 8px;">
-							
-								<label for="name"
-									style="width: 50%; margin-left: 3%; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Account
-									Blance</label><input type="text" id="blance" title="MINIMUM SIZE"
-									onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57"
-									pattern=".{2,}" maxlength="4"
-									style="width: 71%; margin-left: 3%;" class="form-control">
-							 <a href="#" style="width: 50%; margin-left: 343px;"
-										value="changeSTB">Change</a>
-							
-						</div>
-
+						<!-- 								<a href="#" style="width: 272%; margin-left: 350.5px;" -->
+						<!-- 									value="changeSTB" data-modal-stb="stbNumberChange">Change</a> -->
 
 
 					</div>
-				 <input value="Submit!" type="submit"
-						id="submit" class="btn-primary btn btn-block"
-						style="width: 29%; height: 26px; font-size: 12px; margin-left: 35%;">
-					<script>
+
+
+					<!-- 					<div class='col-md-8' style="margin-bottom: 8px;"> -->
+					<!-- 						<div style='overflow: scroll; width: 151%; height: 130px;'> -->
+					<!-- 							<div class='col-md-6 indent-small'> -->
+					<!-- 								<div class="form-group internal" style="width: 208%;"> -->
+
+
+					<!-- 									<table -->
+					<!-- 										class="table table-striped table-bordered table-hover fontsize" -->
+					<!-- 										cellspacing="0" rules="all" border="1" id="a_pack" -->
+					<!-- 										style="width: 52%; border-collapse: collapse;"> -->
+					<!-- 										<tr> -->
+					<!-- 											<th scope="col" -->
+					<!-- 												style="color: #FFFFFF; background-color: #12a59c;">Add -->
+					<!-- 												On Package</th> -->
+
+
+					<!-- 										</tr> -->
+
+					<!-- 									</table> -->
+					<!-- 								</div> -->
+					<!-- 							</div> -->
+					<!-- 							<div class='col-md-6 indent-small'> -->
+
+					<!-- 								<div class='form-group internal' style="width: 104%;"> -->
+
+					<!-- 									<table -->
+					<!-- 										class="table table-striped table-bordered table-hover fontsize" -->
+					<!-- 										cellspacing="0" rules="all" border="1" id="a_cart" -->
+					<!-- 										style="width: 100%; border-collapse: collapse;"> -->
+					<!-- 										<tr> -->
+					<!-- 											<th scope="col" -->
+					<!-- 												style="color: #FFFFFF; background-color: #12a59c;">A La -->
+					<!-- 												Carte</th> -->
+
+					<!-- 										</tr> -->
+
+					<!-- 									</table> -->
+
+					<!-- 								</div> -->
+					<!-- 							</div> -->
+					<!-- 						</div> -->
+
+					<div class='col-md-8' style="margin-bottom: 8px;">
+
+						<label for="name"
+							style="width: 50%; margin-left: 3%; margin-bottom: 0px; font-size: 12px; font-weight: 400; color: black;">Account
+							Blance</label><input type="text" id="blance" title="MINIMUM SIZE"
+							onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57"
+							pattern=".{2,}" maxlength="4"
+							style="width: 71%; margin-left: 3%;" class="form-control">
+						<!-- 							 <a href="#" style="width: 50%; margin-left: 343px;" -->
+						<!-- 										value="changeSTB">Change</a> -->
+
+					</div>
+
+
+
+				</div>
+				<input value="Submit!" type="submit" id="submit"
+					class="btn-primary btn btn-block"
+					style="width: 29%; height: 26px; font-size: 12px; margin-left: 35%;">
+				<script>
 								$("#submit").click( function() {
 									if(validateForm()===true){
 									var idi = $("#id1").text();
@@ -964,14 +961,14 @@ a.close:hover {
 						  </script>
 
 
-				</div>
-
 			</div>
+
 		</div>
+	</div>
 
-		<!-- 		Stb number Change Model  -->
+	<!-- 		Stb number Change Model  -->
 
-		<script>
+	<script>
 			$(function() {
 
 				var appendthis = ("<div class='modal-overlay js-modal-close'></div>");
@@ -1024,57 +1021,57 @@ a.close:hover {
 
 			});
 		</script>
-		<div id="stbNumberChange" class="modal-stb" style="left: 64%;">
-			<header style="padding: -1px;">
+	<div id="stbNumberChange" class="modal-stb" style="left: 64%;">
+		<header style="padding: -1px;">
 
-				<a href="#" class="js-modal-close close"
-					style="line-height: 0; font-size: 1.5em; position: absolute; top: 13%; right: 1%; text-decoration: none; color: #0b212f; opacity: 15.2;">×</a>
+			<a href="#" class="js-modal-close close"
+				style="line-height: 0; font-size: 1.5em; position: absolute; top: 13%; right: 1%; text-decoration: none; color: #0b212f; opacity: 15.2;">×</a>
 
 
 
-			</header>
+		</header>
 
-			<div class="container" style="padding: 10px 0;">
-				<%-- 					<form id="contact" action="#"> --%>
+		<div class="container" style="padding: 10px 0;">
+			<%-- 					<form id="contact" action="#"> --%>
 
-				<div class="form-inline marginBottom">
-					<div class="md-form"></div>
-					<div class="md-form">
-						<div class='col-md-8' style="margin-bottom: 22px;">
-							<div class="form-group internal">
-								<div class="col-sm-1">
-									<div style="margin-bottom: 10px; width: 200px;">
+			<div class="form-inline marginBottom">
+				<div class="md-form"></div>
+				<div class="md-form">
+					<div class='col-md-8' style="margin-bottom: 22px;">
+						<div class="form-group internal">
+							<div class="col-sm-1">
+								<div style="margin-bottom: 10px; width: 200px;">
 
-										<label style="color: black;">STB Number</label>
-
-									</div>
+									<label style="color: black;">STB Number</label>
 
 								</div>
 
-								<div class="col-sm-3">
-									<div
-										style="margin-bottom: 10px; margin-left: 131px; width: 285px;">
-										<select name="status" id="ContentPlaceHolder1_ddlstatus"
-											tabindex="6" class="form-control">
-											<option value="0">Select</option>
-											<option value="Pending">Pending</option>
-											<option value="Live">Live</option>
-											<option value="Expire">Expire</option>
-
-										</select>
-
-									</div>
-
-								</div>
 							</div>
 
+							<div class="col-sm-3">
+								<div
+									style="margin-bottom: 10px; margin-left: 131px; width: 285px;">
+									<select name="status" id="ContentPlaceHolder1_ddlstatus"
+										tabindex="6" class="form-control">
+										<option value="0">Select</option>
+										<option value="Pending">Pending</option>
+										<option value="Live">Live</option>
+										<option value="Expire">Expire</option>
 
+									</select>
+
+								</div>
+
+							</div>
 						</div>
-					</div>
-					<input value="Submit!" type="submit" id="submit"
-						class="btn-primary btn btn-block"
-						style="width: 29%; height: 26px; font-size: 12px; margin-left: 35%;">
 
+
+					</div>
 				</div>
+				<input value="Submit!" type="submit" id="submit"
+					class="btn-primary btn btn-block"
+					style="width: 29%; height: 26px; font-size: 12px; margin-left: 35%;">
+
+			</div>
 </body>
 </html>

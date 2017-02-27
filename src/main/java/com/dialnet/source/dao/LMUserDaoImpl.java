@@ -79,17 +79,22 @@ public class LMUserDaoImpl implements LMUserDao {
 	///////////////////////////////////////////////////////// For
 	///////////////////////////////////////////////////////// Pagination/////////////////////////////////////////////////////
 
-	public List<LMUser> list(Integer offset, Integer maxResults) {
+	public List<LMUser> list(String user , Integer offset, Integer maxResults) {
 		Session sf = dao.openSession();
-		List l= sf.createCriteria(LMUser.class).setFirstResult(offset != null ? offset : 0)
+		Criteria criteria=sf.createCriteria(LMUser.class);
+		criteria.add(Restrictions.eq("lco_id",user));
+		List l= criteria.setFirstResult(offset != null ? offset : 0)
 				.setMaxResults(maxResults != null ? maxResults : 10).list();
 		sf.close();
 		return l;
 	}
 
-	public Long count() {
+	public Long count(String user) {
+		
 		Session sf = dao.openSession();
-		Long l= (Long) sf.createCriteria(LMUser.class).setProjection(Projections.rowCount()).uniqueResult();
+		Criteria criteria=sf.createCriteria(LMUser.class);
+		criteria.add(Restrictions.eq("lco_id",user));
+		Long l= (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
 		sf.close();
 		return l;
 	}
@@ -98,15 +103,11 @@ public class LMUserDaoImpl implements LMUserDao {
 	
 
 	
-	public List userListForSearch(String empid, String username, String desig,String mobile,
+	public List userListForSearch(String user, String username, String desig,String mobile,
 			Integer offset, Integer maxResults) {
 		Session sf=dao.openSession();
 		Criteria criteria = sf.createCriteria(LMUser.class); 
-		
-		if(empid==null || empid.equalsIgnoreCase(""))
-			System.out.println("id is not available");
-		else
-			criteria.add(Restrictions.eq("id",empid));
+		criteria.add(Restrictions.eq("lco_id",user));
 		
 		if(mobile==null || mobile.equalsIgnoreCase(""))
 			System.out.println("mobile is not available");
@@ -133,14 +134,10 @@ public class LMUserDaoImpl implements LMUserDao {
 	}
 	
 	
-	public Long countForSearch(String empid, String username, String desig,String mobile){
+	public Long countForSearch(String user, String username, String desig,String mobile){
 		Session sf=dao.openSession();
 		Criteria criteria = sf.createCriteria(LMUser.class); 
-		
-		if(empid==null || empid.equalsIgnoreCase(""))
-			System.out.println("id is not available");
-		else
-			criteria.add(Restrictions.eq("id",empid));
+		criteria.add(Restrictions.eq("lco_id",user));
 		
 		if(mobile==null || mobile.equalsIgnoreCase(""))
 			System.out.println("mobile is not available");

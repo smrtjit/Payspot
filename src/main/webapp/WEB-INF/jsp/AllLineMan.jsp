@@ -304,7 +304,7 @@ var appendthis =  ("<div class='modal-overlay js-modal-close'></div>");
 			</table>
 
 			<tag:paginate max="15" offset="${offset}" count="${count}"
-				uri="allSubscriber.html?user=${user}" next="&raquo;"
+				uri="allLM.html?user=${user}" next="&raquo;"
 				previous="&laquo;" />
 
 		</div>

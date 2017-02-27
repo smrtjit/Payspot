@@ -93,12 +93,14 @@ color: black;
 
 							</tr>
 							<tr>
-								<td style="text-align: center; color: black;"><input
+								<td style="text-align: center; color: black;" colspan="2"><input
 									type="submit" name="ctl00$ContentPlaceHolder1$btn_sbmit"
 									value="Submit" id="ContentPlaceHolder1_btn_sbmit"
-									class="btn btn-primary" /></td>
-								<td style="text-align: center; color: black;"><a
-									class="btn btn-primary" href="CustRecharge.html?id=${id }">Cancel</a></td>
+									class="btn btn-primary" />
+									<a class="btn btn-primary" href="CustRecharge.html?id=${id }">Cancel</a>
+									</td>
+<!-- 								<td style="text-align: center; color: black;"><a -->
+<%-- 									class="btn btn-primary" href="CustRecharge.html?id=${id }">Cancel</a></td> --%>
 
 							</tr>
 

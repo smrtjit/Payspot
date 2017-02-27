@@ -110,6 +110,8 @@ label.control-label {
              </ul>
           </li>
           <li><a href="lmtopUp.html?user=${user }">Topup</a></li>
+                    					<li><a href="lmbilldownload.html?user=${user }">Bill Download</a></li>
+          
           <li><a href="lmDetail.html?user=${user }">Profile</a></li>
           <li><a href="logOut.html?user=${user}" style="margin-right: -90px;">Log out</a></li>
         </ul>

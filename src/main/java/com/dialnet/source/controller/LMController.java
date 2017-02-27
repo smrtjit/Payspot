@@ -151,6 +151,34 @@ public class LMController {
 		map.addAttribute("user", user);
 		return new ModelAndView("AddComplaintLM", map);
 	}
+	
+	@RequestMapping(value = "/lmbilldownload", method = RequestMethod.GET)
+	public ModelAndView lmbilldownload(ModelMap map, @RequestParam("user") String user, Integer offset, Integer maxResults) {
+		List<Customer_Invoice1> subs = invoice1.list(user, offset, maxResults);
+		map.addAttribute("userList", subs);
+		map.addAttribute("count", invoice1.count(user));
+		map.addAttribute("user", user);
+		return new ModelAndView("LMBillDownload", map);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/lmBill", method = RequestMethod.GET)
+	public String printBill(@RequestParam("user") String user, ModelMap model) {
+		Gson gson = new Gson();
+		String json = null;
+		System.out.println("Invoice Details check data:" + user);
+		Customer_Invoice1 result = invoice1.getByCustomerId(user);
+		if (result != null) {
+			json = gson.toJson(result);
+			System.out.println("Result: " + result.getInvoice_No());
+		} else
+			json = gson.toJson("Data Not Found");
+		System.out.println("Contrtoller Execute");
+
+		model.addAttribute("id", user);
+		return json;
+		// return new ModelAndView(json);
+	}
 
 	@RequestMapping(value = "/LMnewConnn", method = RequestMethod.GET)
 	public String newConnn(ModelMap map, @RequestParam("user") String user) {
@@ -460,6 +488,7 @@ public class LMController {
 		List al = comservice.list(lmuserservice.getLCOID(user), offset, maxResults);
 		map.addAttribute("userList", al);
 		map.addAttribute("count", comservice.count(lmuserservice.getLCOID(user)));
+		map.addAttribute("offset", offset);
 		map.addAttribute("user", user);
 		return new ModelAndView("LMAllComplaint", map);
 	}

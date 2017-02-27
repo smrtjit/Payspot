@@ -384,12 +384,12 @@ public class LCOController {
 		System.out.println("Old User Info Called");
 		LMUser userForm = new LMUser();
 		map.addAttribute("userForm", userForm);
-		List<LMUser> userList = lmuserservice.list(offset, maxResults);
+		List<LMUser> userList = lmuserservice.list(user,offset, maxResults);
 
-		map.addAttribute("count", lmuserservice.count());
+		map.addAttribute("count", lmuserservice.count(user));
 		map.addAttribute("offset", offset);
 		map.addAttribute("userList", userList);
-		map.addAttribute("id", user);
+		
 
 		map.addAttribute("user", user);
 		return new ModelAndView("AllLineMan", map);
@@ -455,10 +455,10 @@ public class LCOController {
 		departments.add("Local Fault Repair");
 		departments.add("Others");
 		model.addAttribute("resp", departments);
-		List<LMUser> tmp = lmuserservice.userListForSearch("", id, desig, mobile, offset, maxResults);
+		List<LMUser> tmp = lmuserservice.userListForSearch(user,id, desig, mobile, offset, maxResults);
 		if (tmp.size() > 0) {
 			System.out.println("Data Found size:........................" + tmp.size());
-			model.addAttribute("count", lmuserservice.countForSearch("", id, desig, mobile));
+			model.addAttribute("count", lmuserservice.countForSearch(user, id, desig, mobile));
 			model.addAttribute("offset", offset);
 		} else {
 

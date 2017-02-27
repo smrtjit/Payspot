@@ -358,7 +358,7 @@ a.close:hover {
 			</table>
 
 			<tag:paginate max="15" offset="${offset}" count="${count}"
-				uri="allSubscriber.html?user=${user}" next="&raquo;"
+				uri="allComplaint.html?user=${user}" next="&raquo;"
 				previous="&laquo;" />
 		</div>
 
