@@ -104,6 +104,7 @@ public class CustomerInvoiceDaoImpl implements CustomerInvoiceDao {
 		Criteria c = sf.createCriteria(Customer_Invoice1.class);
 		c.add(Restrictions.eq("lcoId", user));
 		c.add(Restrictions.ne("billStatus", "Approved"));
+		c.addOrder(Order.desc("eDate"));
 		List l = c.setFirstResult(offset != null ? offset : 0).setMaxResults(maxResults != null ? maxResults : 10)
 				.list();
 		sf.close();
@@ -142,7 +143,7 @@ public class CustomerInvoiceDaoImpl implements CustomerInvoiceDao {
 		Session sf = dao.openSession();
 		Criteria cr = sf.createCriteria(Customer_Invoice1.class);
 
-		// To get records having salary more than 2000
+		cr.addOrder(Order.desc("eDate"));
 		cr.add(Restrictions.eq("custId", id));
 		Customer_Invoice1 l = (Customer_Invoice1) cr.uniqueResult();
 		sf.close();

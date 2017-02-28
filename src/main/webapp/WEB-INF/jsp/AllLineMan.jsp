@@ -161,7 +161,13 @@ var appendthis =  ("<div class='modal-overlay js-modal-close'></div>");
 
 </head>
 <body id="top">
-
+	<%
+		if (session.getAttribute("lcoLogin") == null) {
+			System.out.print("session not found");
+			response.sendRedirect("lcologin.html?error=Session is Expired!!!");
+		} else {
+			System.out.print("session found");
+	%>
 	<div class="wrapper row1">
     <header id="header" class="hoc clear"> 
       <!-- ################################################################################################ -->
@@ -547,5 +553,8 @@ var appendthis =  ("<div class='modal-overlay js-modal-close'></div>");
 	<script src="layout/scripts/jquery.min.js"></script>
 	<script src="layout/scripts/jquery.backtotop.js"></script>
 	<script src="layout/scripts/jquery.mobilemenu.js"></script>
+	<%
+		}
+	%>
 </body>
 </html>

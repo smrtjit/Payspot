@@ -260,6 +260,13 @@ a.close:hover {
 </head>
 
 <body id="top">
+	<%
+		if (session.getAttribute("lcoLogin") == null) {
+			System.out.print("session not found");
+			response.sendRedirect("lcologin.html?error=Session is Expired!!!");
+		} else {
+			System.out.print("session found");
+	%>
 	<div class="wrapper row1">
 		<header id="header" class="hoc clear">
 			<!-- ################################################################################################ -->
@@ -1073,5 +1080,8 @@ a.close:hover {
 					style="width: 29%; height: 26px; font-size: 12px; margin-left: 35%;">
 
 			</div>
+			<%
+		}
+	%>
 </body>
 </html>

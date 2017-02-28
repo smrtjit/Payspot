@@ -7,6 +7,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -54,6 +55,7 @@ public class STBStockDaoImpl implements STBStockDao {
 	public List<STBStock> list(String user, Integer offset, Integer maxResults) {
 		Session sf = dao.openSession();
 		Criteria cr = sf.createCriteria(STBStock.class);
+		cr.addOrder(Order.desc("trndate_Of_Subs"));
 		cr.add(Restrictions.eq("LCO_Id", user));
 		List l = cr.setFirstResult(offset != null ? offset : 0).setMaxResults(maxResults != null ? maxResults : 10)
 				.list();
@@ -195,6 +197,21 @@ public class STBStockDaoImpl implements STBStockDao {
 		Query query = sf.createSQLQuery("update STB_Stock set Warranty = :st where Stb_Id = :id");
 		query.setParameter("id", stbno);
 		query.setParameter("st", warranty);
+		int result = query.executeUpdate();
+		sf.beginTransaction().commit();
+		sf.close();
+		return result;
+	}
+
+	@Override
+	public int updatesubscriber(String stbno, String sub_id, String trn_date, String status) {
+		Session sf = dao.openSession();
+		String qry="update STB_Stock set SubscriberId = :sub_id,trndate_Of_Subs= :trn_date,STB_Status= :status where Stb_Id = :id";
+		Query query = sf.createSQLQuery(qry);
+		query.setParameter("id",stbno);
+		query.setParameter("sub_id",sub_id);
+		query.setParameter("trn_date", trn_date);
+		query.setParameter("status", status);
 		int result = query.executeUpdate();
 		sf.beginTransaction().commit();
 		sf.close();

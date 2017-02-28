@@ -147,6 +147,13 @@ a.close:hover {
 
 </head>
 <body id="top">
+	<%
+		if (session.getAttribute("lmlogin") == null) {
+			System.out.print("session not found");
+			response.sendRedirect("lmlogin.html?error=Session is Expired!!!");
+		} else {
+			System.out.print("session found");
+	%>
 	
 	<div class="wrapper row1">
 		<header id="header" class="hoc clear">
@@ -840,5 +847,8 @@ a.close:hover {
 				</div>
 			</div>
 		</div>
+		<%
+		}
+		%>
 </body>
 </html>

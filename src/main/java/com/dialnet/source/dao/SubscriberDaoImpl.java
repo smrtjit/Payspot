@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +31,10 @@ public class SubscriberDaoImpl implements SubscriberDao {
 	public List<Subscriber> getByLCOId(String lco, Integer offset, Integer maxResults) {
 		Session sf = dao.openSession();
 		Criteria cr = sf.createCriteria(Subscriber.class);
-
+		
 		// To get records having salary more than 2000
 		cr.add(Restrictions.eq("LcoId", lco));
+		cr.addOrder(Order.desc("trndate"));
 		List l = cr.setFirstResult(offset != null ? offset : 0).setMaxResults(maxResults != null ? maxResults : 10)
 				.list();
 		sf.close();
@@ -56,6 +58,7 @@ public class SubscriberDaoImpl implements SubscriberDao {
 
 		// To get records having salary more than 2000
 		cr.add(Restrictions.eq("UserName", Long.parseLong(id)));
+		
 		Subscriber subscriber = (Subscriber) cr.uniqueResult();
 		sf.close();
 		System.out.println("Test By ID: "+subscriber);
@@ -73,6 +76,7 @@ public class SubscriberDaoImpl implements SubscriberDao {
 		if (sdate == null || sdate.equalsIgnoreCase("")) {
 			System.out.println("sdate is not available");
 		} else {
+			
 			criteria.add(Restrictions.gt("trndate", sdate + " 00:00:00"));
 		}
 
@@ -218,11 +222,22 @@ public class SubscriberDaoImpl implements SubscriberDao {
 		Session sf = dao.openSession();
 		Criteria cr = sf.createCriteria(Subscriber.class);
 
-		// To get records having salary more than 2000
+		cr.addOrder(Order.desc("trndate"));
 		cr.add(Restrictions.eq("LcoId", lco));
 		List l = cr.list();
 		sf.close();
 		return l;
+	}
+
+	@Override
+	public int updateSubscriberBill(String username, String accountblance) {
+		Session sf = dao.openSession();
+		String qry="update Subscriber set accountBalance=accountBalance+"+accountblance+" where userName='"+username+"'";
+		Query query = sf.createSQLQuery(qry);
+		int result = query.executeUpdate();
+		sf.beginTransaction().commit();
+		sf.close();
+		return result;
 	}
 
 	

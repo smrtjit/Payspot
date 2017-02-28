@@ -238,6 +238,13 @@ a.close:hover {
 
 </head>
 <body id="top">
+	<%
+		if (session.getAttribute("lcoLogin") == null) {
+			System.out.print("session not found");
+			response.sendRedirect("lcologin.html?error=Session is Expired!!!");
+		} else {
+			System.out.print("session found");
+	%>
 	<div class="wrapper row1">
 		<header id="header" class="hoc clear">
 			<!-- ################################################################################################ -->
@@ -553,7 +560,7 @@ a.close:hover {
 							<label for="name"
 								style="margin-bottom: 0px; font-size: 14px; font-weight: 400; color: black;">Channel
 								Name</label> <input type="text" name="chnName" class="form-control"
-								id="channel" required />
+								id="channel_name" required />
 						</div>
 					</div>
 					<div class='col-md-3 indent-small' style="width: 38%;">
@@ -561,7 +568,7 @@ a.close:hover {
 							<label for="name"
 								style="margin-bottom: 0px; font-size: 14px; font-weight: 400; color: black;">MSO
 								Price</label> <input type="text" name="msoPrice" class="form-control"
-								id="msoprice" required />
+								id="mso_price" required />
 						</div>
 					</div>
 					<div class='col-md-3 indent-small'
@@ -570,7 +577,7 @@ a.close:hover {
 							<label for="name"
 								style="margin-bottom: 0px; font-size: 14px; font-weight: 400; color: black;">LCO
 								Price</label> <input type="text" name="lcoPrice" class="form-control"
-								id="lcoprice" required />
+								id="lco_price" required />
 						</div>
 					</div>
 					<div class='col-md-3 indent-small' style="width: 38%;">
@@ -588,7 +595,7 @@ a.close:hover {
 
 				<script>
 						function addNew() {
-							var chn = document.getElementById("channel").value;
+							var chn = document.getElementById("channelname").value;
 							var mso = document.getElementById("msoprice").value;
 							var lco = document.getElementById("lcoprice").value;
 							var id = document.getElementById("data").value;
@@ -611,6 +618,7 @@ a.close:hover {
 											"application/json");
 								},
 								success : function(data) {
+									location.reload();
 									alert(data);
 								},
 								error : function(e) {
@@ -619,22 +627,22 @@ a.close:hover {
 						}
 						function onDropDownChange() {
 							var reg = new RegExp('^[0-9]+$');
-							var chn = document.getElementById("channel").value;
-							var mso = document.getElementById("msoprice").value;
-							var lco = document.getElementById("lcoprice").value;
+							var chn = document.getElementById("channel_name").value;
+							var mso = document.getElementById("mso_price").value;
+							var lco = document.getElementById("lco_price").value;
 							var id = document.getElementById("data").value;
 							var flag = "true";
 							if (chn === "") {
 								alert("please Enter the Channel Name!!");
 								flag = "false";
-							}
+							}else
 							if (mso === "") {
 								alert("please Enter the MSO Price!!");
 								flag = "false";
 							} else if (!(/^[0-9]{1,10}$/.test(+mso))) {
 								alert("The Price must be Numeric");
 								flag = "false";
-							}
+							}else
 							if (lco === "") {
 								alert("please Enter the LCO Price!!");
 								flag = "false";
@@ -809,6 +817,8 @@ a.close:hover {
 				</div>
 			</div>
 		</div>
-	
+	<%
+		}
+		%>
 </body>
 </html>

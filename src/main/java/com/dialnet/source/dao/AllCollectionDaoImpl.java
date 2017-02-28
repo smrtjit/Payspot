@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class AllCollectionDaoImpl implements AllCollectionDao {
 	public List<AllCollections> getAll(String user) {
 		Session sf=dao.openSession();
 		Criteria cr=sf.createCriteria(AllCollections.class);
+	
 		cr.add(Restrictions.eq("Lco_Id", user));
 		List l= cr.list();
 		sf.close();
@@ -131,6 +133,7 @@ public class AllCollectionDaoImpl implements AllCollectionDao {
 	public List<AllCollections> list(String user,Integer offset, Integer maxResults) {
 		Session sf = dao.openSession();
 		Criteria cr=sf.createCriteria(AllCollections.class);
+		cr.addOrder(Order.desc("trndate"));
 		cr.add(Restrictions.eq("Lco_Id", user));
 		List l= cr.setFirstResult(offset != null ? offset : 0)
 				.setMaxResults(maxResults != null ? maxResults : 10).list();

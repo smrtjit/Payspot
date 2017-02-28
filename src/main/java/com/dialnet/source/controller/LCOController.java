@@ -357,6 +357,7 @@ public class LCOController {
 		map.addAttribute("userList", al);
 		map.addAttribute("count", comservice.count(user));
 		map.addAttribute("user", user);
+		map.addAttribute("offset", offset);
 		return new ModelAndView("AllComp", map);
 	}
 
@@ -1056,7 +1057,7 @@ public class LCOController {
 				sub.setTrndate_Of_MSO(getDate());
 				sub.setSTB_Type("New");
 				sub.setWarranty(contact.getWarranty() + "");
-				sub.setSTB_Status("Off Line");
+				sub.setSTB_Status("OffLine");
 				sub.setSubscriberId("NA");
 				sub.setSTB_Returned_trndate_Sub("NA");
 				sub.setTrndate_Of_Subs("NA");
@@ -1124,13 +1125,21 @@ public class LCOController {
 		sub.setInstatus("Aprroved");
 		sub.setApprovedBy(user);
 		sub.setApprovalDate(getDate());
+		String recive=sub.getReceivedAmt();
+		
 		int i = agentbillservice.saveDetail(sub);
-
+		
 		Subscriber u = userService.getByID(tmpdata.getCustId());
+	
 		AllCollections col = new AllCollections();
 		col.setInvoice(sub.getInvoice_id());
 		col.setCust_Id(tmpdata.getCustId());
-		// Doubt
+		
+		
+	
+		int bill=userService.updateSubscriberBill(tmpdata.getCustId(), recive);
+		
+
 		col.setCust_mobile(u.getMobile());
 		col.setCust_Name(tmpdata.getCustName());
 		col.setCurrent_Pckg(tmpdata.getCustBasePckg());
@@ -1180,12 +1189,21 @@ public class LCOController {
 					sub.setInstatus("Aprroved");
 					sub.setApprovedBy(user);
 					sub.setApprovalDate(getDate());
+					String recive=sub.getReceivedAmt();
 					int i = agentbillservice.saveDetail(sub);
 
 					Subscriber u = userService.getByID(tmpdata.getCustId());
+					
+					
+					
+					
 					AllCollections col = new AllCollections();
 					col.setInvoice(contact.getInvoiceid() + "");
 					col.setCust_Id(tmpdata.getCustId());
+					
+					
+					int bill=userService.updateSubscriberBill(tmpdata.getCustId(),recive);
+					System.out.println("Data sucessfully upload*********");
 					// Doubt Vcno
 					col.setCust_mobile(u.getMobile());
 					col.setCust_Name(tmpdata.getCustName());
@@ -1349,8 +1367,9 @@ public class LCOController {
 	public ModelAndView addSubscriber(ModelMap map, @RequestParam("user") String user,
 			@ModelAttribute("NewSubscriber") Subscriber sub, @RequestParam("addpckg") String adonList,
 			@RequestParam("allpckg") String alList) {
-		System.out.println("adonList List Of Package---------\t" + adonList);
-		sub.setUserName(System.currentTimeMillis());
+		
+		long sbno=System.currentTimeMillis();
+		sub.setUserName(sbno);
 		sub.setPassword(getSaltString());
 		sub.setLcoId(user);
 		sub.setTrndate(getDate());
@@ -1362,7 +1381,15 @@ public class LCOController {
 		sub.setAddOnPCKG(adonList);
 		sub.setA_La_Carte(alList);
 		int i = userService.addSubscriber(sub);
+	
+//		Stock Table
+		String subid=null;
+		subid=sbno+"";
+		Subscriber subdata=userService.getByID(subid);
+		String stbno=subdata.getSTBNo();
+		int sb=stbService.updatesubscriber(stbno, subid, getDate(), "OnLine");
 		map.addAttribute("user", user);
+		System.out.println("Data sucessfully Update STBStock And Subscriber=\t " + adonList);
 		return new ModelAndView("redirect:newConnn.html", map);
 	}
 

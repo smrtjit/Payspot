@@ -154,10 +154,12 @@ public class LMController {
 	
 	@RequestMapping(value = "/lmbilldownload", method = RequestMethod.GET)
 	public ModelAndView lmbilldownload(ModelMap map, @RequestParam("user") String user, Integer offset, Integer maxResults) {
-		List<Customer_Invoice1> subs = invoice1.list(user, offset, maxResults);
+		List<Customer_Invoice1> subs = invoice1.list(lmuserservice.getLCOID(user), offset, maxResults);
 		map.addAttribute("userList", subs);
-		map.addAttribute("count", invoice1.count(user));
+		map.addAttribute("count", invoice1.count(lmuserservice.getLCOID(user)));
 		map.addAttribute("user", user);
+		map.addAttribute("offset",  offset);
+		System.out.println("invoice1.count(lmuserservice.getLCOID(user))\t"+invoice1.count(lmuserservice.getLCOID(user)));
 		return new ModelAndView("LMBillDownload", map);
 	}
 	
@@ -192,6 +194,34 @@ public class LMController {
 		map.addAttribute("user", user);
 		return "LMCreateNewCon";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/getaddonpak", method = RequestMethod.GET)
+	public String getAddOnPckg(@RequestParam("user") String user) {
+		List<String> addon = pckgservice.getPckgByType(lmuserservice.getLCOID(user), "Add On");
+		for (String tmp : addon) {
+			System.out.println("Add on Pckg: " + tmp);
+		}
+		Gson gson = new Gson();
+		String json = gson.toJson(addon);
+
+		return json;
+		// return new ModelAndView(json);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/getalcarte", method = RequestMethod.GET)
+	public String getALCarte(@RequestParam("user") String user) {
+		List<String> al = pckgservice.getPckgByType(lmuserservice.getLCOID(user), "A-La-Carte");
+		for (String tmp : al) {
+			System.out.println("A la Carte Pckg: " + tmp);
+		}
+		Gson gson = new Gson();
+		String json = gson.toJson(al);
+
+		return json;
+		// return new ModelAndView(json);
+	}
 
 	@RequestMapping(value = "/addSubscriberLM", method = RequestMethod.POST)
 	public ModelAndView addSubscriber(ModelMap map, @RequestParam("user") String user,
@@ -211,7 +241,7 @@ public class LMController {
 		sub.setA_La_Carte(alList);
 		int i = userService.addSubscriber(sub);
 		map.addAttribute("user", user);
-		return new ModelAndView("redirect:LMCreateNewCon.html", map);
+		return new ModelAndView("redirect:LMnewConnn.html", map);
 	}
 
 	@ResponseBody
@@ -325,7 +355,11 @@ public class LMController {
 					sub.setInstatus("Pending");
 					sub.setApprovedBy(user);
 					sub.setApprovalDate(getDate());
+					String recive=sub.getReceivedAmt();
 					int i = agentbillservice.saveDetail(sub);
+					
+					int bill=userService.updateSubscriberBill(tmpdata.getCustId(),recive);
+					System.out.println("Data sucessfully upload*********");
 
 					Subscriber u = userService.getByID(tmpdata.getCustId());
 					AllCollections col = new AllCollections();
@@ -410,7 +444,7 @@ public class LMController {
 			mainObj.setClosing_remark("NA");
 			mainObj.setClosing_date("NA");
 			mainObj.setCreater_Id(user);
-			mainObj.setLco_id(user);
+			mainObj.setLco_id(lmuserservice.getLCOID(user));
 			mainObj.setComplaint_no(System.currentTimeMillis());
 			comservice.add(mainObj);
 		}
@@ -433,8 +467,12 @@ public class LMController {
 		sub.setInstatus("Aprroved");
 		sub.setApprovedBy(user);
 		sub.setApprovalDate(getDate());
+		String recive=sub.getReceivedAmt();
 		int i = agentbillservice.saveDetail(sub);
 
+		int bill=userService.updateSubscriberBill(tmpdata.getCustId(), recive);
+		
+		
 		Subscriber u = userService.getByID(tmpdata.getCustId());
 		AllCollections col = new AllCollections();
 		col.setInvoice(sub.getInvoice_id());
@@ -449,7 +487,7 @@ public class LMController {
 		col.setPayment_Mode("OffLine");
 		col.setPayment_Status("Approved");
 		col.setCollecting_Agent(sub.getAgentId());
-		col.setLco_Id(user);
+		col.setLco_Id(lmuserservice.getLCOID(user));
 		col.setPayment_Type(sub.getPayment_Type());
 		col.setApproval_ID(user);
 		col.setRefernceId(sub.getReferenceId());

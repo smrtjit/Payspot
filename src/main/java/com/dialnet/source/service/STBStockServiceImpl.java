@@ -65,8 +65,12 @@ public class STBStockServiceImpl implements STBStockService {
 
 	@Override
 	public int update(String stbno, String warranty) {
-		// TODO Auto-generated method stub
 		return dao.update(stbno, warranty);
+	}
+
+	@Override
+	public int updatesubscriber(String stbno, String sub_id, String trn_date, String status) {
+		return dao.updatesubscriber(stbno, sub_id, trn_date, status);
 	}
 
 		

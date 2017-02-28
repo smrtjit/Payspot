@@ -168,7 +168,7 @@ color: black;
 							</tr>
 							<c:forEach items="${userList}" var="user" varStatus="itr">
 								<tr>
-									<td>${offset + itr.index +1 }</td>
+									<td  style="color: black;">${offset + itr.index +1 }</td>
 									<td style="color: black;">${user.complaint_no}</td>
 									<td style="color: black;">${user.complaint_type}</td>
 									<td style="color: black;">${user.open_date}</td>

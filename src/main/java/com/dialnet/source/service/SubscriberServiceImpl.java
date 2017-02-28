@@ -78,6 +78,11 @@ public class SubscriberServiceImpl implements SubscriberService {
 		return subsriberdao.getAll(lco);
 	}
 
+	@Override
+	public int updateSubscriberBill(String username, String accountblance) {
+		return subsriberdao.updateSubscriberBill(username, accountblance);
+	}
+
 
 	
 }

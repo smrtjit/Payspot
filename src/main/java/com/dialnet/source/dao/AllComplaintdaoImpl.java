@@ -9,6 +9,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,7 @@ public class AllComplaintdaoImpl implements AllComplaintdao {
 	public List<AllComplaints> list(String user, Integer offset, Integer maxResults) {
 		Session sf = session.openSession();
 		Criteria cr = sf.createCriteria(AllComplaints.class);
+		cr.addOrder(Order.desc("open_date"));
 		cr.add(Restrictions.eq("lco_id", user));
 		List l = cr.setFirstResult(offset != null ? offset : 0).setMaxResults(maxResults != null ? maxResults : 10)
 				.list();

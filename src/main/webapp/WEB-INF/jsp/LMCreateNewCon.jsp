@@ -100,7 +100,7 @@ label.control-label {
      			//	alert("hello");
 	     				$.ajax({  
 						            type : 'GET', 
-						            url: 'getAddOnPckg.html',
+						            url: 'getaddonpak.html',
 					        	    data: {
 						            	"user":  ${user}
 						            },
@@ -126,7 +126,7 @@ label.control-label {
 	     				
 	     				$.ajax({  
 				            type : 'GET', 
-				            url: 'getALCarte.html',
+				            url: 'getalcarte.html',
 			        	    data: {
 				            	"user":  ${user}
 				            },
@@ -331,6 +331,13 @@ function setvalue(){
 <script src="layout/scripts/jquery.mobilemenu.js"></script>
 </head>
 <body id="top" onload="getData()">
+	<%
+		if (session.getAttribute("lmlogin") == null) {
+			System.out.print("session not found");
+			response.sendRedirect("lmlogin.html?error=Session is Expired!!!");
+		} else {
+			System.out.print("session found");
+	%>
 	  <div class="wrapper row1">
     <header id="header" class="hoc clear"> 
       <!-- ################################################################################################ -->
@@ -1036,5 +1043,8 @@ function setvalue(){
 	<script src="layout/scripts/jquery.min.js "></script>
 	<script src="layout/scripts/jquery.backtotop.js "></script>
 	<script src="layout/scripts/jquery.mobilemenu.js "></script>
+		<%
+		}
+	%>
 </body>
 </html>

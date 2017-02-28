@@ -80,14 +80,15 @@ public class UserController {
 	@RequestMapping(value = "/UserDetail", method = RequestMethod.GET)
 	public ModelAndView LCODEtail(@ModelAttribute("UserDetail") Subscriber studentLogin, @RequestParam("id") String id,
 			BindingResult result) {
-		System.out.println("LCO Controller LcoCode: " + id);
+		System.out.println("Subscriber Controller id: " + id);
 		if (result.hasErrors()) {
 			// return "lcologin";
 			return new ModelAndView("userlogin", "error", "There are some Errors");
 
 		} else {
 			Subscriber found = subservice.getByID(id);
-
+			Customer_Invoice1 invoice = invoice1.getByCustomerId(id);
+			
 			ModelAndView model = new ModelAndView("CustAccount");
 			model.addObject("id", found.getUserName());
 			model.addObject("UserName", found.getFirstName());
@@ -96,7 +97,7 @@ public class UserController {
 			//PackageInfo lco = packageinfoservice.getByID(found.getBasePCKG());
 			model.addObject("Package_name", found.getBasePCKG());
 			model.addObject("Account_balance", found.getAccountBalance());
-			model.addObject("Last_payment", found.getPCKGPrice());
+			model.addObject("Last_payment", invoice.getBillAmtPaid());
 			// model.addObject("Account_balance", found.get);
 			model.addObject("Last_recharge_date", found.getSTB_IssuedOn());
 			model.addObject("mobile", found.getMobile());

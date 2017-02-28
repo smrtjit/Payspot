@@ -7,6 +7,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -25,7 +26,9 @@ public class AllChannelsDaoImpl implements AllChannelsDao {
 	public List<AllChannels> getListByLCO(String lco, Integer offset, Integer maxResults) {
 		Session sf = session.openSession();
 		Criteria criteria = sf.createCriteria(AllChannels.class);
+		
 		criteria.add(Restrictions.eq("lco_id", lco));
+		
 		List l = criteria.setFirstResult(offset != null ? offset : 0)
 				.setMaxResults(maxResults != null ? maxResults : 10).list();
 		sf.close();

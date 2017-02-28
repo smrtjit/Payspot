@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -82,6 +83,7 @@ public class LMUserDaoImpl implements LMUserDao {
 	public List<LMUser> list(String user , Integer offset, Integer maxResults) {
 		Session sf = dao.openSession();
 		Criteria criteria=sf.createCriteria(LMUser.class);
+		criteria.addOrder(Order.desc("trnadate"));
 		criteria.add(Restrictions.eq("lco_id",user));
 		List l= criteria.setFirstResult(offset != null ? offset : 0)
 				.setMaxResults(maxResults != null ? maxResults : 10).list();
